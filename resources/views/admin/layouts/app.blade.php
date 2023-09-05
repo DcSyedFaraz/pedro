@@ -28,7 +28,7 @@
   <!-- Toastr -->
   <link rel="stylesheet" href="{{asset('/admin/plugins/toastr/toastr.min.css')}}">
 	  <link rel="stylesheet" href="{{asset('assets/custom.css')}}">
-  
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -38,7 +38,7 @@
     <img class="animation__shake" src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
-  
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -90,7 +90,7 @@
                               </a>
                             </li>
                           </ul>
-                      </li> 
+                      </li>
                       <!--Start Miscellaneous Modules -->
                       <li class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
                         {{ request()->routeIs('estimates.index') ? 'menu-open' : '' }}
@@ -101,15 +101,15 @@
                         {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
                         {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
                         {{ request()->routeIs('technicians.index') ? 'menu-open' : '' }} ">
-                          <a href="#" class="nav-link nav-dropdown-toggle 
+                          <a href="#" class="nav-link nav-dropdown-toggle
                           {{ request()->routeIs('customer.index') ? 'active' : '' }}
                           {{ request()->routeIs('estimates.index') ? 'active' : '' }}
                           {{ request()->routeIs('admin.work_orders.index') ? 'active' : '' }}
                           {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
                           {{ request()->routeIs('job-category.index') ? 'active' : '' }}
                           {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}
-                          {{ request()->routeIs('job-priority.index') ? 'active' : '' }} 
-                          {{ request()->routeIs('job-source.index') ? 'active' : '' }} 
+                          {{ request()->routeIs('job-priority.index') ? 'active' : '' }}
+                          {{ request()->routeIs('job-source.index') ? 'active' : '' }}
                           {{ request()->routeIs('technicians.index') ? 'active' : '' }} ">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
@@ -176,16 +176,16 @@
                       </li>
                       <!--End Miscellaneous Modules -->
                       <!--Start Jobs/Scheduling Modules -->
-                      <li class="nav-item 
-                    {{ request()->routeIs('job.index') ? 'menu-open' : '' }} 
+                      <li class="nav-item
+                    {{ request()->routeIs('job.index') ? 'menu-open' : '' }}
                     {{ request()->routeIs('today.job.schedule') ? 'menu-open' : '' }}
                     {{ request()->routeIs('today.job.next.48.hours') ? 'menu-open' : '' }}
                     {{ request()->routeIs('job.needing.scheduling') ? 'menu-open' : '' }}
                     {{ request()->routeIs('jobs.in.progress') ? 'menu-open' : '' }}
                     {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
                       ">
-                          <a href="#" class="nav-link nav-dropdown-toggle 
-                    {{ request()->routeIs('job.index') ? 'active' : '' }} 
+                          <a href="#" class="nav-link nav-dropdown-toggle
+                    {{ request()->routeIs('job.index') ? 'active' : '' }}
                     {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}
                     {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
                     {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
@@ -252,7 +252,7 @@
                                   <p>Jobs per region</p>
                                 </a>
                               </li>
-                              
+
                           </ul>
                       </li>
                       <!--Start Jobs/Scheduling Modules -->
@@ -288,8 +288,14 @@
                                     <p>Location</p>
                                   </a>
                                 </li>
+                                <li class="nav-item">
+                                  <a href="{{route('inspection.index')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Inspection Sheet</p>
+                                  </a>
+                                </li>
                               </ul>
-                          </li> 
+                          </li>
 
                           <li class="nav-item">
                                 <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('roles.index') ? 'active' : '' }}">
@@ -300,6 +306,12 @@
                                   </p>
                                 </a>
                               <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                  <a href="{{route('checklist.index')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Overall Checklist</p>
+                                  </a>
+                                </li>
                                 <li class="nav-item">
                                   <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -325,9 +337,9 @@
                                   </a>
                                 </li>
                               </ul>
-                          </li> 
+                          </li>
 
-                            
+
                               <li class="nav-item">
                                 <a href="#" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
@@ -358,7 +370,7 @@
                                   <p style="font-size: 15px;">Emp-Vendor performance</p>
                                 </a>
                               </li>
-                              
+
                           </ul>
                       </li>
                       <!--Start Operations Modules -->
@@ -449,7 +461,7 @@
                             </a>
                           </li>
                         </ul>
-                      </li> 
+                      </li>
                       @endcan
                       <!--Start Accounting Modules -->
                       <li class="nav-item {{ request()->routeIs('roles.index') ? 'menu-open' : '' }} {{ request()->routeIs('users.index') ? 'menu-open' : '' }}{{ request()->routeIs('users.create') ? 'menu-open' : '' }}{{ request()->routeIs('permission.index') ? 'menu-open' : '' }}{{ request()->routeIs('permission.create') ? 'menu-open' : '' }}">
@@ -480,7 +492,7 @@
                                   </a>
                                 </li>
                                 @endcan
-                            
+
                                 @can('role-create')
                                 <li class="nav-item">
                                   <a href="#" class="nav-link">
@@ -490,7 +502,7 @@
                                 </li>
                                 @endcan
                               </ul>
-                          </li> 
+                          </li>
                           @can('user-list')
                           <li class="nav-item {{ request()->routeIs('users.index') ? 'menu-open' : '' }} {{ request()->routeIs('users.create') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('users.index') ? 'active' : '' }} {{ request()->routeIs('users.create') ? 'active' : '' }}">
@@ -518,7 +530,7 @@
                                 </li>
                                 @endcan
                             </ul>
-                          </li> 
+                          </li>
                           @endcan
                           @can('permission-list')
                           <li class="nav-item {{ request()->routeIs('permission.index') ? 'menu-open' : '' }} {{ request()->routeIs('permission.create') ? 'menu-open' : '' }}">
@@ -547,7 +559,7 @@
                               </li>
                               @endcan
                             </ul>
-                          </li> 
+                          </li>
                           @endcan
                           <li class="nav-item">
                             <a href="#" class="nav-link {{ request()->routeIs('job.index')? 'active' : '' }}">
@@ -604,7 +616,7 @@
                         </a>
                       </li>
                     </ul>
-                  </li> 
+                  </li>
                   @endcan
                   <li class="nav-item {{ request()->routeIs('change_password') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link nav-dropdown-toggle  {{ request()->routeIs('profile.index') ? 'active' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
@@ -615,7 +627,7 @@
                       </p>
                     </a>
                     <ul class="nav nav-treeview">
-                    
+
                       <!-- @can('permission-list') -->
                       <li class="nav-item">
                         <a href="{{route('profile.index')}}" class="nav-link {{ request()->routeIs('profile.index')? 'active' : '' }}">
@@ -623,7 +635,7 @@
                           <p>Profile</p>
                         </a>
                       </li>
-                    
+
                       <!-- @endcan -->
                       <li class="nav-item">
                         <a href="{{route('change_password')}}" class="nav-link {{ request()->routeIs('change_password')? 'active' : '' }}">
@@ -632,7 +644,7 @@
                         </a>
                       </li>
                     </ul>
-                  </li> 
+                  </li>
                   <li class="nav-item">
                     <a href="{{url('/logout')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
@@ -727,7 +739,7 @@
             }
         }
 });
-   
+
 </script>
 
 
@@ -780,7 +792,7 @@ $(document).ready(function () {
           country: "PK"
         }
     });
-	
+
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var near_place = autocomplete.getPlace();
         // alert(near_place.geometry);

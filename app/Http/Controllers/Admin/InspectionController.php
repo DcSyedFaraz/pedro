@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\CheckList;
+use App\Http\Controllers\Controller;
+use App\Models\Inspection;
 use Illuminate\Http\Request;
 
-class CheckListController extends Controller
+class InspectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class CheckListController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.inspection.inspection');
     }
 
     /**
@@ -41,10 +42,10 @@ class CheckListController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CheckList  $checkList
+     * @param  \App\Models\Inspection  $inspection
      * @return \Illuminate\Http\Response
      */
-    public function show(CheckList $checkList)
+    public function show(Inspection $inspection)
     {
         //
     }
@@ -52,10 +53,10 @@ class CheckListController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CheckList  $checkList
+     * @param  \App\Models\Inspection  $inspection
      * @return \Illuminate\Http\Response
      */
-    public function edit(CheckList $checkList)
+    public function edit(Inspection $inspection)
     {
         //
     }
@@ -64,10 +65,10 @@ class CheckListController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CheckList  $checkList
+     * @param  \App\Models\Inspection  $inspection
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CheckList $checkList)
+    public function update(Request $request, Inspection $inspection)
     {
         //
     }
@@ -75,10 +76,10 @@ class CheckListController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CheckList  $checkList
+     * @param  \App\Models\Inspection  $inspection
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CheckList $checkList)
+    public function destroy(Inspection $inspection)
     {
         //
     }

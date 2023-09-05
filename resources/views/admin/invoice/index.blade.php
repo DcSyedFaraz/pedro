@@ -37,7 +37,7 @@
             <!-- /.card-header -->
             <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
-            <thead>
+            <thead class="thead-light">
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
@@ -64,7 +64,7 @@
                 @endforeach
             </tbody>
     </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -86,5 +86,5 @@
 @endsection
 
 
-   
+
 

@@ -83,7 +83,7 @@ th {
                             <button type="submit" class="btn btn-primary">Save Job</button>
                         </div>
                     </div>
-                    </br>
+                    <br>
                     <div class="row">
                         <div class="col-6">
                             <!-- tabs A -->

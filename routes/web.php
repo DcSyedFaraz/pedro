@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\CheckListController;
+use App\Http\Controllers\Admin\InspectionController;
 
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\JobSubCategoryController;
@@ -44,14 +46,14 @@ use App\Http\Controllers\vendor\VendorController;
 */
     Route::get('/signup', [RegisterController::class, 'register_form'])->name('signup');
     Route::get('logout', [LoginController::class, 'logout']);
-    Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('users.verify'); 
+    Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('users.verify');
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/', [HomeController::class,'login']);
     Route::get('/', [HomeController::class,'index']);
 
-  
+
 Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
-  
+
     Route::get('/change_password', [DashboardController::class, 'change_password'])->name('change_password');
     Route::post('/store_change_password', [DashboardController::class, 'store_change_password'])->name('store_change_password');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -73,12 +75,12 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
     Route::get('/signature', [DashboardController::class, 'signature'])->name('signature');
     Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
     Route::resource('general_setting',GeneralSettingController::class);
-    // Routes for work 
+    // Routes for work
     Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('admin.work_orders.index');
     Route::resource('technicians', TechniciansController::class);
     Route::resource('estimates', EstimateController::class);
     Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
-    
+
 
     Route::resource('job-category', JobCategoryController::class);
     Route::resource('job-sub-category', JobSubCategoryController::class);
@@ -90,7 +92,9 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
     Route::resource('purchase-orders', PurchaseOrderController::class);
 	 Route::resource('inventory', InventoryController::class);
     Route::resource('invoice', InvoiceController::class);
-	
+    Route::resource('checklist', CheckListController::class);
+    Route::resource('inspection', InspectionController::class);
+
     Route::get('get-subcategories', [JobController::class, 'getSubcategories'])->name('get-subcategories');
     Route::get('/get-subdescription', [JobController::class, 'getSubDescription'])->name('get-subdescription');
     Route::get('/today-schedule-job', [JobController::class, 'TodaySchedule'])->name('today.job.schedule');
@@ -98,13 +102,13 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
     Route::get('/jobs-needing-scheduling', [JobController::class, 'JobsNeedingScheduling'])->name('job.needing.scheduling');
     Route::get('/jobs-in-progress', [JobController::class, 'JobsInProgress'])->name('jobs.in.progress');
     Route::get('/jobs-complete', [JobController::class, 'JobsInCompleted'])->name('jobs.complete');
-   
-    
-    
+
+
+
 });
 Auth::routes();
 Route::group(['prefix' => 'users','middleware'=> ['auth']], function(){
-    
+
     //Work Order
      Route::get('/work-orders/index', [UsersController::class, 'index'])->name('users.work-orders.index');
     Route::post('/assign-vendor/store', [UsersController::class, 'storeWorkOrder'])->name('users.assign_vendor.store');
@@ -122,8 +126,8 @@ Route::group(['prefix' => 'users','middleware'=> ['auth']], function(){
 });
 
 Route::group(['prefix' => 'vendor','middleware'=> ['auth']], function(){
-    
-    //Manage Work Order & Execute Work Order 
+
+    //Manage Work Order & Execute Work Order
     Route::get('/manage/work/orders', [vendorController::class, 'manageWorkOrders'])->name('manage_work_orders');
     Route::get('/execute/work/order', [vendorController::class, 'executeWorkOrder'])->name('execute_work_order');
     Route::get('/dashboard', [vendorDashboardController::class, 'index'])->name('vendor.dashboard');
@@ -138,4 +142,4 @@ Route::group(['prefix' => 'vendor','middleware'=> ['auth']], function(){
     Route::post('/vendor/deliver/order', [vendorController::class, 'deliverOrder'])->name('vendor.deliver_order');
 
 });
-  
+
