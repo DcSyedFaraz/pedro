@@ -46,16 +46,16 @@
                 <th width="560px">Action</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($customers)
                   @foreach ($customers as $key => $customer)
                     <tr>
                       <td>{{ $key+1 }}</td>
-                      <td>{{ $customer->name }}</td>
-                      <td>{{ $customer->email }}</td>
+                      <td>{{ $customer->customer_name }}</td>
+                      <td>{{ $customer->fname[0] }}</td>
                       <td>
-                          <label class="badge badge-success">user</label>
+                          <label class="badge badge-success">customer</label>
                       </td>
                       <td>
                         <!-- <a class="btn btn-info" href="{{ route('users.show',$customer->id) }}">Show</a> -->
@@ -64,13 +64,12 @@
                               {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                           {!! Form::close() !!}
                       </td>
-                     
+
                     </tr>
                   @endforeach
                   @endif
                 </tbody>
               </table>
-              {!! $customers->render() !!}
             </div>
             <!-- /.card-body -->
           </div>
@@ -138,9 +137,9 @@ $(function() {
   }
 });
 </script>
- 
+
 @endsection
 
 
-   
+
 

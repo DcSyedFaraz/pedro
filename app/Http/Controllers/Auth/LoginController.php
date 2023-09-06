@@ -27,8 +27,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
-  
+
+
     /**
      * Create a new controller instance.
      *
@@ -41,12 +41,12 @@ class LoginController extends Controller
 
     public function redirectTo() {
 
-        $role = Auth::user()->getRoleNames(); 
-        
+        $role = Auth::user()->getRoleNames();
+
+        // dd($role) ;
         switch ($role[0]) {
-            
-           
-            case 'admin':
+
+            case 'Admin':
                 return 'admin/dashboard';
             break;
             case 'user':
@@ -59,12 +59,12 @@ class LoginController extends Controller
                 return 'agent/dashboard';
               break;
               default:
-                return '/login'; 
+                return '/login';
             break;
         }
      }
 
-    
+
 
 
     public function logout()
@@ -81,12 +81,12 @@ class LoginController extends Controller
     public function verifyAccount($token)
     {
         $verifyUser = UserVerify::where('token', $token)->first();
-  
+
         $message = 'Sorry your email cannot be identified.';
-  
+
         if(!is_null($verifyUser) ){
             $user = $verifyUser->user;
-              
+
             if(!$user->is_email_verified) {
                 $verifyUser->user->is_email_verified = 1;
                 $verifyUser->user->save();
@@ -95,7 +95,7 @@ class LoginController extends Controller
                 $message = "Your e-mail is already verified. You can now login.";
             }
         }
-  
+
       return redirect()->route('login')->with('message', $message);
     }
 }

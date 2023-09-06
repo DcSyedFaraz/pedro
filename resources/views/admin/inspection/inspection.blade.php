@@ -10,17 +10,20 @@
             <div class="container mt-4">
                 <h1 class="text-center">Inspection Sheet</h1>
 
-                <!-- Common Areas Table -->
-                <h2>Common Areas</h2>
+                <!-- Shared Spaces
+                         Table -->
+                <h2>Shared Spaces
+                </h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Common Areas</th>
+                            <th>Shared Spaces
+                            </th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,21 +81,22 @@
                             <td></td>
                         </tr>
 
-                        <!-- Add more rows for Common Areas here -->
+                        <!-- Add more rows for Shared Spaces
+                         here -->
                     </tbody>
                 </table>
 
-                <!-- Elevators Table -->
-                <h2>Elevators</h2>
+                <!-- Lifts Table -->
+                <h2>Lifts</h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Elevators</th>
+                            <th>Lifts</th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,20 +137,20 @@
                             <td></td>
                         </tr>
 
-                        <!-- Add more rows for Elevators here -->
+                        <!-- Add more rows for Lifts here -->
                     </tbody>
                 </table>
-                <!-- Restrooms Table -->
-                <h2>Restrooms</h2>
+                <!-- Lavatories Table -->
+                <h2>Lavatories</h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Restrooms</th>
+                            <th>Lavatories</th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -162,7 +166,7 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>Restock all restrooms consumables</td>
+                            <td>Restock all Lavatories consumables</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -242,20 +246,23 @@
                             <td></td>
                         </tr>
 
-                        <!-- Add more rows for Elevators here -->
+                        <!-- Add more rows for Lifts here -->
                     </tbody>
                 </table>
-                <!-- Building Exterior Table -->
-                <h2>Building Exterior</h2>
+                <!-- Exterior of Building
+                     Table -->
+                <h2>Exterior of Building
+                </h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Building Exterior</th>
+                            <th>Exterior of Building
+                            </th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -291,17 +298,20 @@
 
                     </tbody>
                 </table>
-                <!-- Common Areas/Hallways Table -->
-                <h2>Common Areas/Hallways</h2>
+                <!-- Shared Spaces
+                        /Hallways Table -->
+                <h2>Shared Spaces
+                    /Hallways</h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Common Areas/Hallways</th>
+                            <th>Shared Spaces
+                                /Hallways</th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -364,17 +374,20 @@
 
                     </tbody>
                 </table>
-                <!-- Stairwells Table -->
-                <h2>Stairwells</h2>
+                <!-- Stair Areas
+                 Table -->
+                <h2>Stair Areas
+                </h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Stairwells</th>
+                            <th>Stair Areas
+                            </th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -408,7 +421,8 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td>Vacuum carpeted stairwells</td>
+                            <td>Vacuum carpeted Stair Areas
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -418,17 +432,20 @@
 
                     </tbody>
                 </table>
-                <!-- Janitor Closets Table -->
-                <h2>Janitor Closets</h2>
+                <!-- Cleaning Closets
+             Table -->
+                <h2>Cleaning Closets
+                </h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Janitor Closets</th>
+                            <th>Cleaning Closets
+                            </th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -471,17 +488,20 @@
 
                     </tbody>
                 </table>
-                <!-- Breakrooms/Kitchens Table -->
-                <h2>Breakrooms/Kitchens</h2>
+                <!-- Kitchen Spaces
+        s Table -->
+                <h2>Kitchen Spaces
+                    s</h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Breakrooms/Kitchens</th>
+                            <th>Kitchen Spaces
+                                s</th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -561,17 +581,20 @@
 
                     </tbody>
                 </table>
-                <!-- Classrooms/Offices/Conference rooms/Work Stations Table -->
-                <h2>Classrooms/Offices/Conference rooms/Work Stations</h2>
+                <!-- Workspace Types
+     Table -->
+                <h2>Workspace Types
+                </h2>
                 <table class="table table-bordered">
                     <thead class="thead-light">
                         <tr>
                             <th>Check</th>
-                            <th>Classrooms/Offices/Conference rooms/Work Stations</th>
+                            <th>Workspace Types
+                            </th>
                             <th>G</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Additional information/Comments</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>

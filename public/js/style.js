@@ -1,13 +1,13 @@
-$(document).on('click', '.wallet-dep-modal', function() {
+$(document).on('click', '.wallet-dep-modal', function () {
     $('#deposit').val($(this).data('id'));
     // $('#exampleModalSizeDefault2').modal('show');
 });
 
-$(document).on('click', '.wallet-with-modal', function() {
+$(document).on('click', '.wallet-with-modal', function () {
     $('#withdraw').val($(this).data('id'));
     // $('#exampleModalSizeDefault3').modal('show');
 });
-$('#jobDetTabs a').on('click', function(e) {
+$('#jobDetTabs a').on('click', function (e) {
     e.preventDefault();
     $(this).tab('show');
 });
@@ -17,7 +17,7 @@ function validateForm() {
     // Check if at least one phone number is added
     const phoneInputs = $('input[name="phone[]"]');
     let isPhoneValid = false;
-    phoneInputs.each(function() {
+    phoneInputs.each(function () {
         if ($(this).val().trim() !== '') {
             isPhoneValid = true;
             return false; // Exit the loop early if a valid phone number is found
@@ -29,7 +29,7 @@ function validateForm() {
     const extsInputs = $('select[name="ext_id[]"]');
     let isextsValid = false;
 
-    extsInputs.each(function() {
+    extsInputs.each(function () {
         const selectedValue = $(this).val();
 
         // Check if the selected option's value is not empty
@@ -41,7 +41,7 @@ function validateForm() {
 
     const extInputs = $('input[name="ext[]"]');
     let isextValid = false;
-    extInputs.each(function() {
+    extInputs.each(function () {
         if ($(this).val().trim() !== '') {
             isextValid = true;
             return false; // Exit the loop early if a valid phone number is found
@@ -51,7 +51,7 @@ function validateForm() {
     // Check if at least one email is added
     const emailInputs = $('input[name="email[]"]');
     let isEmailValid = false;
-    emailInputs.each(function() {
+    emailInputs.each(function () {
         if ($(this).val().trim() !== '') {
             isEmailValid = true;
             return false; // Exit the loop early if a valid email is found
@@ -86,7 +86,7 @@ function validateForm() {
 }
 
 
-$('#add-primary').click(function() {
+$('#add-primary').click(function () {
 
     var newPrimaryInput = $(
         '<div class="row" id="new-primary">' +
@@ -111,7 +111,7 @@ $('#add-primary').click(function() {
     $('.primary_append').append(newPrimaryInput);
 });
 
-$(document).on('click', '.remove-primary', function() {
+$(document).on('click', '.remove-primary', function () {
     $('#new-primary').remove();
 });
 
@@ -119,7 +119,7 @@ $(document).on('click', '.remove-primary', function() {
 
 
 //Validation Form
-$(document).ready(function() {
+$(document).ready(function () {
     // Function to validate the form
     function validateForm() {
         let isValid = true;
@@ -193,7 +193,7 @@ $(document).ready(function() {
         // Additional validations for dynamic fields if applicable
 
         // Validate Phone
-        const phones = $('input[name="phone[]"]').map(function() { return this.value.trim(); }).get();
+        const phones = $('input[name="phone[]"]').map(function () { return this.value.trim(); }).get();
         if (phones.length === 0 || phones.every(phone => phone === '')) {
             $('.phone-error').show();
             isValid = false;
@@ -202,7 +202,7 @@ $(document).ready(function() {
         }
 
         // Validate Ext
-        const exts = $('input[name="ext[]"]').map(function() { return this.value.trim(); }).get();
+        const exts = $('input[name="ext[]"]').map(function () { return this.value.trim(); }).get();
         if (exts.length > 0 && exts.every(ext => ext === '')) {
             $('.ext-error').show();
             isValid = false;
@@ -211,7 +211,7 @@ $(document).ready(function() {
         }
 
         // Validate Email
-        const emails = $('input[name="email[]"]').map(function() { return this.value.trim(); }).get();
+        const emails = $('input[name="email[]"]').map(function () { return this.value.trim(); }).get();
         if (emails.length === 0 || emails.every(email => email === '')) {
             $('.email-error').show();
             isValid = false;
@@ -365,7 +365,7 @@ $(document).ready(function() {
     }
 
     // Handle form submission
-    $('#myForm').submit(function(e) {
+    $('#myForm').submit(function (e) {
         e.preventDefault();
         if (validateForm()) {
             // Submit the form if valid
@@ -374,7 +374,7 @@ $(document).ready(function() {
     });
 
     // Clear error messages on input focus
-    $('input, select, textarea').focus(function() {
+    $('input, select, textarea').focus(function () {
         $(this).removeClass('error');
         $(`#${this.id}_error`).text('');
     });
@@ -398,7 +398,7 @@ function validateForm() {
 }
 
 // Multiple Email Section
-$('#add-email').click(function() {
+$('#add-email').click(function () {
     var newEmailInput = $(
         '<div class="row" id="new-email">' +
         '<div class="col-md-4">&nbsp;</div>' +
@@ -415,14 +415,14 @@ $('#add-email').click(function() {
     $('.email_append').append(newEmailInput);
 });
 
-$(document).on('click', '.remove-email', function() {
+$(document).on('click', '.remove-email', function () {
     $('#new-email').remove();
 });
 
 
 
 // Event listener for job category dropdown change
-$('#job-cat-id').change(function() {
+$('#job-cat-id').change(function () {
 
     var categoryId = $(this).val();
 
@@ -432,17 +432,17 @@ $('#job-cat-id').change(function() {
             url: '/admin/get-subcategories',
             type: 'GET',
             data: { category_id: categoryId },
-            success: function(data) {
+            success: function (data) {
 
                 var subcategories = data;
                 var options = '<option value="">Select a Job Subcategorysss</option>';
 
-                subcategories.forEach(function(subcategory) {
+                subcategories.forEach(function (subcategory) {
                     options += '<option value="' + subcategory.id + '">' + subcategory.name + '</option>';
                 });
                 $('#jobSubcategory').html(options);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 console.log(xhr.responseText);
             }
         });
@@ -453,7 +453,7 @@ $('#job-cat-id').change(function() {
     }
 });
 
-$('#job-cat-id').change(function() {
+$('#job-cat-id').change(function () {
     var subcategoryId = $(this).val();
 
     if (subcategoryId) {
@@ -462,11 +462,11 @@ $('#job-cat-id').change(function() {
             url: '/admin/get-subdescription',
             type: 'GET',
             data: { subcategory_id: subcategoryId },
-            success: function(data) {
+            success: function (data) {
                 // Update job sub-description field
                 $('#jobSubDescription').val(data.subdescription);
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 console.log(xhr.responseText);
             }
         });
@@ -476,7 +476,7 @@ $('#job-cat-id').change(function() {
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     var JobtotalJobAmount = 0;
     var JobtotalDriveAndLaborTime = 0;
@@ -504,10 +504,10 @@ $(document).ready(function() {
         JobCost = 0;
 
 
-        $(".job_inv_total").each(function() {
+        $(".job_inv_total").each(function () {
             JobtotalJobAmount += parseFloat($(this).val());
         });
-        $(".job_inv_cost").each(function() {
+        $(".job_inv_cost").each(function () {
             JobCost += parseFloat($(this).val());
         });
 
@@ -555,26 +555,26 @@ $(document).ready(function() {
         $("#job-gross-profit-percentage").text("(" + Math.min(JobgrossProfitPercentage, 100).toFixed(2) + "%)");
     }
 
-    $(document).on("input", ".job_inv_qty, .job_inv_rate, .job_inv_cost, .job_inv_tax", function() {
+    $(document).on("input", ".job_inv_qty, .job_inv_rate, .job_inv_cost, .job_inv_tax", function () {
         var row = $(this).closest("tr");
         var jobTotal = JobcalculateRowTotals(row);
         JobupdateTotalJobAmount();
     });
 
     // Listen for input changes on drive and labor time fields
-    $("#job_drive_time, #job_labor_time, #job_amount, #job_payments_and_deposits_input").on("input", function() {
+    $("#job_drive_time, #job_labor_time, #job_amount, #job_payments_and_deposits_input").on("input", function () {
         JobupdateTotalDriveAndLaborTime();
     });
 
     // Only update the corresponding inv_total and total-job-amount on inv_total change
-    $(document).on("input", ".job_inv_total", function() {
+    $(document).on("input", ".job_inv_total", function () {
         var row = $(this).closest("tr");
         JobcalculateRowTotals(row);
         JobupdateTotalJobAmount();
     });
 
 
-    $("#job-multiple-primary").click(function() {
+    $("#job-multiple-primary").click(function () {
         var newRow = `
             <tr>
                 <td colspan="2"><input type="text" class="form-control job_inv_desc" name="description" placeholder="Description"></td>
@@ -593,7 +593,7 @@ $(document).ready(function() {
     });
 
     // Event listener: Remove a row from the invoice table
-    $("#job-invoice-rows").on("click", ".remove-row", function() {
+    $("#job-invoice-rows").on("click", ".remove-row", function () {
         $(this).closest("tr").remove();
         JobupdateTotalJobAmount();
     });
@@ -619,10 +619,10 @@ $(document).ready(function() {
     function EstupdateTotalJobAmount() {
         EsttotalJobAmount = 0;
         EstCost = 0;
-        $(".est_inv_total").each(function() {
+        $(".est_inv_total").each(function () {
             EsttotalJobAmount += parseFloat($(this).val());
         });
-        $(".est_inv_cost").each(function() {
+        $(".est_inv_cost").each(function () {
             EstCost += parseFloat($(this).val());
         });
         $("#est-product-and-service-taxes-and-fees").text("$" + EsttotalJobAmount.toFixed(2));
@@ -647,25 +647,25 @@ $(document).ready(function() {
         $("#est-gross-profit-percentage").text("(" + EstgrossProfitPercentage.toFixed(2) + "%)");
     }
 
-    $(document).on("input", ".est_inv_qty, .est_inv_rate, .est_inv_cost, .est_inv_tax", function() {
+    $(document).on("input", ".est_inv_qty, .est_inv_rate, .est_inv_cost, .est_inv_tax", function () {
         var row = $(this).closest("tr");
         var EstTotal = EstcalculateRowTotals(row);
         EstupdateTotalJobAmount();
     });
 
     // Listen for input changes on drive and labor time fields
-    $("#est_drive_time, #est_labor_time, #est_amount, #est_payments_and_deposits_input").on("input", function() {
+    $("#est_drive_time, #est_labor_time, #est_amount, #est_payments_and_deposits_input").on("input", function () {
         EstupdateTotalDriveAndLaborTime();
     });
 
     // Only update the corresponding inv_total and total-job-amount on inv_total change
-    $(document).on("input", ".est_inv_total", function() {
+    $(document).on("input", ".est_inv_total", function () {
         var row = $(this).closest("tr");
         EstcalculateRowTotals(row);
         EstupdateTotalJobAmount();
     });
 
-    $("#est_multiples_primary").click(function() {
+    $("#est_multiples_primary").click(function () {
 
         var newRow = `
             <tr>
@@ -684,9 +684,226 @@ $(document).ready(function() {
         EstupdateTotalJobAmount();
     });
 
-    $("#est-invoice-rows").on("click", ".remove-row", function() {
+    $("#est-invoice-rows").on("click", ".remove-row", function () {
         $(this).closest("tr").remove();
         EstupdateTotalJobAmount();
 
+    });
+
+    // Faraz
+    // Multiple Primary Section
+    $('#add-pri').click(function () {
+        var newEmailInput = $(
+            '<div class="row" id="new-pri">' +
+            '<div class="col-sm-6">' +
+            '<div class="name-main-div">' +
+            '<div class="mb-3">' +
+            '<label for="exampleInputfirst" class="form-label">First Name</label>' +
+            '<input type="text" name="fname[]" class="form-control" id="exampleInputfirst" placeholder="First Name">' +
+            '</div>' +
+            '<div class="mb-3">' +
+            '<label for="exampleInputlast" class="form-label">Last Name</label>' +
+            '<input type="text" name="lname[]" class="form-control" id="exampleInputlast" placeholder="Last Name">' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-sm-6">' +
+            '<div class="phone-main-div">' +
+            '<div class="col-md-4">' +
+            '<label for="number-div" class="form-label">Phone</label>' +
+            '<select class="form-select form-control" name="phone_type[]" aria-label="Default select example" id="number-div">' +
+            '<option value="">Select Menu</option>' +
+            '<option value="mobile">Mobile</option>' +
+            '<option value="telephone">Telephone</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="col-md-4">' +
+            '<input type="text" name="number[]" class="form-control" id="number-div" placeholder="433202232323">' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<input type="text" name="ext[]" class="form-control" id="number-div" placeholder="Ext">' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<button type="button" class="remove-pri add-sign"><i class="fas fa-trash text-danger"></i></button>' +
+            '</div>' +
+            '</div>' +
+            '</div>');
+
+        $('.pri_append').append(newEmailInput);
+    });
+
+    $(document).on('click', '.remove-pri', function () {
+        $('#new-pri').remove();
+    });
+
+    // Add Details
+    $('#add-dte').click(function () {
+        var newEmailInput = $('<div class="row" id="new-dte">' +
+            '<div class="col-sm-3">' +
+            '<div class="mb-3">' +
+            '<label for="exampleInputfirst" class="form-label">Department</label>' +
+            '<input type="text" name="department[]" class="form-control" id="exampleInputfirst" placeholder="Department">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-sm-4">' +
+            '<div class="mb-3">' +
+            '<label for="exampleInputlast" class="form-label">Job Title</label>' +
+            '<input type="text" name="job_title[]" class="form-control" id="exampleInputlast" placeholder="Job Title" style="width:80%;">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-sm-5">' +
+            '<div class="phone-main-div">' +
+            '<div class="col-md-4">' +
+            '<label for="email-div" class="form-label">Email</label>' +
+            '<select class="form-select form-control" name="email_type[]" aria-label="Default select example" id="email-div">' +
+            '<option value="personal">Personal</option>' +
+            '<option value="company">Company</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<input type="text" name="email[]" class="form-control" id="number-div" placeholder="abc@abc.com">' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<button type="button" id="remove-dte" class="add-sign pe-auto"><i class="fas fa-trash text-danger"></i></button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>');
+
+        $('.dte_append').append(newEmailInput);
+    });
+
+    $(document).on('click', '#remove-dte', function () {
+        $('#new-dte').remove();
+    });
+    // Add Services
+    $('#add-ser').click(function () {
+        var newElement = $(
+            '<div id="new-ser" class=" row">' +
+
+            '<div class="col-sm-2">' +
+            '    <div class="mb-3">' +
+            '        <label for="exampleInputlocation" class="form-label">Nickname</label>' +
+            '        <input type="text" class="form-control" name="nick_name[]" id="exampleInputlocation" placeholder="David Smith">' +
+            '    </div>' +
+            '</div>' +
+            '<div class="col-sm-2">' +
+            '    <div class="mb-3">' +
+            '        <label for="flexRadioDefaulta" class="form-label">Primary?</label>' +
+            '        <select class="form-select form-control" name="primary[]" aria-label="Default select example">' +
+            '            <option value="yes">Yes</option>' +
+            '            <option value="no">No</option>' +
+            '        </select>' +
+            '    </div>' +
+            '</div>' +
+            '<div class="col-sm-2">' +
+            '    <div class="mb-3">' +
+            '        <label for="flexRadioDefaultd" class="form-label">Billing Address?</label>' +
+            '        <select class="form-select form-control" name="billing_address[]" aria-label="Default select example">' +
+            '            <option value="yes">Yes</option>' +
+            '            <option value="no">No</option>' +
+            '        </select>' +
+            '    </div>' +
+            '</div>' +
+            '<div class="col-sm-2">' +
+            '    <div class="mb-3">' +
+            '        <label for="email-div" class="form-label">Contact</label>' +
+            '        <select class="form-select form-control" name="contact_type[]" aria-label="Default select example">' +
+            '            <option value="0" disabled>Select Contact</option>' +
+            '            <option value="contact 1">contact 1</option>' +
+            '            <option value="contact 2">contact 2</option>' +
+            '        </select>' +
+            '    </div>' +
+            '</div>' +
+            '<div class="col-sm-2">' +
+            '    <div class="mb-3">' +
+            '        <label for="flexRadioDefaulte" class="form-label">Active?</label>' +
+            '        <select class="form-select form-control" name="active[]" aria-label="Default select example">' +
+            '            <option value="yes">Yes</option>' +
+            '            <option value="no">No</option>' +
+            '        </select>' +
+            '    </div>' +
+            '</div>' +
+            '<div class="col-sm-2">' +
+            '<button type="button" id="remove-ser" class="add-more-btn mt-4"><i class="fas fa-trash text-danger"></i></button>' +
+            '</div>' +
+            '<div class="col-sm-12">' +
+            '    <div class="location-div">' +
+            '        <div class="row">' +
+            '            <div class="col-sm-4">' +
+            '                <div class="mb-3">' +
+            '                    <label for="exampleInputstreet" class="form-label">Street Address or Latitude, Longitude</label>' +
+            '                    <input type="text" name="address[]" class="form-control" id="exampleInputstreet" placeholder="Street Address or Latitude, Longitude">' +
+            '                </div>' +
+            '            </div>' +
+            '            <div class="col-sm-2">' +
+            '                <div class="mb-3">' +
+            '                    <label for="exampleInputapt" class="form-label">Apt/Suite/Unit #</label>' +
+            '                    <input type="text" name="aptNo[]" class="form-control" id="exampleInputapt" placeholder="Apt Suite Unit #">' +
+            '                </div>' +
+            '            </div>' +
+            '            <div class="col-sm-2">' +
+            '                <div class="mb-3">' +
+            '                    <label for="exampleInputcity" class="form-label">City</label>' +
+            '                    <input type="text" name="city[]" class="form-control" id="exampleInputcity" placeholder="City Name">' +
+            '                </div>' +
+            '            </div>' +
+            '            <div class="col-sm-2">' +
+            '                <div class="mb-3">' +
+            '                    <label for="exampleInputstate" class="form-label">State/Province</label>' +
+            '                    <input type="text" name="state[]" class="form-control" id="exampleInputstate" placeholder="State Province">' +
+            '                </div>' +
+            '            </div>' +
+            '            <div class="col-sm-2">' +
+            '                <div class="mb-3">' +
+            '                    <label for="exampleInputzip" class="form-label">Zip/Postal Code</label>' +
+            '                    <input type="text" name="zip[]" class="form-control" id="exampleInputzip" placeholder="Zip Postal Code">' +
+            '                </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>' +
+            '</div>');
+
+        // You can now append or manipulate the 'newElement' as needed in your web page.
+        $('#ser_append').append(newElement);
+    });
+
+    $(document).on('click', '#remove-ser', function () {
+        $('#new-ser').remove();
+    });
+    // Add Commission
+    $('#add-com').click(function () {
+        var newElement = $(
+            '<div class="agent-inner-div" id="new-com">' +
+            '<div class="commission-div">' +
+            '<label for="agent-div" class="form-label">Assigned Rep</label>' +
+            '<select class="form-select form-control" name="assigned_rep[]" aria-label="Default select example" id="agent-div">' +
+            '<option value="1">Do Not Assign Agent/Rep</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="commission1-div">' +
+            '<label for="commission-div" class="form-label">Commission</label>' +
+            '<select class="form-select form-control" name="commission_sign[]" aria-label="Default select example" id="commission-div">' +
+            '<option value="1">%</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="commission2-div">' +
+            '<input type="text" class="form-control" name="commission[]" id="exampleInputcommtag">' +
+            '</div>' +
+            '<div class="commission3-div">' +
+            '<button type="button" id="remove-com" class="add-sign"><i class="fas fa-trash text-danger"></i></button>' +
+            '</div>' +
+            '</div>'
+        );
+
+
+
+        // You can now append or manipulate the 'newElement' as needed in your web page.
+        $('#com_append').append(newElement);
+    });
+
+    $(document).on('click', '#remove-com', function () {
+        $('#new-com').remove();
     });
 });

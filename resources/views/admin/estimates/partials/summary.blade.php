@@ -4,7 +4,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
-                    
+
                         <select name="customer_id" id="customer_id" class="form-control" >
                             <option value="">select Customer</option>
                             @foreach($customer as $cust)
@@ -16,9 +16,10 @@
                 </div>
             </div>
             <hr/>
-            <div class="row">    
+            <div class="row">
                 <div class="col-md-4">
-                    <strong>Primary Contact</strong>
+                    <strong>Main Contact
+                    </strong>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -34,9 +35,9 @@
                 </div>
             </div>
             <div class="primary_append">
-                <div class="row">    
+                <div class="row">
                 <div class="col-md-4">
-                    &nbsp;   
+                    &nbsp;
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -49,15 +50,15 @@
                     <input type="tel" class="form-control" name="ext[]" placeholder="Ext">
                     <p class="ext-error error-messages" style="display: none;">Add at least ext</p>
                     </div>
-                
+
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn" id="add-primary"><i class="fas fa-plus text-primary"></i></button>
                 </div>
                 </div>
-            </div>      
-            <div class="email_append">   
-                <div class="row" >    
+            </div>
+            <div class="email_append">
+                <div class="row" >
                 <div class="col-md-4">&nbsp;</div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -72,9 +73,10 @@
                 </div>
             </div>
             <hr/>
-            <div class="row">    
+            <div class="row">
                 <div class="col-md-4">
-                    <strong>Service Location</strong>
+                    <strong>Work Location
+                        </strong>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -85,7 +87,7 @@
                         <input type="checkbox"  name="location_gated_property" placeholder="Location Name(e.g Home or Office)" > Gated Property
                 </div>
             </div>
-            <div class="row">    
+            <div class="row">
                         <div class="col-md-4">
                             &nbsp;
                         </div>
@@ -98,9 +100,9 @@
                         <input type="tel" class="form-control" name="location_unit" placeholder="Site/Unit/Apt" >
                         </div>
             </div>
-            <div class="row">    
+            <div class="row">
                         <div class="col-md-4">
-                        
+
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -111,20 +113,21 @@
                                 <input type="text" class="form-control" name="location_state" placeholder="State/Province" >
                         </div>
                         <div class="col-md-2">
-                                <input type="text"  class="form-control" name="location_zipcode" placeholder="Zip/Postal Code" > 
+                                <input type="text"  class="form-control" name="location_zipcode" placeholder="Zip/Postal Code" >
                         </div>
             </div>
             <hr/>
-            <div class="row">    
+            <div class="row">
                 <div class="col-md-4">
-                    <strong>Job Category</strong>
+                    <strong>Work Category
+                    </strong>
                 </div>
-            
+
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="jobCategory">Job Category</label>
+                        <label for="jobCategory">Work Category</label>
                         <select id="job-cat-id" name="job_cat_id" class="form-control">
-                            <option value="">Select a Job Category</option>
+                            <option value="">Select a Work Category</option>
                             @foreach($jobCategories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -134,14 +137,14 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="jobSubcategory">Job Sub Category</label>
+                        <label for="jobSubcategory">Work Sub Category</label>
                         <select id="jobSubcategory" name="job_sub_cat_id" class="form-control">
-                            <option value="">Select a job subcategory</option>
+                            <option value="">Select a Work subcategory</option>
                         </select>
                         <span class="error-message error-messages" id="jobSubcategory_error"></span><br>
                     </div>
                 </div>
-                        
+
             </div>
 
 <div class="row">
@@ -150,24 +153,24 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <label for="jobSubDescription">Job Sub Description</label>
+            <label for="jobSubDescription">Work Sub Description</label>
             <textarea id="jobSubDescription" name="job_sub_description" class="form-control" placeholder="Job Sub Category Description"></textarea>
         </div>
     </div>
 </div>
 <hr/>
-<div class="row">    
+<div class="row">
             <div class="col-md-4">
-                <strong>Job Description</strong>
+                <strong>Work Description</strong>
             </div>
             <div class="col-md-8">
                 <div class="form-group">
-                <textarea  class="form-control" name="job_description" placeholder="Job Desciption"></textarea> 
+                <textarea  class="form-control" name="job_description" placeholder="Job Desciption"></textarea>
                 </div>
             </div>
 </div>
 <hr/>
-<div class="row">    
+<div class="row">
             <div class="col-md-4">
                 <strong>PO #</strong>
             </div>
@@ -178,14 +181,14 @@
             </div>
 </div>
 <hr/>
-<div class="row">    
+<div class="row">
             <div class="col-md-4">
-                <strong>Job Source</strong>
+                <strong>Work Source</strong>
             </div>
             <div class="col-md-8">
                 <div class="form-group">
                 <select id="job_sour" name="job_source" class="form-control" >
-                    <option value="">Select Job Source</option>
+                    <option value="">Select Work Source</option>
                     @foreach($job_source as $job_sour)
                     <option value="{{$job_sour->id}}">{{$job_sour->name}}</option>
                     @endforeach
@@ -195,13 +198,14 @@
             </div>
 </div>
 <hr/>
-<div class="row">    
+<div class="row">
             <div class="col-md-4">
-                <strong>Agent/Rep</strong>
+                <strong>Representative
+                </strong>
             </div>
             <div class="col-md-8">
                 <div class="form-group">
-                <input type="tel" class="form-control" name="agent" placeholder="Select Agents"> 
+                <input type="tel" class="form-control" name="agent" placeholder="Select Agents">
                 </div>
             </div>
 </div>

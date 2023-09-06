@@ -34,10 +34,10 @@
         <section class="content-header">
 
             <div class="container mt-4">
-                <h1 class="mb-4">Maintenance Checklist</h1>
+                <h1 class="mb-4">Service Verification</h1>
 <p>This will be the preliminary master list of all checklists per area and responsibility.</p>
                 <!-- HVAC Section -->
-                <h2 class=" border-top border-5 border-success">HVAC– Each item to be verified per specs below.</h2>
+                <h2 class=" border-top border-5 border-success">Heating, Ventilation, and Air Conditioning Check</h2>
                 <ul>
                     <li><input type="checkbox"> Replace filters – Per system specifications.</li>
                     <li><input type="checkbox"> Clean and check flue system - Monthly</li>
@@ -52,7 +52,7 @@
                 </ul>
 
                 <!-- Electrical Section -->
-                <h2 class=" border-top border-4 border-success">Electrical – Each item to be verified on each visit.</h2>
+                <h2 class=" border-top border-4 border-success">Electrical Component Verification</h2>
                 <ul>
                     <li><input type="checkbox"> Visually inspect circuit breakers for any abnormalities</li>
                     <li><input type="checkbox"> Test all light switches to ensure proper function</li>
@@ -64,7 +64,7 @@
                 </ul>
 
                 <!-- Plumbing Section -->
-                <h2 class=" border-top border-4 border-success">Plumbing – Each item to be verified on each visit.</h2>
+                <h2 class=" border-top border-4 border-success">Plumbing Fixture Inspection</h2>
                 <ul>
                     <li><input type="checkbox"> Inspect all faucets for proper operation</li>
                     <li><input type="checkbox"> Inspect all toilets for proper operation</li>
@@ -77,7 +77,8 @@
                 </ul>
 
                 <!-- Additional Tasks Section -->
-                <h2 class=" border-top border-4 border-success">Additional Tasks</h2>
+                <h2 class=" border-top border-4 border-success">Additional Responsibilities
+                </h2>
                 <ul>
                     <li><input type="checkbox"> During working hours, assist with any building emergency requests.</li>
                     <li><input type="checkbox"> Perform any miscellaneous items requested by One Global Management or Clean Force Management Team. (Agreed & approved between One Global and Clean Force Management Teams)</li>

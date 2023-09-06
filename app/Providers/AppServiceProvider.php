@@ -27,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $REQUEST)
     {
+        
         // $data['page'] = Request::segment(1);
         // $data['category'] = Category::all();
         // $data['generalsetting'] = GeneralSetting::first();
