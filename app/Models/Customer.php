@@ -41,4 +41,12 @@ class Customer extends Model
     {
         return $this->hasMany(StoredService::class);
     }
+    public function pricontact()
+    {
+        return $this->hasMany(PrimaryContact::class);
+    }
+    public function usname()
+    {
+        return $this->belongsTo(User::class,'user_id', 'id');
+    }
 }

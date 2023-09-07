@@ -21,17 +21,9 @@ return new class extends Migration
             $table->string('service_agreement')->nullable();
             $table->string('acnum')->nullable();
             $table->string('activeCustomer')->nullable();
-            $table->string('fname')->nullable();
-            $table->string('lname')->nullable();
-            $table->string('phone_type')->nullable();
-            $table->string('number')->nullable();
-            $table->string('ext')->nullable();
-            $table->string('department')->nullable();
-            $table->string('job_title')->nullable();
-            $table->string('email_type')->nullable();
-            $table->string('email')->nullable();
+            
             $table->string('contact')->nullable();
-           
+
             $table->string('estimate_template')->nullable();
             $table->string('job_template')->nullable();
             $table->string('invoice_template')->nullable();

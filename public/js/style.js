@@ -693,88 +693,21 @@ $(document).ready(function () {
     // Faraz
     // Multiple Primary Section
     $('#add-pri').click(function () {
-        var newEmailInput = $(
-            '<div class="row" id="new-pri">' +
-            '<div class="col-sm-6">' +
-            '<div class="name-main-div">' +
-            '<div class="mb-3">' +
-            '<label for="exampleInputfirst" class="form-label">First Name</label>' +
-            '<input type="text" name="fname[]" class="form-control" id="exampleInputfirst" placeholder="First Name">' +
-            '</div>' +
-            '<div class="mb-3">' +
-            '<label for="exampleInputlast" class="form-label">Last Name</label>' +
-            '<input type="text" name="lname[]" class="form-control" id="exampleInputlast" placeholder="Last Name">' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-sm-6">' +
-            '<div class="phone-main-div">' +
-            '<div class="col-md-4">' +
-            '<label for="number-div" class="form-label">Phone</label>' +
-            '<select class="form-select form-control" name="phone_type[]" aria-label="Default select example" id="number-div">' +
-            '<option value="">Select Menu</option>' +
-            '<option value="mobile">Mobile</option>' +
-            '<option value="telephone">Telephone</option>' +
-            '</select>' +
-            '</div>' +
-            '<div class="col-md-4">' +
-            '<input type="text" name="number[]" class="form-control" id="number-div" placeholder="433202232323">' +
-            '</div>' +
-            '<div class="col-md-2">' +
-            '<input type="text" name="ext[]" class="form-control" id="number-div" placeholder="Ext">' +
-            '</div>' +
-            '<div class="col-md-2">' +
-            '<button type="button" class="remove-pri add-sign"><i class="fas fa-trash text-danger"></i></button>' +
-            '</div>' +
-            '</div>' +
-            '</div>');
+        var newDiv = $("#pri_div").clone();
 
-        $('.pri_append').append(newEmailInput);
+        // Remove the template's ID to avoid duplicates
+        newDiv.removeAttr("id");
+        newDiv.removeClass("d-none","exclude-from-submission");
+        newDiv.find('input[type="text"]').val('');
+        // Append the cloned div to the container
+        $("#some").append(newDiv);
+
+        // Add a remove button to the cloned form
+        newDiv.append('<button type="button"  class="remove-pri btn btn-danger mb-4">Delete </button>');
     });
 
     $(document).on('click', '.remove-pri', function () {
-        $('#new-pri').remove();
-    });
-
-    // Add Details
-    $('#add-dte').click(function () {
-        var newEmailInput = $('<div class="row" id="new-dte">' +
-            '<div class="col-sm-3">' +
-            '<div class="mb-3">' +
-            '<label for="exampleInputfirst" class="form-label">Department</label>' +
-            '<input type="text" name="department[]" class="form-control" id="exampleInputfirst" placeholder="Department">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-sm-4">' +
-            '<div class="mb-3">' +
-            '<label for="exampleInputlast" class="form-label">Job Title</label>' +
-            '<input type="text" name="job_title[]" class="form-control" id="exampleInputlast" placeholder="Job Title" style="width:80%;">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-sm-5">' +
-            '<div class="phone-main-div">' +
-            '<div class="col-md-4">' +
-            '<label for="email-div" class="form-label">Email</label>' +
-            '<select class="form-select form-control" name="email_type[]" aria-label="Default select example" id="email-div">' +
-            '<option value="personal">Personal</option>' +
-            '<option value="company">Company</option>' +
-            '</select>' +
-            '</div>' +
-            '<div class="col-md-6">' +
-            '<input type="text" name="email[]" class="form-control" id="number-div" placeholder="abc@abc.com">' +
-            '</div>' +
-            '<div class="col-md-2">' +
-            '<button type="button" id="remove-dte" class="add-sign pe-auto"><i class="fas fa-trash text-danger"></i></button>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>');
-
-        $('.dte_append').append(newEmailInput);
-    });
-
-    $(document).on('click', '#remove-dte', function () {
-        $('#new-dte').remove();
+        $(this).closest('.pri_append').remove();
     });
     // Add Services
     $('#add-ser').click(function () {
@@ -818,7 +751,7 @@ $(document).ready(function () {
             '<div class="col-sm-2">' +
             '    <div class="mb-3">' +
             '        <label for="flexRadioDefaulte" class="form-label">Active?</label>' +
-            '        <select class="form-select form-control" name="active[]" aria-label="Default select example">' +
+            '        <select class="form-select form-control" name="active_service[]" aria-label="Default select example">' +
             '            <option value="yes">Yes</option>' +
             '            <option value="no">No</option>' +
             '        </select>' +

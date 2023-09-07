@@ -88,7 +88,7 @@
                                                         <div class="mb-3">
                                                             <label for="exampleInputacount" class="form-label">Account
                                                                 #</label>
-                                                            <input type="acnum" class="form-control"
+                                                            <input type="text" name="acnum" class="form-control"
                                                                 id="exampleInputaccount" placeholder="Account number">
                                                         </div>
                                                     </div>
@@ -97,7 +97,7 @@
                                                             <label for="flexRadioDefault5" class="form-label">Active
                                                                 ?</label>
                                                                 <select class="form-select form-control"
-                                                                name="active"
+                                                                name="activeCustomer"
                                                                 aria-label="Default select example"
                                                                 id="email-div">
                                                                 <option value="yes">Yes</option>
@@ -109,110 +109,109 @@
                                                     <div class="col-sm-12">
                                                         <div class="inner-header bg-light pt-2 pb-2">
                                                             <h3 class="primary">Primary Contact</h3>
+                                                            <button class="add-more-btn" id="add-pri"
+                                                                type="button">&#43;Add Primary Contact</button>
                                                         </div>
                                                     </div>
-                                                    <div class="row pri_append">
+                                                    <div class="pri_append" id="pri_div">
 
-                                                        <div class="col-sm-6">
-                                                            <div class="name-main-div">
+                                                        <div class="row">
 
+                                                            <div class="col-sm-6">
+                                                                <div class="name-main-div">
+
+                                                                    <div class="mb-3">
+                                                                        <label for="exampleInputfirst" class="form-label">First
+                                                                            Name</label>
+                                                                        <input type="text" name="fname[]"
+                                                                            class="form-control" id="exampleInputfirst"
+                                                                            placeholder="First Name">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="exampleInputlast" class="form-label">Last
+                                                                            Name</label>
+                                                                        <input type="text" name="lname[]"
+                                                                            class="form-control" id="exampleInputlast"
+                                                                            placeholder="Last Name">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="phone-main-div">
+                                                                    <div class="col-md-4">
+                                                                        <label for="number-div"
+                                                                            class="form-label">Phone</label>
+                                                                        <select class="form-select form-control"
+                                                                            name="phone_type[]"
+                                                                            aria-label="Default select example"
+                                                                            id="number-div">
+                                                                            <option value="">Select Menu</option>
+                                                                            <option value="mobile">Mobile</option>
+                                                                            <option value="telephone">Telephone</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <input type="text" name="number[]"
+                                                                            class="form-control" id="number-div"
+                                                                            placeholder="433202232323">
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input type="text" name="ext[]"
+                                                                            class="form-control" id="number-div"
+                                                                            placeholder="Ext">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-sm-3">
                                                                 <div class="mb-3">
-                                                                    <label for="exampleInputfirst" class="form-label">First
-                                                                        Name</label>
-                                                                    <input type="text" name="fname[]"
-                                                                        class="form-control" id="exampleInputfirst"
-                                                                        placeholder="First Name">
+                                                                    <label for="exampleInputdepartment"
+                                                                        class="form-label">Department</label>
+                                                                    <input type="text" name="department[]"
+                                                                        class="form-control" id="exampleInputdepartment"
+                                                                        placeholder="Department">
                                                                 </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
                                                                 <div class="mb-3">
-                                                                    <label for="exampleInputlast" class="form-label">Last
-                                                                        Name</label>
-                                                                    <input type="text" name="lname[]"
-                                                                        class="form-control" id="exampleInputlast"
-                                                                        placeholder="Last Name">
+                                                                    <label for="exampleInputjob" class="form-label">Job
+                                                                        Title</label>
+                                                                    <input type="text" name="job_title[]"
+                                                                        class="form-control" id="exampleInputjob"
+                                                                        placeholder="Job title">
                                                                 </div>
-
                                                             </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="phone-main-div">
-                                                                <div class="col-md-4">
-                                                                    <label for="number-div"
-                                                                        class="form-label">Phone</label>
-                                                                    <select class="form-select form-control"
-                                                                        name="phone_type[]"
-                                                                        aria-label="Default select example"
-                                                                        id="number-div">
-                                                                        <option value="">Select Menu</option>
-                                                                        <option value="mobile">Mobile</option>
-                                                                        <option value="telephone">Telephone</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <input type="text" name="number[]"
-                                                                        class="form-control" id="number-div"
-                                                                        placeholder="433202232323">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <input type="text" name="ext[]"
-                                                                        class="form-control" id="number-div"
-                                                                        placeholder="Ext">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <button type="button" id="add-pri"
-                                                                        class="add-sign pe-auto">&#43;</button>
+                                                            <div class="col-sm-6">
+                                                                <div class="email-address-div">
+                                                                    <div class="col-md-4">
+                                                                        <label for="email-div"
+                                                                            class="form-label">Email</label>
+                                                                        <select class="form-select form-control"
+                                                                            name="email_type[]"
+                                                                            aria-label="Default select example"
+                                                                            id="email-div">
+                                                                            <option value="personal">Personal</option>
+                                                                            <option value="company">Company</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <input type="text" class="form-control"
+                                                                            name="email[]" id="number-div"
+                                                                            placeholder="abc@gmail.com">
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row dte_append">
+                                                    <div id="some">
 
-                                                        <div class="col-sm-3">
-                                                            <div class="mb-3">
-                                                                <label for="exampleInputdepartment"
-                                                                    class="form-label">Department</label>
-                                                                <input type="text" name="department[]"
-                                                                    class="form-control" id="exampleInputdepartment"
-                                                                    placeholder="Department">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="mb-3">
-                                                                <label for="exampleInputjob" class="form-label">Job
-                                                                    Title</label>
-                                                                <input type="text" name="job_title[]"
-                                                                    class="form-control" id="exampleInputjob"
-                                                                    placeholder="Job title">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="email-address-div">
-                                                                <div class="col-md-4">
-                                                                    <label for="email-div"
-                                                                        class="form-label">Email</label>
-                                                                    <select class="form-select form-control"
-                                                                        name="email_type[]"
-                                                                        aria-label="Default select example"
-                                                                        id="email-div">
-                                                                        <option value="personal">Personal</option>
-                                                                        <option value="company">Company</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <input type="text" class="form-control"
-                                                                        name="email[]" id="number-div"
-                                                                        placeholder="abc@gmail.com">
-                                                                </div>
-                                                                {{-- <div class="col-md-2">
-                                                                    <button class="add-sign">&#9881;</button>
-                                                                </div> --}}
-                                                                <div class="">
-                                                                    <button type="button" id="add-dte"
-                                                                        class="add-sign">&#43;</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-2 align-items-end">
+                                                    <div class=" col-sm-6 align-items-end">
                                                         <label for="email-div"
                                                                         class="form-label">Contact Type</label>
                                                                     <select class="form-select form-control"
@@ -224,7 +223,7 @@
                                                                     </select>
 
                                                     </div>
-                                                    <div class="col-sm-2 align-items-end">
+                                                    <div class="col-sm-6 align-items-end">
                                                         <label for="email-div"
                                                                         class="form-label">Personal Email</label>
                                                                     <input type="email" name="per_email" class="form-control" placeholder="personal@gmail.com" id="">
@@ -292,7 +291,7 @@
                                                             <label for="flexRadioDefaulte"
                                                                 cldss="form-label">Active?</label>
                                                                 <select class="form-select form-control"
-                                                                name="active[]"
+                                                                name="active_service[]"
                                                                 aria-label="Default select example"
                                                                 >
                                                                 <option value="yes">Yes</option>
@@ -502,7 +501,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>

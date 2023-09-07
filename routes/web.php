@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
     Route::put('/customer/update/{id}', [UserController::class, 'customer_update'])->name('customer.update');
     Route::delete('/customer/destroy/{id}', [UserController::class, 'customer_destroy'])->name('customer.destroy');
     Route::get('/service/destroy/{id}', [UserController::class, 'service_destroy'])->name('service.destroy');
+    Route::get('/pricontact/destroy/{id}', [UserController::class, 'pri_destroy'])->name('pri.destroy');
 
 
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile.index');

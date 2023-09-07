@@ -41,7 +41,7 @@
                 <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Account#</th>
                 <th>Roles</th>
                 <th width="560px">Action</th>
                 </tr>
@@ -53,7 +53,7 @@
                     <tr>
                       <td>{{ $key+1 }}</td>
                       <td>{{ $customer->customer_name }}</td>
-                      <td>{{ $customer->fname[0] }}</td>
+                      <td>{{ $customer->acnum ?? '' }}</td>
                       <td>
                           <label class="badge badge-success">customer</label>
                       </td>

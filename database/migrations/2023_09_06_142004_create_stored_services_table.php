@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('primary')->nullable();
             $table->string('billing_address')->nullable();
             $table->string('contact_type')->nullable();
-            $table->string('active')->nullable();
+            $table->string('active_service')->nullable();
             $table->string('address')->nullable();
             $table->string('aptNo')->nullable();
             $table->string('city')->nullable();
