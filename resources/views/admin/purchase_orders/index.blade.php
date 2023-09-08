@@ -41,16 +41,16 @@
                 <tr>
                     <th>Order #</th>
                     <th>Order Date</th>
-                    <th>Price</th>
+                    <th>Payment Type</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($purchaseOrders as $purchaseOrder)
                 <tr>
-                    <td>{{ $purchaseOrder->order_number }}</td>
+                    <td>{{ $purchaseOrder->id }}</td>
                     <td>{{ $purchaseOrder->order_date }}</td>
-                    <td>{{ $purchaseOrder->total_amount }}</td>
+                    <td>{{ $purchaseOrder->payment_term }}</td>
                     <td>
                         <form action="{{ route('purchase-orders.destroy', $purchaseOrder->id) }}" method="POST">
                             <a href="{{ route('purchase-orders.show', $purchaseOrder->id) }}" class="btn btn-info">Show</a>
@@ -64,7 +64,7 @@
                 @endforeach
             </tbody>
     </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -86,5 +86,5 @@
 @endsection
 
 
-   
+
 

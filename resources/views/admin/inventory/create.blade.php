@@ -22,7 +22,7 @@
 
     <section class="content">
     <div class="container-fluid">
-  
+
         <div class="row">
           <div class="col-12">
               <div class="card">
@@ -46,14 +46,14 @@
                                                     <option value="1">Vendor 1</option>
                                                     <option value="2">Vendor 2</option>
                                                 </select>
-                                           
+
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group">
                                                  <label for="vender-div" class="form-label">Date</label>
                                                 <div class="input-group date" id="datepicker">
                                                     <input type="date" class="form-control" id="date" />
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-3">
-                                            
+
                                             <label for="vender-div" class="form-label">Paid For By</label>
                                                 <input type="number" class="form-control" id="reference" placeholder="Paid">
                                                 </select>
@@ -90,8 +90,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                                 <label for="receivedto" class="form-label">Received to: </label>
-                                                <input type="text" class="form-control" id="receivedto" placeholder="Received">
-                                                </input>
+                                                <input type="text" class="form-control" id="receivedto" placeholder="Received"/>
+
                                         </div>
                                     </div>
                                 </div>
@@ -161,15 +161,15 @@
                                             <h5>GRADN TOTAL</h5>
                                             <h6>0.00</h6>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-		
-		
+
+
 		<div class="inner-section py-3">
                 <div class="container">
                     <div class="row">
@@ -223,14 +223,14 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-		
+
 			 <div class="inner-section py-3">
                 <div class="container">
                     <div class="row">
@@ -321,8 +321,8 @@
                     </div>
                 </div>
             </div>
-		
-		
+
+
                     <div class="inner-section-4">
                         <div class="container">
                             <div class="row">
@@ -330,12 +330,12 @@
                     </div>
                     </div>
                     </div>
-		
-		
+
+
                     </form>
                   </div>
-              </div> 
-          </div>   
+              </div>
+          </div>
         </div>
     </div>
 </section>
