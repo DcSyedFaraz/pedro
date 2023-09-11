@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
 
+
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile.index');
     // Storage
     Route::get('/document', [DashboardController::class, 'document'])->name('document');
@@ -84,6 +85,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('technicians', TechniciansController::class);
     Route::resource('estimates', EstimateController::class);
     Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
+    Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
 
 
     Route::resource('job-category', JobCategoryController::class);
@@ -107,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/jobs-needing-scheduling', [JobController::class, 'JobsNeedingScheduling'])->name('job.needing.scheduling');
     Route::get('/jobs-in-progress', [JobController::class, 'JobsInProgress'])->name('jobs.in.progress');
     Route::get('/jobs-complete', [JobController::class, 'JobsInCompleted'])->name('jobs.complete');
+    Route::get('/jobprimary/destroy/{id}', [JobController::class, 'job_pri'])->name('jobpri.destroy');
 
 
 

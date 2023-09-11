@@ -36,4 +36,9 @@ class Estimate extends Model
     {
         return $this->hasOne(job_source_category::class,'id','job_source');
     }
+
+    public function prim_cont()
+    {
+        return $this->hasMany(EstimatePrimaryContact::class);
+    }
 }

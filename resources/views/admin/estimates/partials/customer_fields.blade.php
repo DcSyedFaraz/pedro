@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <textarea  class="form-control" name="customer_homeowner" placeholder="Customer Homeowner"></textarea> 
+            <textarea  class="form-control" name="customer_homeowner" placeholder="Customer Homeowner">{{ isset($estimate->customer_homeowner) ? old('customer_homeowner', $estimate->customer_homeowner) : '' }}</textarea>
         </div>
     </div>
 </div>
@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <textarea  class="form-control" name="customer_unit_cordination" placeholder="Customer Unit Cordination"></textarea> 
+            <textarea  class="form-control" name="customer_unit_cordination" placeholder="Customer Unit Cordination">{{ isset($estimate->customer_unit_cordination) ? old('customer_unit_cordination', $estimate->customer_unit_cordination) : '' }}</textarea>
         </div>
     </div>
 </div>

@@ -45,7 +45,7 @@
                     <th>Actions</th>
                   </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($estimates)
                     @foreach($estimates as $estimate)
@@ -64,23 +64,24 @@
                           <td>{{ isset($estimate->job_category->name) ? $estimate->job_category->name : '' }}</td>
                           <td>Primary Contact: {{ $estimate->first_name . '-' . $estimate->last_name }}
                           </br> {{ $emailList }}
-                          </br> Phone: {{ $phone }} Ext: {{ $ext }} 
+                          </br> Phone: {{ $phone }} Ext: {{ $ext }}
                           </td>
                           <td>
                           <!-- <a href="{{ route('estimates.edit', $estimate) }}" class="btn btn-primary">Edit</a> -->
+                          <a class="btn btn-success" href="{{ route('estimates.edit',$estimate->id) }}">Edit</a>
                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#markModal" data-estimate-id="{{ $estimate->id }}">Mark</button>
                           <form action="{{ route('estimates.destroy', $estimate) }}" method="POST" class="d-inline">
                               @csrf
                               @method('DELETE')
                               <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this estimate?')">Delete</button>
-                          </form>           
+                          </form>
                           </td>
                       </tr>
                     @endforeach
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>

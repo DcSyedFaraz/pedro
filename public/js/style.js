@@ -89,7 +89,9 @@ function validateForm() {
 $('#add-primary').click(function () {
 
     var newPrimaryInput = $(
-        '<div class="row" id="new-primary">' +
+
+        '<div class="new-primary">' +
+        '<div class="row" >' +
         '<div class="col-md-4">&nbsp;</div>' +
         '<div class="col-md-4">' +
         '<div class="form-group">' +
@@ -103,16 +105,28 @@ $('#add-primary').click(function () {
         '<p class="ext-error" style="display: none; color: red;">Please add at least one ext</p>' +
         '</div>' +
         '</div>' +
-        '<div class="col-md-1">' +
+
+        '</div>'+
+        '<div class="row" id="new-email">' +
+        '<div class="col-md-4">&nbsp;</div>' +
+        '<div class="col-md-6">' +
+        '<div class="form-group">' +
+        '<input type="tel" class="form-control" name="email[]" placeholder="Email" >' +
+        '<p class="email-error" style="display: none; color: red;">Please add at least one email.</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-md-2">' +
         '<button type="button" class="btn remove-primary"><i class="fas fa-trash text-danger"></i></button>' +
         '</div>' +
-        '</div>');
+        '</div>' +
+        '</div>'
+        );
 
     $('.primary_append').append(newPrimaryInput);
 });
 
 $(document).on('click', '.remove-primary', function () {
-    $('#new-primary').remove();
+    $(this).closest('.new-primary').remove();
 });
 
 
@@ -220,42 +234,42 @@ $(document).ready(function () {
         }
 
         // Validate Image
-        const imageInput = $('input[name="image"]');
-        const imageFile = imageInput[0].files[0];
-        if (!imageFile) {
-            imageInput.addClass('error');
-            $('.image-error').show();
-            isValid = false;
-        } else {
-            imageInput.removeClass('error');
-            $('.image-error').hide();
+        // const imageInput = $('input[name="image"]');
+        // const imageFile = imageInput[0].files[0];
+        // if (!imageFile) {
+        //     imageInput.addClass('error');
+        //     $('.image-error').show();
+        //     isValid = false;
+        // } else {
+        //     imageInput.removeClass('error');
+        //     $('.image-error').hide();
 
-            // Optional: Validate file extension if needed
-            const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-            const fileExtension = imageFile.name.split('.').pop().toLowerCase();
-            if (!allowedExtensions.includes(fileExtension)) {
-                imageInput.addClass('error');
-                $('.image-error').text('Please select a valid image file (JPG, JPEG, PNG, GIF)');
-                $('.image-error').show();
-                isValid = false;
-            }
-        }
+        //     // Optional: Validate file extension if needed
+        //     const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        //     const fileExtension = imageFile.name.split('.').pop().toLowerCase();
+        //     if (!allowedExtensions.includes(fileExtension)) {
+        //         imageInput.addClass('error');
+        //         $('.image-error').text('Please select a valid image file (JPG, JPEG, PNG, GIF)');
+        //         $('.image-error').show();
+        //         isValid = false;
+        //     }
+        // }
 
-        // Validate Documents
-        const documentInput = $('input[name="document"]');
-        const documentFile = documentInput[0].files[0];
-        if (documentFile) {
-            const allowedExtensions = ['pdf', 'doc', 'docx'];
-            const fileExtension = documentFile.name.split('.').pop().toLowerCase();
-            if (!allowedExtensions.includes(fileExtension)) {
-                documentInput.addClass('error');
-                $('.document-error').show();
-                isValid = false;
-            } else {
-                documentInput.removeClass('error');
-                $('.document-error').hide();
-            }
-        }
+        // // Validate Documents
+        // const documentInput = $('input[name="document"]');
+        // const documentFile = documentInput[0].files[0];
+        // if (documentFile) {
+        //     const allowedExtensions = ['pdf', 'doc', 'docx'];
+        //     const fileExtension = documentFile.name.split('.').pop().toLowerCase();
+        //     if (!allowedExtensions.includes(fileExtension)) {
+        //         documentInput.addClass('error');
+        //         $('.document-error').show();
+        //         isValid = false;
+        //     } else {
+        //         documentInput.removeClass('error');
+        //         $('.document-error').hide();
+        //     }
+        // }
 
         // Validate Current Status
         const currentStatus = $('#fruits').val();

@@ -39,13 +39,14 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Customer Name</th>
+                  <th>Jobs Name</th>
                   <th>Jobs</th>
                   <th>Primary Contact</th>
-                  <!-- <th>Actions</th> -->
+                 <th>Schedule</th>
+                 <th>Actions</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($job)
                   @foreach($job as $jobs)
@@ -60,16 +61,16 @@
                     $emailList = implode(',', $emailAddresses);
                   @endphp
                   <tr>
-                  <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
+                  <td>{{ isset($jobs->jobs->name) ? $jobs->jobs->name : '' }}</td>
                   <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}</td>
                   <td>Primary Contact: {{ $jobs->first_name . '-' . $jobs->last_name }}
                     </br> {{ $emailList }}
-                    </br> Phone: {{ $phone }} Ext: {{ $ext }} 
+                    </br> Phone: {{ $phone }} Ext: {{ $ext }}
                   </td>
                   @if($jobs->current_status == 1)
                     <td class="text-primary"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
                   @elseif($jobs->current_status == 2)
-                  <td class="text-secondary"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td> 
+                  <td class="text-secondary"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
                   @elseif($jobs->current_status == 3)
                   <td class="text-warning"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
                   @elseif($jobs->current_status == 4)
@@ -87,13 +88,18 @@
                     @else
                     <td class="text-success"><strong>---</strong></td>
                   @endif
-                 
+                  <td>
+                    <a class="btn btn-primary" href="{{ route('job.edit',$jobs->id) }}">Edit</a>
+                      {!! Form::open(['method' => 'DELETE','route' => ['job.destroy', $jobs->id],'style'=>'display:inline']) !!}
+                          {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                      {!! Form::close() !!}
+                  </td>
               </tr>
               @endforeach
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>

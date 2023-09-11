@@ -58,8 +58,12 @@ class Job extends Model
             return 'Partially';
         } else if($this->attributes['current_status'] == 9) {
             return 'Completed';
-        }  
+        }
         return '';
+    }
+    public function jobPri()
+    {
+        return $this->hasMany(JobPrimaryContact::class);
     }
 
     protected $appends = ['parsedStatus'];
