@@ -5,13 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Invoice extends Model
+class ProductandService extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function service()
-    {
-        return $this->hasMany(ProductandService::class);
-    }
 }

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('job__categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('job_sub_cat_id')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -34,6 +34,7 @@ use App\Http\Controllers\users\UsersController;
 // Vendor Dashboard
 use App\Http\Controllers\vendor\DashboardController as vendorDashboardController;
 use App\Http\Controllers\vendor\VendorController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,15 +45,15 @@ use App\Http\Controllers\vendor\VendorController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-    Route::get('/signup', [RegisterController::class, 'register_form'])->name('signup');
-    Route::get('logout', [LoginController::class, 'logout']);
-    Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('users.verify');
-    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/', [HomeController::class,'login']);
-    Route::get('/', [HomeController::class,'index']);
+Route::get('/signup', [RegisterController::class, 'register_form'])->name('signup');
+Route::get('logout', [LoginController::class, 'logout']);
+Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('users.verify');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/', [HomeController::class, 'login']);
+Route::get('/', [HomeController::class, 'index']);
 
 
-Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::get('/change_password', [DashboardController::class, 'change_password'])->name('change_password');
     Route::post('/store_change_password', [DashboardController::class, 'store_change_password'])->name('store_change_password');
@@ -71,12 +72,13 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
     Route::get('/pricontact/destroy/{id}', [UserController::class, 'pri_destroy'])->name('pri.destroy');
 
 
+
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile.index');
     // Storage
     Route::get('/document', [DashboardController::class, 'document'])->name('document');
     Route::get('/signature', [DashboardController::class, 'signature'])->name('signature');
     Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
-    Route::resource('general_setting',GeneralSettingController::class);
+    Route::resource('general_setting', GeneralSettingController::class);
     // Routes for work
     Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('admin.work_orders.index');
     Route::resource('technicians', TechniciansController::class);
@@ -92,7 +94,8 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
     Route::resource('job', JobController::class);
     Route::resource('products', ProductController::class);
     Route::resource('purchase-orders', PurchaseOrderController::class);
-	 Route::resource('inventory', InventoryController::class);
+    Route::resource('inventory', InventoryController::class);
+    Route::get('/product/delete/{id}', [InventoryController::class, 'product_destroy'])->name('productService.destroy');
     Route::resource('invoice', InvoiceController::class);
     Route::resource('checklist', CheckListController::class);
     Route::resource('inspection', InspectionController::class);
@@ -109,10 +112,10 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth']], function(){
 
 });
 Auth::routes();
-Route::group(['prefix' => 'users','middleware'=> ['auth']], function(){
+Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 
     //Work Order
-     Route::get('/work-orders/index', [UsersController::class, 'index'])->name('users.work-orders.index');
+    Route::get('/work-orders/index', [UsersController::class, 'index'])->name('users.work-orders.index');
     Route::post('/assign-vendor/store', [UsersController::class, 'storeWorkOrder'])->name('users.assign_vendor.store');
     Route::resource('work-orders', UsersController::class);
     Route::post('/feedback', [UsersController::class, 'completeOrder'])->name('users.complete.order');
@@ -127,7 +130,7 @@ Route::group(['prefix' => 'users','middleware'=> ['auth']], function(){
 
 });
 
-Route::group(['prefix' => 'vendor','middleware'=> ['auth']], function(){
+Route::group(['prefix' => 'vendor', 'middleware' => ['auth']], function () {
 
     //Manage Work Order & Execute Work Order
     Route::get('/manage/work/orders', [vendorController::class, 'manageWorkOrders'])->name('manage_work_orders');
@@ -144,4 +147,3 @@ Route::group(['prefix' => 'vendor','middleware'=> ['auth']], function(){
     Route::post('/vendor/deliver/order', [vendorController::class, 'deliverOrder'])->name('vendor.deliver_order');
 
 });
-

@@ -13,14 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('productand_services', function (Blueprint $table) {
             $table->id();
-            $table->string('drive_time');
-            $table->string('labor_time');
-            $table->string('payments_and_deposits_input');
-            $table->string('amount_description');
-            $table->string('amount');
-            $table->string('note_to_cust');
+            $table->string('invoice_id');
+            $table->string('description');
+            $table->string('warehouse');
+            $table->string('qty_hrs');
+            $table->string('rate');
+            $table->string('total');
+            $table->string('cost');
+            $table->string('margin_tax');
+
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('productand_services');
     }
 };

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inventory;
+use App\Models\ProductandService;
+use App\Models\PurchaseOrder;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -16,7 +18,9 @@ class InventoryController extends Controller
 
     public function create()
     {
-        return view('admin.inventory.create');
+        $purchase = PurchaseOrder::get();
+        // return $purchase;
+        return view('admin.inventory.create', compact('purchase'));
     }
 
     public function store(Request $request)
@@ -26,14 +30,15 @@ class InventoryController extends Controller
             ->with('success', 'Inventory created successfully');
     }
 
-    public function show(Inventory $Inventory)
+    public function show(Inventory $inventory)
     {
-        return view('admin.inventory.show', compact('Inventory'));
+        return view('admin.inventory.show', compact('inventory'));
     }
 
-    public function edit(Inventory $Inventory)
+    public function edit(Inventory $inventory)
     {
-        return view('admin.inventory.edit', compact('Inventory'));
+        $purchase = PurchaseOrder::get();
+        return view('admin.inventory.edit', compact('inventory','purchase'));
     }
 
     public function update(Request $request, Inventory $Inventory)
@@ -48,5 +53,11 @@ class InventoryController extends Controller
         $Inventory->delete();
         return redirect()->route('inventory.index')
             ->with('success', 'Inventory deleted successfully');
+    }
+    public function product_destroy($id)
+    {
+        ProductandService::find($id)->delete();
+        return redirect()->back()
+            ->with('success', 'Product & Services deleted successfully');
     }
 }

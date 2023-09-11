@@ -15,11 +15,21 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->string('vendor')->nullable();
+            $table->date('date')->nullable();
+            $table->string('paid_for')->nullable();
+            $table->integer('paid')->default(0);
+            $table->string('receive')->nullable();
+            $table->string('product')->nullable();
             $table->integer('quantity')->default(0);
-            $table->text('description')->nullable();
-            $table->string('inventoriable_type');
-            $table->unsignedBigInteger('inventoriable_id');
-            $table->index(['inventoriable_type', 'inventoriable_id']);
+            $table->integer('unreceived')->default(0);
+            $table->integer('unit_cost')->default(0);
+            $table->integer('total')->default(0);
+            $table->string('subtotal')->nullable();
+            $table->string('discount')->nullable();
+            $table->string('tax_paid')->nullable();
+            $table->string('ship_cost')->nullable();
+            $table->string('grand_total')->nullable();
             $table->timestamps();
         });
     }

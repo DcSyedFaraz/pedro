@@ -39,18 +39,18 @@
             <table id="example1" class="table table-bordered table-striped">
             <thead class="thead-light">
                 <tr>
-                    <th>Name</th>
                     <th>Description</th>
-                    <th>Price</th>
-                    <th>Action</th>
+                    <th>Amount</th>
+                    <th>Labour Time</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($invoice as $inv)
                 <tr>
-                    <td>{{ $inv->name }}</td>
-                    <td>{{ $inv->description }}</td>
-                    <td>{{ $inv->price }}</td>
+                    <td>{{ $inv->amount_description }}</td>
+                    <td>{{ $inv->amount }}</td>
+                    <td>{{ $inv->labor_time }}</td>
                     <td>
                         <form action="{{ route('invoice.destroy', $inv->id) }}" method="POST">
                             <a href="{{ route('invoice.show', $inv->id) }}" class="btn btn-info">Show</a>

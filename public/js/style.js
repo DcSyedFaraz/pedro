@@ -577,13 +577,13 @@ $(document).ready(function () {
     $("#job-multiple-primary").click(function () {
         var newRow = `
             <tr>
-                <td colspan="2"><input type="text" class="form-control job_inv_desc" name="description" placeholder="Description"></td>
-                <td><input type="text" class="form-control job_inv_whr" name="warehouse" placeholder="Warehouse"></td>
-                <td><input type="number" class="form-control job_inv_qty" name="qty_hrs" placeholder="Qty"></td>
-                <td><input type="number" class="form-control job_inv_rate" name="rate" placeholder="Rate"></td>
-                <td><input type="number" class="form-control job_inv_total" name="total" placeholder="Total" readonly></td>
-                <td><input type="number" class="form-control job_inv_cost" name="cost1" placeholder="Cost"></td>
-                <td><input type="number" class="form-control job_inv_tax" name="margin_tax" placeholder="Tax"></td>
+                <td colspan="2"><input type="text" class="form-control job_inv_desc" name="description[]" placeholder="Description"></td>
+                <td><input type="text" class="form-control job_inv_whr" name="warehouse[]" placeholder="Warehouse"></td>
+                <td><input type="number" class="form-control job_inv_qty" name="qty_hrs[]" placeholder="Qty"></td>
+                <td><input type="number" class="form-control job_inv_rate" name="rate[]" placeholder="Rate"></td>
+                <td><input type="number" class="form-control job_inv_total" name="total[]" placeholder="Total" readonly></td>
+                <td><input type="number" class="form-control job_inv_cost" name="cost[]" placeholder="Cost"></td>
+                <td><input type="number" class="form-control job_inv_tax" name="margin_tax[]" placeholder="Tax"></td>
                 <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
             </tr>`;
         $("#job-invoice-rows").append(newRow);

@@ -18,15 +18,36 @@
                                     </tr>
                                 </thead>
                                 <tbody id="job-invoice-rows">
+
+                                @if (@isset($invoice->service))
+                                @foreach ($invoice->service as $y=> $service)
                                 <tr>
-                                    <td colspan="2"><input type="text" class="form-control inv_desc" name="description" placeholder="Description"></td>
-                                    <td><input type="text" class="form-control job_inv_whr" name="warehouse" placeholder="Warehouse"></td>
-                                    <td><input type="number" class="form-control job_inv_qty" name="qty_hrs" placeholder="Qty"></td>
-                                    <td><input type="number" class="form-control job_inv_rate" name="rate" placeholder="Rate"></td>
-                                    <td><input type="number" class="form-control job_inv_total" name="total" placeholder="Total"></td>
-                                    <td><input type="number" class="form-control job_inv_cost" name="cost" placeholder="Cost"></td>
-                                    <td><input type="number" class="form-control job_inv_tax" name="margin_tax" placeholder="Tax"></td>
+                                    <td colspan="2"><input value="{{ old('description', $service->description) }}" type="text" class="form-control inv_desc" name="description[]" placeholder="Description"></td>
+                                    <td><input value="{{ old('warehouse', $service->warehouse) }}" type="text" class="form-control job_inv_whr" name="warehouse[]" placeholder="Warehouse"></td>
+                                    <td><input value="{{ old('qty_hrs', $service->qty_hrs) }}" type="number" class="form-control job_inv_qty" name="qty_hrs[]" placeholder="Qty"></td>
+                                    <td><input value="{{ old('rate', $service->rate) }}" type="number" class="form-control job_inv_rate" name="rate[]" placeholder="Rate"></td>
+                                    <td><input value="{{ old('total', $service->total) }}" type="number" class="form-control job_inv_total" name="total[]" placeholder="Total" readonly></td>
+                                    <td><input value="{{ old('cost', $service->cost) }}" type="number" class="form-control job_inv_cost" name="cost[]" placeholder="Cost"></td>
+                                    <td><input value="{{ old('margin_tax', $service->margin_tax) }}" type="number" class="form-control job_inv_tax" name="margin_tax[]" placeholder="Tax"></td>
+                                    <td class="d-flex"><a href="{{route('productService.destroy',$service->id)}}" class="btn calculate-button" data-row="1"><i class="fas fa-trash text-danger"></i></a>
+                                        @if ($loop->last)
+                                        <button type="button" class="btn calculate-button" id="job-multiple-primary" data-row="1"><i class="fas fa-plus text-primary"></i></button>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="2"><input type="text" class="form-control inv_desc" name="description[]" placeholder="Description"></td>
+                                    <td><input type="text" class="form-control job_inv_whr" name="warehouse[]" placeholder="Warehouse"></td>
+                                    <td><input type="number" class="form-control job_inv_qty" name="qty_hrs[]" placeholder="Qty"></td>
+                                    <td><input type="number" class="form-control job_inv_rate" name="rate[]" placeholder="Rate"></td>
+                                    <td><input type="number" class="form-control job_inv_total" name="total[]" placeholder="Total" readonly></td>
+                                    <td><input type="number" class="form-control job_inv_cost" name="cost[]" placeholder="Cost"></td>
+                                    <td><input type="number" class="form-control job_inv_tax" name="margin_tax[]" placeholder="Tax"></td>
                                     <td><button type="button" class="btn calculate-button" id="job-multiple-primary" data-row="1"><i class="fas fa-plus text-primary"></i></button></td>
+                                </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>

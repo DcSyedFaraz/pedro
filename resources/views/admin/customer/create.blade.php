@@ -409,7 +409,7 @@
                                                         <div class="mb-3">
                                                             <label for="exampleInputcustomertag"
                                                                 class="form-label">Customer Tags</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control" name="customer_tag"
                                                                 id="exampleInputcustomertag" placeholder="Customer Tags">
                                                         </div>
                                                         <div class="mb-3">
@@ -496,7 +496,7 @@
                                                                         name="commission[]" id="exampleInputcommtag">
                                                                 </div>
                                                                 <div class="commission3-div">
-                                                                    <button class="add-sign" type="button" id="add-com">+</button>
+                                                                    {{-- <button class="add-sign" type="button" id="add-com">+</button> --}}
                                                                 </div>
                                                             </div>
                                                         </div>

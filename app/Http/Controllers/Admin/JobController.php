@@ -17,13 +17,13 @@ class JobController extends Controller
 
         $now = now();
         $next72Hours = now()->addHours(72);
-        
+
         $job = Job::with('customer','job_category','job_prioirty','job_source')->whereNull('scheduled_at')  // Change 'scheduled_at' to your actual column name
             ->orWhere(function ($query) use ($now, $next72Hours) {
                 $query->where('scheduled_at', '>', $next72Hours);
                     //   ->orWhere('due_at', '<', $now);
             })->get();
-            
+
 
         // $job = Job::with('customer','job_category','job_prioirty','job_source')->get();
         return view('admin.job.index', compact('job'));
@@ -31,7 +31,7 @@ class JobController extends Controller
 
     public function create()
     {
-        $customer = User::withRole('user')->get();
+        $customer = User::withRole('customer')->get();
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
@@ -43,17 +43,17 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Adjust the validation rules as needed
             'document' => 'required|mimes:pdf,doc,docx', // Adjust the validation rules as needed
         ]);
-        
+
         $job =new Job();
         $job->customer_id                   = $request->customer_id;
         $job->first_name                    = $request->first_name;
         $job->last_name                     = $request->last_name;
-        //Array Value    
+        //Array Value
         $job->phone                         = $request->phone;
         $job->ext_id                        = $request->ext_id;
         $job->ext                           = $request->ext;
@@ -76,29 +76,29 @@ class JobController extends Controller
         $job->customer_homeowner            = $request->customer_homeowner;
         $job->customer_unit_cordination     = $request->customer_unit_cordination;
         //Job Picture
-        
-        if($request->hasFile('image')) 
+
+        if($request->hasFile('image'))
         {
             $file = request()->file('image');
             $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
-            $file->move('uploads/image/', $fileName);  
+            $file->move('uploads/image/', $fileName);
             $image = asset('uploads/image/'.$fileName);
         }
-        
-        
+
+
         //Job document
-        if($request->hasFile('document')) 
+        if($request->hasFile('document'))
 			{
 				$file = request()->file('document');
 				$fileName = md5($file->getClientOriginalName() . time()) . "doc." . $file->getClientOriginalExtension();
-				$file->move('uploads/document/', $fileName);  
+				$file->move('uploads/document/', $fileName);
 				$document = asset('uploads/document/'.$fileName);
 			}
         // Job Information
         //Job image
         $job->image                         = $image;
         //Job document
-        $job->document                       = $document;    
+        $job->document                       = $document;
         $job->current_status                = $request->current_status;
         $job->start_date                    = $request->start_date;
         $job->end_date                      = $request->end_date;
@@ -148,14 +148,14 @@ class JobController extends Controller
     {
         $categoryId = $request->get('category_id');
         $subcategories = JobSubCategory::where('job_cat_id', $categoryId)->get();
-        
+
         return response()->json($subcategories);
     }
-    
+
     public function getSubDescription(Request $request)
     {
         $subcategoryId = $request->get('subcategory_id');
-       
+
         $subDescription = JobSubCategory::where('job_cat_id', $subcategoryId)->first();
         return response()->json(['subdescription' => $subDescription ? $subDescription->description : '']);
     }
@@ -169,24 +169,24 @@ class JobController extends Controller
         $schedule_today = Job::whereBetween('start_date', [$startOfDay, $endOfDay])
         ->whereBetween('end_date', [$startOfDay, $endOfDay])
         ->get();
-        
-        return view('admin.job.schedule_today',compact('schedule_today'));   
+
+        return view('admin.job.schedule_today',compact('schedule_today'));
     }
-    //48 hours 
+    //48 hours
     public function Next48Hours(){
         //today
         $now = now(); // Current date and time
         $endOfNext48Hours = $now->copy()->addHours(48); // Today's end time
-     
+
         //Schedule Today
         $next_48_hours = Job::whereBetween('start_date', [$now, $endOfNext48Hours])
         ->whereBetween('end_date', [$now, $endOfNext48Hours])
         ->get();
-        
-        return view('admin.job.next_48_hours',compact('next_48_hours'));   
+
+        return view('admin.job.next_48_hours',compact('next_48_hours'));
     }
     public function JobsNeedingScheduling(){
-        
+
         $now = now(); // Current date and time
         // Jobs that need scheduling (start_date or end_date is null or in the past)
         $jobs_needing_scheduling = Job::where(function ($query) use ($now) {
@@ -198,22 +198,22 @@ class JobController extends Controller
                 ->orWhere('end_date', '<=', $now);
         })->get();
 
-        return view('admin.job.job_needing_scheduling',compact('jobs_needing_scheduling'));  
+        return view('admin.job.job_needing_scheduling',compact('jobs_needing_scheduling'));
     }
 
     public function JobsInProgress(){
 
         // Retrieve jobs in progress based on the current_status field
         $jobs_in_progress = Job::where('current_status',7)->get();
-        return view('admin.job.job_in_progress',compact('jobs_in_progress')); 
+        return view('admin.job.job_in_progress',compact('jobs_in_progress'));
 
-    } 
+    }
 
     public function JobsInCompleted(){
-        
+
         //Retrieve completed jobs based on the current_status field
         $completed_jobs = Job::where('current_status',9)->get();
         return view('admin.job.jobs_completed',compact('completed_jobs'));
 
-    } 
+    }
 }

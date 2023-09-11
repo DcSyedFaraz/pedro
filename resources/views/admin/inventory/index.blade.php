@@ -39,18 +39,18 @@
             <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
+                    <th>Vendor</th>
+                    <th>Date</th>
+                    <th>Received By</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($inventory as $inv)
                 <tr>
-                    <td>{{ $inv->name }}</td>
-                    <td>{{ $inv->description }}</td>
-                    <td>{{ $inv->price }}</td>
+                    <td>{{ $inv->vendor }}</td>
+                    <td>{{ $inv->date }}</td>
+                    <td>{{ $inv->receive }}</td>
                     <td>
                         <form action="{{ route('inventory.destroy', $inv->id) }}" method="POST">
                             <a href="{{ route('inventory.show', $inv->id) }}" class="btn btn-info">Show</a>
@@ -64,7 +64,7 @@
                 @endforeach
             </tbody>
     </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -86,5 +86,5 @@
 @endsection
 
 
-   
+
 

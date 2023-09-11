@@ -98,6 +98,7 @@ class UserController extends Controller
             'job_template' => $request['job_template'],
             'invoice_template' => $request['invoice_template'],
             'notes' => $request['notes'],
+            'customer_tag' => $request['customer_tag'],
             'referral' => $request['referral'],
             'amount' => $request['amount'],
             'assigned_contract' => $request['assigned_contract'],
@@ -242,6 +243,7 @@ class UserController extends Controller
         $customer->job_template         = $request['job_template'];
         $customer->invoice_template     = $request['invoice_template'];
         $customer->notes                = $request['notes'];
+        $customer->customer_tag         = $request['customer_tag'];
         $customer->referral             = $request['referral'];
         $customer->amount               = $request['amount'];
         $customer->assigned_contract    = $request['assigned_contract'];
@@ -252,32 +254,7 @@ class UserController extends Controller
         $customer->commission_sign      = $request['commission_sign'];
         $customer->commission           = $request['commission'];
         $customer->save();
-
-
-    // $customers = Customer::update([
-
-    //     'user_id' => $user->id,
-    //     'customer_name' => $request['customer_name'],
-    //     'service_agreement' => $request['service_agreement'],
-    //     'acnum' => $request['acnum'],
-    //     'activeCustomer' => $request['activeCustomer'],
-
-    //     'contact' => $request['contact'],
-
-    //     'estimate_template' => $request['estimate_template'],
-    //     'job_template' => $request['job_template'],
-    //     'invoice_template' => $request['invoice_template'],
-    //     'notes' => $request['notes'],
-    //     'referral' => $request['referral'],
-    //     'amount' => $request['amount'],
-    //     'assigned_contract' => $request['assigned_contract'],
-    //     'taxable' => $request['taxable'],
-    //     'tax_item' => $request['tax_item'],
-    //     'bussiness_id' => $request['bussiness_id'],
-    //     'assigned_rep' => $request['assigned_rep'],
-    //     'commission_sign' => $request['commission_sign'],
-    //     'commission' => $request['commission'],
-    // ]);
+        
         return redirect()->route('customer.index')
             ->with('success', 'Customer updated successfully');
     }

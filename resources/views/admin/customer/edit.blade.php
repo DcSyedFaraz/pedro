@@ -706,7 +706,7 @@
                                                         <label for="notes-div" class="form-label ">Internal/Private
                                                             Notes</label>
                                                         <textarea name="notes" class="text-area w-100 form-control" rows="8" id="notes-div"
-                                                            placeholder="Internal/Private Notes"></textarea>
+                                                            placeholder="Internal/Private Notes">{{ old('notes', $customer->notes ?? '') }}</textarea>
 
                                                     </div>
                                                     <div class="col-sm-4">
@@ -714,7 +714,7 @@
                                                             <label for="exampleInputcustomertag"
                                                                 class="form-label">Customer
                                                                 Tags</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control" value="{{ old('discount', $customer->discount ?? '') }}"
                                                                 id="exampleInputcustomertag" placeholder="Customer Tags">
                                                         </div>
                                                         <div class="mb-3">
@@ -723,8 +723,8 @@
                                                                 Source</label>
                                                             <select class="form-select form-control" name="referral"
                                                                 aria-label="Default select example" id="referral-div">
-                                                                <option value="1">Referral 1</option>
-                                                                <option value="2">Referral 2</option>
+                                                                <option value="1"{{ old('referral', $customer->referral) == '1' ? 'selected' : '' }}>Referral 1</option>
+                                                                <option value="2"{{ old('referral', $customer->referral) == '2' ? 'selected' : '' }}>Referral 2</option>
                                                             </select>
                                                         </div>
 
@@ -732,7 +732,7 @@
                                                         <div class="mb-3">
                                                             <label for="exampleInputamount"
                                                                 class="form-label">Amount</label>
-                                                            <input type="text" name="amount" class="form-control"
+                                                            <input type="text" name="amount" class="form-control" value="{{ old('amount', $customer->amount ?? '') }}"
                                                                 id="exampleInputamount" placeholder="Amount">
                                                         </div>
                                                     </div>
@@ -743,8 +743,8 @@
                                                             <select class="form-select form-control"
                                                                 name="assigned_contract"
                                                                 aria-label="Default select example" id="referral-div">
-                                                                <option value="1">Contract 1</option>
-                                                                <option value="2">Contract 2</option>
+                                                                <option value="1"{{ old('assigned_contract', $customer->assigned_contract) == '1' ? 'selected' : '' }}>Contract 1</option>
+                                                                <option value="2"{{ old('assigned_contract', $customer->assigned_contract) == '2' ? 'selected' : '' }}>Contract 2</option>
                                                             </select>
                                                         </div>
                                                         <div class="mb-3">
@@ -753,12 +753,11 @@
                                                             <select class="form-select form-control" name="taxable"
                                                                 aria-label="Default select example" id="email-div">
                                                                 <option value="yes"
-                                                                    {{ old('service_agreement', $customer->service_agreement) == 'yes' ? 'selected' : '' }}>
+                                                                    {{ old('taxable', $customer->taxable) == 'yes' ? 'selected' : '' }}>
                                                                     Yes</option>
                                                                 <option value="no"
-                                                                    {{ old('service_agreement', $customer->service_agreement) == 'no' ? 'selected' : '' }}>
+                                                                    {{ old('taxable', $customer->taxable) == 'no' ? 'selected' : '' }}>
                                                                     No</option>
-                                                                <option value="no">No</option>
                                                             </select>
 
                                                         </div>
@@ -766,15 +765,15 @@
                                                             <label for="item-div" class="form-label">Tax Item</label>
                                                             <select class="form-select form-control" name="tax_item"
                                                                 aria-label="Default select example" id="item-div">
-                                                                <option value="1">Tax 1</option>
-                                                                <option value="2">Tax 2</option>
+                                                                <option value="1"{{ old('tax_item', $customer->tax_item) == '1' ? 'selected' : '' }}>Tax 1</option>
+                                                                <option value="2"{{ old('tax_item', $customer->tax_item) == '2' ? 'selected' : '' }}>Tax 2</option>
                                                             </select>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="exampleInputnumber" class="form-label">Business #
                                                                 & Tax ID</label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" class="form-control" value="{{ old('bussiness_id', $customer->bussiness_id ?? '0.00') }}"
                                                                 name="bussiness_id" id="exampleInputnumber"
                                                                 placeholder="Business # & Tax ID">
                                                         </div>
@@ -788,7 +787,7 @@
                                                                         name="assigned_rep[]"
                                                                         aria-label="Default select example"
                                                                         id="agent-div">
-                                                                        <option value="1">Do Not Assign Agent/Rep
+                                                                        <option value="1"{{ old('assigned_rep', $customer->assigned_rep) == '1' ? 'selected' : '' }}>Do Not Assign Agent/Rep
                                                                         </option>
                                                                     </select>
                                                                 </div>
@@ -799,16 +798,16 @@
                                                                         name="commission_sign[]"
                                                                         aria-label="Default select example"
                                                                         id="commission-div">
-                                                                        <option value="1">%</option>
+                                                                        <option value="1" {{ old('commission_sign', $customer->commission_sign) == '1' ? 'selected' : '' }}>%</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="commission2-div">
-                                                                    <input type="text" class="form-control"
-                                                                        name="commission[]" id="exampleInputcommtag">
+                                                                    <input type="text" class="form-control" value="{{ old('commission', $customer->commission ?? '') }}"
+                                                                        name="commission" id="exampleInputcommtag">
                                                                 </div>
                                                                 <div class="commission3-div">
-                                                                    <button class="add-sign" type="button"
-                                                                        id="add-com">+</button>
+                                                                    {{-- <button class="add-sign" type="button"
+                                                                        id="add-com">+</button> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -828,16 +827,3 @@
 
     </div>
 @endsection
-{{-- <script>
-    $(document).ready(function() {
-    // Add an event listener to the form submission
-    $('form').submit(function() {
-        // Loop through all the hidden divs with class 'exclude-from-submission'
-        $('.exclude-from-submission').each(function() {
-            // Disable or remove the fields within the hidden divs
-            $(this).find(':input',':select').prop('disabled', true);
-        });
-    });
-});
-
-</script> --}}
