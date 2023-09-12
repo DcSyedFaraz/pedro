@@ -21,6 +21,10 @@ class Job extends Model
     {
         return $this->hasOne(User::class,'id','customer_id');
     }
+    public function manager()
+    {
+        return $this->hasOne(User::class,'id','account_manager_id');
+    }
 
     public function job_category()
     {

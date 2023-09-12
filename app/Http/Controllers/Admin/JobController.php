@@ -26,10 +26,11 @@ class JobController extends Controller
                 $query->where('scheduled_at', '>', $next72Hours);
                 //   ->orWhere('due_at', '<', $now);
             })->get();
+            $manager = User::withRole('account manager')->get();
 
 
         // $job = Job::with('customer','job_category','job_prioirty','job_source')->get();
-        return view('admin.job.index', compact('job'));
+        return view('admin.job.index', compact('job','manager'));
     }
 
     public function create()
@@ -329,5 +330,17 @@ class JobController extends Controller
         $completed_jobs = Job::where('current_status', 9)->get();
         return view('admin.job.jobs_completed', compact('completed_jobs'));
 
+    }
+    public function job_assign(Request $request, $id)
+    {
+
+        $input = $request->all();
+
+
+        $user = Job::find($id);
+        $user->update($input);
+
+        return redirect()->back()
+                        ->with('success','Job Assigned Successfully');
     }
 }

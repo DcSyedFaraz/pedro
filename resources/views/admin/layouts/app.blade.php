@@ -183,6 +183,8 @@
                     {{ request()->routeIs('job.needing.scheduling') ? 'menu-open' : '' }}
                     {{ request()->routeIs('jobs.in.progress') ? 'menu-open' : '' }}
                     {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
+                    {{ request()->routeIs('jobperregion.index') ? 'menu-open' : '' }}
+                    {{ request()->routeIs('jobpermanager.index') ? 'menu-open' : '' }}
                       ">
                           <a href="#" class="nav-link nav-dropdown-toggle
                     {{ request()->routeIs('job.index') ? 'active' : '' }}
@@ -190,7 +192,10 @@
                     {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
                     {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
                     {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}
-                    {{ request()->routeIs('jobs.complete') ? 'active' : '' }} ">
+                    {{ request()->routeIs('jobs.complete') ? 'active' : '' }} "
+                    {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}
+                    {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}
+                    >
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                               Jobs
@@ -235,19 +240,19 @@
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('readyinvoice.index') }}" class="nav-link">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Ready to be invoiced</p>
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('jobpermanager.index')}}" class="nav-link {{ request()->routeIs('jobpermanager.index')? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p style="font-size: 15px;">Jobs per Account Manager</p>
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('jobperregion.index')}}" class="nav-link {{ request()->routeIs('jobperregion.index')? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Jobs per region</p>
                                 </a>

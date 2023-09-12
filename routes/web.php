@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
+use App\Http\Controllers\Admin\JobPerAssignController;
+use App\Http\Controllers\Admin\JobPerRegionController;
+use App\Http\Controllers\Admin\ReadyInvoiceController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -87,6 +90,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
     Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
 
+    //Ready Invoice
+    Route::resource('readyinvoice', ReadyInvoiceController::class);
 
     Route::resource('job-category', JobCategoryController::class);
     Route::resource('job-sub-category', JobSubCategoryController::class);
@@ -101,6 +106,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('invoice', InvoiceController::class);
     Route::resource('checklist', CheckListController::class);
     Route::resource('inspection', InspectionController::class);
+    Route::resource('jobpermanager', JobPerAssignController::class);
+    Route::resource('jobperregion', JobPerRegionController::class);
 
     Route::get('get-subcategories', [JobController::class, 'getSubcategories'])->name('get-subcategories');
     Route::get('/get-subdescription', [JobController::class, 'getSubDescription'])->name('get-subdescription');
@@ -110,6 +117,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/jobs-in-progress', [JobController::class, 'JobsInProgress'])->name('jobs.in.progress');
     Route::get('/jobs-complete', [JobController::class, 'JobsInCompleted'])->name('jobs.complete');
     Route::get('/jobprimary/destroy/{id}', [JobController::class, 'job_pri'])->name('jobpri.destroy');
+    Route::put('/jobassign/update/{id}', [JobController::class, 'job_assign'])->name('jobassign.update');
 
 
 

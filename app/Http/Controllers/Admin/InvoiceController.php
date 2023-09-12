@@ -50,7 +50,7 @@ class InvoiceController extends Controller
             ->with('success', 'Invoice created successfully');
     }
 
-    public function show(Invoice $Invoice)
+    public function show(Invoice $invoice)
     {
         return view('admin.invoice.show', compact('invoice'));
     }
@@ -90,7 +90,7 @@ class InvoiceController extends Controller
         $Invoice->amount = $request['amount'];
         $Invoice->note_to_cust = $request['note_to_cust'];
         $Invoice->save();
-        
+
         return redirect()->route('invoice.index')
             ->with('success', 'Invoice updated successfully');
     }

@@ -1,120 +1,199 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>DataTables</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">DataTables</li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Job List</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Job List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
 
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
 
-          <div class="card">
-            <!-- <div class="card-header">
-              <h3 class="card-title">User Managment</h3>
-            </div> -->
-           <!-- /.card-header -->
-            <div class="card-header">
-              <a class="btn btn-success" href="{{ route('job.create') }}"> Create Job </a>
+                        <div class="card">
+                            <!-- <div class="card-header">
+                  <h3 class="card-title">User Managment</h3>
+                </div> -->
+                            <!-- /.card-header -->
+                            <div class="card-header">
+                                <a class="btn btn-success" href="{{ route('job.create') }}"> Create Job </a>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <th>Jobs</th>
+                                            <th>Assigned Manager</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @if ($job)
+                                            @foreach ($job as $jobs)
+                                                @php
+                                                    $phones = isset($jobs->phone) ? $jobs->phone : [];
+                                                    $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
+                                                    $exts = isset($jobs->ext) ? $jobs->ext : [];
+                                                    $emailAddresses = isset($jobs->email) ? $jobs->email : [];
+                                                    $phone = implode(',', $phones);
+                                                    $ext_id = implode(',', $ext_ids);
+                                                    $ext = implode(',', $exts);
+                                                    $emailList = implode(',', $emailAddresses);
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
+                                                    <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}
+                                                    </td>
+                                                    <td>
+                                                        {{ isset($jobs->account_manager_id) ? $jobs->manager->name : 'null' }}
+                                                    </td>
+                                                    @if ($jobs->current_status == 1)
+                                                        <td class="text-primary">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 2)
+                                                        <td class="text-secondary">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 3)
+                                                        <td class="text-warning">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 4)
+                                                        <td class="text-info">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 5)
+                                                        <td class="text-light bg-dark">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 6)
+                                                        <td class="text-dark">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 7)
+                                                        <td class="text-danger">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 8)
+                                                        <td class="text-muted">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @elseif($jobs->current_status == 9)
+                                                        <td class="text-success">
+                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-success"><strong>---</strong></td>
+                                                    @endif
+                                                    <td>
+                                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                                            data-target="#exampleModal{{ $jobs->id }}">
+                                                            Assign
+                                                        </button>
+                                                        <a class="btn btn-primary"
+                                                            href="{{ route('job.edit', $jobs->id) }}">Edit</a>
+                                                        <form action="{{ route('job.destroy', $jobs->id) }}" method="POST"
+                                                            class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger"
+                                                                onclick="return confirm('Are you sure you want to delete this job?')">Delete</button>
+                                                        </form>
+
+                                                    </td>
+                                                </tr>
+                                                <div class="modal fade" id="exampleModal{{ $jobs->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="{{ route('jobassign.update', $jobs->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('put')
+                                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <strong>Account Manager:</strong>
+                                                                            <select name="account_manager_id"
+                                                                                class="form-control select-form ">
+                                                                                <option value="">Choose any
+                                                                                    option</option>
+                                                                                @foreach ($manager as $data)
+                                                                                <option
+                                                                                {{ isset($jobs->account_manager_id) && $data->id == old('account_manager_id', $jobs->account_manager_id) ? 'selected' : '' }}
+                                                                                value="{{ $data->id }}">
+                                                                                {{ ucfirst($data->name) }}
+                                                                            </option>
+
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                    changes</button>
+                                                                <a href="">
+
+                                                                </a>
+                                                            </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                            </div>
+                            @endforeach
+                            @endif
+                            </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Jobs Name</th>
-                  <th>Jobs</th>
-                  <th>Primary Contact</th>
-                 <th>Schedule</th>
-                 <th>Actions</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                  @if($job)
-                  @foreach($job as $jobs)
-                  @php
-                    $phones = isset($jobs->phone) ? $jobs->phone : [];
-                    $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
-                    $exts = isset($jobs->ext) ? $jobs->ext : [];
-                    $emailAddresses = isset($jobs->email) ? $jobs->email : [];
-                    $phone = implode(',', $phones);
-                    $ext_id = implode(',', $ext_ids);
-                    $ext = implode(',', $exts);
-                    $emailList = implode(',', $emailAddresses);
-                  @endphp
-                  <tr>
-                  <td>{{ isset($jobs->jobs->name) ? $jobs->jobs->name : '' }}</td>
-                  <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}</td>
-                  <td>Primary Contact: {{ $jobs->first_name . '-' . $jobs->last_name }}
-                    </br> {{ $emailList }}
-                    </br> Phone: {{ $phone }} Ext: {{ $ext }}
-                  </td>
-                  @if($jobs->current_status == 1)
-                    <td class="text-primary"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                  @elseif($jobs->current_status == 2)
-                  <td class="text-secondary"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                  @elseif($jobs->current_status == 3)
-                  <td class="text-warning"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                  @elseif($jobs->current_status == 4)
-                  <td class="text-info"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                    @elseif($jobs->current_status == 5)
-                    <td class="text-light bg-dark"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                  @elseif($jobs->current_status == 6)
-                  <td class="text-dark"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                    @elseif($jobs->current_status == 7)
-                    <td class="text-danger"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                  @elseif($jobs->current_status == 8)
-                  <td class="text-muted"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                    @elseif($jobs->current_status == 9)
-                    <td class="text-success"><strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong></td>
-                    @else
-                    <td class="text-success"><strong>---</strong></td>
-                  @endif
-                  <td>
-                    <a class="btn btn-primary" href="{{ route('job.edit',$jobs->id) }}">Edit</a>
-                      {!! Form::open(['method' => 'DELETE','route' => ['job.destroy', $jobs->id],'style'=>'display:inline']) !!}
-                          {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                      {!! Form::close() !!}
-                  </td>
-              </tr>
-              @endforeach
-                  @endif
-                </tbody>
-              </table>
-
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+            <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
-</div>
+    </section>
+    <!-- /.content -->
+    </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 @endsection
