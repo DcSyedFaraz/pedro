@@ -112,6 +112,24 @@
                 </li>
               </ul>
           </li>
+             <!-- invoice  -->
+             <li class="nav-item {{ request()->routeIs('invoices.index') ? 'menu-open' : '' }} ">
+              <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('invoices.index') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                    invoice Manage
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('invoices.index')}}" class="nav-link {{ request()->routeIs('invoices.index')? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>invoices List</p>
+                  </a>
+                </li>
+              </ul>
+          </li>
              <!-- Estimate  -->
              <li class="nav-item {{ request()->routeIs('estimate.index') ? 'menu-open' : '' }} ">
               <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('estimate.index') ? 'active' : '' }}">

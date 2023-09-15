@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\users\userEstimateController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
@@ -37,6 +36,7 @@ use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\users\DashboardController as usersDashboardController;
 use App\Http\Controllers\users\UsersController;
 use App\Http\Controllers\users\userInvoiceController;
+use App\Http\Controllers\users\userEstimateController;
 use App\Http\Controllers\users\userJobController;
 
 
@@ -151,6 +151,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 
     //Estimate
     Route::resource('estimate', userEstimateController::class);
+
+    //invoice
+    Route::resource('invoices', userInvoiceController::class);
 
 
     //users Profile

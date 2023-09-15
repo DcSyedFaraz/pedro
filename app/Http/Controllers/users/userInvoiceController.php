@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class userInvoiceController extends Controller
@@ -14,10 +15,12 @@ class userInvoiceController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $job = Job::where('user_id',$user->id)->get();
-        // dd($user);
-        return view('users.invoice.index', compact('job'));
+        $user = auth()->user()->id;
+        $invoices = Invoice::whereHas('job', function ($query) use ($user) {
+            $query->where('user_id', $user);
+        })->get();
+        // dd($invoices);
+        return view('users.invoice.index', compact('invoices'));
     }
 
     /**
@@ -49,7 +52,9 @@ class userInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $invoice = Invoice::with('service','job')->find($id);
+        // dd($invoice);
+        return view('users.invoice.show', compact('invoice'));
     }
 
     /**
