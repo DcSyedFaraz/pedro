@@ -27,88 +27,64 @@
             </div><!-- /.container-fluid -->
         </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-10 border-2 border">
-                        <!-- tabs A -->
-                        <ul class="nav nav-tabs justify-content-end" id="jobDetTabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="sum-tab" data-toggle="tab" href="#sum" role="tab"
-                                    aria-controls="sum" aria-selected="true"><i class="fas fa-exclamation-circle text-danger"></i>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
 
-                                    Unpaid Invoices</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="cut-tab" data-toggle="tab" href="#cut" role="tab"
-                                    aria-controls="cut" aria-selected="false"><i class="fas fa-check-circle text-success"></i>
-                                    Paid Invoices</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pic-tab" data-toggle="tab" href="#pic" role="tab"
-                                    aria-controls="pic" aria-selected="false"><i class="fas fa-recycle  text-warning"></i>
-
-                                    Recurring&nbsp;</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="doc-tab" data-toggle="tab" href="#doc" role="tab"
-                                    aria-controls="doc" aria-selected="false"><i class="fas fa-list text-info"></i>
-
-                                    All Invoices&nbsp;</a>
-                            </li>
-                        </ul>
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="tab-content" id="jobTabsContent">
-                                    <div class="tab-pane fade show active" id="sum" role="tabpanel"
-                                        aria-labelledby="sum-tab">
-                                        @include('admin.invoice.partials.unpaid')
-                                    </div>
-                                    <div class="tab-pane fade" id="cut" role="tabpanel" aria-labelledby="cut-tab">
-                                        @include('admin.invoice.partials.paid')
-                                    </div>
-                                    <div class="tab-pane fade show" id="pic" role="tabpanel"
-                                        aria-labelledby="pic-tab">
-                                        @include('admin.invoice.partials.recurring')
-                                    </div>
-                                    <div class="tab-pane fade" id="doc" role="tabpanel" aria-labelledby="doc-tab">
-                                        @include('admin.invoice.partials.all')
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="card mb-3">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Past Due</h5>
-                                <div class="mt-4">
-                                    <i class="fas fa-clock text-danger display-4"></i>
-                                </div>
-                                <p class="mt-3">{{ isset($add) ? $add : 'N/A' }}</p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title text-center">Total Bill</h5>
-                                <div class="mt-4">
-                                    <i class="fas fa-dollar-sign text-warning text-xl"></i>
-                                </div>
-                                <p class="mt-3">{{ isset($add) ? $add : 'N/A' }}</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- /.row -->
+          <div class="card">
+            <!-- <div class="card-header">
+              <h3 class="card-title">User Managment</h3>
+            </div> -->
+           <!-- /.card-header -->
+            <div class="card-header">
+                <a class="btn btn-success" href="{{ route('invoice.create') }}" class="btn btn-primary">Create New Invoice</a>
             </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+            <!-- /.card-header -->
+            <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Labour Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($invoice as $inv)
+                <tr>
+                    <td>{{ $inv->amount_description }}</td>
+                    <td>{{ $inv->amount }}</td>
+                    <td>{{ $inv->labor_time }}</td>
+                    <td>
+                        <form action="{{ route('invoice.destroy', $inv->id) }}" method="POST">
+                            <a href="{{ route('invoice.show', $inv->id) }}" class="btn btn-info">Show</a>
+                            <a href="{{ route('invoice.edit', $inv->id) }}" class="btn btn-primary">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+    </table>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
     </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
 
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
