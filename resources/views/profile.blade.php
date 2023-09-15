@@ -10,12 +10,12 @@
     </div>
         <section class="section dashboard">
             <div class="row" >
-                <div class="col-sm-6 col-xl-5 col-lg-6" style="background:#fff;border-radius: 9px;">    
+                <div class="col-sm-6 col-xl-5 col-lg-6" style="background:#fff;border-radius: 9px;">
                     <div class="modal-body">
-                        <form 
-                                role="form" 
-                                action="{{route('user.deposit.store')}}" 
-                                method="post" 
+                        <form
+                                role="form"
+                                action="{{route('user.deposit.store')}}"
+                                method="post"
                                 class="require-validation"
                                 data-cc-on-file="false"
                                 data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
@@ -24,7 +24,7 @@
                             <br>
                             <div class="mb-3">
                                 <label class="col-form-label" for="recipient-name">Deposit to Game</label>
-                            </div>   
+                            </div>
                             <input type="hidden" name="user_id" id="deposit">
                             <div class='form-row row'>
                                 <div class='col-xs-12 col-md-12 form-group required'>
@@ -35,13 +35,13 @@
                                                 <option value="2">V Blink: Celia2317</option>
                                                 <option value="3">Fire Kirin: Celia2317</option>
                                                 <option value="4">Ignite: 1812141</option>
-                                          
+
                                             </select>
                                 </div>
-                               
+
                             </div>
-                            
- 
+
+
                             <div class='form-row row'>
                                 <div class='col-xs-12 col-md-12 form-group required'>
                                     <label>Amount</label>
@@ -69,8 +69,8 @@
                             <br>
                             <br>
                             <button class="btn btn-warning" type="submit">Deposit</button>
-                            
-                            
+
+
                         </form>
                     </div>
                 </div>
@@ -79,9 +79,9 @@
     </div>
 </main>
 
- 
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script type="text/javascript">
 $(function() {
   var $form = $(".require-validation");

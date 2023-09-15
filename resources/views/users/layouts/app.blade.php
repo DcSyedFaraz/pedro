@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="{{asset('/admin/plugins/summernote/summernote-bs4.min.css')}}">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{asset('/admin/plugins/toastr/toastr.min.css')}}">
-  
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -37,7 +37,7 @@
     <img class="animation__shake" src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
-  
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -73,8 +73,8 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
-         
+
+
         <li class="nav-item {{ request()->routeIs('users.dashboard') ? 'menu-open' : '' }} ">
             <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('users.dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
@@ -84,16 +84,52 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-        
+
               <li class="nav-item">
                 <a href="{{route('users.dashboard')}}" class="nav-link {{ request()->routeIs('users.dashboard')? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
-             
+
             </ul>
-          </li> 
+          </li>
+             <!-- Jobs  -->
+             <li class="nav-item {{ request()->routeIs('joblist.index') ? 'menu-open' : '' }} ">
+              <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('joblist.index') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                  Job Manage
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('joblist.index')}}" class="nav-link {{ request()->routeIs('joblist.index')? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Job List</p>
+                  </a>
+                </li>
+              </ul>
+          </li>
+             <!-- Estimate  -->
+             <li class="nav-item {{ request()->routeIs('estimate.index') ? 'menu-open' : '' }} ">
+              <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('estimate.index') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                    Estimate Manage
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('estimate.index')}}" class="nav-link {{ request()->routeIs('estimate.index')? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Estimate List</p>
+                  </a>
+                </li>
+              </ul>
+          </li>
              <!-- Work Order  -->
              <li class="nav-item {{ request()->routeIs('users.work-orders.index') ? 'menu-open' : '' }} ">
               <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('users.work-orders.index') ? 'active' : '' }}">
@@ -111,7 +147,7 @@
                   </a>
                 </li>
               </ul>
-          </li> 
+          </li>
           <li class="nav-item {{ request()->routeIs('games.index') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link nav-dropdown-toggle  {{ request()->routeIs('users.profile') ? 'active' : '' }} {{ request()->routeIs('games.index') ? 'active' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
               <i class="nav-icon fas fa-table"></i>
@@ -121,15 +157,15 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-             
+
               <li class="nav-item">
                 <a href="{{route('users.profile')}}" class="nav-link {{ request()->routeIs('users.profile')? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Profile</p>
                 </a>
               </li>
-             
-        
+
+
               <li class="nav-item">
                 <a href="{{route('users.change_password')}}" class="nav-link {{ request()->routeIs('change_password')? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -137,14 +173,14 @@
                 </a>
               </li>
             </ul>
-          </li> 
+          </li>
           <li class="nav-item">
                 <a href="{{url('/logout')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Logout</p>
                 </a>
               </li>
-      
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -290,7 +326,7 @@ $(document).ready(function () {
           country: "PK"
         }
     });
-	
+
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var near_place = autocomplete.getPlace();
         // alert(near_place.geometry);

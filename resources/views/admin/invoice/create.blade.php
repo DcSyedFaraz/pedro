@@ -92,6 +92,35 @@
                                                             </div>
                                                         </div>
                                                         <br />
+                                                        <div class="row w-25 d-flex flex-column">
+
+                                                            <div class="col-md-12">
+                                                                <strong>Job</strong>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+
+                                                                    <select name="job_id" id="customer_id"
+                                                                        class="form-control">
+                                                                        <option value="" selected hidden>Select Job
+                                                                        </option>
+                                                                        @foreach ($job as $cust)
+                                                                            <option
+                                                                                {{ isset($job->job_id) ? (old('job_id', $job->job_id) ? 'selected' : '') : '' }}
+                                                                                value="{{ $cust->id }}">
+                                                                                {{ $cust->location_name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <span class="error-message error-messages"
+                                                                        id="customer_id_error"></span><br>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <button class="form-control"><i class="fas fa-link"></i> Link to parent</button>
+                                                                        </div>
+                                                                    </div> -->
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label for="note-to-customer">Note To Customer</label>
@@ -131,8 +160,8 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <p><span id=""><input type="text"
-                                                                                    id="job_total_due" disabled></span></p>
+
+                                                                        <p><span id="job_total_due">$0.00</span></p>
                                                                         <p><span id="job_total_cost">$0.00</span></p>
                                                                         <p style="color:#09af2f"><span
                                                                                 id="job-gross-profit">$0.00</span></p>

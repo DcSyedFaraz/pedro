@@ -44,7 +44,7 @@
                   <th>Actions</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($technicians)
                   @foreach($technicians as $technician)
@@ -58,13 +58,13 @@
                           {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                       {!! Form::close() !!}
                   </td>
-                  
+
               </tr>
               @endforeach
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -81,10 +81,10 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 
 @endsection
 
 
-   
+
 

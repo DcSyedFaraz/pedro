@@ -10,6 +10,7 @@ use App\Models\job_Category;
 use App\Models\JobSubCategory;
 use App\Models\job_priority_category;
 use App\Models\job_source_category;
+use App\Models\Task;
 use File;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class JobController extends Controller
         $now = now();
         $next72Hours = now()->addHours(72);
 
-        $job = Job::with('customer', 'job_category', 'job_prioirty', 'job_source')->whereNull('scheduled_at') // Change 'scheduled_at' to your actual column name
+        $job = Job::with('customer', 'job_category', 'job_prioirty')->whereNull('scheduled_at') // Change 'scheduled_at' to your actual column name
             ->orWhere(function ($query) use ($now, $next72Hours) {
                 $query->where('scheduled_at', '>', $next72Hours);
                 //   ->orWhere('due_at', '<', $now);
@@ -337,8 +338,15 @@ class JobController extends Controller
         $input = $request->all();
 
 
-        $user = Job::find($id);
+        $user = Job::with('task')->find($id);
+
         $user->update($input);
+if($user->task != null){
+            $task = Task::where('job_id',$id)->first();
+
+            $task->manager_id = $user->account_manager_id;
+            $task->save();
+        }
 
         return redirect()->back()
                         ->with('success','Job Assigned Successfully');

@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-xl-4" style="background:#fff">
                     <div class="card">
-                            <div class="card-header">  
+                            <div class="card-header">
                             <h4 class="">My Profile</h4>
                             <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
                             </div>
@@ -60,9 +60,9 @@
 
                 </div>
                 &nbsp;&nbsp;&nbsp;
-                <div class="col-xl-4" style="background:#fff"> 
+                <div class="col-xl-4" style="background:#fff">
                     <div class="card">
-                            <div class="card-header">  
+                            <div class="card-header">
                             <h4 class="">Edit Profile</h4>
                             <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
                             </div>
@@ -87,8 +87,8 @@
                                     <div class="form-footer">
                                         <button class="btn btn-primary btn-block w-100" data-bs-original-title="" name="save" title="">Update</button>
                                     </div>
-                                </form> 
-                                 
+                                </form>
+
                             </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
             <div class="row">
             <div class="col-xl-4" style="background:#fff">
                     <div class="card">
-                            <div class="card-header">  
+                            <div class="card-header">
                             <h4 class="">Bank Details</h4>
                             <h6 style="color:crimson">*Please note the bank account has to be in your name or the cashout will fail. RC Amusement LLC will not be responsible for any mistakes you made during the cashout process.</h6>
                             <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
@@ -127,9 +127,9 @@
     </div>
 </main>
 
- 
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script type="text/javascript">
 $(function() {
   var $form = $(".require-validation");

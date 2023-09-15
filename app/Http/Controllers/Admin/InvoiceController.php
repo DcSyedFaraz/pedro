@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\Job;
 use App\Models\ProductandService;
 use Illuminate\Http\Request;
 
@@ -11,13 +12,19 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        $invoice = Invoice::get();
-        return view('admin.invoice.index', compact('invoice'));
+        $invoice = Invoice::where('status','unpaid')->with('service','unpaid')->get();
+        $paid = Invoice::where('status','paid')->with('service','unpaid')->get();
+        $recur = Invoice::where('status','recurring')->with('service','unpaid')->get();
+        $all = Invoice::with('service','unpaid')->get();
+        $add = ProductandService::sum('total');
+        // dd($add);
+        return view('admin.invoice.index', compact('invoice','paid','recur','all','add'));
     }
 
     public function create()
     {
-        return view('admin.invoice.create');
+        $job = Job::get();
+        return view('admin.invoice.create', compact('job'));
     }
 
     public function store(Request $request)
@@ -25,6 +32,7 @@ class InvoiceController extends Controller
         // return $request;
         $Invoice = Invoice::create([
 
+            'job_id' => $request['job_id'],
             'drive_time' => $request['drive_time'],
             'labor_time' => $request['labor_time'],
             'payments_and_deposits_input' => $request['payments_and_deposits_input'],
@@ -50,8 +58,10 @@ class InvoiceController extends Controller
             ->with('success', 'Invoice created successfully');
     }
 
-    public function show(Invoice $invoice)
+    public function show($id)
     {
+        $invoice = Invoice::with('service','job')->find($id);
+        // dd($invoice);
         return view('admin.invoice.show', compact('invoice'));
     }
 
@@ -83,6 +93,7 @@ class InvoiceController extends Controller
                 'margin_tax' => $request['margin_tax'][$key],
             ]);
         }
+        $Invoice->status = $request['status'];
         $Invoice->drive_time = $request['drive_time'];
         $Invoice->labor_time = $request['labor_time'];
         $Invoice->payments_and_deposits_input = $request['payments_and_deposits_input'];

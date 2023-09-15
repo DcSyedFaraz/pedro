@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('customer_id')->nullable();
             $table->string('account_manager_id')->nullable();
+            $table->string('user_id')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
             $table->string('location_address')->nullable();

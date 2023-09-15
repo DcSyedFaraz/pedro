@@ -89,7 +89,7 @@
 <!-- End withdraw -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script type="text/javascript">
 $(function() {
   var $form = $(".require-validation");

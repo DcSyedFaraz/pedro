@@ -12,6 +12,14 @@ class Invoice extends Model
 
     public function service()
     {
-        return $this->hasMany(ProductandService::class);
+        return $this->hasMany(ProductandService::class,'invoice_id','id');
+    }
+    public function job()
+    {
+        return $this->belongsTo(Job::class,'job_id');
+    }
+    public function unpaid()
+    {
+        return $this->belongsTo(ProductandService::class,'id','invoice_id');
     }
 }

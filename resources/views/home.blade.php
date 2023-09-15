@@ -39,10 +39,12 @@
       </div>
       <div class="col-md-3 text-end">
         <button type="button" class="btn gradint">Get Free Demo</button>
-        <button type="button" class="btn gradint">Sign Up</button>
-    
+       <a href="{{route('login')}}">
+        <button type="button" class="btn gradint">Sign Up/ Login</button>
+    </a>
+
       </div>
-   
+
   </div>
 </header>
 
@@ -51,29 +53,29 @@
         <div class="slider1">
 
             <div class="container slider-contant text-center">
-                <h6 class="heading6">LOREM IPSUM YOUR BUSINESS</h6> 
+                <h6 class="heading6">LOREM IPSUM YOUR BUSINESS</h6>
                 <h1 class="heading1">FACILITY <span style="color:#FB7D00">SERVICES FOR YOUR</span> GROWTH</h1>
-                <p>Aliquam vehicula mollis urna vel dignissim. Integer tincidunt viverra est, non congue lorem tempor ac. Phasellus pulvinar iaculis nunc at placerat.</p> 
+                <p>Aliquam vehicula mollis urna vel dignissim. Integer tincidunt viverra est, non congue lorem tempor ac. Phasellus pulvinar iaculis nunc at placerat.</p>
              </div>
 
         </div>
         <div class="slider1">
             <div class="container slider-contant text-center">
-                <h6 class="heading6">LOREM IPSUM YOUR BUSINESS</h6> 
+                <h6 class="heading6">LOREM IPSUM YOUR BUSINESS</h6>
                 <h1 class="heading1">FACILITY <span style="color:#FB7D00">SERVICES FOR YOUR</span> GROWTH</h1>
-                <p>Aliquam vehicula mollis urna vel dignissim. Integer tincidunt viverra est, non congue lorem tempor ac. Phasellus pulvinar iaculis nunc at placerat.</p> 
+                <p>Aliquam vehicula mollis urna vel dignissim. Integer tincidunt viverra est, non congue lorem tempor ac. Phasellus pulvinar iaculis nunc at placerat.</p>
              </div>
         </div>
         <div class="slider1">
             <div class="container slider-contant text-center">
-                <h6 class="heading6">LOREM IPSUM YOUR BUSINESS</h6> 
+                <h6 class="heading6">LOREM IPSUM YOUR BUSINESS</h6>
                 <h1 class="heading1">FACILITY <span style="color:#FB7D00">SERVICES FOR YOUR</span> GROWTH</h1>
-                <p>Aliquam vehicula mollis urna vel dignissim. Integer tincidunt viverra est, non congue lorem tempor ac. Phasellus pulvinar iaculis nunc at placerat.</p> 
+                <p>Aliquam vehicula mollis urna vel dignissim. Integer tincidunt viverra est, non congue lorem tempor ac. Phasellus pulvinar iaculis nunc at placerat.</p>
              </div>
         </div>
     </div>
 
-   
+
         <div class="container about">
             <div class="row">
 
@@ -82,7 +84,7 @@
                 </div>
                 <div class="col-6 about-text  ">
                     <div class="content">
-                        <h6 class="heading6">ABOUT US</h6> 
+                        <h6 class="heading6">ABOUT US</h6>
                         <h2 class="heading2">LOREM IPSUM INDUSTRY TEXT</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
 
@@ -98,9 +100,9 @@
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                                     <button type="button" class="btn gradint">Learn More</button>
                                   </div>
-                                </div>                   
-                            </div>                     
-                         </div>  
+                                </div>
+                            </div>
+                         </div>
                     </div>
 
                     <div class="container team-box">
@@ -115,9 +117,9 @@
                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                              <button type="button" class="btn gradint">Learn More</button>
                           </div>
-                        </div>                   
-                    </div>                     
-                 </div>  
+                        </div>
+                    </div>
+                 </div>
             </div>
 
             <div class="container team-box">
@@ -132,9 +134,9 @@
                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                        <button type="button" class="btn gradint">Learn More</button>
                   </div>
-                </div>                   
-            </div>                     
-         </div>  
+                </div>
+            </div>
+         </div>
     </div>
 
                     <button type="button" class="btn gradint">Learn More</button>
@@ -146,7 +148,7 @@
 
     <div class="container-fluid service">
                 <div class="content text-center">
-                    <h6 class="heading6">SERVICES</h6> 
+                    <h6 class="heading6">SERVICES</h6>
                     <h2 class="heading2">LOREM IPSUM SERVICES</h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     <div class="row">
@@ -160,9 +162,9 @@
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                         <button type="button" class="btn white">Learn More</button>
                                     </div>
-                                   
-                                </figcaption>			
-                            </figure> 
+
+                                </figcaption>
+                            </figure>
                         </div>
                         <div class="col-4">
                             <figure class="effect-lily">
@@ -173,8 +175,8 @@
                                     <h5>Lorem Ipsum Facility</h5>                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                     <button type="button" class="btn white">Learn More</button>
                                 </div>
-                              
-                            </figcaption>			
+
+                            </figcaption>
                         </figure>
                     </div>
                         <div class="col-4">
@@ -187,7 +189,7 @@
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                         <button type="button" class="btn white">Learn More</button>
                                     </div>
-                            </figcaption>			
+                            </figcaption>
                         </figure>
                     </div>
                </div>
@@ -198,11 +200,11 @@
 
             <div class="container-fluid videoscreen">
                 <div class="row">
-    
-                    
+
+
                     <div class="col-7 video-contant about-text text-white">
                         <div class="content">
-                            <h6 class="heading6">INTRO VIDEO</h6> 
+                            <h6 class="heading6">INTRO VIDEO</h6>
                             <h2 class="heading2">HOW WE GROWTH OUR BUSINESS.</h2>
                             <p><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry </b></br></br>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -221,7 +223,7 @@
 
            <div class="container our-team">
             <div class="content text-center">
-                <h6 class="heading6">OUR TEAM</h6> 
+                <h6 class="heading6">OUR TEAM</h6>
                 <h2 class="heading2">OUR EXPERIENCE TEAM</h2>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
                 <div class="row">
@@ -236,9 +238,9 @@
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                     <button type="button" class="btn white">Learn More</button>
                                 </div>
-                               
-                            </figcaption>			
-                        </figure> 
+
+                            </figcaption>
+                        </figure>
                     </div>
                     <div class="col-4">
                         <figure class="effect-lily">
@@ -246,13 +248,13 @@
                         <img src="{{ asset('frontend/images/Group 203.png') }}" alt="img1"/>
                         <figcaption>
                           <div class="content-service">
-                                <h5>Roseline Diana</h5>   
+                                <h5>Roseline Diana</h5>
                                 <h5>Founder</h5>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                 <button type="button" class="btn white">Learn More</button>
                             </div>
-                          
-                        </figcaption>			
+
+                        </figcaption>
                     </figure>
                 </div>
                     <div class="col-4">
@@ -266,7 +268,7 @@
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                                     <button type="button" class="btn white">Learn More</button>
                                 </div>
-                        </figcaption>			
+                        </figcaption>
                     </figure>
                 </div>
            </div>
@@ -277,7 +279,7 @@
            <div class="container-fluid satisfaction">
             <div class="container">
             <div class="content text-center">
-                <h6 class="heading6">SATISFACTION</h6> 
+                <h6 class="heading6">SATISFACTION</h6>
                 <h2 class="heading2">CUSTOMERS SATISFACTION</h2>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, whe.</p>
                 <div class="row">
@@ -289,7 +291,7 @@
                         </div>
                         <h5>Lorem Ipsum</h5>
                         <p>Lorem Ipsum is simply dummy text of the printing.</p>
-                                       
+
                     </div>
                     <div class="col-3"><div class="circle_percent" data-percent="78">
                         <div class="circle_inner">
@@ -299,7 +301,7 @@
                     <h5>Lorem Ipsum</h5>
                     <p>Lorem Ipsum is simply dummy text of the printing.</p>
                 </div>
-                    
+
                     <div class="col-3"><div class="circle_percent" data-percent="65">
                         <div class="circle_inner">
                             <div class="round_per"></div>
@@ -318,8 +320,8 @@
                          </div>
                       </div>
                     </div>
-                 </div>  
-                </div>  
+                 </div>
+                </div>
 
                  <div class="container">
                     <div class="portfolio text-center">
@@ -350,7 +352,7 @@
 
                  <div class="container">
                     <div class="testimonials text-center">
-                        <h6 class="heading6">TESTIMONIALS</h6> 
+                        <h6 class="heading6">TESTIMONIALS</h6>
                         <h2 class="heading2">WHAT OUR CLIENTS SAY</h2>
 
                         <main>
@@ -391,7 +393,7 @@
                                               <i class="fas fa-quote-right"></i>
                                             </div>
                                             <div class="testimonial_box-text">
-                                              
+
                                               <img src="{{ asset('frontend/images/Shape.png') }}"/>
                                               <span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus scelerisque aliquam nulla. Mauris mauris nulla, pulvinar et nisi sit amet, interdum luctus lacus. Vivamus volutpat orci risus, quis feugiat elit tincidunt in. Quisque gravida ante non elit cursus pharetra.</p>
@@ -442,7 +444,7 @@
                     </div>
                 </div>
 
-                
+
                   <div class="blogs text-center">
                     <div class="container">
                       <h2 class="heading2">BLOG</h2>
@@ -498,7 +500,7 @@
           </ul>
           </div>
           <div class="col-2">
-            <h4>Explore</h4> 
+            <h4>Explore</h4>
             <ul class="foot-txt">
               <li>About Us</li>
               <li>Meet our team</li>
@@ -517,7 +519,7 @@
               <li>Help</li>
             </ul>
           </div>
-          
+
           <div class="col-4">
             <h4>Newsletter</h4>
             <form action="/action_page.php">
@@ -530,7 +532,7 @@
               </div>
             </form>
           </div>
-    
+
           <div class="copy-right ">
           <p>2023 Copy Right All Right Reserved -</p>
           <ul class="socialization">
@@ -539,7 +541,7 @@
             <li><a href="#"><img src="{{ asset('frontend/images/insta.png') }} "></a></li>
           </ul>
         </div>
-        
+
           </div>
       </div>
     </div>
@@ -558,12 +560,12 @@
 		$dataV = $this.data("percent"),
 		$dataDeg = $dataV * 3.6,
 		$round = $this.find(".round_per");
-	$round.css("transform", "rotate(" + parseInt($dataDeg + 180) + "deg)");	
+	$round.css("transform", "rotate(" + parseInt($dataDeg + 180) + "deg)");
 	$this.append('<div class="circle_inbox"><span class="percent_text"></span></div>');
 	$this.prop('Counter', 0).animate({Counter: $dataV},
 	{
-		duration: 2000, 
-		easing: 'swing', 
+		duration: 2000,
+		easing: 'swing',
 		step: function (now) {
             $this.find(".percent_text").text(Math.ceil(now)+"%");
         }
@@ -576,7 +578,7 @@
 		setTimeout(function(){
 			$round.css("transform", "rotate(" + parseInt($dataDeg + 180) + "deg)");
 		},1000);
-	} 
+	}
 });
 </script>
 <script>
@@ -608,7 +610,7 @@
             }
         ]
     });
-}); 
+});
 </script>
 </body>
 </html>
