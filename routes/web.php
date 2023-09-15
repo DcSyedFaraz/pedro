@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\users\userEstimateController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
+use App\Http\Controllers\Admin\TaskController;
+use App\Http\Controllers\Admin\InspectionCategoryController;
 use App\Http\Controllers\Admin\JobPerAssignController;
 use App\Http\Controllers\Admin\JobPerRegionController;
 use App\Http\Controllers\Admin\ReadyInvoiceController;
@@ -33,6 +36,9 @@ use App\Http\Controllers\GeneralSettingController;
 // users Dashboard
 use App\Http\Controllers\users\DashboardController as usersDashboardController;
 use App\Http\Controllers\users\UsersController;
+use App\Http\Controllers\users\userInvoiceController;
+use App\Http\Controllers\users\userJobController;
+
 
 // Vendor Dashboard
 use App\Http\Controllers\vendor\DashboardController as vendorDashboardController;
@@ -56,7 +62,7 @@ Route::get('/', [HomeController::class, 'login']);
 Route::get('/', [HomeController::class, 'index']);
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
 
     Route::get('/change_password', [DashboardController::class, 'change_password'])->name('change_password');
     Route::post('/store_change_password', [DashboardController::class, 'store_change_password'])->name('store_change_password');
@@ -93,6 +99,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     //Ready Invoice
     Route::resource('readyinvoice', ReadyInvoiceController::class);
 
+    //Inspection Category
+    Route::resource('ins_category', InspectionCategoryController::class);
+
+    //Task
+    Route::resource('task', TaskController::class);
+
     Route::resource('job-category', JobCategoryController::class);
     Route::resource('job-sub-category', JobSubCategoryController::class);
     Route::resource('job-priority', JobPriorityCategoryController::class);
@@ -123,7 +135,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 });
 Auth::routes();
-Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], function () {
 
     //Work Order
     Route::get('/work-orders/index', [UsersController::class, 'index'])->name('users.work-orders.index');
@@ -133,6 +145,14 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
     Route::get('/change/password', [usersDashboardController::class, 'users_change_password'])->name('users.change_password');
     Route::post('/store/change/password', [usersDashboardController::class, 'users_store_change_password'])->name('users.store_change_password');
     Route::get('/dashboard', [usersDashboardController::class, 'index'])->name('users.dashboard');
+
+    //Job
+    Route::resource('joblist', userJobController::class);
+
+    //Estimate
+    Route::resource('estimate', userEstimateController::class);
+
+
     //users Profile
     Route::get('/profile', [usersDashboardController::class, 'profile'])->name('users.profile');
     Route::post('/update/profile', [usersDashboardController::class, 'usersProfileUpdate'])->name('users.profile.update');

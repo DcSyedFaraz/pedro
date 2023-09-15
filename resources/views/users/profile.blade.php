@@ -24,11 +24,11 @@
 
         <section class="section dashboard">
             <div class="row">
-                
-                <div class="col-xl-12" style="background:#fff"> 
+
+                <div class="col-xl-12" style="background:#fff">
                     <div class="card">
-                            <div class="card-header">  
-                            
+                            <div class="card-header">
+
                             <div class="card-body">
                                 <form action="{{ route('users.edit.profile')}}" method="post" autocomplete="false">
                                     @csrf
@@ -56,22 +56,22 @@
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
-                                </form> 
+                                </form>
                             </div>
                     </div>
                 </div>
             </div>
-           
-            
+
+
         </section>
     </div>
 </main>
 </div>
 
 
- 
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script type="text/javascript">
 $(function() {
   var $form = $(".require-validation");

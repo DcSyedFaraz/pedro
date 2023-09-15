@@ -49,7 +49,7 @@ class LoginController extends Controller
             case 'Admin':
                 return 'admin/dashboard';
             break;
-            case 'user':
+            case 'User':
                 return 'users/dashboard';
              break;
              case 'vendor':

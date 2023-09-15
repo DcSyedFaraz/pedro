@@ -45,7 +45,7 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($WorkOrders)
                     <?php $i = 0; ?>
@@ -86,7 +86,7 @@
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -110,18 +110,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
+
             <!-- Modal body -->
             <div class="modal-body">
                 <!-- Vendor assignment form -->
                 <form action="{{ route('vendor.deliver_order') }}" method="POST">
                     @csrf
                     <input type="hidden" name="work_order_code" id="work_order_code">
-                    
+
                     <div class="form-group">
                         <label for="deliverd_id">Select Status:</label>
                         <select class="form-control" id="status" name="status" required>
-                                <option value="0">Slelect Menu</option>        
+                                <option value="0">Slelect Menu</option>
                                 <option value="1">Order Deliverd</option>
                                 <option value="2">Reject</option>
                                 <option value="3">Pending</option>
@@ -142,14 +142,14 @@
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script>
- 
+
     $(document).ready(function() {
       $('.orderdel').click(function() {
             var workOrderCode = $(this).data('workorder-code');
             var status = $(this).data('status');
-            
+
             $('#work_order_code').val(workOrderCode);
             $('#status').val(status);
             $('#orderDelModal').modal('show');
@@ -161,5 +161,5 @@
 @endsection
 
 
-   
+
 

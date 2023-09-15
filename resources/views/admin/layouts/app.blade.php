@@ -100,6 +100,7 @@
                         {{ request()->routeIs('job-sub-category.index') ? 'menu-open' : '' }}
                         {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
                         {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
+                        {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
                         {{ request()->routeIs('technicians.index') ? 'menu-open' : '' }} ">
                           <a href="#" class="nav-link nav-dropdown-toggle
                           {{ request()->routeIs('customer.index') ? 'active' : '' }}
@@ -110,6 +111,8 @@
                           {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}
                           {{ request()->routeIs('job-priority.index') ? 'active' : '' }}
                           {{ request()->routeIs('job-source.index') ? 'active' : '' }}
+                          {{ request()->routeIs('inventory.index') ? 'active' : '' }}
+
                           {{ request()->routeIs('technicians.index') ? 'active' : '' }} ">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
@@ -143,11 +146,17 @@
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href="{{ route('inventory.index') }}" class="nav-link">
+                              <a href="{{ route('inventory.index') }}" class="nav-link {{ request()->routeIs('inventory.index')? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Inventory</p>
                               </a>
                             </li>
+                              <li class="nav-item">
+                                <a href="{{route('ins_category.index')}}" class="nav-link {{ request()->routeIs('ins_category.index')? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Inpection Category</p>
+                                </a>
+                              </li>
                               <li class="nav-item">
                                 <a href="{{route('job-category.index')}}" class="nav-link {{ request()->routeIs('job-category.index')? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
@@ -185,6 +194,8 @@
                     {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
                     {{ request()->routeIs('jobperregion.index') ? 'menu-open' : '' }}
                     {{ request()->routeIs('jobpermanager.index') ? 'menu-open' : '' }}
+                    {{ request()->routeIs('readyinvoice.index') ? 'menu-open' : '' }}
+
                       ">
                           <a href="#" class="nav-link nav-dropdown-toggle
                     {{ request()->routeIs('job.index') ? 'active' : '' }}
@@ -192,9 +203,12 @@
                     {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
                     {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
                     {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}
-                    {{ request()->routeIs('jobs.complete') ? 'active' : '' }} "
+                    {{ request()->routeIs('jobs.complete') ? 'active' : '' }}
                     {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}
                     {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}
+                    {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}
+
+                    {{ request()->routeIs('ins_category.index') ? 'active' : '' }}"
                     >
                             <i class="nav-icon fas fa-table"></i>
                             <p>
@@ -240,7 +254,7 @@
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="{{ route('readyinvoice.index') }}" class="nav-link">
+                                <a href="{{ route('readyinvoice.index') }}" class="nav-link {{ request()->routeIs('readyinvoice.index')? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Ready to be invoiced</p>
                                 </a>
@@ -262,8 +276,8 @@
                       </li>
                       <!--Start Jobs/Scheduling Modules -->
                       <!--Start Operations Modules -->
-                      <li class="nav-item ">
-                          <a href="#" class="nav-link nav-dropdown-toggle ">
+                      <li class="nav-item {{ request()->routeIs('task.index') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('task.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                               Operations
@@ -351,8 +365,8 @@
                                   <p>Problem Reporting</p>
                                 </a>
                               </li>
-                              <li class="nav-item">
-                                <a href="#" class="nav-link">
+                              <li class="nav-item ">
+                                <a href="{{route('task.index') }}" class="nav-link {{ request()->routeIs('task.index') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Tasks</p>
                                 </a>
@@ -380,8 +394,16 @@
                       </li>
                       <!--Start Operations Modules -->
                       <!--Start Accounting Modules -->
-                      <li class="nav-item {{ request()->routeIs('pages.index') ? 'menu-open' : '' }} {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link nav-dropdown-toggle ">
+                      <li class="nav-item
+                      {{ request()->routeIs('pages.index') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('invoice.create') ? 'menu-open' : '' }}
+                        {{ request()->routeIs('invoice.index') ? 'menu-open' : '' }}
+                        {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}
+                        ">
+                        <a href="#" class="nav-link nav-dropdown-toggle
+                        {{ request()->routeIs('invoice.create') ? 'active' : '' }}
+                        {{ request()->routeIs('invoice.index') ? 'active' : '' }}
+                        ">
                           <i class="nav-icon fas fa-table"></i>
                           <p>
                             Accounting
@@ -390,18 +412,18 @@
                         </a>
                         <ul class="nav nav-treeview">
                           <li class="nav-item">
-                            <a href="{{ route('invoice.index') }}" class="nav-link {{ request()->routeIs('job.index')? 'active' : '' }}">
+                            <a href="{{ route('invoice.create') }}" class="nav-link {{ request()->routeIs('invoice.create')? 'active' : '' }}">
                               <i class="far fa-circle nav-icon"></i>
                               <p>Create invoice</p>
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('invoice.index') }}" class="nav-link {{ request()->routeIs('invoice.index')? 'active' : '' }}">
                               <i class="far fa-circle nav-icon"></i>
                               <p>Invoice dashboard</p>
                             </a>
                           </li>
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                             <a href="#" class="nav-link">
                               <i class="far fa-circle nav-icon"></i>
                               <p>Unpaid Invoices</p>
@@ -436,7 +458,7 @@
                               <i class="far fa-circle nav-icon"></i>
                               <p>Total bill for this year</p>
                             </a>
-                          </li>
+                          </li> --}}
                         </ul>
                       </li>
                       @can('pages-list')

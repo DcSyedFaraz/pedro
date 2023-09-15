@@ -47,7 +47,7 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($WorkOrders)
                   <?php $i = 0; ?>
@@ -66,7 +66,7 @@
                         @else
                         <span class="text-warning" style="font-size: 16px;font-weight: bold;">Pending</span>
                         @endif
-                      
+
                       </td>
                       <td>
                         <a class="btn btn-info" href="{{ route('work-orders.show',$workOrder->id) }}"><i class="fa fa-eye"></i></a>
@@ -79,16 +79,16 @@
                           <a href="#" class="feedback btn btn-danger" data-toggle="modal" data-target="#feedbackModal{{ $workOrder->code }}" data-workorder-code="{{ $workOrder->code }}"><i class="fas fa-comment"></i></a>
                           @else
                           <a href="#" class="feedback btn btn-danger" style="display:none" data-toggle="modal" data-target="#feedbackModal{{ $workOrder->code }}" data-workorder-code="{{ $workOrder->code }}"><i class="fas fa-comment"></i></a>
-                         
-                          @endif 
+
+                          @endif
                         </td>
-                     
+
                 </tr>
               @endforeach
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -111,14 +111,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
+
             <!-- Modal body -->
             <div class="modal-body">
                 <!-- Vendor assignment form -->
                 <form action="{{ route('users.assign_vendor.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="work_order_id" id="work_order_id">
-                    
+
                     <div class="form-group">
                         <label for="vendor_id">Select Vendor:</label>
                         <select class="form-control" id="vendor_id" name="vendor_id">
@@ -127,7 +127,7 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Assign</button>
                 </form>
             </div>
@@ -146,14 +146,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
+
             <!-- Modal body -->
             <div class="modal-body">
                 <!-- Vendor assignment form -->
                 <form action="{{ route('users.complete.order') }}" method="POST">
                     @csrf
                     <input type="hidden" name="work_order_code" id="work_order_code">
-                    
+
                     <div class="form-group">
                         <label for="vendor_id">Order Status</label>
                         <select class="form-control" id="status" name="status" required>
@@ -166,7 +166,7 @@
                         <label for="vendor_id">Feedback</label>
                         <textarea name="feedback" class="form-control"></textarea>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
@@ -188,9 +188,9 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 <script>
- 
+
     $(document).ready(function() {
       $('.assign-vendor').click(function() {
             var workOrderId = $(this).data('workorder-id');
@@ -213,5 +213,5 @@
 @endsection
 
 
-   
+
 

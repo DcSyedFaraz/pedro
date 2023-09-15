@@ -25,6 +25,10 @@ class Job extends Model
     {
         return $this->hasOne(User::class,'id','account_manager_id');
     }
+    public function agentname()
+    {
+        return $this->hasOne(User::class,'id','agent');
+    }
 
     public function job_category()
     {
@@ -36,11 +40,24 @@ class Job extends Model
         return $this->hasOne(job_priority_category::class,'id','job_priority');
     }
 
-    public function job_source()
+    public function job_source_name()
     {
         return $this->hasOne(job_source_category::class,'id','job_source');
     }
     // 'customer','job_category','job_prioirty','job_source',
+    public function jobPri()
+    {
+        return $this->hasMany(JobPrimaryContact::class);
+    }
+
+    public function task()
+    {
+        return $this->hasOne(Task::class,'job_id');
+    }
+    public function estimate()
+    {
+        return $this->hasOne(Estimate::class,'id','estimate_id');
+    }
 
     public function getParsedStatusAttribute()
     {
@@ -65,10 +82,7 @@ class Job extends Model
         }
         return '';
     }
-    public function jobPri()
-    {
-        return $this->hasMany(JobPrimaryContact::class);
-    }
+
 
     protected $appends = ['parsedStatus'];
 }

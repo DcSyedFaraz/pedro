@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->integer('job_id');
+            $table->string('status')->default('unpaid');
             $table->string('drive_time');
             $table->string('labor_time');
             $table->string('payments_and_deposits_input');

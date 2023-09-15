@@ -40,13 +40,13 @@
                     <th>Order Complete</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($WorkOrders)
                   <?php $i = 0; ?>
                   @foreach($WorkOrders as $workOrder)
                   <?php $i++; ?>
-                 
+
                   <tr>
                       <td>{{ $i }}</td>
                       <td>{{ $workOrder->title }}</td>
@@ -67,7 +67,7 @@
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -84,10 +84,10 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 
 @endsection
 
 
-   
+
 

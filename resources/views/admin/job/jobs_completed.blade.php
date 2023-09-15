@@ -38,7 +38,7 @@
                   <th>Actions</th>
                 </tr>
                 </thead>
-                
+
                 <tbody>
                   @if($completed_jobs)
                 @foreach($completed_jobs as $jobs)
@@ -57,8 +57,8 @@
                         <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}</td>
                         <td>Primary Contact: <span style="font-weight: bold;">{{ $jobs->first_name . '-' . $jobs->last_name }}</span>
                           </br>Email: <strong>{{ $emailList }}</strong>
-                          </br>  Start Date: <strong>{{ $jobs->start_date }} End Date {{ $jobs->end_date }}</strong>  
-                          </br> Start Time: <strong>{{ $jobs->start_time }} End Time: {{ $jobs->end_time }}</strong> 
+                          </br>  Start Date: <strong>{{ $jobs->start_date }} End Date {{ $jobs->end_date }}</strong>
+                          </br> Start Time: <strong>{{ $jobs->start_time }} End Time: {{ $jobs->end_time }}</strong>
                           </br> Estimated Duration: <strong>Start Duration:{{ $jobs->start_duration }} End Duration: {{ $jobs->end_duration }} </strong>
                         </td>
                         <td class="text-success"><strong>Completed</strong></td>
@@ -67,7 +67,7 @@
                   @endif
                 </tbody>
               </table>
-             
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -83,6 +83,6 @@
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
 
 @endsection

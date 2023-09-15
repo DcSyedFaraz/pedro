@@ -94,6 +94,36 @@
                                                             </div>
                                                         </div>
                                                         <br />
+                                                        <div class="row w-25 d-flex flex-column">
+
+                                                            <div class="col-md-12">
+                                                                <strong>Status</strong>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+
+                                                                    <select name="status" id="customer_id"
+                                                                        class="form-control">
+                                                                        <option value=""  selected hidden>Select Job
+                                                                        </option>
+                                                                        <option value="unpaid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'unpaid' ? 'selected' : '' }}>UnPaid
+                                                                        </option>
+                                                                        <option value="paid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'paid' ? 'selected' : '' }}>Paid
+                                                                        </option>
+                                                                        <option value="recurring"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'recurring' ? 'selected' : '' }}>Recurring
+                                                                        </option>
+
+                                                                    </select>
+                                                                    <span class="error-message error-messages"
+                                                                        id="customer_id_error"></span><br>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <button class="form-control"><i class="fas fa-link"></i> Link to parent</button>
+                                                                        </div>
+                                                                    </div> -->
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label for="note-to-customer">Note To Customer</label>
