@@ -714,7 +714,7 @@
                                                             <label for="exampleInputcustomertag"
                                                                 class="form-label">Customer
                                                                 Tags</label>
-                                                            <input type="text" class="form-control" value="{{ old('discount', $customer->discount ?? '') }}"
+                                                            <input type="text" class="form-control" name="customer_tag" value="{{ old('customer_tag', $customer->customer_tag ?? '') }}"
                                                                 id="exampleInputcustomertag" placeholder="Customer Tags">
                                                         </div>
                                                         <div class="mb-3">
@@ -784,7 +784,7 @@
                                                                     <label for="agent-div" class="form-label">Assigned
                                                                         Rep</label>
                                                                     <select class="form-select form-control"
-                                                                        name="assigned_rep[]"
+                                                                        name="assigned_rep"
                                                                         aria-label="Default select example"
                                                                         id="agent-div">
                                                                         <option value="1"{{ old('assigned_rep', $customer->assigned_rep) == '1' ? 'selected' : '' }}>Do Not Assign Agent/Rep
@@ -795,7 +795,7 @@
                                                                     <label for="commission-div"
                                                                         class="form-label">Commission</label>
                                                                     <select class="form-select form-control"
-                                                                        name="commission_sign[]"
+                                                                        name="commission_sign"
                                                                         aria-label="Default select example"
                                                                         id="commission-div">
                                                                         <option value="1" {{ old('commission_sign', $customer->commission_sign) == '1' ? 'selected' : '' }}>%</option>

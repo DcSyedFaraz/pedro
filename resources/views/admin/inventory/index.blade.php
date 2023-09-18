@@ -57,7 +57,7 @@
                             <a href="{{ route('inventory.edit', $inv->id) }}" class="btn btn-primary">Edit</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this inventory?')">Delete</button>
                         </form>
                     </td>
                 </tr>

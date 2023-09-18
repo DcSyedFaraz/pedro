@@ -162,6 +162,7 @@ class UserController extends Controller
     //Customer Update
     public function customer_update(Request $request, $id)
     {
+        return $request;
         $primaryContacts = PrimaryContact::where('customer_id', $id)->get();
 
     if ($primaryContacts->count() > 0) {
@@ -254,7 +255,7 @@ class UserController extends Controller
         $customer->commission_sign      = $request['commission_sign'];
         $customer->commission           = $request['commission'];
         $customer->save();
-        
+
         return redirect()->route('customer.index')
             ->with('success', 'Customer updated successfully');
     }

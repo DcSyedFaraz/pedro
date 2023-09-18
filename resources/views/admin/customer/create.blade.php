@@ -476,7 +476,7 @@
                                                                     <label for="agent-div" class="form-label">Assigned
                                                                         Rep</label>
                                                                     <select class="form-select form-control"
-                                                                        name="assigned_rep[]"
+                                                                        name="assigned_rep"
                                                                         aria-label="Default select example" id="agent-div">
                                                                         <option value="1">Do Not Assign Agent/Rep</option>
                                                                     </select>
@@ -485,7 +485,7 @@
                                                                     <label for="commission-div"
                                                                         class="form-label">Commission</label>
                                                                     <select class="form-select form-control"
-                                                                        name="commission_sign[]"
+                                                                        name="commission_sign"
                                                                         aria-label="Default select example"
                                                                         id="commission-div">
                                                                         <option value="1">%</option>
@@ -493,7 +493,7 @@
                                                                 </div>
                                                                 <div class="commission2-div">
                                                                     <input type="text" class="form-control"
-                                                                        name="commission[]" id="exampleInputcommtag">
+                                                                        name="commission" id="exampleInputcommtag">
                                                                 </div>
                                                                 <div class="commission3-div">
                                                                     {{-- <button class="add-sign" type="button" id="add-com">+</button> --}}

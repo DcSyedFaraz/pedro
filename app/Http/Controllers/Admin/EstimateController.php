@@ -39,7 +39,7 @@ class EstimateController extends Controller
 
     public function create()
     {
-        $customer = User::get();
+        $customer = User::withRole('customer')->get();
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
