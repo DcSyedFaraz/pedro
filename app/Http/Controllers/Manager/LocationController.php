@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
-use App\Models\InspectionCategory;
+use App\Models\InspectionChecklist;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
-class InspectionCategoryController extends Controller
+class LocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,11 @@ class InspectionCategoryController extends Controller
      */
     public function index()
     {
-        // $ins_category = InspectionCategory::all();
-        return view('manager.inspection.index');
+        $locations = Job::get();
+        $checklists = InspectionChecklist::get();
+        $show = Job::with('inspectionChecklists')->get();
+        // dd($show);
+        return view('manager.location.index',compact('locations','checklists','show'));
     }
 
     /**
@@ -26,7 +30,7 @@ class InspectionCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.inspection_category.create');
+        //
     }
 
     /**
@@ -37,8 +41,16 @@ class InspectionCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        InspectionCategory::create($request->all());
-        return redirect()->back()->with('success', 'Category Created successfully');
+        foreach ($request->input('assignments') as $locationId => $checklistIds) {
+            // Find the location based on its ID
+            $location = Job::findOrFail($locationId);
+
+            // Attach the selected checklists to the location
+            $location->inspectionChecklists()->sync($checklistIds);
+        }
+
+        // Redirect back with a success message or to a different page
+        return redirect()->route('location.index')->with('success', 'Checklists assigned successfully to the locations.');
     }
 
     /**

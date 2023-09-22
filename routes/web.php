@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ProblemReportingController;
+use App\Http\Controllers\Manager\LocationController;
+use App\Http\Controllers\Manager\ResponceController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
@@ -60,6 +63,7 @@ Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])-
 // Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/', [HomeController::class, 'login']);
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/manager/dashboard', [HomeController::class, 'manager'])->name('manager.dashboard');
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
@@ -92,6 +96,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     // Routes for work
     Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('admin.work_orders.index');
     Route::resource('technicians', TechniciansController::class);
+
+    //Problem Reporting
+    Route::resource('problem', ProblemReportingController::class);
+
     Route::resource('estimates', EstimateController::class);
     Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
     Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
@@ -99,8 +107,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     //Ready Invoice
     Route::resource('readyinvoice', ReadyInvoiceController::class);
 
-    //Inspection Category
-    Route::resource('ins_category', InspectionCategoryController::class);
 
     //Task
     Route::resource('task', TaskController::class);
@@ -179,5 +185,18 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth']], function () {
     Route::get('/vendor/work-orders', [vendorDashboardController::class, 'manageWorkOrders'])->name('vendor.manage.work.order');
     Route::get('/vendor/work-orders/{id}/execut', [vendorDashboardController::class, 'executeWorkOrder'])->name('vendor.execute.work.order');
     Route::post('/vendor/deliver/order', [vendorController::class, 'deliverOrder'])->name('vendor.deliver_order');
+
+});
+Route::group(['prefix' => 'manager', 'middleware' => ['auth','role:account manager']], function () {
+
+
+    //Inspection
+    Route::resource('checklists', InspectionController::class);
+
+    //Location
+    Route::resource('location', LocationController::class);
+
+    //Responce
+    Route::resource('responce', ResponceController::class);
 
 });

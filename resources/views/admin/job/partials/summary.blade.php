@@ -7,20 +7,29 @@
         <div class="form-group">
 
             <select name="customer_id" id="customer_id" class="form-control">
-                <option value="">select Customer</option>
+                <option value="">Select Customer</option>
                 @foreach ($customer as $cust)
-                    <option {{ isset($job->customer_id) ? (old('customer_id', $job->customer_id) ? 'selected' : '') : '' }}
-                     value="{{ $cust->id }}">{{ $cust->name }}</option>
+                    <option value="{{ $cust->id }}" {{ isset($job) && old('customer_id', $job->customer_id) == $cust->id ? 'selected' : '' }}>
+                        {{ $cust->name }}
+                    </option>
                 @endforeach
             </select>
+
             <span class="error-message error-messages" id="customer_id_error"></span><br>
         </div>
     </div>
-    <!-- <div class="col-md-4">
-            <div class="form-group">
-                <button class="form-control"><i class="fas fa-link"></i> Link to parent</button>
-            </div>
-        </div> -->
+    <div class="col-md-4">
+        <strong>Job Name</strong>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+
+            <input value="{{ isset($job->name) ? old('name', $job->name) : '' }}" class="form-control" name="name" id="name" placeholder="Job Name">
+
+            <span class="error-message error-messages" id="customer_id_error"></span><br>
+        </div>
+    </div>
+
 </div>
 
 <hr />

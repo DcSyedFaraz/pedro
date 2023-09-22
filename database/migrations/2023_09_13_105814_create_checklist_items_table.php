@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inspection_category_rows', function (Blueprint $table) {
+        Schema::create('checklist_items', function (Blueprint $table) {
             $table->id();
-            $table->string('ins_category_id')->nullable();
-            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('inspection_checklist_id');
+            $table->string('description');
             $table->timestamps();
+
+            $table->foreign('inspection_checklist_id')->references('id')->on('inspection_checklists');
         });
     }
 

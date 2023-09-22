@@ -96,7 +96,7 @@
                       <div class="row">
                         <div class="col-md-6">&nbsp;</div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">Save Job</button>
+                            <button type="submit" class="btn btn-success">Update Job</button>
                         </div>
                     </div>
                     <br>

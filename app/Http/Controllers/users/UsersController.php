@@ -16,8 +16,8 @@ class UsersController extends Controller
     public function index()
     {
         $WorkOrders = WorkOrders::where('user_id',Auth::user()->id)->get();
-        $vendors = User::get();
-        
+        $vendors = User::withRole('vendor')->get();
+
         return view('users.work_orders.index', compact('WorkOrders','vendors'));
     }
 
@@ -29,14 +29,14 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'technician_id' => 'nullable',
             'user_id' => 'nullable',
         ]);
-        
+
         $order =new WorkOrders();
         $order->title = $request->title;
         $order->description = $request->description;
@@ -74,7 +74,7 @@ class UsersController extends Controller
         return redirect()->route('users.work-orders.index')->with('success', 'Work order deleted successfully!');
     }
 
-    //Assign to vendor 
+    //Assign to vendor
     public function storeWorkOrder(Request $request)
     {
         $workOrder = WorkOrders::findOrFail($request->work_order_id);
@@ -82,12 +82,12 @@ class UsersController extends Controller
         $workOrder->save();
         return redirect()->route('users.work-orders.index')->with('success', 'Work order Assign to Vendor submitted successfully!');
     }
-   
+
 
     public function completeOrder(Request $request)
 {
-    
-    
+
+
     $orderCode = $request->input('work_order_code');
     $feedback = $request->input('feedback');
 
@@ -101,7 +101,7 @@ class UsersController extends Controller
             return redirect()->back()->with('success', 'Order completed successfully. Thank you for your feedback!');
         } else {
             return redirect()->back()->with('error', 'Order not found.');
-        }  
+        }
     // }else{
     //     return redirect()->back()->with('error', 'Your order is being processed. Please wait for the vendor to complete the delivery.');
     // }

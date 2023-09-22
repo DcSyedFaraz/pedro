@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('work_orders', function (Blueprint $table) {
+        Schema::create('inspection_checklists', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->integer('user_id');
-            $table->integer('vendor_id');
-            $table->string('code');
-            $table->unsignedBigInteger('technician_id')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
+            // Add other checklist-related fields here
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_orders');
+        Schema::dropIfExists('inspection_categories');
     }
 };

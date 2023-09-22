@@ -128,6 +128,12 @@
                               </a>
                             </li>
                             <li class="nav-item">
+                            <a href="{{route('technicians.index')}}" class="nav-link {{ request()->routeIs('technicians.index')? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Technicians</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
                               <a href="{{route('estimates.index')}}" class="nav-link {{ request()->routeIs('estimates.index')? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Estimates</p>
@@ -152,7 +158,7 @@
                               </a>
                             </li>
                               <li class="nav-item">
-                                <a href="{{route('ins_category.index')}}" class="nav-link {{ request()->routeIs('ins_category.index')? 'active' : '' }}">
+                                <a href="#" class="nav-link {{ request()->routeIs('#')? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Inpection Category</p>
                                 </a>
@@ -276,8 +282,14 @@
                       </li>
                       <!--Start Jobs/Scheduling Modules -->
                       <!--Start Operations Modules -->
-                      <li class="nav-item {{ request()->routeIs('task.index') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('task.index') ? 'active' : '' }}">
+                      <li class="nav-item
+                      {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                      ">
+                          <a href="#" class="nav-link nav-dropdown-toggle
+                          {{ request()->routeIs('task.index') ? 'active' : '' }}
+                          {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                          ">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                               Operations
@@ -316,8 +328,13 @@
                               </ul>
                           </li>
 
-                          <li class="nav-item">
-                                <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('roles.index') ? 'active' : '' }}">
+                          <li class="nav-item
+                          {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                          ">
+                                <a href="#" class="nav-link nav-dropdown-toggle
+                                {{ request()->routeIs('roles.index') ? 'active' : '' }}
+                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                ">
                                   <i class="nav-icon fas fa-table"></i>
                                   <p>
                                   Checklist
@@ -360,7 +377,7 @@
 
 
                               <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('problem.index')}}" class="nav-link {{ request()->routeIs('problem.index') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Problem Reporting</p>
                                 </a>
@@ -589,7 +606,7 @@
                           </li>
                           @endcan
                           <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->routeIs('job.index')? 'active' : '' }}">
+                            <a href="#" class="nav-link ">
                               <i class="far fa-circle nav-icon"></i>
                               <p>Clients</p>
                             </a>

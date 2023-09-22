@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\InspectionCategory;
+use App\Models\Job;
+use App\Models\ProblemReporting;
 use Illuminate\Http\Request;
 
-class InspectionCategoryController extends Controller
+class ProblemReportingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,10 @@ class InspectionCategoryController extends Controller
      */
     public function index()
     {
-        // $ins_category = InspectionCategory::all();
-        return view('manager.inspection.index');
+        $problemReports = ProblemReporting::all();
+        $job = Job::get();
+        // return $problem;
+        return view('admin.problem.index', compact('problemReports','job'));
     }
 
     /**
@@ -26,7 +29,8 @@ class InspectionCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.inspection_category.create');
+        $job = Job::get();
+        return view('admin.problem.create', compact('job'));
     }
 
     /**
@@ -37,8 +41,8 @@ class InspectionCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        InspectionCategory::create($request->all());
-        return redirect()->back()->with('success', 'Category Created successfully');
+        ProblemReporting::create($request->all());
+        return redirect()->route('problem.index')->with('success', 'New Report Created Successfully');
     }
 
     /**
@@ -49,7 +53,8 @@ class InspectionCategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $problemReport = ProblemReporting::findOrFail($id);
+        return view('admin.problem.show', compact('problemReport'));
     }
 
     /**
@@ -60,7 +65,9 @@ class InspectionCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $problemReport = ProblemReporting::findOrFail($id);
+        $job = Job::get();
+        return view('admin.problem.edit', compact('problemReport','job'));
     }
 
     /**
@@ -72,7 +79,9 @@ class InspectionCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $problemReport = ProblemReporting::findOrFail($id);
+        $problemReport->update($request->all());
+        return redirect()->route('problem.index')->with('success', 'Report Updated Successfully');
     }
 
     /**
@@ -83,6 +92,8 @@ class InspectionCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $problemReport = ProblemReporting::findOrFail($id);
+        $problemReport->delete();
+        return redirect()->route('problem.index')->with('error', 'Report Deleted Successfully');
     }
 }

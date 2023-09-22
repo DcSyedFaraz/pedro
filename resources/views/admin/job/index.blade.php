@@ -40,7 +40,7 @@
                                     <thead>
                                         <tr>
                                             <th>Customer Name</th>
-                                            <th>Jobs</th>
+                                            <th>Job Name</th>
                                             <th>Assigned Manager</th>
                                             <th>Status</th>
                                             <th>Actions</th>
@@ -62,7 +62,7 @@
                                                 @endphp
                                                 <tr>
                                                     <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
-                                                    <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}
+                                                    <td>{{ isset($jobs->name) ? $jobs->name : '' }}
                                                     </td>
                                                     <td>
                                                         {{ isset($jobs->account_manager_id) ? $jobs->manager->name : 'null' }}

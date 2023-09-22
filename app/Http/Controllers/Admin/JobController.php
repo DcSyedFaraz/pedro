@@ -57,6 +57,7 @@ class JobController extends Controller
 
 
         $job = new Job();
+        $job->name = $request->name;
         $job->customer_id = $request->customer_id;
         $job->first_name = $request->first_name;
         $job->last_name = $request->last_name;
@@ -150,6 +151,7 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
 
         $job->customer_id = $request->customer_id;
+        $job->name = $request->name;
         $job->first_name = $request->first_name;
         $job->last_name = $request->last_name;
         //Array Value

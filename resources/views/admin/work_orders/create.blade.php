@@ -22,7 +22,7 @@
 
     <section class="content">
     <div class="container-fluid">
-  
+
         <div class="row">
           <div class="col-12">
               <div class="card">
@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="title">Technicians:</label>
                               <select name="technician_id" class="form-control" required>
-                                  <option>select Technicians</option>
+                                  <option value="0">select Technicians</option>
                                   @foreach($technicians as $technician)
                                   <option value="{{$technician->id}}">{{$technician->name}}</option>
                                   @endforeach
@@ -52,8 +52,8 @@
                         </div>
                     </form>
                   </div>
-              </div> 
-          </div>   
+              </div>
+          </div>
         </div>
     </div>
 </section>

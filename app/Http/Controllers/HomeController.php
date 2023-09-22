@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\VeriantSize;
@@ -23,12 +24,16 @@ class HomeController extends Controller
         // $this->middleware('auth')->except('logout');
         return view('auth.login');
     }
-    
+    public function manager(){
+        $data['users'] = User::all()->count();
+        return view('manager.dashboard',$data);
+    }
+
     public function product_detail($id)
     {
         $data['product'] = Product::find($id);
         $data['size'] = VeriantSize::where('product_id',$id)->first();
-        // return json_decode($size->name); 
+        // return json_decode($size->name);
         $data['color'] = VeriantColor::where('product_id',$id)->first();
         return view('admin.product_detail',$data);
     }

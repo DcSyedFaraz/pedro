@@ -50,7 +50,7 @@ class TechniciansController extends Controller
     {
         $technician = Technicians::findOrFail($id);
         $technician->delete();
-        return redirect()->route('technicians.index');
+        return redirect()->route('technicians.index')->with('error', 'Technician Removed Successfully');
     }
 
 }
