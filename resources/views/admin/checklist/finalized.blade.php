@@ -1,4 +1,4 @@
-@extends('manager.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Inspection Category</h1>
+                        <h1>Inspection Sheet</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,11 +32,11 @@
                 </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
-                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                {{-- <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal">
                                     New Inspection Sheet
-                                </button>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                </button> --}}
+                                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -76,7 +76,7 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -85,6 +85,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Total Itmes</th>
+                                            <th>Created By</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -96,6 +97,7 @@
                                                     <td>{{ $jobcat->name }}</td>
 
                                                     <td>{{ $jobcat->checklistItems->count() ?? '0' }}</td>
+                                                    <td>{{ $jobcat->user->name ?? 'Null' }}</td>
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"
                                                             data-target="#checklistModal_{{ $jobcat->id }}">View
@@ -155,7 +157,31 @@
         <!-- /.content -->
     </div>
 
+@section('script')
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $('#add-checklist-item').click(function() {
+            var newChecklistItem = $(
+                '<div class="my-2 new-checklist-item">' +
 
+                '<input type="text" class="form-control my-custom-class" name="checklist_items[]" placeholder="Enter Checklist Item">' +
+
+
+                '<div class="col-md-3 my-1">' +
+                '<button type="button" class="btn btn-danger remove-checklist-item">Remove</button>' +
+
+                '</div>' +
+                '</div>'
+            );
+
+            $('#checklist-items').append(newChecklistItem);
+        });
+
+        $(document).on('click', '.remove-checklist-item', function() {
+            $(this).closest('.new-checklist-item').remove();
+        });
+    </script>
+@endsection
 
 
 @endsection

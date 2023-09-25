@@ -285,10 +285,16 @@
                       <li class="nav-item
                       {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
                       {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('location') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
                       ">
                           <a href="#" class="nav-link nav-dropdown-toggle
                           {{ request()->routeIs('task.index') ? 'active' : '' }}
                           {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                          {{ request()->routeIs('finalized') ? 'active' : '' }}
+                          {{ request()->routeIs('location') ? 'active' : '' }}
+                          {{ request()->routeIs('adminresponse') ? 'active' : '' }}
                           ">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
@@ -330,10 +336,16 @@
 
                           <li class="nav-item
                           {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('location') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
                           ">
                                 <a href="#" class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('roles.index') ? 'active' : '' }}
                                 {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('finalized') ? 'active' : '' }}
+                                {{ request()->routeIs('location') ? 'active' : '' }}
+                                {{ request()->routeIs('adminresponse') ? 'active' : '' }}
                                 ">
                                   <i class="nav-icon fas fa-table"></i>
                                   <p>
@@ -349,13 +361,13 @@
                                   </a>
                                 </li>
                                 <li class="nav-item">
-                                  <a href="#" class="nav-link">
+                                  <a href="{{route('finalized')}}" class="nav-link {{ request()->routeIs('finalized') ? 'active' : '' }}" >
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Finalized</p>
                                   </a>
                                 </li>
                                 <li class="nav-item">
-                                  <a href="#" class="nav-link">
+                                  <a href="{{route('location')}}" class="nav-link {{ request()->routeIs('location') ? 'active' : '' }} {{ request()->routeIs('adminresponse') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>location</p>
                                   </a>

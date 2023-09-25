@@ -76,15 +76,12 @@
                                                     </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" id="add-checklist-item">Add
-                                                    Checklist Item</button>
+
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Save
                                                     changes</button>
-                                                <a href="">
-
-                                                </a>
+                                               
                                             </div>
                                             </form>
                                         </div>
@@ -117,7 +114,7 @@
                                                         <button class="btn btn-primary" data-toggle="modal"
                                                             data-target="#checklistModal_{{ $shows->id }}">View
                                                             Checklist Items</button>
-                                                        <a class="btn btn-info"
+                                                        {{-- <a class="btn btn-info"
                                                             href="{{ route('location.show', $shows->id) }}">Show</a>
 
                                                         {!! Form::open([
@@ -126,7 +123,7 @@
                                                             'style' => 'display:inline',
                                                         ]) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                                        {!! Form::close() !!}
+                                                        {!! Form::close() !!} --}}
                                                     </td>
                                                     <!-- Modal for Checklist Items -->
                                                     <div class="modal fade" id="checklistModal_{{ $shows->id }}"
@@ -184,27 +181,5 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-        $('#add-checklist-item').click(function() {
-            var newChecklistItem = $(
-                '<div class="my-2 new-checklist-item">' +
 
-                '<input type="text" class="form-control my-custom-class" name="checklist_items[]" placeholder="Enter Checklist Item">' +
-
-
-                '<div class="col-md-3 my-1">' +
-                '<button type="button" class="btn btn-danger remove-checklist-item">Remove</button>' +
-
-                '</div>' +
-                '</div>'
-            );
-
-            $('#checklist-items').append(newChecklistItem);
-        });
-
-        $(document).on('click', '.remove-checklist-item', function() {
-            $(this).closest('.new-checklist-item').remove();
-        });
-    </script>
 @endsection

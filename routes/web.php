@@ -127,6 +127,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::resource('jobpermanager', JobPerAssignController::class);
     Route::resource('jobperregion', JobPerRegionController::class);
 
+    Route::get('/checklists/finalized', [CheckListController::class, 'finalized'])->name('finalized');
+    Route::get('/checklists/location', [CheckListController::class, 'location'])->name('location');
+    Route::get('/checklists/response/{id}', [CheckListController::class, 'response'])->name('adminresponse');
+
     Route::get('get-subcategories', [JobController::class, 'getSubcategories'])->name('get-subcategories');
     Route::get('/get-subdescription', [JobController::class, 'getSubDescription'])->name('get-subdescription');
     Route::get('/today-schedule-job', [JobController::class, 'TodaySchedule'])->name('today.job.schedule');

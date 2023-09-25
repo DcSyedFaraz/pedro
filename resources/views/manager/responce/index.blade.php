@@ -85,7 +85,10 @@
                                                                                     value="{{ $shows->id }}">
 
                                                                                 @foreach ($shows->inspectionResponse as $item)
-
+                                                                                <input type="hidden"
+                                                                                name="checklist_id[]"
+                                                                                value="{{ $item->checklist_id }}"
+                                                                                id="">
                                                                                     <input type="hidden"
                                                                                         name="checklist_item_id[]"
                                                                                         value="{{ $item->checklist_item_id }}">
@@ -236,27 +239,5 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-        $('#add-checklist-item').click(function() {
-            var newChecklistItem = $(
-                '<div class="my-2 new-checklist-item">' +
-
-                '<input type="text" class="form-control my-custom-class" name="checklist_items[]" placeholder="Enter Checklist Item">' +
-
-
-                '<div class="col-md-3 my-1">' +
-                '<button type="button" class="btn btn-danger remove-checklist-item">Remove</button>' +
-
-                '</div>' +
-                '</div>'
-            );
-
-            $('#checklist-items').append(newChecklistItem);
-        });
-
-        $(document).on('click', '.remove-checklist-item', function() {
-            $(this).closest('.new-checklist-item').remove();
-        });
-    </script>
+    
 @endsection

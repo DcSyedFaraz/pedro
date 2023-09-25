@@ -28,7 +28,8 @@ class InspectionController extends Controller
      */
     public function create()
     {
-        $checklist = InspectionChecklist::get();
+        $user = auth()->user()->id;
+        $checklist = InspectionChecklist::where('createdBy',$user)->get();
         return view('manager.inspection.index', compact('checklist'));
     }
 
@@ -44,10 +45,12 @@ class InspectionController extends Controller
         'name' => 'required|string|max:255',
         'checklist_items' => 'array', // Ensure checklist_items is an array
     ]);
-
+    $user = auth()->user()->id;
+// dd($user);
     // Create a new inspection checklist
     $inspectionChecklist = InspectionChecklist::create([
         'name' => $request->input('name'),
+        'createdBy' => $user,
     ]);
 
     // Add checklist items to the inspection checklist

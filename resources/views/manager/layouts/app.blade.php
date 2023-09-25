@@ -117,7 +117,7 @@
                 <li class="nav-item">
                   <a href="{{route('checklists.create')}}" class="nav-link {{ request()->routeIs('checklists.create')? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Assigned List</p>
+                    <p>Inspection List</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -241,25 +241,7 @@
 
 <!-- Change password -->
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $('.validatedForm').validate({
-        rules : {
-            password : {
-                minlength : 8
-            },
-            password_confirmation : {
-                minlength : 8,
-                equalTo : "#password"
-            }
-        }
 
-
-
-});
-   $('button').click(function(){
-    $('.validatedForm').valid();
-});
-</script>
 
 
 <!-- DataTables  & Plugins -->

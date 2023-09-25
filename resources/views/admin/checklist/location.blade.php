@@ -1,4 +1,4 @@
-@extends('manager.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Inspection Category</h1>
+                        <h1>Location</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Inspection Sheet</li>
+                            <li class="breadcrumb-item active">Location</li>
                         </ol>
                     </div>
                 </div>
@@ -28,15 +28,15 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                  <h3 class="card-title">User Managment</h3>
-                </div> -->
+                              <h3 class="card-title">User Managment</h3>
+                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
-                                <button type="button" class="btn btn-success" data-toggle="modal"
+                                {{-- <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal">
-                                    New Inspection Sheet
-                                </button>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    New Location
+                                </button> --}}
+                                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -49,15 +49,29 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('checklists.store') }}" method="post">
+                                                <form action="{{ route('location.store') }}" method="post">
                                                     @csrf
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <strong>New Sheet Name:</strong>
-                                                            <input type="text" class="form-control" name="name">
-                                                            <div id="checklist-items">
-                                                                <!-- Dynamic checklist items will be added here -->
-                                                            </div>
+
+                                                            @foreach ($locations as $location)
+                                                                <div class="col-12">
+
+                                                                    <label
+                                                                        for="location_{{ $location->id }}">{{ $location->name }}</label>
+                                                                    @foreach ($checklists as $checklist)
+                                                                    <div class="d-flex">
+
+                                                                        <input type="checkbox" class="form-check"
+                                                                            name="assignments[{{ $location->id }}][]"
+                                                                            value="{{ $checklist->id }}"
+                                                                            id="location_{{ $location->id }}_checklist_{{ $checklist->id }}">
+                                                                        <label
+                                                                            for="location_{{ $location->id }}_checklist_{{ $checklist->id }}" class="form-label">{{ $checklist->name }}</label>
+                                                                    </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                             </div>
@@ -76,42 +90,54 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Total Itmes</th>
+                                            <th>Job Name</th>
+                                            <th>Assigned Manager Name</th>
+                                            <th>Assigned Checklists</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @if ($checklist)
-                                            @foreach ($checklist as $jobcat)
+                                        @if ($show)
+                                            @foreach ($show as $shows)
                                                 <tr>
-                                                    <td>{{ $jobcat->name }}</td>
-
-                                                    <td>{{ $jobcat->checklistItems->count() ?? '0' }}</td>
+                                                    <td>{{ $shows->name }}</td>
+                                                    <td>{{ $shows->manager->name ?? 'null' }}</td>
                                                     <td>
-                                                        <button class="btn btn-primary" data-toggle="modal"
-                                                            data-target="#checklistModal_{{ $jobcat->id }}">View
-                                                            Checklist Items</button>
-                                                       
+                                                        @foreach ($shows->inspectionChecklists as $checklist)
+                                                            <li>{{ $checklist->name }}</li>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
 
+                                                            @if ($shows->inspectionResponse->count() > 0)
+                                                            <a class="btn btn-info"
+                                                                href="{{ route('adminresponse', $shows->id) }}">Show Response</a>
+                                                                <button class="btn btn-primary" data-toggle="modal"
+                                                            data-target="#checklistModal_{{ $shows->id }}">View
+                                                            Checklist Items</button>
+                                                            @else
+                                                            <button class="btn btn-primary" data-toggle="modal"
+                                                            data-target="#checklistModal_{{ $shows->id }}">View
+                                                            Checklist Items</button>
+                                                                @endif
                                                     </td>
                                                     <!-- Modal for Checklist Items -->
-                                                    <div class="modal fade" id="checklistModal_{{ $jobcat->id }}"
+                                                    <div class="modal fade" id="checklistModal_{{ $shows->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="checklistModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="checklistModalLabel">
-                                                                        Checklist Items for {{ $jobcat->name }}</h5>
+                                                                        Checklist Items for {{ $shows->name }}</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -119,13 +145,16 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <ul>
-
+                                                                        @foreach ($shows->inspectionChecklists as $checklist)
+                                                                            <li
+                                                                                class="text-uppercase font-weight-bold my-2">
+                                                                                {{ $checklist->name }}</li>
                                                                             <ul>
-                                                                                @foreach ($jobcat->checklistItems as $item)
+                                                                                @foreach ($checklist->checklistItems as $item)
                                                                                     <li>{{ $item->description }}</li>
                                                                                 @endforeach
                                                                             </ul>
-
+                                                                        @endforeach
                                                                     </ul>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -154,7 +183,6 @@
         </section>
         <!-- /.content -->
     </div>
-
 
 
 

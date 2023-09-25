@@ -17,4 +17,8 @@ public function checklistItems()
 {
     return $this->hasMany(ChecklistItem::class);
 }
+public function user()
+{
+    return $this->belongsTo(User::class,'createdBy');
+}
 }
