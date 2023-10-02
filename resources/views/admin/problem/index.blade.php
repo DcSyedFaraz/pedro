@@ -36,7 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Project Name</th>
+                                        <th>Job Name</th>
                                         <th>Location</th>
                                         <th>Type</th>
                                         <th>Action</th>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MoodReportController;
 use App\Http\Controllers\Admin\ProblemReportingController;
 use App\Http\Controllers\Manager\LocationController;
 use App\Http\Controllers\Manager\ResponceController;
@@ -63,6 +64,11 @@ Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])-
 // Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/', [HomeController::class, 'login']);
 Route::get('/', [HomeController::class, 'index']);
+// Route::get('test', function () {
+//     event(new App\Events\StatusLiked('Someone'));
+//     return "Event has been sent!!";
+// });
+
 Route::get('/manager/dashboard', [HomeController::class, 'manager'])->name('manager.dashboard');
 
 
@@ -106,6 +112,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
     //Ready Invoice
     Route::resource('readyinvoice', ReadyInvoiceController::class);
+
+    //Mood Reporting
+    Route::resource('moodreport', MoodReportController::class);
 
 
     //Task
@@ -165,6 +174,13 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
     //invoice
     Route::resource('invoices', userInvoiceController::class);
 
+    //problem
+    Route::get('/problem', [usersDashboardController::class, 'problem'])->name('users.problem');
+    Route::get('/problem/show/{id}', [usersDashboardController::class, 'problemshow'])->name('users.problem.show');
+
+    //inspection
+    Route::get('/inspection', [usersDashboardController::class, 'inspection'])->name('users.inspection');
+    Route::get('/inspection/show/{id}', [usersDashboardController::class, 'inspectionshow'])->name('users.inspection.show');
 
     //users Profile
     Route::get('/profile', [usersDashboardController::class, 'profile'])->name('users.profile');

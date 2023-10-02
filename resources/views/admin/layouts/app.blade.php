@@ -288,6 +288,7 @@
                       {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
                       {{ request()->routeIs('location') ? 'menu-open' : '' }}
                       {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('moodreport.index') ? 'menu-open' : '' }}
                       ">
                           <a href="#" class="nav-link nav-dropdown-toggle
                           {{ request()->routeIs('task.index') ? 'active' : '' }}
@@ -295,6 +296,7 @@
                           {{ request()->routeIs('finalized') ? 'active' : '' }}
                           {{ request()->routeIs('location') ? 'active' : '' }}
                           {{ request()->routeIs('adminresponse') ? 'active' : '' }}
+                          {{ request()->routeIs('moodreport.index') ? 'active' : '' }}
                           ">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
@@ -407,7 +409,7 @@
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('moodreport.index')}}" class="nav-link {{ request()->routeIs('moodreport.index') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Mood reporting</p>
                                 </a>

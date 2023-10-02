@@ -1,190 +1,121 @@
-@extends('layouts.app')
-@section('title')
-  Admin | Cms Pages
-@endsection
-
-@section('content')
-
-<link rel="stylesheet" type="text/css"
-        href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css') }}">
-
-
-        <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo Application</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-notifications.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Pages</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Pages</li>
-            </ol>
-          </div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Demo App</a>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown dropdown-notifications">
+              <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
+              </a>
 
-        <section class="content">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title"><i class="ion ion-clipboard mr-1"></i>Page Info</h3><br>
-                    <button type="button" data-toggle="modal" href='#sec1-id' class="btn btn-primary float-right"><i
-                            class="fas fa-plus"></i></button>
-                <div class="modal fade" id="sec1-id">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add</h4>
-                                <button type="button" class="close" data-dismiss="modal"
-                                    aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-
-                                <form action="{{ route('pages.store') }}" enctype="multipart/form-data"
-                                    id="form" method="post">
-                                    @csrf
-                                    <div class="card card-warning">
-                                        <div class="card-body">
-                                            <div class="row">
-
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Page Title </label>
-                                                        <input class="form-control" required="" name="page_name" />
-                                                    </div>
-                                                </div>
-                                              
-                                            </div>
-
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" id="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+              <div class="dropdown-container">
+                <div class="dropdown-toolbar">
+                  <div class="dropdown-toolbar-actions">
+                    <a href="#">Mark all as read</a>
+                  </div>
+                  <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
                 </div>
-
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Page Title</th>                               
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                       
-                            @if ($pages)
-                            @foreach($pages as $val)
-                                <tr>
-                                    <td>{{ $val->page_name }}</td>
-
-                                    <td>
-                                        <button type="button" data-toggle="modal" href='#edit-secss1-{{$val->id}}'
-                                            class="btn btn-default"><i class="fa fa-edit"></i></button>
-                                        <div class="modal fade" id="edit-secss1-{{$val->id}}" style="padding: 0px 0px;">
-                                            <div class="modal-dialog modal-lg">
-                                                <form method="post" action="{{ route('pages.update', $val->id) }}"
-                                                    enctype="multipart/form-data" id="update_link">
-                                                    @csrf
-                                                    @method('put')
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Edit</h4>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label>Page Title </label>
-                                                                        <input class="form-control" required=""
-                                                                            value="{{ $val->page_name }}" name="page_name" />
-                                                                    </div>
-                                                                </div>                                            
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="submit" class="btn btn-primary">Update</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                       {{-- <form method="post" action="{{ route('pages.destroy', $val->id) }}">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are You Sure Want To Delete This..??')" class="btn btn-default generalsetting_admin"><i class="fas fa-trash-alt"></i></button>
-                                        </form> --}}
-                                    </td>
-                                </tr>
-                             @endforeach   
-                            @else
-                                <tr>
-                                    <td class="text-center" colspan="7">No Record Found</td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
+                <ul class="dropdown-menu">
+                </ul>
+                <div class="dropdown-footer text-center">
+                  <a href="#">View All</a>
                 </div>
-            </div>
+              </div>
+            </li>
+            <li><a href="#">Timeline</a></li>
+            <li><a href="#">Friends</a></li>
+          </ul>
         </div>
-    </section>
-</div>
+      </div>
+    </nav>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      var notificationsWrapper   = $('.dropdown-notifications');
+      var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+      var notificationsCountElem = notificationsToggle.find('i[data-count]');
+      var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+      var notifications          = notificationsWrapper.find('ul.dropdown-menu');
+
+      if (notificationsCount <= 0) {
+        notificationsWrapper.hide();
+      }
+
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher('6783ea165c58d9b1b6c3', {
+        encrypted: true,
+        cluster: 'ap2',
+      });
+
+    //   window.Echo.channel('my-channel')
+    // .listen('my-event', (data) => {
+    //     console.log('Received event: ' + data.message);
+    //     // Update your UI or perform other actions here
+    // });
 
 
+      // Subscribe to the channel we specified in our Laravel Event
+      var channel = pusher.subscribe('pedro');
 
+      // Bind a function to a Event (the full Laravel class)
+      channel.bind('App\\Events\\StatusLiked', function(data) {
+        var existingNotifications = notifications.html();
+        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+        var newNotificationHtml = `
+          <li class="notification active">
+              <div class="media">
+                <div class="media-left">
+                  <div class="media-object">
+                    <img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="50x50" style="width: 50px; height: 50px;">
+                  </div>
+                </div>
+                <div class="media-body">
+                  <strong class="notification-title">`+data.message+`</strong>
+                  <!--p class="notification-desc">Extra description can go here</p-->
+                  <div class="notification-meta">
+                    <small class="timestamp">about a minute ago</small>
+                  </div>
+                </div>
+              </div>
+          </li>
+        `;
+        notifications.html(newNotificationHtml + existingNotifications);
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-    <script>
-        @if (Session::has('success'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.success("{{ session('success') }}");
-        @endif
-
-        @if (Session::has('error'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.error("{{ session('error') }}");
-        @endif
-
-        @if (Session::has('info'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.info("{{ session('info') }}");
-        @endif
-
-        @if (Session::has('warning'))
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true
-            }
-            toastr.warning("{{ session('warning') }}");
-        @endif
-
+        notificationsCount += 1;
+        notificationsCountElem.attr('data-count', notificationsCount);
+        notificationsWrapper.find('.notif-count').text(notificationsCount);
+        notificationsWrapper.show();
+      });
     </script>
-@endsection
+  </body>
+</html>
+

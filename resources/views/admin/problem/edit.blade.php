@@ -26,31 +26,25 @@
                 @method('PUT') <!-- Use the PUT method for updating -->
 
                 <div class="form-group">
-                    <label for="project">Project:</label>
-                    <select name="project" id="project" class="form-control">
-                        <option value="">Select Project/ Job</option>
+                    <label for="job">Job:</label>
+                    <select name="job" id="job" class="form-control">
+                        <option value="">Select Job</option>
                         @foreach ($job as $cust)
-                            <option value="{{ $cust->id }}" {{ isset($problemReport) && old('project', $problemReport->project) == $cust->id ? 'selected' : '' }}>
+                            <option value="{{ $cust->id }}" {{ isset($problemReport) && old('job', $problemReport->job) == $cust->id ? 'selected' : '' }}>
                                 {{ $cust->name }}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="problem_reference_number">Problem Reference #:</label>
-                    <input type="text" name="problem_reference_number" id="problem_reference_number" class="form-control" value="{{ old('problem_reference_number', isset($problemReport) ? $problemReport->problem_reference_number : '') }}">
-                </div>
+              
 
                 <div class="form-group">
                     <label for="location">Location:</label>
                     <input type="text" name="location" id="location" class="form-control" value="{{ old('location', isset($problemReport) ? $problemReport->location : '') }}">
                 </div>
 
-                <div class="form-group">
-                    <label for="department_head">Department Head:</label>
-                    <input type="text" name="department_head" id="department_head" class="form-control" value="{{ old('department_head', isset($problemReport) ? $problemReport->department_head : '') }}">
-                </div>
+               
 
                 <div class="form-group">
                     <label for="location_supervisor">Location Supervisor:</label>

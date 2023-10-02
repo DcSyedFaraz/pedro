@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('problem_reportings', function (Blueprint $table) {
             $table->id();
-            $table->string('project');
-            $table->string('problem_reference_number');
+            $table->string('job');
             $table->string('location');
-            $table->string('department_head');
             $table->string('location_supervisor');
             $table->text('problem_details');
             $table->date('problem_date');

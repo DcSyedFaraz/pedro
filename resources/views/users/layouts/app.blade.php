@@ -166,6 +166,40 @@
                 </li>
               </ul>
           </li>
+             <!-- Reports  -->
+             <li class="nav-item
+             {{ request()->routeIs('users.problem') ? 'menu-open' : '' }}
+             {{ request()->routeIs('users.problem.show') ? 'menu-open' : '' }}
+             {{ request()->routeIs('users.inspection') ? 'menu-open' : '' }}
+             {{ request()->routeIs('users.inspection.show') ? 'menu-open' : '' }}
+                 ">
+              <a href="#" class="nav-link nav-dropdown-toggle
+              {{ request()->routeIs('users.problem') ? 'active' : '' }}
+              {{ request()->routeIs('users.problem.show') ? 'active' : '' }}
+              {{ request()->routeIs('users.inspection') ? 'active' : '' }}
+              {{ request()->routeIs('users.inspection.show') ? 'active' : '' }}
+              ">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                  Reports
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('users.problem')}}" class="nav-link {{ request()->routeIs('users.problem')? 'active' : '' }} {{ request()->routeIs('users.problem.show')? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Problem Reports</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('users.inspection')}}" class="nav-link {{ request()->routeIs('users.inspection')? 'active' : '' }}{{ request()->routeIs('users.inspection.show')? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Inspection Reports</p>
+                  </a>
+                </li>
+              </ul>
+          </li>
           <li class="nav-item {{ request()->routeIs('games.index') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link nav-dropdown-toggle  {{ request()->routeIs('users.profile') ? 'active' : '' }} {{ request()->routeIs('games.index') ? 'active' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
               <i class="nav-icon fas fa-table"></i>

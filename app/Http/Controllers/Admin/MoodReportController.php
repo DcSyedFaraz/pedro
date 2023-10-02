@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\users;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
+use App\Models\MoodReport;
 use Illuminate\Http\Request;
 
-class userJobController extends Controller
+class MoodReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,8 @@ class userJobController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $job = Job::where('customer_id',$user->id)->get();
-        // dd($user);
-        return view('users.job.index', compact('job'));
+        $report = MoodReport::orderBy('created_at','desc')->get();
+        return view('admin.report.index', compact('report'));
     }
 
     /**
@@ -39,7 +37,10 @@ class userJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['user_id'] = auth()->user()->id;
+        MoodReport::create($request->all());
+
+        return redirect()->back()->with('success','Report Submitted Successfully');
     }
 
     /**
@@ -50,8 +51,7 @@ class userJobController extends Controller
      */
     public function show($id)
     {
-        $job = Job::findOrFail($id);
-        return view('users.job.show', compact('job'));
+        //
     }
 
     /**
@@ -74,9 +74,7 @@ class userJobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $job = Job::find($id);
-        $job->update($request->all());
-        return redirect()->back()->with('success', 'Status Changed Successfully');
+        //
     }
 
     /**

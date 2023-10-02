@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('work_orders', function (Blueprint $table) {
+        Schema::create('mood_reports', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->integer('deliver_status');
             $table->integer('user_id');
-            $table->integer('vendor_id');
-            $table->string('code');
-            $table->unsignedBigInteger('technician_id')->nullable();
+            $table->integer('mood');
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_orders');
+        Schema::dropIfExists('mood_reports');
     }
 };

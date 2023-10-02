@@ -36,7 +36,7 @@ class JobController extends Controller
 
     public function create()
     {
-        $customer = User::withRole('customer')->get();
+        $customer = User::withRole('user')->get();
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
@@ -136,7 +136,7 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
-        $customer = User::withRole('customer')->get();
+        $customer = User::withRole('user')->get();
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();

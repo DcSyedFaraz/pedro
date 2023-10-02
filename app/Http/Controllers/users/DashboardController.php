@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
+use App\Models\InspectionResponse;
+use App\Models\Job;
+use App\Models\ProblemReporting;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -37,24 +40,51 @@ class DashboardController extends Controller
         $data['users'] = User::all()->count();
         return view('users.dashboard',$data);
     }
-    
+
     public function profile()
     {
         return view('users.profile');
     }
-    
+
+
+    //Problem's Functions
+    public function problem()
+    {
+        $problemReports = ProblemReporting::whereHas('jobname', function($q){
+            $q->where('customer_id', auth()->user()->id);
+        })->get();
+        return view('users.report.problem', compact('problemReports'));
+    }
+    public function problemshow($id)
+    {
+        $problemReport = ProblemReporting::findOrFail($id);
+        return view('users.report.problemshow', compact('problemReport'));
+    }
+
+    //Inspection's Functions
+    public function inspection()
+    {
+        $show = Job::where('customer_id',auth()->user()->id)->with('inspectionChecklists','inspectionResponse')->get();
+        return view('users.report.inspection',compact('show'));
+    }
+    public function inspectionshow($id)
+    {
+        $response = InspectionResponse::with('checklistItem','checklistItem.inspectionChecklist')->where('location_id',$id)->get();
+        return view('users.report.inspectionshow', compact('response'));
+    }
+
 
 
     public function UserProfileUpdate(Request $request)
     {
         $id = Auth::user()->id;
-       
+
         $this->validate($request, [
             'first_name' => 'nullable',
             'last_name' => 'nullable',
             'email' => 'nullable',
         ]);
-    
+
         $password = Hash::make($request->password);
 
         $user = User::find($id);
@@ -69,10 +99,10 @@ class DashboardController extends Controller
 
     }
 
-    
-    
+
+
     public function user_edit_profile(Request $request){
-       
+
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
         $user->name = $request->name;
@@ -84,7 +114,7 @@ class DashboardController extends Controller
         return redirect()->back();
 
     }
-  
+
 
     public function users_change_password()
     {
@@ -95,14 +125,14 @@ class DashboardController extends Controller
         // dd($request->all());
         $user = Auth::user();
         $userPassword = $user->password;
-        
+
         $validator =Validator::make($request->all(),[
           'oldpassword' => 'required',
           'newpassword' => 'required|same:password_confirmation|min:6',
           'password_confirmation' => 'required',
         ]);
 
-        if(!Hash::check($request->oldpassword, $userPassword)) 
+        if(!Hash::check($request->oldpassword, $userPassword))
         {
             return back()->with(['error'=>'old password not match']);
         }
@@ -112,5 +142,5 @@ class DashboardController extends Controller
 
         return redirect()->back()->with("success","Password changed successfully!");
     }
-    
+
 }

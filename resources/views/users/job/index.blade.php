@@ -31,9 +31,7 @@
                   <h3 class="card-title">User Managment</h3>
                 </div> -->
                             <!-- /.card-header -->
-                            <div class="card-header">
-                                <a class="btn btn-success" href="{{ route('job.create') }}"> Create Job </a>
-                            </div>
+                           
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
