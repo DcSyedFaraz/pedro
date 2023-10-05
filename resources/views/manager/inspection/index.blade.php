@@ -1,4 +1,4 @@
-@extends('manager.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout')))
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -28,8 +28,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                  <h3 class="card-title">User Managment</h3>
-                </div> -->
+                      <h3 class="card-title">User Managment</h3>
+                    </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <button type="button" class="btn btn-success" data-toggle="modal"
@@ -41,7 +41,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                                <h5 class="modal-title" id="exampleModalLabel">New Inspection Sheet
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
@@ -83,24 +83,40 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>S. No</th>
                                             <th>Name</th>
                                             <th>Total Itmes</th>
+                                            @if (auth()->user()->hasRole('Admin'))
+                                                <th>Created By</th>
+                                            @endif
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @if ($checklist)
+                                        <?php $i = 0; ?>
                                             @foreach ($checklist as $jobcat)
+                                            <?php $i++; ?>
                                                 <tr>
+                                                    <td>{{ $i }}</td>
                                                     <td>{{ $jobcat->name }}</td>
 
                                                     <td>{{ $jobcat->checklistItems->count() ?? '0' }}</td>
+                                                    @if (auth()->user()->hasRole('Admin'))
+                                                        <td>{{ $jobcat->user->name ?? '' }}</td>
+                                                    @endif
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"
                                                             data-target="#checklistModal_{{ $jobcat->id }}">View
                                                             Checklist Items</button>
-                                                       
+                                                        <form action="{{ route('checklists.destroy', $jobcat->id) }}"
+                                                            method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger"
+                                                                onclick="return confirm('Are you sure you want to delete this Sheet?')">Delete</button>
+                                                        </form>
 
                                                     </td>
                                                     <!-- Modal for Checklist Items -->
@@ -120,11 +136,11 @@
                                                                 <div class="modal-body">
                                                                     <ul>
 
-                                                                            <ul>
-                                                                                @foreach ($jobcat->checklistItems as $item)
-                                                                                    <li>{{ $item->description }}</li>
-                                                                                @endforeach
-                                                                            </ul>
+                                                                        <ul>
+                                                                            @foreach ($jobcat->checklistItems as $item)
+                                                                                <li>{{ $item->description }}</li>
+                                                                            @endforeach
+                                                                        </ul>
 
                                                                     </ul>
                                                                 </div>

@@ -100,7 +100,7 @@
 
 
     <!-- Modal Feedback-->
-<div class="modal fade" id="orderDelModal" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="orderDelModal" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- Modal header -->
@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!--End Feedback-->
 
 
@@ -140,8 +140,6 @@
   </section>
   <!-- /.content -->
 </div>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
 

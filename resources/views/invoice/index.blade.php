@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout')))
 
 @section('content')
     <style>
@@ -63,22 +63,25 @@
                                 <div class="tab-content" id="jobTabsContent">
                                     <div class="tab-pane fade show active" id="sum" role="tabpanel"
                                         aria-labelledby="sum-tab">
-                                        @include('admin.invoice.partials.unpaid')
+                                        @include('invoice.partials.unpaid')
                                     </div>
                                     <div class="tab-pane fade" id="cut" role="tabpanel" aria-labelledby="cut-tab">
-                                        @include('admin.invoice.partials.paid')
+                                        @include('invoice.partials.paid')
                                     </div>
                                     <div class="tab-pane fade show" id="pic" role="tabpanel"
                                         aria-labelledby="pic-tab">
-                                        @include('admin.invoice.partials.recurring')
+                                        @include('invoice.partials.recurring')
                                     </div>
                                     <div class="tab-pane fade" id="doc" role="tabpanel" aria-labelledby="doc-tab">
-                                        @include('admin.invoice.partials.all')
+                                        @include('invoice.partials.all')
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {{-- <iframe src="https://docs.google.com/document/d/1234567890/embed" width="500" height="500"></iframe> --}}
+
+                    @if (isset($add))
                     <div class="col-2">
                         <div class="card mb-3">
                             <div class="card-body text-center">
@@ -101,6 +104,10 @@
                         </div>
 
                     </div>
+
+
+                    @endif
+
                 </div>
 
                 <!-- /.row -->

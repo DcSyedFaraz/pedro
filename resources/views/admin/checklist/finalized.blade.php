@@ -102,7 +102,7 @@
                                                         <button class="btn btn-primary" data-toggle="modal"
                                                             data-target="#checklistModal_{{ $jobcat->id }}">View
                                                             Checklist Items</button>
-                                                       
+
 
                                                     </td>
                                                     <!-- Modal for Checklist Items -->
@@ -159,7 +159,7 @@
 
 @section('script')
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
+    {{-- <script>
         $('#add-checklist-item').click(function() {
             var newChecklistItem = $(
                 '<div class="my-2 new-checklist-item">' +
@@ -180,7 +180,7 @@
         $(document).on('click', '.remove-checklist-item', function() {
             $(this).closest('.new-checklist-item').remove();
         });
-    </script>
+    </script> --}}
 @endsection
 
 

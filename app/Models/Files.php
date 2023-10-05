@@ -5,8 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class Files extends Model
 {
     use HasFactory;
-    protected $table ='location_inspection_checklist';
+    protected $guarded = [];
+
+    public function job()
+    {
+        return $this->belongsTo(Job::class);
+    }
 }

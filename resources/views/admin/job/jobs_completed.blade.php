@@ -35,6 +35,7 @@
                   <th>Customer Name</th>
                   <th>Jobs</th>
                   <th>Primary Contact</th>
+                  <th>Stauts</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -62,6 +63,8 @@
                           </br> Estimated Duration: <strong>Start Duration:{{ $jobs->start_duration }} End Duration: {{ $jobs->end_duration }} </strong>
                         </td>
                         <td class="text-success"><strong>Completed</strong></td>
+                        <td ><a class="btn btn-primary"
+                            href="{{ route('job.edit', $jobs->id) }}">Edit</a></td>
                       </tr>
                   @endforeach
                   @endif

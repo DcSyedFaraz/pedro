@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use App\Models\InspectionChecklist;
 use App\Models\Job;
+use App\Models\Location;
 use Illuminate\Http\Request;
+use Log;
 
 class LocationController extends Controller
 {
@@ -16,11 +18,34 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Job::get();
-        $checklists = InspectionChecklist::get();
-        $show = Job::with('inspectionChecklists')->get();
+        $user = auth()->user();
+        if ($user->hasRole('Admin')) {
+            // Fetch all records if the user is an admin
+            $locations = Job::get();
+            $show = Job::with('inspectionChecklists')->get();
+            $checklists = InspectionChecklist::get();
+
+
+        } else {
+            // Fetch records created by the user
+            $locations = Job::whereHas('workOrder', function ($query) {
+                $query->where('vendor_id', auth()->user()->id)
+                    ->where('status', 'accepted');
+                    })->get();
+                    
+            $show = Job::whereHas('workOrder', function ($query) {
+                $query->where('vendor_id', auth()->user()->id)
+                    ->where('status', 'accepted');
+                    })->with('inspectionChecklists')->get();
+
+            $checklists = InspectionChecklist::where('createdBy', $user->id)->orderBy('id', 'desc')->get();
+
+
+        }
+
+        $inspections = Location::get();
         // dd($show);
-        return view('manager.location.index',compact('locations','checklists','show'));
+        return view('manager.location.index', compact('locations', 'checklists', 'show', 'inspections'));
     }
 
     /**
@@ -41,17 +66,26 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        foreach ($request->input('assignments') as $locationId => $checklistIds) {
-            // Find the location based on its ID
-            $location = Job::findOrFail($locationId);
+        try {
+            foreach ($request->input('assignments') as $locationId => $checklistIds) {
+                // Find the location based on its ID
+                $location = Job::findOrFail($locationId);
 
-            // Attach the selected checklists to the location
-            $location->inspectionChecklists()->sync($checklistIds);
+                // Attach the selected checklists to the location
+                $location->inspectionChecklists()->sync($checklistIds);
+            }
+
+            // Redirect back with a success message or to a different page
+            return redirect()->route('location.index')->with('success', 'Checklists assigned successfully to the locations.');
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error($e->getMessage());
+
+            // Return an error message
+            return redirect()->back()->with('error', 'An error occurred while assigning checklists to the locations.');
         }
-
-        // Redirect back with a success message or to a different page
-        return redirect()->route('location.index')->with('success', 'Checklists assigned successfully to the locations.');
     }
+
 
     /**
      * Display the specified resource.

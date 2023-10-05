@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->integer('job_id');
-            $table->integer('createdBy');
-            $table->string('status')->default('unpaid');
-            $table->string('drive_time');
-            $table->string('labor_time');
-            $table->string('payments_and_deposits_input');
-            $table->string('amount_description');
-            $table->string('amount');
-            $table->string('note_to_cust');
+            $table->string('filename');
             $table->timestamps();
         });
     }
@@ -35,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('files');
     }
 };

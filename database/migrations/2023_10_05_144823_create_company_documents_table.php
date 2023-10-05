@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('work_orders', function (Blueprint $table) {
+        Schema::create('company_documents', function (Blueprint $table) {
             $table->id();
-            $table->string('job_id');
-            $table->text('vendor_id');
-            $table->integer('status');
-            $table->integer('deadline');
-            $table->integer('payment_info');
+            $table->integer('vendor_id');
+            $table->string('filename');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work_orders');
+        Schema::dropIfExists('company_documents');
     }
 };

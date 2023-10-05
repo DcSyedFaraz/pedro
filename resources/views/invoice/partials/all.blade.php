@@ -10,10 +10,11 @@
             </div> --}}
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example2" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped table-responsive">
                     <thead class="thead-light">
                         <tr>
                             <th>Date</th>
+                            <th>Created By</th>
                             <th>Customer Name</th>
                             <th>Invoice#</th>
                             <th>PO#</th>
@@ -28,7 +29,7 @@
                         @if ($all->isEmpty())
 
                         <tr>
-                            <td class="text-center" colspan="8">
+                            <td class="text-center" colspan="9">
                                 No Records Availabe
 
                             </td>
@@ -37,6 +38,7 @@
                         @foreach ($all as $inv)
                             <tr>
                                 <td>{{ Carbon\Carbon::parse($inv->updated_at)->format('l, F j, Y h:i A') }}</td>
+                                <td>{{ isset($inv->user->name) ? $inv->user->name : 'N/A' }}</td>
                                 <td>{{ isset($inv->job->customer->name) ? $inv->job->customer->name : 'N/A' }}</td>
                                 <td>{{ $inv->id }}</td>
                                 <td>{{ isset($inv->job) ? $inv->job->po_no : 'N/A' }}</td>

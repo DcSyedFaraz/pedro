@@ -41,7 +41,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{route('users.dashboard')}}" class="brand-link">
       <img src="{{asset('/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Users Dashboard</span>
     </a>
@@ -54,7 +54,7 @@
           <img src="{{asset('/admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name}}</a>
+          <a href="{{route('users.dashboard')}}" class="d-block">{{ Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -241,12 +241,9 @@
   </aside>
 @yield('content')
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2022-2023 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+ <footer class="main-footer">
+    <strong>Copyright &copy; 2022-{{now()->year}} <a href="#">Pedro</a>.</strong>
     All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
   </footer>
 
   <!-- Control Sidebar -->

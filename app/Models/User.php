@@ -15,7 +15,7 @@ use Bavix\Wallet\Interfaces\Wallet;
 class User extends Authenticatable implements MustVerifyEmail, Wallet
 {
     use HasApiTokens,HasFactory,Notifiable,HasRoles,HasWallet;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -51,5 +51,13 @@ class User extends Authenticatable implements MustVerifyEmail, Wallet
         return $query->whereHas('roles', function ($query) use ($roleName) {
             $query->where('name', $roleName);
         });
+    }
+    public function userdetail()
+    {
+        return $this->hasOne(CompanyProfile::class, 'vendor_id');
+    }
+    public function files()
+    {
+        return $this->hasMany(CompanyDocuments::class,'vendor_id','id');
     }
 }

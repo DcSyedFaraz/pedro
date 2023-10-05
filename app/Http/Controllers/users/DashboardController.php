@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
 use App\Models\InspectionResponse;
+use App\Models\Invoice;
 use App\Models\Job;
 use App\Models\ProblemReporting;
 use Illuminate\Http\Request;
@@ -36,9 +37,19 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // return Auth::user();
-        $data['users'] = User::all()->count();
-        return view('users.dashboard',$data);
+        $user = auth()->user()->id;
+        $data['jobs'] = Job::where('customer_id', $user)->count();
+
+        $data['estimates'] = Job::where('user_id', $user)
+            ->whereHas('estimate', function ($query) {
+                $query->whereColumn('estimates.id', 'jobs.estimate_id');
+            })->count();
+
+        $data['invoices'] = Invoice::whereHas('job', function ($query) use ($user) {
+            $query->where('user_id', $user);
+        })->count();
+        
+        return view('users.dashboard', $data);
     }
 
     public function profile()
@@ -50,7 +61,7 @@ class DashboardController extends Controller
     //Problem's Functions
     public function problem()
     {
-        $problemReports = ProblemReporting::whereHas('jobname', function($q){
+        $problemReports = ProblemReporting::whereHas('jobname', function ($q) {
             $q->where('customer_id', auth()->user()->id);
         })->get();
         return view('users.report.problem', compact('problemReports'));
@@ -64,12 +75,12 @@ class DashboardController extends Controller
     //Inspection's Functions
     public function inspection()
     {
-        $show = Job::where('customer_id',auth()->user()->id)->with('inspectionChecklists','inspectionResponse')->get();
-        return view('users.report.inspection',compact('show'));
+        $show = Job::where('customer_id', auth()->user()->id)->with('inspectionChecklists', 'inspectionResponse')->get();
+        return view('users.report.inspection', compact('show'));
     }
     public function inspectionshow($id)
     {
-        $response = InspectionResponse::with('checklistItem','checklistItem.inspectionChecklist')->where('location_id',$id)->get();
+        $response = InspectionResponse::with('checklistItem', 'checklistItem.inspectionChecklist')->where('location_id', $id)->get();
         return view('users.report.inspectionshow', compact('response'));
     }
 
@@ -94,14 +105,15 @@ class DashboardController extends Controller
         $user->password = isset($password) ? $password : $user->password;
         $user->save();
 
-        session::flash('success','profile Updated Successfully');
+        session::flash('success', 'profile Updated Successfully');
         return redirect()->back();
 
     }
 
 
 
-    public function user_edit_profile(Request $request){
+    public function user_edit_profile(Request $request)
+    {
 
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
@@ -110,7 +122,7 @@ class DashboardController extends Controller
         $user->phone = $request->phone;
         $user->save();
 
-        session::flash('success','profile Updated Successfully');
+        session::flash('success', 'profile Updated Successfully');
         return redirect()->back();
 
     }
@@ -126,21 +138,20 @@ class DashboardController extends Controller
         $user = Auth::user();
         $userPassword = $user->password;
 
-        $validator =Validator::make($request->all(),[
-          'oldpassword' => 'required',
-          'newpassword' => 'required|same:password_confirmation|min:6',
-          'password_confirmation' => 'required',
+        $validator = Validator::make($request->all(), [
+            'oldpassword' => 'required',
+            'newpassword' => 'required|same:password_confirmation|min:6',
+            'password_confirmation' => 'required',
         ]);
 
-        if(!Hash::check($request->oldpassword, $userPassword))
-        {
-            return back()->with(['error'=>'old password not match']);
+        if (!Hash::check($request->oldpassword, $userPassword)) {
+            return back()->with(['error' => 'old password not match']);
         }
 
         $user->password = Hash::make($request->newpassword);
         $user->save();
 
-        return redirect()->back()->with("success","Password changed successfully!");
+        return redirect()->back()->with("success", "Password changed successfully!");
     }
 
 }

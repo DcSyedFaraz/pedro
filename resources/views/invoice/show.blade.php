@@ -1,4 +1,4 @@
-@extends('admin.layouts.app') {{-- Include your base layout if you have one --}}
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout'))) {{-- Include your base layout if you have one --}}
 
 @section('content')
 <div class="content-wrapper">
@@ -95,6 +95,10 @@
                                 <li class="list-group-item">
                                     <strong>Note to Customer:</strong>
                                     <span>{{ $invoice->note_to_cust }}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Created By:</strong>
+                                    <span>{{ $invoice->user->name ?? 'N/A' }}</span>
                                 </li>
                             </ul>
                         </div>

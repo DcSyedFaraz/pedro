@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class CompanyProfile extends Model
 {
     use HasFactory;
-    protected $table ='location_inspection_checklist';
+    protected $guarded = [];
 }

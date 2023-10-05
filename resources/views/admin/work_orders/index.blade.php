@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>DataTables</h1>
+          <h1>Work Order List</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">DataTables</li>
+            <li class="breadcrumb-item active">Work Order List</li>
           </ol>
         </div>
       </div>
@@ -28,41 +28,63 @@
 
           <div class="card">
             <!-- /.card-header -->
+            <div class="card-header">
+                <a class="btn btn-success" href="{{ route('work_orders.create') }}"> Create Work Order </a>
+            </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Feedback</th>
-                    <th>Order Complete</th>
-                </tr>
+                    <tr>
+                        <th>Work Order ID</th>
+                        <th>Job Name</th>
+                        <th>Vendor</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                        <th>Payment</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
 
                 <tbody>
                   @if($WorkOrders)
-                  <?php $i = 0; ?>
+
                   @foreach($WorkOrders as $workOrder)
-                  <?php $i++; ?>
+
 
                   <tr>
-                      <td>{{ $i }}</td>
-                      <td>{{ $workOrder->title }}</td>
-                      <td>{{ $workOrder->code }}</td>
-                      <td>{{ $workOrder->description }}</td>
-                      <td>{{ $workOrder->feedback }}</td>
-                      <td>
-                        @if($workOrder->status == 1)
-                          <span class="text-success" style="font-size: 16px;font-weight: bold;">Completed</span>
-                        @elseif($workOrder->status == 2)
-                        <span class="text-danger" style="font-size: 16px;font-weight: bold;">Rejected</span>
-                        @else
-                        <span class="text-warning" style="font-size: 16px;font-weight: bold;">Pending</span>
-                        @endif
+                    <td>{{ $workOrder->id ?? '' }}</td>
+                    <td>{{ $workOrder->jobname->name ?? '' }}</td>
+                    <td>{{ $workOrder->vendor->name ?? '' }}</td>
+                    <td>
+                        @switch($workOrder->status)
+                          @case('pending')
+                            <span class="badge bg-warning">Pending</span>
+                          @break
+                          @case('accepted')
+                            <span class="badge bg-success">Accepted</span>
+                          @break
+                          @case('declined')
+                            <span class="badge bg-danger">Declined</span>
+                          @break
+                          @default
+                            {{ $workOrder->status }}
+                        @endswitch
                       </td>
-                  </tr>
+
+                    <td>{{ $workOrder->deadline ?? '' }}</td>
+                    <td> @switch($workOrder->payment_info)
+
+                        @case('quick_pay')
+                          <span class="badge bg-success">Quick Pay</span>
+                        @break
+                        @default
+                         ----
+                      @endswitch</td>
+                    <td>
+                        <a href="{{ route('work_orders.edit',$workOrder->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('work_orders.show',$workOrder->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                    </td>
+                </tr>
               @endforeach
                   @endif
                 </tbody>

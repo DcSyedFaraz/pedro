@@ -54,6 +54,10 @@ class Job extends Model
     {
         return $this->hasOne(Task::class, 'job_id');
     }
+    public function workOrder()
+    {
+        return $this->hasOne(WorkOrders::class, 'job_id');
+    }
     public function estimate()
     {
         return $this->hasOne(Estimate::class, 'id', 'estimate_id');

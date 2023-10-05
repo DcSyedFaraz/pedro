@@ -22,4 +22,8 @@ class Invoice extends Model
     {
         return $this->belongsTo(ProductandService::class,'id','invoice_id');
     }
+    public function user()
+{
+    return $this->belongsTo(User::class,'createdBy');
+}
 }

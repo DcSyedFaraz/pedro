@@ -1,26 +1,19 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout')))
 
 
 @section('content')
-    <style>
-        a {
-            color: #5c5555;
-            text-decoration: none;
-            background-color: transparent;
-        }
-    </style>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>New Invoice</h1>
+                        <h1>Edit Invoice</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">New Invoice</li>
+                            <li class="breadcrumb-item active">Edit Invoice</li>
                         </ol>
                     </div>
                 </div>
@@ -29,14 +22,23 @@
 
         <section class="content">
             <div class="container-fluid">
-
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-12">
-                        <!--invoice Start  -->
                         <div class="card">
                             <div class="card-header">
-                                <form action="{{ route('invoice.store') }}" method="POST">
+                                <form action="{{ route('invoice.update', $invoice->id) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="container mt-5">
@@ -51,14 +53,9 @@
                                                         <a class="nav-link active" data-toggle="tab"
                                                             href="#single-invoice">Single Invoice</a>
                                                     </li>
+
                                                     <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab"
-                                                            href="#process-billing">Process
-                                                            Billing</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" data-toggle="tab" href="#no-change">No
-                                                            Change</a>
+                                                        <a class="nav-link" data-toggle="tab" href="#no-change">Not Billable</a>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content mt-3">
@@ -95,21 +92,22 @@
                                                         <div class="row w-25 d-flex flex-column">
 
                                                             <div class="col-md-12">
-                                                                <strong>Job</strong>
+                                                                <strong>Status</strong>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
 
-                                                                    <select name="job_id" id="customer_id"
+                                                                    <select name="status" id="customer_id"
                                                                         class="form-control">
-                                                                        <option value="" selected hidden>Select Job
+                                                                        <option value=""  selected hidden>Select Job
                                                                         </option>
-                                                                        @foreach ($job as $cust)
-                                                                            <option
-                                                                                {{ isset($job->job_id) ? (old('job_id', $job->job_id) ? 'selected' : '') : '' }}
-                                                                                value="{{ $cust->id }}">
-                                                                                {{ $cust->location_name }}</option>
-                                                                        @endforeach
+                                                                        <option value="unpaid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'unpaid' ? 'selected' : '' }}>UnPaid
+                                                                        </option>
+                                                                        <option value="paid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'paid' ? 'selected' : '' }}>Paid
+                                                                        </option>
+                                                                        <option value="recurring"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'recurring' ? 'selected' : '' }}>Recurring
+                                                                        </option>
+
                                                                     </select>
                                                                     <span class="error-message error-messages"
                                                                         id="customer_id_error"></span><br>
@@ -124,7 +122,7 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label for="note-to-customer">Note To Customer</label>
-                                                                <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4"></textarea>
+                                                                <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4">{{ old('note_to_cust', $invoice->note_to_cust) }}</textarea>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="row invoice">
@@ -160,7 +158,6 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="col">
-
                                                                         <p><span id="job_total_due">$0.00</span></p>
                                                                         <p><span id="job_total_cost">$0.00</span></p>
                                                                         <p style="color:#09af2f"><span
@@ -170,10 +167,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Process Billing -->
-                                                    <div id="process-billing" class="tab-pane fade show">
-                                                        <h6>Process Billing</h6>
-                                                    </div>
+                                                    
                                                     <!-- No Change -->
                                                     <div id="no-change" class="tab-pane fade show">
                                                         <h6>No Change</h6>
@@ -186,30 +180,8 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="card">
-                  <div class="card-header">
-                  <form action="{{ route('invoice.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Price:</label>
-                            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </form>
-                  </div>
-              </div>  --}}
             </div>
-    </div>
-    </div>
-    </section>
+        </section>
 
     </div>
 @endsection

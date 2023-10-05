@@ -10,7 +10,7 @@
             </div> --}}
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example3" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead class="thead-light">
                         <tr>
                             <th>Date</th>
@@ -24,23 +24,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @dd($recur) --}}
-                        @if ($recur->isEmpty())
-
-                        <tr>
-                            <td class="text-center" colspan="8">
-                                No Records Availabe
-
-                            </td>
-                        </tr>
-                        @else
-                        @foreach ($recur as $inv)
+                        @foreach ($invoice as $inv)
                             <tr>
-                                <td>{{ $inv->updated_at }}</td>
+                                <td>{{ $inv->updated_at->format('l, F j, Y h:i A') }}</td>
                                 <td>{{ isset($inv->job->customer->name) ? $inv->job->customer->name : 'N/A' }}</td>
                                 <td>{{ $inv->id }}</td>
                                 <td>{{ isset($inv->job) ? $inv->job->po_no : 'N/A' }}</td>
-                                <td class=""> <label class="badge badge-warning ">{{ Str::ucfirst($inv->status)  }}</label></td>
+                                <td class=""> <label class="badge badge-danger ">{{ Str::ucfirst($inv->status)  }}</label></td>
                                 {{-- @dd($inv->unpaid->total) --}}
                                 <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
                                 </td>
@@ -56,7 +46,6 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @endif
                     </tbody>
                 </table>
 

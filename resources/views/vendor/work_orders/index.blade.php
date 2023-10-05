@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>DataTables</h1>
+          <h1>Work Order</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">DataTables</li>
+            <li class="breadcrumb-item active">Work Order</li>
           </ol>
         </div>
       </div>
@@ -34,58 +34,80 @@
 
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>S/No</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Work Order Status</th>
-                    <th>Deliverd Order</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                  @if($WorkOrders)
-                    <?php $i = 0; ?>
-                    @foreach($WorkOrders as $workOrder)
-                    <?php $i++; ?>
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
                         <tr>
-                          <td>{{ $i }}</td>
-                          <td>{{ $workOrder->title }}</td>
-                          <td>{{ $workOrder->description }}</td>
-                          <td>
-                            @if ($workOrder->deliver_status === 1)
-                                <strong class="text-success">Completed</strong>
-                            @elseif ($workOrder->deliver_status === 2)
-                                <strong class="text-danger">Rejected</strong>
+                            <th>Work Order ID</th>
+                            <th>Job Name</th>
+                            <th>Vendor</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Payment</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                      @if($WorkOrders)
+
+                      @foreach($WorkOrders as $workOrder)
+
+
+                      <tr>
+                        <td>{{ $workOrder->id ?? '' }}</td>
+                        <td>{{ $workOrder->jobname->name ?? '' }}</td>
+                        <td>{{ $workOrder->vendor->name ?? '' }}</td>
+                        <td>
+                            @switch($workOrder->status)
+                              @case('pending')
+                                <span class="badge bg-warning">Pending</span>
+                              @break
+                              @case('accepted')
+                                <span class="badge bg-success">Accepted</span>
+                              @break
+                              @case('declined')
+                                <span class="badge bg-danger">Declined</span>
+                              @break
+                              @default
+                                {{ $workOrder->status }}
+                            @endswitch
+                          </td>
+
+                        <td>{{ $workOrder->deadline ?? '' }}</td>
+                        <td> @switch($workOrder->payment_info)
+
+                            @case('quick_pay')
+                              <span class="badge bg-success">Quick Pay</span>
+                            @break
+                            @default
+                             ----
+                          @endswitch</td>
+                        <td>
+                            @if($workOrder->status == 'pending')
+                            <!-- Show Accept Button -->
+                            <a href="{{ route('vendor.accept', ['id' => $workOrder->id]) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Accept this Work Order?')">
+                                <i class="fa fa-check"></i> Accept
+                            </a>
+                            <!-- Show Decline Button -->
+                            <a href="{{ route('vendor.decline', ['id' => $workOrder->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Decline this Work Order?')">
+                                <i class="fa fa-times"></i> Decline
+                            </a>
                             @else
-                                <strong class="text-warning">Pending</strong>
+                            <a title="ask for quick pay" href="{{ route('vendor.quick_pay', ['id' => $workOrder->id]) }}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Apply For Quick Pay?')">
+                                <i class="fa fa-hand-holding-usd"></i>
+                            </a>
+                            <a title="add images and notes" href="{{ route('vendor.doc', ['id' => $workOrder->id]) }}" class="btn btn-warning" >
+                                <i class="fa fa-plus"></i>
+                            </a>
+
                             @endif
-                          </td>
-                          <td>
-                            @if ($workOrder->status === 1)
-                                <strong class="text-success">Completed</strong>
-                            @elseif ($workOrder->status === 2)
-                                <strong class="text-danger">Rejected</strong>
-                            @else
-                                <strong class="text-warning">Pending</strong>
-                            @endif
-                          </td>
-                          @if($workOrder->status === 1)
-                          <td>
-                          </td>
-                          @else
-                          <td>
-                          <a href="#" class="orderdel btn btn-primary" data-toggle="modal" data-target="#orderDelModal{{ $workOrder->id }}" data-workorder-code="{{ $workOrder->code }}"  data-status="{{ $workOrder->status }}"> <i class="fas fa-truck"></i></a>
-                          </td>
-                          @endif
-                      </tr>
-                    @endforeach
-                  @endif
-                </tbody>
-              </table>
+                            <a title="view details" href="{{ route('manage_work_orders.show',$workOrder->job_id) }}" class="btn btn-info">View</a>
+                        </td>
+                    </tr>
+                  @endforeach
+                      @endif
+                    </tbody>
+                  </table>
 
             </div>
             <!-- /.card-body -->
@@ -99,65 +121,7 @@
     <!-- /.container-fluid -->
 
 
-    <!-- Modal Feedback-->
-<div class="modal fade" id="orderDelModal" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <!-- Modal header -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="assignModalLabel">Order Deliverd</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <!-- Vendor assignment form -->
-                <form action="{{ route('vendor.deliver_order') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="work_order_code" id="work_order_code">
-
-                    <div class="form-group">
-                        <label for="deliverd_id">Select Status:</label>
-                        <select class="form-control" id="status" name="status" required>
-                                <option value="0">Slelect Menu</option>
-                                <option value="1">Order Deliverd</option>
-                                <option value="2">Reject</option>
-                                <option value="3">Pending</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Order Deliver</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!--End Feedback-->
-
-
-
-  </section>
-  <!-- /.content -->
-</div>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-<script>
-
-    $(document).ready(function() {
-      $('.orderdel').click(function() {
-            var workOrderCode = $(this).data('workorder-code');
-            var status = $(this).data('status');
-
-            $('#work_order_code').val(workOrderCode);
-            $('#status').val(status);
-            $('#orderDelModal').modal('show');
-        });
-    });
-
-
-</script>
 @endsection
 
 

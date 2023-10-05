@@ -1,4 +1,9 @@
-@extends('manager.layouts.app')
+@extends(
+    Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :
+    (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' :
+    (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout')
+)
+)
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -34,14 +39,14 @@
                             <div class="card-header">
                                 <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal">
-                                    New Location
+                                    Assign/ Update Checklist
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                                <h5 class="modal-title" id="exampleModalLabel">Assign Checklist
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
@@ -61,13 +66,18 @@
                                                                         for="location_{{ $location->id }}">{{ $location->name }}</label>
                                                                     @foreach ($checklists as $checklist)
                                                                     <div class="d-flex">
-
+                                                                        @php
+                                                                        // Check if there is a matching inspection record for the current location and checklist
+                                                                        $matchingInspection = $inspections->first(function ($inspection) use ($location, $checklist) {
+                                                                            return $inspection->job_id === $location->id && $inspection->inspection_checklist_id === $checklist->id;
+                                                                        });
+                                                                    @endphp
                                                                         <input type="checkbox" class="form-check"
                                                                             name="assignments[{{ $location->id }}][]"
-                                                                            value="{{ $checklist->id }}"
+                                                                            value="{{ $checklist->id }}" {{ $matchingInspection  ? 'checked' : '' }}
                                                                             id="location_{{ $location->id }}_checklist_{{ $checklist->id }}">
                                                                         <label
-                                                                            for="location_{{ $location->id }}_checklist_{{ $checklist->id }}" class="form-label">{{ $checklist->name }}</label>
+                                                                            for="location_{{ $location->id }}_checklist_{{ $checklist->id }}" class="form-label"> &nbsp;{{ $checklist->name }}</label>
                                                                     </div>
                                                                     @endforeach
                                                                 </div>
@@ -81,7 +91,7 @@
                                                     data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Save
                                                     changes</button>
-                                               
+
                                             </div>
                                             </form>
                                         </div>

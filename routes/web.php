@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\MoodReportController;
 use App\Http\Controllers\Admin\ProblemReportingController;
 use App\Http\Controllers\Manager\LocationController;
 use App\Http\Controllers\Manager\ResponceController;
+use App\Http\Controllers\vendor\CompanyProfileController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
@@ -72,6 +73,20 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/manager/dashboard', [HomeController::class, 'manager'])->name('manager.dashboard');
 
 
+
+Route::group(['middleware' => ['auth']], function () {
+    // Inspection
+    Route::resource('checklists', InspectionController::class);
+    Route::resource('location', LocationController::class);
+    Route::resource('invoice', InvoiceController::class);
+});
+
+
+
+
+
+
+
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
 
     Route::get('/change_password', [DashboardController::class, 'change_password'])->name('change_password');
@@ -100,7 +115,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
     Route::resource('general_setting', GeneralSettingController::class);
     // Routes for work
-    Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('admin.work_orders.index');
+    // Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('.index');
+    Route::resource('work_orders', adminWorkOrderController::class);
+
+
+
+
     Route::resource('technicians', TechniciansController::class);
 
     //Problem Reporting
@@ -130,7 +150,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::resource('purchase-orders', PurchaseOrderController::class);
     Route::resource('inventory', InventoryController::class);
     Route::get('/product/delete/{id}', [InventoryController::class, 'product_destroy'])->name('productService.destroy');
-    Route::resource('invoice', InvoiceController::class);
+
     Route::resource('checklist', CheckListController::class);
     Route::resource('inspection', InspectionController::class);
     Route::resource('jobpermanager', JobPerAssignController::class);
@@ -190,10 +210,15 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 
 });
 
-Route::group(['prefix' => 'vendor', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], function () {
 
     //Manage Work Order & Execute Work Order
-    Route::get('/manage/work/orders', [vendorController::class, 'manageWorkOrders'])->name('manage_work_orders');
+    Route::resource('manage_work_orders', vendorController::class);
+
+    //Company Profile
+    Route::resource('company_profile', CompanyProfileController::class);
+
+    // Route::get('/manage/work/orders', [vendorController::class, 'manageWorkOrders'])->name('manage_work_orders');
     Route::get('/execute/work/order', [vendorController::class, 'executeWorkOrder'])->name('execute_work_order');
     Route::get('/dashboard', [vendorDashboardController::class, 'index'])->name('vendor.dashboard');
     //users Profile
@@ -203,18 +228,17 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth']], function () {
     Route::post('/bank/detail', [vendorDashboardController::class, 'usersBankDetail'])->name('vendor.bank.detail');
     //Vendor Work order
     Route::get('/vendor/work-orders', [vendorDashboardController::class, 'manageWorkOrders'])->name('vendor.manage.work.order');
-    Route::get('/vendor/work-orders/{id}/execut', [vendorDashboardController::class, 'executeWorkOrder'])->name('vendor.execute.work.order');
-    Route::post('/vendor/deliver/order', [vendorController::class, 'deliverOrder'])->name('vendor.deliver_order');
+
+    Route::get('/accept/{id}', [VendorController::class, 'acceptWorkOrder'])->name('vendor.accept');
+    Route::get('/decline/{id}', [VendorController::class, 'declineWorkOrder'])->name('vendor.decline');
+    Route::get('/quick_pay/{id}', [VendorController::class, 'quick_pay'])->name('vendor.quick_pay');
+    Route::get('/doc/{id}', [VendorController::class, 'doc'])->name('vendor.doc');
+    Route::put('/upload/{id}', [VendorController::class, 'upload'])->name('vendor.upload');
+    Route::delete('/upload/delete/{id}', [VendorController::class, 'delete'])->name('vendor.delete');
 
 });
-Route::group(['prefix' => 'manager', 'middleware' => ['auth','role:account manager']], function () {
+Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account manager']], function () {
 
-
-    //Inspection
-    Route::resource('checklists', InspectionController::class);
-
-    //Location
-    Route::resource('location', LocationController::class);
 
     //Responce
     Route::resource('responce', ResponceController::class);

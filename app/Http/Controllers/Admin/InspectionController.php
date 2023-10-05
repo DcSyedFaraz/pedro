@@ -28,8 +28,14 @@ class InspectionController extends Controller
      */
     public function create()
     {
-        $user = auth()->user()->id;
-        $checklist = InspectionChecklist::where('createdBy',$user)->get();
+        $user = auth()->user();
+        if ($user->hasRole('Admin')) {
+            // Fetch all records if the user is an admin
+            $checklist = InspectionChecklist::orderBy('id','desc')->get();
+        } else {
+            // Fetch records created by the user
+            $checklist = InspectionChecklist::where('createdBy', $user->id )->orderBy('id','desc')->get();
+        }
         return view('manager.inspection.index', compact('checklist'));
     }
 
@@ -110,6 +116,8 @@ class InspectionController extends Controller
      */
     public function destroy($id)
     {
+        $job = InspectionChecklist::findOrFail($id);
+        $job->delete();
         $ProductandService = ChecklistItem::where('inspection_checklist_id', $id)->get();
 
         if ($ProductandService->count() > 0) {
@@ -118,8 +126,6 @@ class InspectionController extends Controller
                 $ProductandServices->delete();
             }
         }
-        $job = InspectionChecklist::findOrFail($id);
-        $job->delete();
         return redirect()->back()->with('error','Sheet deleted Successfully');
     }
 }

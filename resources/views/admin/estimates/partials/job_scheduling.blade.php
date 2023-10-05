@@ -144,7 +144,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <strong>On-Site Examination
+        <strong>On-Site Date
         </strong>
     </div>
     <div class="col-md-4">
@@ -201,7 +201,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <strong>Team Assignment</strong>
+        <strong>Technician Assigned</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -224,7 +224,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Technical Instructions</strong>
+        <strong>Technician Instructions</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">

@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="{{asset('/admin/plugins/summernote/summernote-bs4.min.css')}}">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{asset('/admin/plugins/toastr/toastr.min.css')}}">
-  
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -37,7 +37,7 @@
     <img class="animation__shake" src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
-  
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -73,8 +73,8 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        
-         
+
+
         <li class="nav-item {{ request()->routeIs('vendor.dashboard') ? 'menu-open' : '' }} ">
             <a href="#" class="nav-link nav-dropdown-toggle {{ request()->routeIs('vendor.dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-table"></i>
@@ -84,17 +84,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-        
+
               <li class="nav-item">
                 <a href="{{route('vendor.dashboard')}}" class="nav-link {{ request()->routeIs('vendor.dashboard')? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
-              
+
             </ul>
-          </li> 
-          
+          </li>
+
           <li class="nav-item">
                 <a href="{{route('manage_work_orders')}}" class="nav-link {{ request()->routeIs('vendor.blogs')? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -108,7 +108,7 @@
                   <p>Logout</p>
                 </a>
               </li>
-      
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -117,12 +117,9 @@
   </aside>
 @yield('content')
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2022-2023 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+ <footer class="main-footer">
+    <strong>Copyright &copy; 2022-{{now()->year}} <a href="#">Pedro</a>.</strong>
     All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
   </footer>
 
   <!-- Control Sidebar -->
@@ -168,23 +165,23 @@
 <!-- Toastr -->
 <script src="{{asset('/admin/plugins/toastr/toastr.min.js')}}"></script>
 <script>
- 
+
         $('.complete-btn').click(function() {
             var workOrderId = $(this).data('workorder-id');
             updateWorkOrderStatus(workOrderId, 1);
         });
-        
+
         $('.incomplete-btn').click(function() {
             var workOrderId = $(this).data('workorder-id');
             updateWorkOrderStatus(workOrderId, 0);
         });
-        
+
         function updateWorkOrderStatus(workOrderId, status) {
-        
+
             $.ajax({
                 url: "{{ route('execute_work_order') }}",
                 method: 'GET',
-               
+
                 data: {
                     work_order_id: workOrderId,
                     status: status
@@ -197,7 +194,7 @@
                 }
             });
         }
-  
+
 
 
 
@@ -287,7 +284,7 @@ $(document).ready(function () {
           country: "PK"
         }
     });
-	
+
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var near_place = autocomplete.getPlace();
         // alert(near_place.geometry);

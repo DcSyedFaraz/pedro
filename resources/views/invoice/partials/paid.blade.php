@@ -36,7 +36,7 @@
                         @else
                         @foreach ($paid as $inv)
                             <tr>
-                                <td>{{ $inv->updated_at }}</td>
+                                <td>{{ $inv->updated_at->format('l, F j, Y h:i A') }}</td>
                                 <td>{{ isset($inv->job->customer->name) ? $inv->job->customer->name : 'N/A' }}</td>
                                 <td>{{ $inv->id }}</td>
                                 <td>{{ isset($inv->job) ? $inv->job->po_no : 'N/A' }}</td>

@@ -78,7 +78,6 @@
                   @endif
                 </tbody>
               </table>
-              {!! $data->render() !!}
             </div>
             <!-- /.card-body -->
           </div>

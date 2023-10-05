@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Today Schedule Job</h1>
+          <h1>UnScheduled Job</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Today Schedule Job</li>
+            <li class="breadcrumb-item active">UnScheduled Job</li>
           </ol>
         </div>
       </div>
@@ -35,6 +35,7 @@
                   <th>Customer Name</th>
                   <th>Jobs</th>
                   <th>Primary Contact</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -82,6 +83,8 @@
                         @else
                           <td class="text-success"><strong>---</strong></td>
                         @endif
+                        <td ><a class="btn btn-primary"
+                            href="{{ route('job.edit', $jobs->id) }}">Edit</a></td>
                       </tr>
                   @endforeach
                   @endif

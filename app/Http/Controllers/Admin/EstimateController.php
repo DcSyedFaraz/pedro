@@ -44,9 +44,8 @@ class EstimateController extends Controller
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
         $job_source = job_source_category::get();
-        $job_img = Job::count('image');
-        $job_doc = Job::count('document');
-        return view('admin.estimates.create', compact('customer', 'jobCategories', 'job_prioirty', 'job_source', 'job_img', 'job_doc', 'agent'));
+
+        return view('admin.estimates.create', compact('customer', 'jobCategories', 'job_prioirty', 'job_source',  'agent'));
     }
 
     public function store(Request $request)
@@ -87,6 +86,8 @@ class EstimateController extends Controller
             $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
             $file->move('uploads/image/', $fileName);
             $image = asset('uploads/image/' . $fileName);
+        $job->image = $image;
+
         }
 
 
@@ -96,12 +97,12 @@ class EstimateController extends Controller
             $fileName = md5($file->getClientOriginalName() . time()) . "doc." . $file->getClientOriginalExtension();
             $file->move('uploads/document/', $fileName);
             $document = asset('uploads/document/' . $fileName);
+        $job->document = $document;
+
         }
         // Job Information
         //Job image
-        $job->image = $image;
         //Job document
-        $job->document = $document;
         $job->requested_on = $request->requested_on;
         $job->current_status = $request->current_status;
         $job->opportunity_rating = $request->opportunity_rating;
@@ -156,7 +157,9 @@ class EstimateController extends Controller
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
         $job_source = job_source_category::get();
-        return view('admin.estimates.edit', compact('estimate', 'customer', 'jobCategories', 'job_prioirty', 'job_source', 'agent'));
+        $job_img = Estimate::where('id', $estimate->id)->count('image');
+        $job_doc = Estimate::where('id', $estimate->id)->count('document');
+        return view('admin.estimates.edit', compact('estimate', 'customer', 'jobCategories', 'job_prioirty','job_img', 'job_doc', 'job_source', 'agent'));
     }
 
     public function update(Request $request, Estimate $estimate)

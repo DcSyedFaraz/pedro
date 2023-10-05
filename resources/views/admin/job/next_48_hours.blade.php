@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Today Schedule Job</h1>
+          <h1>Next 48Hrs Schedule Job</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Next  Schedule Job</li>
+            <li class="breadcrumb-item active">Next 48Hrs Schedule Job</li>
           </ol>
         </div>
       </div>
@@ -35,6 +35,7 @@
                   <th>Customer Name</th>
                   <th>Jobs</th>
                   <th>Primary Contact</th>
+                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -62,6 +63,8 @@
                           </br>Estimated Duration: <strong>Start Duration:{{ $jobs->start_duration }} End Duration: {{ $jobs->end_duration }} </strong>
                         </td>
                         <td><stronge>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</stronge></td>
+                        <td ><a class="btn btn-primary"
+                            href="{{ route('job.edit', $jobs->id) }}">Edit</a></td>
                       </tr>
                   @endforeach
                   @endif

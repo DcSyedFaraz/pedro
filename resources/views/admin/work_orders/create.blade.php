@@ -20,40 +20,75 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    <section class="content">
-    <div class="container-fluid">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Create Work Order') }}</div>
 
-        <div class="row">
-          <div class="col-12">
-              <div class="card">
-                  <div class="card-header">
-                  <form action="{{ route('work-orders.store') }}" method="POST">
-                    @csrf
-                        <div>
-                            <label for="title">Title:</label>
-                            <input type="text" name="title" class="form-control" id="title" required>
-                        </div>
-                        <div>
-                            <label for="content">Content:</label>
-                            <textarea name="description" id="content" class="form-control" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Technicians:</label>
-                              <select name="technician_id" class="form-control" required>
-                                  <option value="0">select Technicians</option>
-                                  @foreach($technicians as $technician)
-                                  <option value="{{$technician->id}}">{{$technician->name}}</option>
-                                  @endforeach
-                              </select>
-                        </div>
-                        </br>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                  </div>
-              </div>
-          </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('work_orders.store') }}">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="job_id" class="col-md-4 col-form-label text-md-right">{{ __('Job ID') }}</label>
+                                <div class="col-md-6">
+                                    <select id="job_id" name="job_id" class="form-control">
+                                        <!-- Populate this select input with job options from your database -->
+                                        @foreach($jobs as $job)
+                                            <option value="{{ $job->id }}">{{ $job->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('job_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="vendor_id" class="col-md-4 col-form-label text-md-right">{{ __('Vendor ID') }}</label>
+                                <div class="col-md-6">
+                                    <select id="vendor_id" name="vendor_id" class="form-control">
+                                        <!-- Populate this select input with vendor options from your database -->
+                                        @foreach($vendors as $vendor)
+                                            <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('vendor_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="deadline" class="col-md-4 col-form-label text-md-right">{{ __('Deadline') }}</label>
+                                <div class="col-md-6">
+                                    <input id="deadline" type="date" class="form-control @error('deadline') is-invalid @enderror" name="deadline" value="{{ old('deadline') }}" required>
+                                    @error('deadline')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Create Work Order') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
