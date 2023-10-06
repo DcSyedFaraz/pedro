@@ -5,6 +5,7 @@ namespace App\Http\Controllers\vendor;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyDocuments;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class CompanyProfileController extends Controller
      */
     public function index()
     {
-        $vendor = User::where('id', auth()->user()->id)->with('userdetail','files')->first();
+        $vendor = User::where('id', auth()->user()->id)->with('userdetail', 'files')->first();
         return view('vendor.profile.profile', compact('vendor'));
     }
 
@@ -96,7 +97,7 @@ class CompanyProfileController extends Controller
         );
         if ($request->hasFile('document')) {
             foreach ($request->file('document') as $file) {
-                $fileName = Str::random(15) . '.' . $file->getClientOriginalExtension();
+                $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('company_documents', $fileName, 'public');
 
                 CompanyDocuments::create([
@@ -106,7 +107,7 @@ class CompanyProfileController extends Controller
             }
 
         }
-        return redirect()->back()->with('success', 'Files uploaded and deatiles saved successfully.');
+        return redirect()->back()->with('success', 'Files uploaded and detailes saved successfully.');
 
     }
 
@@ -119,7 +120,26 @@ class CompanyProfileController extends Controller
     public function destroy($id)
     {
         $file = CompanyDocuments::findOrFail($id);
-        $file->delete();
-        return redirect()->back()->with('error', 'File Deleted successfully.');
+
+        // Get the file path
+        $filePath = 'public/' . $file->filename;
+        // dd($filePath);
+        try {
+            // Delete the file from the server
+            if (Storage::disk('local')->exists($filePath)) {
+                // dd('done');
+                Storage::disk('local')->delete($filePath);
+            }
+
+            // Delete the record from the database
+            $file->delete();
+
+            return redirect()->back()->with('success', 'File Deleted successfully.');
+        } catch (\Exception $e) {
+            // Handle any exceptions that occur during deletion
+            return redirect()->back()->with('error', 'Error deleting the file: ' . $e->getMessage());
+        }
     }
+
+
 }

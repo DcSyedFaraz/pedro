@@ -283,8 +283,6 @@
 <!-- AdminLTE App -->
 <script src="{{asset('/admin/dist/js/adminlte.js')}}"></script>
 
-<!-- geo Location -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDqnUWO38RJMjRlwsY1imxqB1WI8ZWsU3M"></script>
 
 <!-- Toastr -->
 <script src="{{asset('/admin/plugins/toastr/toastr.min.js')}}"></script>
@@ -364,26 +362,7 @@
 
 
 
-var searchInput = 'search_input';
 
-$(document).ready(function () {
-  // alert('saad');
-    var autocomplete;
-    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
-        types: ['geocode'],
-        componentRestrictions: {
-          country: "PK"
-        }
-    });
-
-    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-        var near_place = autocomplete.getPlace();
-        // alert(near_place.geometry);
-        debugger
-        document.getElementById('loc_lat').value = near_place.geometry.location.lat();
-        document.getElementById('loc_long').value = near_place.geometry.location.lng();
-	  });
-});
 
 
 </script>

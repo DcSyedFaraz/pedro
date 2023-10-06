@@ -100,9 +100,10 @@
                                         @foreach ($vendor->files as $file)
                                             <div class="col-md-4">
                                                 <div class="card mb-4">
-                                                    <img src="{{ asset('storage/' .$file->filename) }}" class="card-img-top"
-                                                        alt="{{ $file->filename }}">
+                                                    {{-- <img src="{{ asset('storage/' .$file->filename) }}" class="card-img-top"
+                                                        > --}}
                                                     <div class="card-body">
+                                                        <a href="{{ asset('storage/' .$file->filename) }}" target="blank">{{ basename($file->filename) }}</a>
                                                         {{-- <p class="card-text">{{ $file->filename }}</p> --}}
                                                         <form action="{{ route('company_profile.destroy', $file->id) }}" method="POST">
                                                             @csrf
