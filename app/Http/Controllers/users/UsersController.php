@@ -15,7 +15,10 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $WorkOrders = WorkOrders::where('user_id',Auth::user()->id)->get();
+        $userId = auth()->user()->id;
+        $WorkOrders = WorkOrders::whereHas('jobname', function ($query) use ($userId) {
+            $query->where('customer_id', $userId);
+        })->get();
         $vendors = User::withRole('vendor')->get();
 
         return view('users.work_orders.index', compact('WorkOrders','vendors'));

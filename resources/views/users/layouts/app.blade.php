@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{asset('/admin/plugins/summernote/summernote-bs4.min.css')}}">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{asset('/admin/plugins/toastr/toastr.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -227,6 +228,20 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="{{ route('estimate_request.index') }}"
+                class="nav-link {{ request()->routeIs('estimate_request.index') ? 'active' : '' }} {{ request()->routeIs('estimate_request.show') ? 'active' : '' }} {{ request()->routeIs('estimate_request.create') ? 'active' : '' }} {{ request()->routeIs('estimate_request.edit') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Estimate Request</p>
+            </a>
+        </li>
+          <li class="nav-item">
+            <a href="{{ route('supply.index') }}"
+                class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Supply Request</p>
+            </a>
+        </li>
+          <li class="nav-item">
                 <a href="{{url('/logout')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Logout</p>
@@ -289,6 +304,9 @@
 <script>
 @if(session('success'))
   toastr.success("{{session('success')}}");
+@endif
+@if(session('info'))
+  toastr.info("{{session('info')}}");
 @endif
 @if(session('error'))
   toastr.error("{{session('error')}}")

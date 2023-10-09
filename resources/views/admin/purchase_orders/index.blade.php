@@ -57,7 +57,7 @@
                             <a href="{{ route('purchase-orders.edit', $purchaseOrder->id) }}" class="btn btn-primary">Edit</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Purchase Order?')">Delete</button>
                         </form>
                     </td>
                 </tr>

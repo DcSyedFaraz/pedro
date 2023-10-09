@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('/admin/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
 
 </head>
 
@@ -156,6 +157,13 @@
                                 <p>Vendor Work Order</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('supply.index') }}"
+                                class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Supply Request</p>
+                            </a>
+                        </li>
                         <!--Start Accounting Modules -->
                         <li
                             class="nav-item
@@ -220,13 +228,13 @@
                                         <p>Company Profile</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('company_profile.index') }}"
                                         class="nav-link {{ request()->routeIs('invoice.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Profile</p>
                                     </a>
-                                </li>
+                                </li> --}}
 
                             </ul>
                         </li>

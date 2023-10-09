@@ -721,6 +721,20 @@
                             </ul>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('estimate_requests.index') }}"
+                                class="nav-link {{ request()->routeIs('estimate_requests.index') ? 'active' : '' }} {{ request()->routeIs('estimate_requests.show') ? 'active' : '' }} {{ request()->routeIs('estimate_requests.create') ? 'active' : '' }} {{ request()->routeIs('estimate_requests.edit') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Estimate Request</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('supply.index') }}"
+                                class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Supply Request</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Logout</p>
@@ -790,6 +804,9 @@
         @if (session('error'))
             toastr.error("{{ session('error') }}")
         @endif
+        @if (session('info'))
+            toastr.info("{{ session('info') }}")
+        @endif
         @if ($errors->any())
             @foreach ($errors->all() as $error)
                 toastr.error("{{ $error }}")
@@ -856,7 +873,7 @@
             });
         });
 
-       
+
     </script>
 
 

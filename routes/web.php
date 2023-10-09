@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminEstimateRequestController;
 use App\Http\Controllers\Admin\MoodReportController;
 use App\Http\Controllers\Admin\ProblemReportingController;
 use App\Http\Controllers\Manager\LocationController;
 use App\Http\Controllers\Manager\ResponceController;
+use App\Http\Controllers\SupplyController;
+use App\Http\Controllers\users\EstimateRequestController;
 use App\Http\Controllers\vendor\CompanyProfileController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
@@ -79,6 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('checklists', InspectionController::class);
     Route::resource('location', LocationController::class);
     Route::resource('invoice', InvoiceController::class);
+    Route::resource('supply', SupplyController::class);
 });
 
 
@@ -139,6 +143,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
     //Task
     Route::resource('task', TaskController::class);
+    //Estimate Request
+    Route::resource('estimate_requests', AdminEstimateRequestController::class);
 
     Route::resource('job-category', JobCategoryController::class);
     Route::resource('job-sub-category', JobSubCategoryController::class);
@@ -190,6 +196,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 
     //Estimate
     Route::resource('estimate', userEstimateController::class);
+
+    //Estimate Request
+    Route::resource('estimate_request', EstimateRequestController::class);
 
     //invoice
     Route::resource('invoices', userInvoiceController::class);
