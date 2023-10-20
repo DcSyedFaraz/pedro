@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\InspectionChecklist;
 use App\Models\InspectionResponse;
 use App\Models\Job;
+use App\Models\Notes;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ResponceController extends Controller
 {
@@ -17,15 +20,14 @@ class ResponceController extends Controller
      */
     public function index()
     {
-        $locations = Job::get();
         $checklists = InspectionChecklist::get();
-        $show = Job::with('inspectionChecklists','inspectionResponse')->get();
-        foreach ($show as $new) {
-            $news = $new->inspectionChecklists;
-        }
+        $show = Job::with('inspectionChecklists','inspectionResponse')->whereHas('workOrder', function ($query){
+            $query->where('vendor_id', auth()->user()->id)->where('status','accepted');
+        })->get();
+
 // dd($show);
         // $location->inspectionChecklists()->sync($request->checklists);
-        return view('manager.responce.index', compact('locations', 'checklists', 'show', 'news'));
+        return view('manager.responce.index', compact('checklists', 'show'));
     }
 
     /**
@@ -46,28 +48,52 @@ class ResponceController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
 
+        try {
+            DB::beginTransaction();
 
-        foreach ($request['rating'] as $key => $value) {
-            // Define the criteria for finding the record
-            $criteria = [
-                'location_id' => $request['location_id'],
-                'checklist_id' => $request['checklist_id'][$key],
-                'checklist_item_id' => $request['checklist_item_id'][$key],
-            ];
+            foreach ($request['rating'] as $key => $value) {
+                $criteria = [
+                    'location_id' => $request['location_id'],
+                    'checklist_id' => $request['checklist_id'][$key],
+                    'checklist_item_id' => $request['checklist_item_id'][$key],
+                ];
 
-            // Data to update or create
-            $data = [
-                'rating' => $value, // Assuming the field is named 'rating'
-                'remarks' => $request['remarks'][$key],
-            ];
+                $data = [
+                    'rating' => $value,
+                    'remarks' => $request['remarks'][$key],
+                ];
 
-            // Use updateOrCreate to either update an existing record or create a new one
-            InspectionResponse::updateOrCreate($criteria, $data);
+                $some = InspectionResponse::updateOrCreate($criteria, $data);
+            }
+
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('inspection', $fileName, 'public');
+            }
+
+            $job_id = $request['location_id'];
+            $notes = ['notes' => $request['notes']];
+
+            if (isset($path)) {
+                $notes['file'] = $path;
+            }
+
+            Notes::updateOrcreate(
+                ['job_id' => $job_id],
+                $notes
+            );
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Responses submitted successfully');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+            return redirect()->back()->with('error', 'An error occurred. Please try again.{{$e->getMessage()}}');
         }
 
-        return redirect()->back()->with('success', 'Responses submitted successfully');
     }
 
 
@@ -79,8 +105,13 @@ class ResponceController extends Controller
      */
     public function show($id)
     {
-        $response = InspectionResponse::with('checklistItem','checklistItem.inspectionChecklist')->where('location_id',$id)->get();
-        return view('manager.responce.show', compact('response'));
+        $response = InspectionResponse::selectRaw('MAX(id) as id, checklist_id, MAX(rating) as rating, MAX(remarks) as remarks')->with('checklistItem', 'checklistItem.inspectionChecklist')
+    ->where('location_id', $id)
+    ->groupBy('checklist_id')
+    ->get();
+    $new = InspectionResponse::where('location_id', $id)->first();
+// dd($response);
+        return view('manager.responce.show', compact('response','new'));
     }
 
     /**

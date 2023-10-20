@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('vendor.layouts.app')
 
 
 @section('content')
@@ -39,10 +39,6 @@
                         <tr>
                           <th>Job</th>
                           <td>{{ $problemReport->job }}</td>
-                        </tr>
-                        <tr>
-                          <th>Created By</th>
-                          <td>{{ $problemReport->usname->name }}</td>
                         </tr>
                         <tr>
                           <th>Location</th>
@@ -87,9 +83,9 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <a href="{{ route('problem.index') }}" class="btn btn-primary">Back to List</a>
-                    <a href="{{ route('problem.edit', $problemReport->id) }}" class="btn btn-info">Edit</a>
-                    <form action="{{ route('problem.destroy', $problemReport->id) }}" method="post" style="display:inline">
+                    <a href="{{ route('userproblem.index') }}" class="btn btn-primary">Back to List</a>
+                    <a href="{{ route('userproblem.edit', $problemReport->id) }}" class="btn btn-info">Edit</a>
+                    <form action="{{ route('userproblem.destroy', $problemReport->id) }}" method="post" style="display:inline">
                       @method('DELETE')
                       @csrf
                       <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Report?')">Delete</button>

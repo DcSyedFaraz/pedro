@@ -51,7 +51,7 @@
                                                         <a class="nav-link active" data-toggle="tab"
                                                             href="#single-invoice">Single Invoice</a>
                                                     </li>
-                                                   
+
                                                     <li class="nav-item">
                                                         <a class="nav-link" data-toggle="tab" href="#no-change">Not Billable</a>
                                                     </li>
@@ -88,8 +88,8 @@
                                                         </div>
                                                         <br />
                                                         <div class="row w-25 d-flex flex-column">
-
-                                                            <div class="col-md-12">
+                                                            <input type="hidden" name="job_id" value="{{$job[0]}}">
+                                                            {{-- <div class="col-md-12">
                                                                 <strong>Job</strong>
                                                             </div>
                                                             <div class="col-md-12">
@@ -109,7 +109,7 @@
                                                                     <span class="error-message error-messages"
                                                                         id="customer_id_error"></span><br>
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                             <!-- <div class="col-md-4">
                                                                         <div class="form-group">
                                                                             <button class="form-control"><i class="fas fa-link"></i> Link to parent</button>

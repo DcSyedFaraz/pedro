@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Feedback;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class userJobController extends Controller
 {
@@ -74,9 +77,30 @@ class userJobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $job = Job::find($id);
-        $job->update($request->all());
-        return redirect()->back()->with('success', 'Status Changed Successfully');
+        DB::beginTransaction(); 
+
+        try {
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('feedback', $fileName, 'public');
+            }
+
+            Feedback::create([
+                'job_id' => $id,
+                'rating' => $request->rating,
+                'comment' => $request->comment,
+                'file' => $path ?? null, // Set to null if no file is uploaded
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Thanks For Your Feedback');
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return redirect()->back()->with('error', 'An error occurred while saving your feedback.');
+        }
     }
 
     /**

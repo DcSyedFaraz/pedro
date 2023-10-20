@@ -41,6 +41,7 @@ class ProblemReportingController extends Controller
      */
     public function store(Request $request)
     {
+        $request['createdBy'] = auth()->user()->id;
         ProblemReporting::create($request->all());
         return redirect()->route('problem.index')->with('success', 'New Report Created Successfully');
     }

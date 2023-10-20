@@ -16,7 +16,7 @@
                             </tr>
                             <tr>
                                 <th>Account Manager</th>
-                                <td>{{ $job->manager->name }}</td>
+                                <td>{{ $job->manager->name ?? '' }}</td>
                             </tr>
                             <tr>
                                 <th>Location Name</th>
@@ -62,11 +62,11 @@
                             </tr>
                             <tr>
                                 <th>Job Source</th>
-                                <td>{{ $job->job_source_name->name }}</td>
+                                <td>{{ $job->job_source->name ?? '' }}</td>
                             </tr>
                             <tr>
                                 <th>Agent</th>
-                                <td>{{ $job->agentname->name }}</td>
+                                <td>{{ $job->agentname->name ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>First Name (Primary Contact)</th>
@@ -94,16 +94,16 @@
                             </tr>
                             <tr>
                                 <th>Start Time</th>
-                                <td>{{ $job->start_time }}</td>
+                                <td>{{ $job->start_duration }}</td>
                             </tr>
                             <tr>
                                 <th>End Time</th>
-                                <td>{{ $job->end_time }}</td>
+                                <td>{{ $job->end_duration }}</td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <th>Job Priority</th>
-                                <td>{{ $job->job_prioirty->name }}</td>
-                            </tr>
+                                <td>{{ $job->job_prioirty->name ?? ''}}</td>
+                            </tr> --}}
                             <tr>
                                 <th>Assigned Technician</th>
                                 <td>{{ $job->assigned_tech }}</td>

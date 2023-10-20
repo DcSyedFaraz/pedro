@@ -19,4 +19,8 @@ public function inspectionResponses()
 {
     return $this->hasMany(InspectionResponse::class);
 }
+public function inspectionResponses1()
+{
+    return $this->hasOne(InspectionResponse::class,'checklist_item_id','id');
+}
 }

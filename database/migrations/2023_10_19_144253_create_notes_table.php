@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inspection_responses', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->integer('location_id');
-            $table->integer('checklist_id');
-            $table->integer('checklist_item_id');
-            $table->string('rating');
-            $table->text('remarks')->nullable();
+            $table->integer('job_id');
+            $table->string('notes');
+            $table->string('file');
             $table->timestamps();
-
-
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inspection_responses_table');
+        Schema::dropIfExists('notes');
     }
 };

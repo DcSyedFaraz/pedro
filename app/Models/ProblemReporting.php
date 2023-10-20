@@ -13,4 +13,7 @@ class ProblemReporting extends Model
     public function jobname(){
         return $this->belongsTo(Job::class,'job', 'id');
     }
+    public function usname(){
+        return $this->belongsTo(User::class,'createdBy', 'id');
+    }
 }

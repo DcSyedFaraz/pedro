@@ -127,7 +127,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('checklists.create') }}"
                                         class="nav-link {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
@@ -140,7 +140,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Location</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('responce.index') }}"
                                         class="nav-link {{ request()->routeIs('responce.index') ? 'active' : '' }} {{ request()->routeIs('responce.show') ? 'active' : '' }}">
@@ -184,13 +184,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('invoice.create') }}"
-                                        class="nav-link {{ request()->routeIs('invoice.create') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create invoice</p>
-                                    </a>
-                                </li>
+
                                 <li class="nav-item">
                                     <a href="{{ route('invoice.index') }}"
                                         class="nav-link {{ request()->routeIs('invoice.index') ? 'active' : '' }}">
@@ -228,13 +222,41 @@
                                         <p>Company Profile</p>
                                     </a>
                                 </li>
-                                {{-- <li class="nav-item">
-                                    <a href="{{ route('company_profile.index') }}"
-                                        class="nav-link {{ request()->routeIs('invoice.index') ? 'active' : '' }}">
+
+
+                            </ul>
+                        </li>
+                        <!--Start Problem Modules -->
+                        <li
+                            class="nav-item
+                            {{ request()->routeIs('userproblem.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('userproblem.edit') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('userproblem.show') ? 'menu-open' : '' }}
+
+                            ">
+                                <a href="#"
+                                class="nav-link nav-dropdown-toggle
+                                {{ request()->routeIs('userproblem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('userproblem.edit') ? 'active' : '' }}
+                                {{ request()->routeIs('userproblem.show') ? 'active' : '' }}
+
+                                ">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Problem Reporting
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('userproblem.index') }}"
+                                        class="nav-link {{ request()->routeIs('userproblem.index') || request()->routeIs('userproblem.edit')|| request()->routeIs('userproblem.show') ? 'active' : '' }}
+                                        ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Profile</p>
+                                        <p>Reports</p>
                                     </a>
-                                </li> --}}
+                                </li>
+
 
                             </ul>
                         </li>

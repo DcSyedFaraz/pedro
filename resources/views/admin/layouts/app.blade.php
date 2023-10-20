@@ -333,6 +333,7 @@
                       {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
                       {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}
                       {{ request()->routeIs('moodreport.index') ? 'menu-open' : '' }}
+                      {{ request()->routeIs('managers.index') ? 'menu-open' : '' }}
                       ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
@@ -343,6 +344,7 @@
                           {{ request()->routeIs('adminresponse') ? 'active' : '' }}
                           {{ request()->routeIs('checklists.create') ? 'active' : '' }}
                           {{ request()->routeIs('moodreport.index') ? 'active' : '' }}
+                          {{ request()->routeIs('managers.index') ? 'active' : '' }}
                           ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
@@ -391,6 +393,7 @@
                           {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
                           {{ request()->routeIs('location') ? 'menu-open' : '' }}
                           {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('managers.index') ? 'menu-open' : '' }}
                           ">
                                     <a href="#"
                                         class="nav-link nav-dropdown-toggle
@@ -399,6 +402,7 @@
                                 {{ request()->routeIs('finalized') ? 'active' : '' }}
                                 {{ request()->routeIs('location') ? 'active' : '' }}
                                 {{ request()->routeIs('adminresponse') ? 'active' : '' }}
+                                {{ request()->routeIs('managers.index') ? 'active' : '' }}
                                 ">
                                         <i class="nav-icon fas fa-table"></i>
                                         <p>
@@ -428,7 +432,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="{{route('managers.index')}}" class="nav-link {{ request()->routeIs('managers.index') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Account Manager</p>
                                             </a>
@@ -500,13 +504,13 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('invoice.create') }}"
                                         class="nav-link {{ request()->routeIs('invoice.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create invoice</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('invoice.index') }}"
                                         class="nav-link {{ request()->routeIs('invoice.index') ? 'active' : '' }}">
@@ -647,7 +651,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Account Managers</p>
                                     </a>

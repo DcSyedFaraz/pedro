@@ -28,8 +28,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                  <h3 class="card-title">User Managment</h3>
-                </div> -->
+                              <h3 class="card-title">User Managment</h3>
+                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success" href="{{ route('customer.create') }}"> New Customer </a>
@@ -55,7 +55,11 @@
                                                     <td>{{ $customer->customer_name }}</td>
                                                     <td>{{ $customer->acnum ?? '' }}</td>
                                                     <td>
-                                                        <label class="badge badge-success">customer</label>
+                                                        @if (!empty($customer->usname))
+                                                            <?php $roles = $customer->usname->getRoleNames(); ?>
+                                                            <label class="badge badge-success">{{ $roles[0] }}</label>
+                                                        @endif
+                                                       
                                                     </td>
                                                     <td>
                                                         <!-- <a class="btn btn-info" href="{{ route('users.show', $customer->id) }}">Show</a> -->

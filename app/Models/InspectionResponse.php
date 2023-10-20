@@ -23,4 +23,8 @@ public function checklist()
 {
     return $this->belongsTo(InspectionChecklist::class);
 }
+public function notess()
+    {
+        return $this->hasOne(Notes::class,'job_id','location_id');
+    }
 }

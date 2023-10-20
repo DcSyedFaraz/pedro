@@ -41,4 +41,12 @@ class Estimate extends Model
     {
         return $this->hasMany(EstimatePrimaryContact::class);
     }
+    public function manager()
+    {
+        return $this->hasOne(User::class, 'id', 'account_manager_id');
+    }
+    public function agentname()
+    {
+        return $this->hasOne(User::class, 'id', 'agent');
+    }
 }

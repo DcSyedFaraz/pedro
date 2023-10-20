@@ -24,12 +24,18 @@ class UserController extends Controller
         return view('admin.users.index', compact('data'))
            ;
     }
+    public function manager(Request $request)
+    {
+        $data = User::withRole('account manager')->get();
+        return view('admin.users.account', compact('data'))
+           ;
+    }
 
     //Customer
     public function customer(Request $request)
     {
         $user = User::whereHas('roles', function ($query) {
-            $query->where('name', 'customer');
+            $query->where('name', 'Admin');
         })
             ->orderBy('id', 'DESC')
             ->paginate(5);
@@ -42,8 +48,7 @@ class UserController extends Controller
     //Customer Create
     public function customer_create(Request $request)
     {
-        $roles = Role::select(['id', 'name'])->where('name', 'user')->get();
-        return view('admin.customer.create', compact('roles'));
+        return view('admin.customer.create');
     }
 
     //Customer Store

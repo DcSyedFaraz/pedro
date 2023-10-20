@@ -8,6 +8,7 @@ use App\Http\Controllers\Manager\ResponceController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\users\EstimateRequestController;
 use App\Http\Controllers\vendor\CompanyProfileController;
+use App\Http\Controllers\vendor\VendorProblemController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
@@ -82,7 +83,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('checklists', InspectionController::class);
     Route::resource('location', LocationController::class);
     Route::resource('invoice', InvoiceController::class);
+    Route::get('/invoice/create/{id}', [InvoiceController::class, 'create'])->name('invoice.create');
     Route::resource('supply', SupplyController::class);
+    Route::resource('userproblem', VendorProblemController::class);
+    //Responce
+    Route::resource('responce', ResponceController::class);
 });
 
 
@@ -100,6 +105,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::resource('permission', PermissionController::class);
     Route::resource('users', UserController::class);
 
+    Route::get('/manager', [UserController::class, 'manager'])->name('managers.index');
     Route::get('/customer', [UserController::class, 'customer'])->name('customer.index');
     Route::get('/customer/create', [UserController::class, 'customer_create'])->name('customer.create');
     Route::post('/customer/store', [UserController::class, 'customer_store'])->name('customer.store');
@@ -117,7 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/document', [DashboardController::class, 'document'])->name('document');
     Route::get('/signature', [DashboardController::class, 'signature'])->name('signature');
     Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
-    Route::resource('general_setting', GeneralSettingController::class);
+    Route::resource('general_setting',GeneralSettingController::class);
     // Routes for work
     // Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('.index');
     Route::resource('work_orders', adminWorkOrderController::class);
@@ -196,6 +202,8 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 
     //Estimate
     Route::resource('estimate', userEstimateController::class);
+    Route::get('/estimate/accept/{id}', [userEstimateController::class, 'accept'])->name('users.accept');
+    Route::get('/estimate/decline/{id}', [userEstimateController::class, 'decline'])->name('users.decline');
 
     //Estimate Request
     Route::resource('estimate_request', EstimateRequestController::class);
@@ -249,7 +257,6 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account manager']], function () {
 
 
-    //Responce
-    Route::resource('responce', ResponceController::class);
+
 
 });

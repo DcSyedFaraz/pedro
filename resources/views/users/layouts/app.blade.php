@@ -302,43 +302,28 @@
 <!-- Toastr -->
 <script src="{{asset('/admin/plugins/toastr/toastr.min.js')}}"></script>
 <script>
-@if(session('success'))
-  toastr.success("{{session('success')}}");
-@endif
-@if(session('info'))
-  toastr.info("{{session('info')}}");
-@endif
-@if(session('error'))
-  toastr.error("{{session('error')}}")
-@endif
-@if($errors->any())
-    @foreach ($errors->all() as $error)
-    toastr.error("{{$error}}")
-    @endforeach
-@endif
+    @if (session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+    @if (session('error'))
+        toastr.error("{{ session('error') }}")
+    @endif
+    @if (session('info'))
+        toastr.info("{{ session('info') }}")
+    @endif
+    @if (session('warning'))
+        toastr.warning("{{ session('warning') }}")
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}")
+        @endforeach
+    @endif
 </script>
 
 <!-- Change password -->
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $('.validatedForm').validate({
-        rules : {
-            password : {
-                minlength : 8
-            },
-            password_confirmation : {
-                minlength : 8,
-                equalTo : "#password"
-            }
-        }
 
-
-
-});
-   $('button').click(function(){
-    $('.validatedForm').valid();
-});
-</script>
 
 
 <!-- DataTables  & Plugins -->

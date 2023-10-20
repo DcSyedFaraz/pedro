@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('vendor.layouts.app')
 
 @section('content')
 <div class="content-wrapper">
@@ -28,7 +28,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a class="btn btn-success" href="{{ route('problem.create') }}"> New Report </a>
+                            <a class="btn btn-success" href="{{ route('userproblem.create') }}"> New Report </a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -38,7 +38,6 @@
                                         <th>ID</th>
                                         <th>Job Name</th>
                                         <th>Location</th>
-                                        <th>Created By</th>
                                         <th>Type</th>
                                         <th>Action</th>
                                     </tr>
@@ -48,10 +47,9 @@
 
                                     @foreach ($problemReports as $report)
                                     <tr>
-                                        <td>{{ $report->id ?? ''}}</td>
-                                        <td>{{ $report->jobname->name ?? ''}}</td>
-                                        <td>{{ $report->location ?? ''}}</td>
-                                        <td>{{ $report->usname->name ?? '' }}</td>
+                                        <td>{{ $report->id }}</td>
+                                        <td>{{ $report->jobname->name }}</td>
+                                        <td>{{ $report->location }}</td>
                                         <td>
                                             @if ($report->type_of_problem === 'critical')
                                                 <span class="badge badge-danger">Critical</span>
@@ -64,9 +62,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('problem.show', $report->id) }}" class="btn btn-info">View</a>
-                                            <a href="{{ route('problem.edit', $report->id) }}" class="btn btn-primary">Edit</a>
-                                            {{-- Add delete button or other actions here --}}
+                                            <a href="{{ route('userproblem.show', $report->id) }}" class="btn btn-info">View</a>
+                                            <a href="{{ route('userproblem.edit', $report->id) }}" class="btn btn-primary">Edit</a>
                                         </td>
                                     </tr>
                                     @endforeach

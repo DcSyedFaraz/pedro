@@ -152,7 +152,7 @@ class EstimateController extends Controller
     public function edit(Estimate $estimate)
     {
         // dd($estimate->prim_cont);
-        $customer = User::withRole('customer')->get();
+        $customer = User::withRole('User')->get();
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();

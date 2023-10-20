@@ -1,4 +1,5 @@
-@extends('manager.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app': 'default.app'))))
+
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -28,8 +29,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                                          <h3 class="card-title">User Managment</h3>
-                                                        </div> -->
+                                                              <h3 class="card-title">User Managment</h3>
+                                                            </div> -->
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
@@ -78,17 +79,17 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <!-- Given Response Form -->
-                                                                            <form action="{{ route('responce.store') }}"
+                                                                            <form action="{{ route('responce.store') }}" enctype="multipart/form-data"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 <input type="hidden" name="location_id"
                                                                                     value="{{ $shows->id }}">
 
                                                                                 @foreach ($shows->inspectionResponse as $item)
-                                                                                <input type="hidden"
-                                                                                name="checklist_id[]"
-                                                                                value="{{ $item->checklist_id }}"
-                                                                                id="">
+                                                                                    <input type="hidden"
+                                                                                        name="checklist_id[]"
+                                                                                        value="{{ $item->checklist_id }}"
+                                                                                        id="">
                                                                                     <input type="hidden"
                                                                                         name="checklist_item_id[]"
                                                                                         value="{{ $item->checklist_item_id }}">
@@ -96,7 +97,7 @@
                                                                                     <div class="mb-3">
                                                                                         <label
                                                                                             for="rating_{{ $item->id }}"
-                                                                                            class="form-label">{{ $item->checklistItem->description }}</label>
+                                                                                            class="form-label">{{ $item->checklistItem->description ?? '' }}</label>
                                                                                         <select name="rating[]"
                                                                                             id="rating_{{ $item->id }}"
                                                                                             class="form-select">
@@ -121,7 +122,33 @@
                                                                                         <textarea class="form-control" name="remarks[]" id="remarks_{{ $item->id }}">{{ isset($item->remarks) ? old('remarks', $item->remarks) : '' }}</textarea>
                                                                                     </div>
                                                                                 @endforeach
+                                                                                <div class="mb-3">
+                                                                                    <label for="remarks"
+                                                                                        class="form-label">Notes:</label>
+                                                                                    <textarea class="form-control" name="notes" id="remarks">{{ isset($item->notess->notes) ? old('notes', $item->notess->notes) : '' }}</textarea>
+                                                                                    <div class="form-group">
+                                                                                        <label for="exampleInputFile">File
+                                                                                        </label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file" accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
+                                                                                                    class="custom-file-input"
+                                                                                                    id="exampleInputFile"
+                                                                                                    name="file">
+                                                                                                <p class="custom-file-label"
+                                                                                                    id="selectedFileName"
+                                                                                                    for="exampleInputFile">
+                                                                                                    Choose
+                                                                                                    file</p>
+                                                                                            </div>
 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    @if (isset($item->notess->file))
+
+                                                                                    <img src="{{asset('storage/'.$item->notess->file)}}" alt="" srcset="" class="img-thumbnail">
+                                                                                    @endif
+                                                                                </div>
                                                                                 <button type="submit"
                                                                                     class="btn btn-success">Update
                                                                                     Inspection</button>
@@ -156,7 +183,7 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <!-- Inspection Response Form -->
-                                                                            <form action="{{ route('responce.store') }}"
+                                                                            <form action="{{ route('responce.store') }}" enctype="multipart/form-data"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 <input type="hidden" name="location_id"
@@ -178,7 +205,7 @@
                                                                                                     name="checklist_id[]"
                                                                                                     value="{{ $checklist->id }}"
                                                                                                     id="">
-                                                                                                    <br>
+                                                                                                <br>
                                                                                                 <label
                                                                                                     for="rating_{{ $item->id }}">Rating:</label>
                                                                                                 <select name="rating[]"
@@ -197,10 +224,33 @@
                                                                                                 <textarea class="form-control" name="remarks[]" id="remarks_{{ $item->id }}"></textarea>
                                                                                             </li>
                                                                                         @endforeach
+
                                                                                     </ul>
                                                                                 @endforeach
 
+                                                                                <div class="mb-3">
+                                                                                    <label for="remarks"
+                                                                                        class="form-label">Notes:</label>
+                                                                                    <textarea class="form-control" name="notes" id="remarks"></textarea>
+                                                                                    <div class="form-group">
+                                                                                        <label for="exampleInputFile">File
+                                                                                        </label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file"
+                                                                                                    class="custom-file-input" accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
+                                                                                                    id="exampleInputFile"
+                                                                                                    name="file">
+                                                                                                <p class="custom-file-label"
+                                                                                                    id="selectedFileName"
+                                                                                                    for="exampleInputFile">
+                                                                                                    Choose
+                                                                                                    file</p>
+                                                                                            </div>
 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
 
                                                                                 <button type="submit"
                                                                                     class="btn btn-success">Submit
@@ -239,5 +289,17 @@
     </div>
 
 
-    
+    <script>
+        const fileInput = document.getElementById('exampleInputFile');
+
+        const selectedFileName = document.getElementById('selectedFileName');
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files && fileInput.files[0]) {
+                selectedFileName.textContent = fileInput.files[0].name;
+            } else {
+                selectedFileName.textContent = 'No file selected';
+            }
+        });
+    </script>
 @endsection

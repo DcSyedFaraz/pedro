@@ -49,7 +49,7 @@ class InvoiceController extends Controller
         }
     }
 
-    public function create()
+    public function create($id)
     {
         $user = auth()->user();
         if ($user->hasRole('Admin')) {
@@ -57,11 +57,12 @@ class InvoiceController extends Controller
             $job = Job::get();
         } else {
 
-            $job = Job::whereHas('workOrder', function ($query) {
+            $job = Job::whereHas('workOrder', function ($query) use ($id) {
                 $query->where('vendor_id', auth()->user()->id)
-                    ->where('status', 'accepted');
-                    })->get();
+                      ->where('id', $id);
+            })->pluck('id');
 
+// dd($job[0]);
         }
         return view('invoice.create', compact('job'));
     }

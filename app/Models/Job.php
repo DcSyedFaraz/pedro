@@ -62,6 +62,10 @@ class Job extends Model
     {
         return $this->hasOne(Estimate::class, 'id', 'estimate_id');
     }
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class);
+    }
     public function inspectionChecklists()
     {
         return $this->belongsToMany(InspectionChecklist::class, 'location_inspection_checklist');

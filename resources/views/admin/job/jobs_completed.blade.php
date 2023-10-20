@@ -63,9 +63,40 @@
                           </br> Estimated Duration: <strong>Start Duration:{{ $jobs->start_duration }} End Duration: {{ $jobs->end_duration }} </strong>
                         </td>
                         <td class="text-success"><strong>Completed</strong></td>
-                        <td ><a class="btn btn-primary"
+                        <td class="d-flex">
+                            @if (optional($jobs->feedback)->count() > 0)
+                             <button type="button" class="btn btn-success mx-2 btn-sm" data-toggle="modal"
+                                 data-target="#exampleModal{{ $jobs->id }}">
+                                 Feedback
+                             </button>
+                             @endif
+                            <a class="btn btn-primary"
                             href="{{ route('job.edit', $jobs->id) }}">Edit</a></td>
                       </tr>
+                      @if (optional($jobs->feedback)->count() > 0)
+                      <div class="modal fade" id="exampleModal{{ $jobs->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Submitted Feedback</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Display the submitted data here -->
+                                    <p>Rating: {{ $jobs->feedback->rating }}/5</p>
+                                    <p>Comments: {{ $jobs->feedback->comment }}</p>
+                                    <a href="{{asset('storage/' . $jobs->feedback->file)}}">File: {{ basename($jobs->feedback->file) }}</a>
+                                    <!-- Add more fields as needed -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                   @endforeach
                   @endif
                 </tbody>
