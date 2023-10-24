@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -23,7 +24,7 @@
                     {{ $job_priority->name }}
                 </div>
             </div>
-            
+
         </div>
     </section>
 </div>

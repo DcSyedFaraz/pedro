@@ -1,4 +1,5 @@
-@extends('admin.layouts.app') {{-- You can customize the layout as needed --}}
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+ {{-- You can customize the layout as needed --}}
 
 @section('content')
 <div class="content-wrapper">

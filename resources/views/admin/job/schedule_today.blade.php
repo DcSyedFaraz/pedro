@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -64,7 +65,7 @@
                   </td>
                   <td><stronge>{{ isset($jobs) ? $jobs->parsedStatus : '' }} </stronge></td>
                   <td ><a class="btn btn-primary"
-                    href="{{ route('job.edit', $jobs->id) }}">Edit</a></td> 
+                    href="{{ route('job.edit', $jobs->id) }}">Edit</a></td>
                 </tr>
               @endforeach
                   @endif

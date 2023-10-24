@@ -5,7 +5,11 @@ namespace App\Http\Controllers\users;
 use App\Http\Controllers\Controller;
 use App\Models\Estimate;
 use App\Models\Job;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class userEstimateController extends Controller
 {
@@ -49,6 +53,50 @@ class userEstimateController extends Controller
         }
 
         return redirect()->back()->with('warning', 'Estimate Declined Successfully');
+    }
+    public function esignature(Request $request, $id)
+    {
+        $request->validate([
+            'signature' => 'required|file|mimes:png,jpg,jpeg,pdf,doc,docx',
+        ]);
+        // dd($request->all());
+        $estimate = Estimate::find($id);
+        DB::beginTransaction();
+
+        try {
+            // Handle file uploads
+            if ($request->hasFile('signature')) {
+
+                    $fileName = Str::random(15) . '.' . $request->file('signature')->getClientOriginalExtension();
+                    $path = $request->file('signature')->storeAs('uploads/image', $fileName, 'public');
+
+
+
+                        $estimate->signature = asset('storage/' . $path);
+                        $estimate->save();
+                        $user = auth()->user();
+                        $admin = User::find(1);
+                        $message = 'Uploaded E-Signature';
+                        $admin->notify(new UserNotification($user,$message));
+
+
+            }
+
+
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Signature uploaded Successfully.');
+        } catch (\Exception $e) {
+            // Rollback the transaction in case of an error
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'An error occurred while uploading signature.');
+        }
+
+
+
     }
 
     /**

@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -81,8 +82,8 @@
                     </div>
                   </form>
                   </div>
-              </div> 
-          </div>   
+              </div>
+          </div>
         </div>
     </div>
 </section>

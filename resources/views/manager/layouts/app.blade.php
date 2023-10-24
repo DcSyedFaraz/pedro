@@ -105,7 +105,386 @@
 
                             </ul>
                         </li>
+                        <!--Start Miscellaneous Modules -->
+                        <li
+                            class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('estimates.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('work_orders.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('purchase-orders.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-category.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-sub-category.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('technicians.index') ? 'menu-open' : '' }} ">
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle
+                                {{ request()->routeIs('customer.index') ? 'active' : '' }}
+                                {{ request()->routeIs('estimates.index') ? 'active' : '' }}
+                                {{ request()->routeIs('work_orders.index') ? 'active' : '' }}
+                                {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-category.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-priority.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-source.index') ? 'active' : '' }}
+                                {{ request()->routeIs('inventory.index') ? 'active' : '' }}
+
+                                {{ request()->routeIs('technicians.index') ? 'active' : '' }} ">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    My Workroom
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('customer.index') }}"
+                                        class="nav-link {{ request()->routeIs('customer.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Customer</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('technicians.index') }}"
+                                        class="nav-link {{ request()->routeIs('technicians.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Manage Technicians</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('estimates.index') }}"
+                                        class="nav-link {{ request()->routeIs('estimates.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Estimates</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('work_orders.index') }}"
+                                        class="nav-link {{ request()->routeIs('work_orders.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Work Order List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('purchase-orders.index') }}"
+                                        class="nav-link {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Purchase Order</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('inventory.index') }}"
+                                        class="nav-link {{ request()->routeIs('inventory.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Inventory</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Inpection Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-category.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-category.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-sub-category.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Sub Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-priority.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-priority.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Priority</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-source.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-source.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Source</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- Jobs  -->
+                        <li
+                            class="nav-item
+                            {{ request()->routeIs('job.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('today.job.schedule') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('today.job.next.48.hours') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job.needing.scheduling') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobs.in.progress') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobperregion.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobpermanager.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('readyinvoice.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('location.index') ? 'menu-open' : '' }}
+
+                             ">
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle
+                            {{ request()->routeIs('job.index') ? 'active' : '' }}
+                            {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}
+                            {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
+                            {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
+                            {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}
+                            {{ request()->routeIs('jobs.complete') ? 'active' : '' }}
+                            {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}
+                            {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}
+                            {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}
+                            {{ request()->routeIs('location.index') ? 'active' : '' }}
+
+                            {{ request()->routeIs('ins_category.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Jobs
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('job.index') }}"
+                                        class="nav-link {{ request()->routeIs('job.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('location.index') }}"
+                                        class="nav-link {{ request()->routeIs('location.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Assign Checklist</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('today.job.schedule') }}"
+                                        class="nav-link {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Today's Schedule</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('today.job.next.48.hours') }}"
+                                        class="nav-link {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Within 48 hours</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job.needing.scheduling') }}"
+                                        class="nav-link {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Unscheduled</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('jobs.in.progress') }}"
+                                        class="nav-link {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>In-progress</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('jobs.complete') }}"
+                                        class="nav-link {{ request()->routeIs('jobs.complete') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Completed</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('readyinvoice.index') }}"
+                                        class="nav-link {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ready to be invoiced</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('jobpermanager.index') }}"
+                                        class="nav-link {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p style="font-size: 15px;">Jobs per Account Manager</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('jobperregion.index') }}"
+                                        class="nav-link {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Jobs per region</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <!--Start Operations Modules -->
+                        <li
+                            class="nav-item
+                             {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('location') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('moodreport.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('managers.index') ? 'menu-open' : '' }}
+                             ">
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle
+                                {{ request()->routeIs('task.index') ? 'active' : '' }}
+                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('finalized') ? 'active' : '' }}
+                                {{ request()->routeIs('location') ? 'active' : '' }}
+                                {{ request()->routeIs('adminresponse') ? 'active' : '' }}
+                                {{ request()->routeIs('checklists.create') ? 'active' : '' }}
+                                {{ request()->routeIs('moodreport.index') ? 'active' : '' }}
+                                {{ request()->routeIs('managers.index') ? 'active' : '' }}
+                                ">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Operations
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li
+                                    class="nav-item {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}">
+                                    <a href="#"
+                                        class="nav-link nav-dropdown-toggle {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Inspections
+                                            <i class="fas fa-plus right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Account Manager</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Location</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('checklists.create') }}"
+                                                class="nav-link {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Inspection Sheet</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li
+                                    class="nav-item
+                          {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('location') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
+                          {{ request()->routeIs('managers.index') ? 'menu-open' : '' }}
+                          ">
+                                    <a href="#"
+                                        class="nav-link nav-dropdown-toggle
+                                {{ request()->routeIs('roles.index') ? 'active' : '' }}
+                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('finalized') ? 'active' : '' }}
+                                {{ request()->routeIs('location') ? 'active' : '' }}
+                                {{ request()->routeIs('adminresponse') ? 'active' : '' }}
+                                {{ request()->routeIs('managers.index') ? 'active' : '' }}
+                                ">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            Checklist
+                                            <i class="fas fa-plus right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('checklist.index') }}" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Overall Checklist</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('finalized') }}"
+                                                class="nav-link {{ request()->routeIs('finalized') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Finalized</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('location') }}"
+                                                class="nav-link {{ request()->routeIs('location') ? 'active' : '' }} {{ request()->routeIs('adminresponse') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>location</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('managers.index') }}"
+                                                class="nav-link {{ request()->routeIs('managers.index') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Account Manager</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Field Member</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="{{ route('problem.index') }}"
+                                        class="nav-link {{ request()->routeIs('problem.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Problem Reporting</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="{{ route('task.index') }}"
+                                        class="nav-link {{ request()->routeIs('task.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasks</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Messages</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('moodreport.index') }}"
+                                        class="nav-link {{ request()->routeIs('moodreport.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Mood reporting</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p style="font-size: 15px;">Emp-Vendor performance</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
                         <li
                             class="nav-item
                              {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}
@@ -303,7 +682,7 @@
 
 
 
-       
+
     </script>
     <script>
         Toast.fire({

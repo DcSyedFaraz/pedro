@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -59,7 +60,7 @@
                                                             <?php $roles = $customer->usname->getRoleNames(); ?>
                                                             <label class="badge badge-success">{{ $roles[0] }}</label>
                                                         @endif
-                                                       
+
                                                     </td>
                                                     <td>
                                                         <!-- <a class="btn btn-info" href="{{ route('users.show', $customer->id) }}">Show</a> -->

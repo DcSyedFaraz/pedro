@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -35,7 +36,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-header">
-                @can('permission-create')  
+                @can('permission-create')
                 <a class="btn btn-success" href="{{ route('permission.create') }}"> Create New Permission</a>
                 @endcan
                 <!-- <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a> -->
@@ -58,8 +59,8 @@
                   <tr>
                       <td>{{ $key+1 }}</td>
                       <td>{{ $permission->name }}</td>
-                      
-						
+
+
 					  <td>
 						@can('permission-edit')
                         <a class="btn btn-primary" href="{{ route('permission.edit',$permission->id) }}">Edit</a>
@@ -70,9 +71,9 @@
                           {!! Form::close() !!}
 						 @endcan
                       </td>
-						   
-                   
-                     
+
+
+
                   </tr>
                   @endforeach
                   @endif

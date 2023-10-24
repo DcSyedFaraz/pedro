@@ -120,7 +120,7 @@
            {{ request()->routeIs('responce.index') ? 'active' : '' }}
            {{ request()->routeIs('responce.show') ? 'active' : '' }}
                    ">
-                                <i class="nav-icon fas fa-table"></i>
+                                <i class="nav-icon fas fa-search text-warning"></i>
                                 <p>
                                     Inspection
                                     <i class="fas fa-angle-left right"></i>
@@ -153,14 +153,14 @@
                         <li class="nav-item">
                             <a href="{{ route('manage_work_orders.index') }}"
                                 class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} {{ request()->routeIs('vendor.doc') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-file-invoice nav-icon text-info"></i>
                                 <p>Vendor Work Order</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('supply.index') }}"
                                 class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-truck nav-icon text-danger"></i>
                                 <p>Supply Request</p>
                             </a>
                         </li>
@@ -177,7 +177,7 @@
                                 {{ request()->routeIs('invoice.create') ? 'active' : '' }}
                                 {{ request()->routeIs('invoice.index') ? 'active' : '' }}
                                 ">
-                                <i class="nav-icon fas fa-table"></i>
+                                <i class="nav-icon fas fa-money-bill text-success"></i>
                                 <p>
                                     Accounting
                                     <i class="fas fa-angle-left right"></i>
@@ -208,7 +208,7 @@
                                 {{ request()->routeIs('company_profile.create') ? 'active' : '' }}
                                 {{ request()->routeIs('company_profile.index') ? 'active' : '' }}
                                 ">
-                                <i class="nav-icon fas fa-table"></i>
+                                <i class="nav-icon fas fa-user text-primary"></i>
                                 <p>
                                     Profile
                                     <i class="fas fa-angle-left right"></i>
@@ -241,7 +241,7 @@
                                 {{ request()->routeIs('userproblem.show') ? 'active' : '' }}
 
                                 ">
-                                <i class="nav-icon fas fa-table"></i>
+                                <i class="nav-icon fas fa-exclamation-triangle text-warning"></i>
                                 <p>
                                     Problem Reporting
                                     <i class="fas fa-angle-left right"></i>
@@ -263,7 +263,7 @@
 
                         <li class="nav-item">
                             <a href="{{ url('/logout') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-circle nav-icon text-danger"></i>
                                 <p>Logout</p>
                             </a>
                         </li>

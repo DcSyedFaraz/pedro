@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -22,7 +23,7 @@
 
     <section class="content">
     <div class="container-fluid">
-  
+
         <div class="row">
           <div class="col-12">
               <div class="card">
@@ -44,8 +45,8 @@
                         <button type="submit" class="btn btn-primary">Create</button>
                     </form>
                   </div>
-              </div> 
-          </div>   
+              </div>
+          </div>
         </div>
     </div>
 </section>

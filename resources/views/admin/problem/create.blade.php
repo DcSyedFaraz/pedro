@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -39,14 +40,14 @@
                     </select>
                 </div>
 
-               
+
 
                 <div class="form-group">
                     <label for="location">Location:</label>
                     <input type="text" name="location" id="location" class="form-control">
                 </div>
 
-               
+
 
                 <div class="form-group">
                     <label for="location_supervisor">Location Supervisor:</label>

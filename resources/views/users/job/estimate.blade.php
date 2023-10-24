@@ -101,12 +101,20 @@
                                                         <a class="btn btn-primary"
                                                             href="{{ route('estimate.show', $jobs->id) }}">show</a>
                                                     </td>
-                                                    <td>
-                                                        {{-- <div>
-                                                            <canvas id="signatureCanvas" width="300" height="100"></canvas>
-                                                            <button id="clearSignature">Clear Signature</button>
-                                                            <button id="saveSignature">Save Signature</button>
-                                                        </div> --}}
+                                                    <td class="w-25">
+                                                        @if (empty($jobs->signature))
+
+                                                        <div class="d-flex">
+                                                            <form method="POST" action="{{route('esignature',$jobs->id)}}" enctype="multipart/form-data">
+                                                                @csrf
+                                                            <input type="file" class="form-control form-control-sm w-75" id="formFile" name="signature" accept=".png,.jpg,.jpeg,.pdf,.doc,.docx">
+                                                            <button class="btn btn-success btn-sm mt-2"><i
+                                                                class="fas fa-check"></i></button></form>
+                                                                {{-- <small>The signature must be a file of type: png, jpg, jpeg, pdf, doc, docx.</small> --}}
+                                                            </div>
+                                                            @else
+                                                            <p class="badge badge-info">E-Signature Uploaded</p>
+                                                            @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -128,53 +136,7 @@
         <!-- /.content -->
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<!-- Add this script at the end of your HTML body or in your JavaScript file -->
-{{-- <script>
-    const canvas = document.getElementById('signatureCanvas');
-    const context = canvas.getContext('2d');
-    const clearButton = document.getElementById('clearSignature');
-    const saveButton = document.getElementById('saveSignature');
-
-    let drawing = false;
-
-    canvas.addEventListener('mousedown', () => {
-        drawing = true;
-    });
-
-    canvas.addEventListener('mouseup', () => {
-        drawing = false;
-        context.beginPath();
-    });
-
-    canvas.addEventListener('mousemove', draw);
-
-    clearButton.addEventListener('click', clearSignature);
-    saveButton.addEventListener('click', saveSignature);
-
-    function draw(e) {
-        if (!drawing) return;
-        context.lineWidth = 2;
-        context.lineCap = 'round';
-        context.strokeStyle = 'black';
-
-        context.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
-        context.stroke();
-        context.beginPath();
-        context.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
-    }
-
-    function clearSignature() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function saveSignature() {
-        const signatureData = canvas.toDataURL('image/png');
-        // You can send this data to your server or handle it as needed.
-        console.log(signatureData);
-    }
-</script> --}}
 </html>
 
 

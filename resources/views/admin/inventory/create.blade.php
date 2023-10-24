@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -255,7 +256,7 @@
                                                                 <td>{{ $purchases->item_name }}</td>
                                                                 <td>
                                                                     <a href="{{ route('purchase-orders.show', $purchases->id) }}" class="btn btn-info">Show</a>
-                                                                   
+
                                                                 </td>
                                                             </tr>
                                                             @endforeach

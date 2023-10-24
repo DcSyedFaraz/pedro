@@ -5,7 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin | Dashboard</title>
-
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        const pusher = new Pusher('6783ea165c58d9b1b6c3', {
+            cluster: 'ap2',
+            encrypted: true
+        });
+        const channel = pusher.subscribe('post-liked');
+    </script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -36,7 +43,61 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
 
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+
+
+
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="far fa-bell"></i>
+                        <span
+                            class="badge badge-danger navbar-badge">{{ auth()->user()->unreadnotifications->count() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">{{ auth()->user()->unreadnotifications->count() }}
+                            UnRead Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        @foreach (auth()->user()->unreadnotifications as $notifications)
+                            <a href="{{ route('markasread', $notifications->id) }}" class="dropdown-item my-2">
+                                <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}@if (isset($notifications->data['message']))
+                                    {{ $notifications->data['message'] }}
+                                @endif
+
+                                <span
+                                    class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                            </a>
+
+                            <div class="dropdown-divider "></div>
+                        @endforeach
+                        <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
+                            Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
@@ -105,28 +166,28 @@
                         <!--Start Miscellaneous Modules -->
                         <li
                             class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('estimates.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('work_orders.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('purchase-orders.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('job-category.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('job-sub-category.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
-                        {{ request()->routeIs('technicians.index') ? 'menu-open' : '' }} ">
+                            {{ request()->routeIs('estimates.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('work_orders.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('purchase-orders.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-category.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-sub-category.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('technicians.index') ? 'menu-open' : '' }} ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                          {{ request()->routeIs('customer.index') ? 'active' : '' }}
-                          {{ request()->routeIs('estimates.index') ? 'active' : '' }}
-                          {{ request()->routeIs('work_orders.index') ? 'active' : '' }}
-                          {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
-                          {{ request()->routeIs('job-category.index') ? 'active' : '' }}
-                          {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}
-                          {{ request()->routeIs('job-priority.index') ? 'active' : '' }}
-                          {{ request()->routeIs('job-source.index') ? 'active' : '' }}
-                          {{ request()->routeIs('inventory.index') ? 'active' : '' }}
+                                {{ request()->routeIs('customer.index') ? 'active' : '' }}
+                                {{ request()->routeIs('estimates.index') ? 'active' : '' }}
+                                {{ request()->routeIs('work_orders.index') ? 'active' : '' }}
+                                {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-category.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-priority.index') ? 'active' : '' }}
+                                {{ request()->routeIs('job-source.index') ? 'active' : '' }}
+                                {{ request()->routeIs('inventory.index') ? 'active' : '' }}
 
-                          {{ request()->routeIs('technicians.index') ? 'active' : '' }} ">
+                                {{ request()->routeIs('technicians.index') ? 'active' : '' }} ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     My Workroom
@@ -213,35 +274,34 @@
                             </ul>
                         </li>
                         <!--End Miscellaneous Modules -->
-                        <!--Start Jobs/Scheduling Modules -->
                         <li
                             class="nav-item
-                    {{ request()->routeIs('job.index') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('today.job.schedule') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('today.job.next.48.hours') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('job.needing.scheduling') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('jobs.in.progress') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('jobperregion.index') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('jobpermanager.index') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('readyinvoice.index') ? 'menu-open' : '' }}
-                    {{ request()->routeIs('location.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('today.job.schedule') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('today.job.next.48.hours') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job.needing.scheduling') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobs.in.progress') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobperregion.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('jobpermanager.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('readyinvoice.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('location.index') ? 'menu-open' : '' }}
 
-                      ">
+                             ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                    {{ request()->routeIs('job.index') ? 'active' : '' }}
-                    {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}
-                    {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
-                    {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
-                    {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}
-                    {{ request()->routeIs('jobs.complete') ? 'active' : '' }}
-                    {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}
-                    {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}
-                    {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}
-                    {{ request()->routeIs('location.index') ? 'active' : '' }}
+                            {{ request()->routeIs('job.index') ? 'active' : '' }}
+                            {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}
+                            {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
+                            {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
+                            {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}
+                            {{ request()->routeIs('jobs.complete') ? 'active' : '' }}
+                            {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}
+                            {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}
+                            {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}
+                            {{ request()->routeIs('location.index') ? 'active' : '' }}
 
-                    {{ request()->routeIs('ins_category.index') ? 'active' : '' }}">
+                            {{ request()->routeIs('ins_category.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Jobs
@@ -322,30 +382,29 @@
 
                             </ul>
                         </li>
-                        <!--Start Jobs/Scheduling Modules -->
                         <!--Start Operations Modules -->
                         <li
                             class="nav-item
-                      {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('location') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('moodreport.index') ? 'menu-open' : '' }}
-                      {{ request()->routeIs('managers.index') ? 'menu-open' : '' }}
-                      ">
+                             {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('location') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('moodreport.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('managers.index') ? 'menu-open' : '' }}
+                             ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                          {{ request()->routeIs('task.index') ? 'active' : '' }}
-                          {{ request()->routeIs('problem.index') ? 'active' : '' }}
-                          {{ request()->routeIs('finalized') ? 'active' : '' }}
-                          {{ request()->routeIs('location') ? 'active' : '' }}
-                          {{ request()->routeIs('adminresponse') ? 'active' : '' }}
-                          {{ request()->routeIs('checklists.create') ? 'active' : '' }}
-                          {{ request()->routeIs('moodreport.index') ? 'active' : '' }}
-                          {{ request()->routeIs('managers.index') ? 'active' : '' }}
-                          ">
+                                {{ request()->routeIs('task.index') ? 'active' : '' }}
+                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('finalized') ? 'active' : '' }}
+                                {{ request()->routeIs('location') ? 'active' : '' }}
+                                {{ request()->routeIs('adminresponse') ? 'active' : '' }}
+                                {{ request()->routeIs('checklists.create') ? 'active' : '' }}
+                                {{ request()->routeIs('moodreport.index') ? 'active' : '' }}
+                                {{ request()->routeIs('managers.index') ? 'active' : '' }}
+                                ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Operations
@@ -432,7 +491,8 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{route('managers.index')}}" class="nav-link {{ request()->routeIs('managers.index') ? 'active' : '' }}">
+                                            <a href="{{ route('managers.index') }}"
+                                                class="nav-link {{ request()->routeIs('managers.index') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Account Manager</p>
                                             </a>
@@ -855,6 +915,8 @@
 
 
 
+
+
     <script>
         $(function() {
             $('#summernote').summernote();
@@ -876,8 +938,18 @@
                 "responsive": true,
             });
         });
-
-
+        // toastr.success('dasd');
+        channel.bind('status.liked', function(data) {
+            if (data) {
+                const eventData = JSON.stringify(data);
+                const message = eventData.message;
+                alert(JSON.stringify(data));
+                toastr.success(JSON.stringify(data.message));
+                console.log(eventData);
+            } else {
+                console.log('some');
+            }
+        });
     </script>
 
 

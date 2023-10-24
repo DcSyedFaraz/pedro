@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 
 @section('content')
@@ -53,7 +54,7 @@
                     @endforeach
                     </select>
                     </br>
-                   
+
                       <div>
                             <label for="title">Description:</label>
                             <textarea type="text" name="description" class="form-control" id="title" value="{{ isset($job_sub_category) ? $job_sub_category->description : '' }}">{{ isset($job_sub_category) ? $job_sub_category->description : '' }}</textarea>
@@ -64,8 +65,8 @@
                       </div>
                     </form>
                   </div>
-              </div> 
-          </div>   
+              </div>
+          </div>
         </div>
     </div>
 </section>

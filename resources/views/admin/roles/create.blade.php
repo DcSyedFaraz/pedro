@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -20,7 +21,7 @@
 
     <section class="content">
     <div class="container-fluid">
-    
+
         <div class="row">
           <div class="col-12">
               <div class="card">
@@ -36,9 +37,9 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class=" form-group">
-                            
+
                                 <strong>Permission:</strong>
-                                
+
                                 <div class="row ps-lg-4">
                                 @foreach($permission as $value)
                                 <div class="col-lg-4">
@@ -46,18 +47,18 @@
                                     <input type="checkbox" name="permission[]" value="{{$value->id}}" class="name form-check-input">
                                     <label class="my-label" for="checkboxSuccess2">{{ $value->name }} </label>
                                   </div>
-                                   
-                                    
+
+
                                   </div>
                                 <br/>
                                 @endforeach
-                       
-                            
 
-                           
-                            
+
+
+
+
                            </div>
-                          </div>  
+                          </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -65,8 +66,8 @@
                     </div>
                   </form>
                   </div>
-              </div> 
-          </div>   
+              </div>
+          </div>
         </div>
     </div>
 </section>
@@ -98,12 +99,12 @@ $('.select2bs4').select2({
 </script>
 
 <script type="text/javascript">
- 
+
  var APP_URL = {!! json_encode(url('/')) !!}
 
 
 
- 
+
 </script>
 <style>
   .form-check-input{
@@ -112,7 +113,7 @@ $('.select2bs4').select2({
     width: 20px;
     margin:0;
   }
-  
+
   .form-group strong{
     margin: 0 0 10px;
     width: fit-content;
@@ -122,10 +123,10 @@ $('.select2bs4').select2({
   .my-txt-box{
     padding: 0 0 10px;
   }
-  
+
   .my-label{
     padding-left: 30px;
     text-transform:capitalize;
   }
   </style>
-@endsection 
+@endsection

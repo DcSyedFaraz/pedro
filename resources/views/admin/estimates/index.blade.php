@@ -1,4 +1,5 @@
-@extends('admin.layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -8,12 +9,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>DataTables</h1>
+          <h1>Estimates</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">DataTables</li>
+            <li class="breadcrumb-item active">Estimates</li>
           </ol>
         </div>
       </div>
@@ -42,6 +43,7 @@
                     <th>Customer Name</th>
                     <th>Jobs</th>
                     <th>Primary Contact</th>
+                    <th>E-Signature</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -65,6 +67,12 @@
                           <td>Primary Contact: {{ $estimate->first_name . '-' . $estimate->last_name }}
                           </br> {{ $emailList }}
                           </br> Phone: {{ $phone }} Ext: {{ $ext }}
+                          </td>
+                          <td>
+                            @if (isset($estimate->signature))
+
+                            <a href="{{ $estimate->signature }}" target="blank" class="btn btn-warning">E-Signature</a>
+                            @endif
                           </td>
                           <td>
                           <!-- <a href="{{ route('estimates.edit', $estimate) }}" class="btn btn-primary">Edit</a> -->

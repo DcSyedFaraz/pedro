@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\VeriantSize;
@@ -17,6 +18,30 @@ class HomeController extends Controller
     {
 
         return view('home');
+
+    }
+    public function allNotification()
+    {
+
+        return view('notification');
+
+    }
+    public function markasread($id)
+    {
+
+        if($id){
+            auth()->user()->notifications->where('id',$id)->markasread();
+            return back()->with('success','Mark as read');
+        }
+
+    }
+    public function test()
+    {
+
+        if(auth()->user()){
+            $user = User::first();
+            auth()->user()->notify(new UserNotification($user));
+           }
 
     }
 

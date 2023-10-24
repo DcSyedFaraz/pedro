@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StatusLiked
+class StatusLiked implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,18 +19,26 @@ class StatusLiked
      *
      * @return void
      */
-    public function __construct()
+public $message;
+
+    public function __construct($username)
     {
-        //
+        $this->username = $username;
+        $this->message = "{$username} liked your status";
+        // dd($username);
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
+    public function broadcastAs()
+    {
+        return 'status.liked';
+    }
     public function broadcastOn()
     {
-        return ['pedro'];
+        return ['post-liked'];
     }
+    public function broadcastWith()
+{
+    return ['message' => $this->message,'problem_id'=> '5'];
+}
+
 }
