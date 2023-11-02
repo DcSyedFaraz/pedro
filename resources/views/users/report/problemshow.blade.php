@@ -58,10 +58,7 @@
                             @endif
                           </td>
                         </tr>
-                        <tr>
-                          <th>Problem Details</th>
-                          <td>{{ $problemReport->problem_details }}</td>
-                        </tr>
+                       
                         <tr>
                           <th>Problem Date</th>
                           <td>{{ $problemReport->problem_date }}</td>

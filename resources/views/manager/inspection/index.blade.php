@@ -104,7 +104,7 @@
 
                                                     <td>{{ $jobcat->checklistItems->count() ?? '0' }}</td>
                                                     @if (auth()->user()->hasRole('Admin'))
-                                                        <td>{{ $jobcat->user->name ?? '' }}</td>
+                                                        <td>{{ $jobcat->users->name ?? '' }}</td>
                                                     @endif
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"

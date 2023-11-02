@@ -86,6 +86,18 @@
                                                             <input type="text" name="description" class="form-control">
                                                         </div>
                                                     </div>
+                                                    <div class="col-xs-6 col-sm-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="selectedJobs">Type of Assignment:</label>
+                                                            <input type="text" name="assignment" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-6 col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="selectedJobs">Due Date:</label>
+                                                            <input type="datetime-local" name="due_date" class="form-control">
+                                                        </div>
+                                                    </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -123,7 +135,7 @@
                                                     <td>{{isset($jobcat->jobs->location_name) ? $jobcat->jobs->location_name : 'null'  }}</td>
                                                     <td>{{ isset($jobcat->manager->name) ? $jobcat->manager->name : 'null' }}
                                                     </td>
-                                                    <td>{{ isset($jobcat->user->name) ? $jobcat->user->name : 'null' }}</td>
+                                                    <td>{{ isset($jobcat->users->name) ? $jobcat->users->name : 'null' }}</td>
                                                     <td>{{ isset($jobcat->description) ? $jobcat->description : 'null' }}
                                                     </td>
                                                     <td>

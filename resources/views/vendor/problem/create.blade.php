@@ -53,10 +53,7 @@
                     <input type="text" name="location_supervisor" id="location_supervisor" class="form-control">
                 </div>
 
-                <div class="form-group">
-                    <label for="problem_details">Problem Details:</label>
-                    <textarea name="problem_details" id="problem_details" class="form-control" rows="4"></textarea>
-                </div>
+               
 
                 <div class="form-group">
                     <label for="problem_date">Problem Date:</label>

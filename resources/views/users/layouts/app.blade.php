@@ -230,20 +230,20 @@
           <li class="nav-item">
             <a href="{{ route('estimate_request.index') }}"
                 class="nav-link {{ request()->routeIs('estimate_request.index') ? 'active' : '' }} {{ request()->routeIs('estimate_request.show') ? 'active' : '' }} {{ request()->routeIs('estimate_request.create') ? 'active' : '' }} {{ request()->routeIs('estimate_request.edit') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Estimate Request</p>
+                <i class="fas fa-file-invoice nav-icon"></i>
+                <p>Estimate Requests</p>
             </a>
         </li>
           <li class="nav-item">
             <a href="{{ route('supply.index') }}"
                 class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Supply Request</p>
+                <i class="fas fa-shopping-cart nav-icon"></i>
+                <p>Supply Requests</p>
             </a>
         </li>
           <li class="nav-item">
                 <a href="{{url('/logout')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-circle nav-icon text-danger"></i>
                   <p>Logout</p>
                 </a>
               </li>
@@ -369,12 +369,7 @@
 
 
 </script>
-<script>
-  Toast.fire({
-        icon: 'error',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-</script>
+
 
 </body>
 </html>

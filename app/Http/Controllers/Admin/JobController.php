@@ -305,14 +305,15 @@ class JobController extends Controller
 
         $now = now(); // Current date and time
         // Jobs that need scheduling (start_date or end_date is null or in the past)
-        $jobs_needing_scheduling = Job::where(function ($query) use ($now) {
-            $query->whereNull('start_date')
-                ->orWhere('start_date', '<=', $now);
-        })
-            ->orWhere(function ($query) use ($now) {
-                $query->whereNull('end_date')
-                    ->orWhere('end_date', '<=', $now);
-            })->get();
+        // $jobs_needing_scheduling = Job::where(function ($query) use ($now) {
+        //     $query->whereNull('start_date')
+        //         ->orWhere('start_date', '<=', $now);
+        // })
+        //     ->orWhere(function ($query) use ($now) {
+        //         $query->whereNull('end_date')
+        //             ->orWhere('end_date', '<=', $now);
+        //     })->get();
+        $jobs_needing_scheduling = Job::where('current_status','1')->get();
 
         return view('admin.job.job_needing_scheduling', compact('jobs_needing_scheduling'));
     }

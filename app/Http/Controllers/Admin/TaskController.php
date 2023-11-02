@@ -20,8 +20,7 @@ class TaskController extends Controller
         $task = Task::with('jobs')->get();
         $user = User::withRole('User')->get();
         $manager = User::withRole('account manager')->get();
-        $jobs = Job::whereNull('user_id')->get();
-        $newjob = Job::get();
+        $jobs = Job::all();
 
         // dd($task);
         return view('admin.task.index', compact('task','user','manager','jobs'));

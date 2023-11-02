@@ -98,7 +98,7 @@
                                                     <td>{{ $jobcat->name }}</td>
 
                                                     <td>{{ $jobcat->checklistItems->count() ?? '0' }}</td>
-                                                    <td>{{ $jobcat->user->name ?? 'Null' }}</td>
+                                                    <td>{{ $jobcat->users->name ?? 'Null' }}</td>
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"
                                                             data-target="#checklistModal_{{ $jobcat->id }}">View

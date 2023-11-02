@@ -69,7 +69,7 @@
                                                 </td>
 
                                                 @if (auth()->user()->hasRole('Admin'))
-                                                <td>{{ $supplies->user->name }}</td>
+                                                <td>{{ $supplies->users->name }}</td>
                                                 @endif
                                                 <td>{{ $supplies->order_date }}</td>
                                                 <td>

@@ -38,7 +38,7 @@
                         @foreach ($all as $inv)
                             <tr>
                                 <td>{{ Carbon\Carbon::parse($inv->updated_at)->format('l, F j, Y h:i A') }}</td>
-                                <td>{{ isset($inv->user->name) ? $inv->user->name : 'N/A' }}</td>
+                                <td>{{ isset($inv->users->name) ? $inv->users->name : 'N/A' }}</td>
                                 <td>{{ isset($inv->job->customer->name) ? $inv->job->customer->name : 'N/A' }}</td>
                                 <td>{{ $inv->id }}</td>
                                 <td>{{ isset($inv->job) ? $inv->job->po_no : 'N/A' }}</td>

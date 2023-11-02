@@ -102,6 +102,7 @@
                 </div>
                 <div class="m-4">
                     <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+                    <a href="{{route('invoice.generate',$invoice->id)}}" class="btn btn-warning" >Download PDF</a>
                 </div>
             </div>
             <!-- /.row -->

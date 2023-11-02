@@ -7,6 +7,7 @@ use App\Models\InspectionResponse;
 use App\Models\Invoice;
 use App\Models\Job;
 use App\Models\ProblemReporting;
+use App\Models\WorkOrders;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -38,7 +39,10 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user()->id;
-        $data['jobs'] = Job::where('customer_id', $user)->count();
+        $data['services'] = Job::where('customer_id', $user)->where('current_status', '2')->count();
+        $data['orders'] = WorkOrders::whereHas('jobname', function ($query) use ($user) {
+            $query->where('customer_id', $user);
+        })->count();
 
         $data['estimates'] = Job::where('user_id', $user)
             ->whereHas('estimate', function ($query) {
@@ -48,7 +52,7 @@ class DashboardController extends Controller
         $data['invoices'] = Invoice::whereHas('job', function ($query) use ($user) {
             $query->where('user_id', $user);
         })->count();
-        
+
         return view('users.dashboard', $data);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class userInvoiceController extends Controller
@@ -55,6 +56,14 @@ class userInvoiceController extends Controller
         $invoice = Invoice::with('service','job')->find($id);
         // dd($invoice);
         return view('users.invoice.show', compact('invoice'));
+    }
+    public function generatePDF($id)
+    {
+        $invoice = Invoice::with('service','job')->find($id);
+        $pdf = Pdf::loadView('users.invoice.pdf',  ['invoice' => $invoice]);
+
+        return $pdf->stream('invoice.pdf');
+        // return view('users.invoice.show', compact('invoice'));
     }
 
     /**

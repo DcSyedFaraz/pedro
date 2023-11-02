@@ -98,7 +98,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <strong>Created By:</strong>
-                                    <span>{{ $invoice->user->name ?? 'N/A' }}</span>
+                                    <span>{{ $invoice->users->name ?? 'N/A' }}</span>
                                 </li>
                             </ul>
                         </div>

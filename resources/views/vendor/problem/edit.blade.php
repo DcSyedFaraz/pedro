@@ -51,10 +51,7 @@
                     <input type="text" name="location_supervisor" id="location_supervisor" class="form-control" value="{{ old('location_supervisor', isset($problemReport) ? $problemReport->location_supervisor : '') }}">
                 </div>
 
-                <div class="form-group">
-                    <label for="problem_details">Problem Details:</label>
-                    <textarea name="problem_details" id="problem_details" class="form-control" rows="4">{{ old('problem_details', isset($problemReport) ? $problemReport->problem_details : '') }}</textarea>
-                </div>
+               
 
                 <div class="form-group">
                     <label for="problem_date">Problem Date:</label>

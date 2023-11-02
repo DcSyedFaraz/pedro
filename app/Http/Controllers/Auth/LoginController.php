@@ -88,11 +88,11 @@ class LoginController extends Controller
         $message = 'Sorry your email cannot be identified.';
 
         if(!is_null($verifyUser) ){
-            $user = $verifyUser->user;
+            $user = $verifyUser->users;
 
             if(!$user->is_email_verified) {
-                $verifyUser->user->is_email_verified = 1;
-                $verifyUser->user->save();
+                $verifyUser->users->is_email_verified = 1;
+                $verifyUser->users->save();
                 $message = "Your e-mail is verified. You can now login.";
             } else {
                 $message = "Your e-mail is already verified. You can now login.";

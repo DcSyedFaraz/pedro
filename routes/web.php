@@ -78,7 +78,7 @@ Route::get('/test', function () {
 
 
 Route::get('/testing', [HomeController::class, 'test']);
-Route::get('/testings', [HomeController::class, 'allNotification'])->name('allNotification');
+Route::get('/notifications', [HomeController::class, 'allNotification'])->name('allNotification');
 Route::get('/markasread/{id}', [HomeController::class, 'markasread'])->name('markasread');
 Route::get('/manager/dashboard', [HomeController::class, 'manager'])->name('manager.dashboard');
 
@@ -137,56 +137,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
 
 
-    Route::resource('technicians', TechniciansController::class);
-
-    //Problem Reporting
-    Route::resource('problem', ProblemReportingController::class);
-
-    Route::resource('estimates', EstimateController::class);
-    Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
-    Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
-
-    //Ready Invoice
-    Route::resource('readyinvoice', ReadyInvoiceController::class);
-
-    //Mood Reporting
-    Route::resource('moodreport', MoodReportController::class);
-
-
-    //Task
-    Route::resource('task', TaskController::class);
-    //Estimate Request
-    Route::resource('estimate_requests', AdminEstimateRequestController::class);
-
-    Route::resource('job-category', JobCategoryController::class);
-    Route::resource('job-sub-category', JobSubCategoryController::class);
-    Route::resource('job-priority', JobPriorityCategoryController::class);
-    Route::resource('job-source', JobSourceCategoryController::class);
-
-    Route::resource('job', JobController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('purchase-orders', PurchaseOrderController::class);
-    Route::resource('inventory', InventoryController::class);
-    Route::get('/product/delete/{id}', [InventoryController::class, 'product_destroy'])->name('productService.destroy');
-
-    Route::resource('checklist', CheckListController::class);
-    Route::resource('inspection', InspectionController::class);
-    Route::resource('jobpermanager', JobPerAssignController::class);
-    Route::resource('jobperregion', JobPerRegionController::class);
-
-    Route::get('/checklists/finalized', [CheckListController::class, 'finalized'])->name('finalized');
-    Route::get('/checklists/location', [CheckListController::class, 'location'])->name('location');
-    Route::get('/checklists/response/{id}', [CheckListController::class, 'response'])->name('adminresponse');
-
-    Route::get('get-subcategories', [JobController::class, 'getSubcategories'])->name('get-subcategories');
-    Route::get('/get-subdescription', [JobController::class, 'getSubDescription'])->name('get-subdescription');
-    Route::get('/today-schedule-job', [JobController::class, 'TodaySchedule'])->name('today.job.schedule');
-    Route::get('/next-48-hours-job', [JobController::class, 'Next48Hours'])->name('today.job.next.48.hours');
-    Route::get('/jobs-needing-scheduling', [JobController::class, 'JobsNeedingScheduling'])->name('job.needing.scheduling');
-    Route::get('/jobs-in-progress', [JobController::class, 'JobsInProgress'])->name('jobs.in.progress');
-    Route::get('/jobs-complete', [JobController::class, 'JobsInCompleted'])->name('jobs.complete');
-    Route::get('/jobprimary/destroy/{id}', [JobController::class, 'job_pri'])->name('jobpri.destroy');
-    Route::put('/jobassign/update/{id}', [JobController::class, 'job_assign'])->name('jobassign.update');
 
 
 
@@ -217,6 +167,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 
     //invoice
     Route::resource('invoices', userInvoiceController::class);
+    Route::get('/invoices/generate/{id}', [userInvoiceController::class, 'generatePDF'])->name('invoice.generate');
 
     //problem
     Route::get('/problem', [usersDashboardController::class, 'problem'])->name('users.problem');
@@ -263,6 +214,11 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
 });
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account manager']], function () {
 
+
+
+
+});
+Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'role:account manager|Admin']], function () {
     Route::resource('job', JobController::class);
     Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
     Route::resource('general_setting',\App\Http\Controllers\Admin\GeneralSettingController::class);
@@ -323,6 +279,4 @@ Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account mana
     Route::get('/jobs-complete', [JobController::class, 'JobsInCompleted'])->name('jobs.complete');
     Route::get('/jobprimary/destroy/{id}', [JobController::class, 'job_pri'])->name('jobpri.destroy');
     Route::put('/jobassign/update/{id}', [JobController::class, 'job_assign'])->name('jobassign.update');
-
-
 });

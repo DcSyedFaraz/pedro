@@ -44,7 +44,7 @@
                             <th>Vendor</th>
                             <th>Status</th>
                             <th>Deadline</th>
-                            <th>Payment</th>
+                            {{-- <th>Payment</th> --}}
                             {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
@@ -76,14 +76,14 @@
                           </td>
 
                         <td>{{ $workOrder->deadline ?? '' }}</td>
-                        <td> @switch($workOrder->payment_info)
+                        {{-- <td> @switch($workOrder->payment_info)
 
                             @case('quick_pay')
                               <span class="badge bg-success">Quick Pay</span>
                             @break
                             @default
                              ----
-                          @endswitch</td>
+                          @endswitch</td> --}}
                         {{-- <td>
                             <a href="{{ route('work_orders.edit',$workOrder->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                             <a href="{{ route('work_orders.show',$workOrder->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
