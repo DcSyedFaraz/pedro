@@ -15,7 +15,7 @@ class Task extends Model
         return $this->hasOne(User::class,'id','manager_id');
     }
 
-    public function user()
+    public function users()
     {
         return $this->hasOne(User::class,'id','user_id');
     }

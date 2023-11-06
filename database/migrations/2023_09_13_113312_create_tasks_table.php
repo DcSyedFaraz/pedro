@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('job_id')->nullable();
             $table->integer('manager_id')->nullable();
             $table->integer('user_id')->nullable();
+            $table->string('assignment')->nullable();
+            $table->dateTime('due_date')->nullable();
             $table->integer('description')->nullable();
             $table->timestamps();
         });

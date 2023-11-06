@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 @section('content')
@@ -29,8 +29,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                          <h3 class="card-title">User Managment</h3>
-                        </div> -->
+                                  <h3 class="card-title">User Managment</h3>
+                                </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <button type="button" class="btn btn-success" data-toggle="modal"
@@ -95,7 +95,8 @@
                                                     <div class="col-xs-6 col-sm-6 col-md-12">
                                                         <div class="form-group">
                                                             <label for="selectedJobs">Due Date:</label>
-                                                            <input type="datetime-local" name="due_date" class="form-control">
+                                                            <input type="datetime-local" name="due_date"
+                                                                class="form-control">
                                                         </div>
                                                     </div>
                                             </div>
@@ -119,23 +120,28 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>S.N</th>
                                             <th>Job Location</th>
                                             <th>Assigned Manager</th>
                                             <th>Assigned User</th>
                                             <th>Description</th>
                                             <th>Actions</th>
-                                            {{-- <th>Actions</th> --}}
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @if ($task)
-                                            @foreach ($task as $jobcat)
+                                            @foreach ($task as $key => $jobcat)
                                                 <tr>
-                                                    <td>{{isset($jobcat->jobs->location_name) ? $jobcat->jobs->location_name : 'null'  }}</td>
+                                                    <td>
+                                                        {{$key +1}}
+                                                    </td>
+                                                    <td>{{ isset($jobcat->jobs->location_name) ? $jobcat->jobs->location_name : 'null' }}
+                                                    </td>
                                                     <td>{{ isset($jobcat->manager->name) ? $jobcat->manager->name : 'null' }}
                                                     </td>
-                                                    <td>{{ isset($jobcat->users->name) ? $jobcat->users->name : 'null' }}</td>
+                                                    <td>{{ isset($jobcat->users->name) ? $jobcat->users->name : 'null' }}
+                                                    </td>
                                                     <td>{{ isset($jobcat->description) ? $jobcat->description : 'null' }}
                                                     </td>
                                                     <td>
@@ -143,8 +149,8 @@
                                                             data-target="#exampleModal{{ $jobcat->id }}">
                                                             Edit
                                                         </button>
-                                                        <form action="{{ route('task.destroy', $jobcat->id) }}" method="POST"
-                                                            class="d-inline">
+                                                        <form action="{{ route('task.destroy', $jobcat->id) }}"
+                                                            method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger"
@@ -157,7 +163,8 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Task
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                                        Task
                                                                     </h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
@@ -180,20 +187,37 @@
                                                                                         selected>select user
                                                                                     </option>
                                                                                     @foreach ($user as $job)
-                                                                                    <option
-                                                                                    {{ isset($jobcat->user_id) && $job->id == old('user_id', $jobcat->user_id) ? 'selected' : '' }}
-                                                                                    value="{{ $job->id }}">
-                                                                                    {{ ucfirst($job->name) }}
-                                                                                </option>
+                                                                                        <option
+                                                                                            {{ isset($jobcat->user_id) && $job->id == old('user_id', $jobcat->user_id) ? 'selected' : '' }}
+                                                                                            value="{{ $job->id }}">
+                                                                                            {{ ucfirst($job->name) }}
+                                                                                        </option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xs-6 col-sm-6 col-md-12">
                                                                             <div class="form-group">
+                                                                                <label for="selectedJobs">Type of
+                                                                                    Assignment:</label>
+                                                                                <input type="text" name="assignment"
+                                                                                    class="form-control"
+                                                                                    value="{{ $jobcat->assignment }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xs-6 col-sm-6 col-md-12">
+                                                                            <div class="form-group">
+                                                                                <label for="selectedJobs">Due Date:</label>
+                                                                                <input type="datetime-local"
+                                                                                    name="due_date" class="form-control"
+                                                                                    value="{{ $jobcat->due_date }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xs-6 col-sm-6 col-md-12">
+                                                                            <div class="form-group">
                                                                                 <label
                                                                                     for="selectedJobs">Description:</label>
-                                                                                    <textarea name="description"  cols="30" rows="1" class="form-control">{{ isset($jobcat->description) ? old('description', $jobcat->description) : '' }}</textarea>
+                                                                                <textarea name="description" cols="30" rows="1" class="form-control">{{ isset($jobcat->description) ? old('description', $jobcat->description) : '' }}</textarea>
 
                                                                             </div>
                                                                         </div>
@@ -210,14 +234,6 @@
 
                                                         </div>
                                                     </div>
-                                                    {{-- <td>
-                      <a class="btn btn-info" href="{{ route('task.show',$jobcat->id) }}">Show</a>
-                      <a class="btn btn-primary" href="{{ route('task.edit',$jobcat->id) }}">Edit</a>
-                      {!! Form::open(['method' => 'DELETE','route' => ['task.destroy', $jobcat->id],'style'=>'display:inline']) !!}
-                          {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                      {!! Form::close() !!}
-                  </td> --}}
-
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -239,7 +255,6 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
 @endsection

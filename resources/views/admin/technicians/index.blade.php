@@ -38,6 +38,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>S.N</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Actions</th>
@@ -46,9 +47,10 @@
 
                                     <tbody>
                                         @if ($technicians)
-                                            @foreach ($technicians as $technician)
+                                            @foreach ($technicians as $key=> $technician)
                                                 <tr>
-                                                    <td>{{ $technician->name }}</td>
+                                                    <td>{{$key+1}}</td>
+                                                    <td>{{ $technician->fname }}&nbsp;{{ $technician->lname }}</td>
                                                     <td>{{ $technician->email }}</td>
                                                     <td>
                                                         <a class="btn btn-info"

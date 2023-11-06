@@ -9,6 +9,13 @@ class Invoice extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function ($invoice) {
+            $invoice->service->each->delete();
+        });
+    }
 
     public function service()
     {
@@ -22,7 +29,7 @@ class Invoice extends Model
     {
         return $this->belongsTo(ProductandService::class,'id','invoice_id');
     }
-    public function user()
+    public function users()
 {
     return $this->belongsTo(User::class,'createdBy');
 }

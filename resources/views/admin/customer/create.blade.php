@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 
@@ -42,7 +42,7 @@
                             <div class="card-header">
                                 <form action="{{ route('customer.store') }}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="roles" value="2" >
+                                    <input type="hidden" name="roles" value="2">
                                     <div class="inner-section py-3">
                                         <div class="container">
                                             <div class="row">
@@ -75,9 +75,8 @@
                                                         <div class="mb-3">
                                                             <label for="flexRadioDefault3" class="form-label">Service
                                                                 Agreement ?</label>
-                                                                <select class="form-select form-control"
-                                                                name="service_agreement"
-                                                                aria-label="Default select example"
+                                                            <select class="form-select form-control"
+                                                                name="service_agreement" aria-label="Default select example"
                                                                 id="email-div">
                                                                 <option value="yes">Yes</option>
                                                                 <option value="no">No</option>
@@ -97,10 +96,8 @@
                                                         <div class="mb-3">
                                                             <label for="flexRadioDefault5" class="form-label">Active
                                                                 ?</label>
-                                                                <select class="form-select form-control"
-                                                                name="activeCustomer"
-                                                                aria-label="Default select example"
-                                                                id="email-div">
+                                                            <select class="form-select form-control" name="activeCustomer"
+                                                                aria-label="Default select example" id="email-div">
                                                                 <option value="yes">Yes</option>
                                                                 <option value="no">No</option>
                                                             </select>
@@ -122,14 +119,16 @@
                                                                 <div class="name-main-div">
 
                                                                     <div class="mb-3">
-                                                                        <label for="exampleInputfirst" class="form-label">First
+                                                                        <label for="exampleInputfirst"
+                                                                            class="form-label">First
                                                                             Name</label>
                                                                         <input type="text" name="fname[]"
                                                                             class="form-control" id="exampleInputfirst"
                                                                             placeholder="First Name">
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <label for="exampleInputlast" class="form-label">Last
+                                                                        <label for="exampleInputlast"
+                                                                            class="form-label">Last
                                                                             Name</label>
                                                                         <input type="text" name="lname[]"
                                                                             class="form-control" id="exampleInputlast"
@@ -213,21 +212,18 @@
 
                                                     </div>
                                                     <div class=" col-sm-6 align-items-end">
-                                                        <label for="email-div"
-                                                                        class="form-label">Contact Type</label>
-                                                                    <select class="form-select form-control"
-                                                                        name="contact"
-                                                                        aria-label="Default select example"
-                                                                        id="email-div">
-                                                                        <option value="billing">Billing Contact</option>
-                                                                        <option value="booking">Booking Contact</option>
-                                                                    </select>
+                                                        <label for="email-div" class="form-label">Contact Type</label>
+                                                        <select class="form-select form-control" name="contact"
+                                                            aria-label="Default select example" id="email-div">
+                                                            <option value="billing">Billing Contact</option>
+                                                            <option value="booking">Booking Contact</option>
+                                                        </select>
 
                                                     </div>
                                                     <div class="col-sm-6 align-items-end">
-                                                        <label for="email-div"
-                                                                        class="form-label">Personal Email</label>
-                                                                    <input type="email" name="per_email" class="form-control" placeholder="personal@gmail.com" id="">
+                                                        <label for="email-div" class="form-label">Personal Email</label>
+                                                        <input type="email" name="per_email" class="form-control"
+                                                            placeholder="personal@gmail.com" id="">
 
                                                     </div>
 
@@ -240,119 +236,115 @@
                                                         </div>
                                                     </div>
                                                     <p id="">
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputlocation"
-                                                                class="form-label">Nickname</label>
-                                                            <input type="text" class="form-control" name="nick_name[]"
-                                                                id="exampleInputlocation" placeholder="David Smith">
+                                                        <div class="col-sm-2">
+                                                            <div class="mb-3">
+                                                                <label for="exampleInputlocation"
+                                                                    class="form-label">Nickname</label>
+                                                                <input type="text" class="form-control" name="nick_name[]"
+                                                                    id="exampleInputlocation" placeholder="David Smith">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="flexRadioDefaulta"
-                                                                class="form-label">Primary?</label>
-                                                                <select class="form-select form-control"
-                                                                        name="primary[]"
-                                                                        aria-label="Default select example"
-                                                                        >
-                                                                        <option value="yes">Yes</option>
-                                                                        <option value="no">No</option>
-                                                                    </select>
+                                                        <div class="col-sm-2">
+                                                            <div class="mb-3">
+                                                                <label for="flexRadioDefaulta"
+                                                                    class="form-label">Primary?</label>
+                                                                <select class="form-select form-control" name="primary[]"
+                                                                    aria-label="Default select example">
+                                                                    <option value="yes">Yes</option>
+                                                                    <option value="no">No</option>
+                                                                </select>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="flexRadioDefaultd" cldss="form-label">Billing
-                                                                Address?</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="mb-3">
+                                                                <label for="flexRadioDefaultd" cldss="form-label">Billing
+                                                                    Address?</label>
                                                                 <select class="form-select form-control"
-                                                                        name="billing_address[]"
-                                                                        aria-label="Default select example"
-                                                                        >
-                                                                        <option value="yes">Yes</option>
-                                                                        <option value="no">No</option>
-                                                                    </select>
+                                                                    name="billing_address[]"
+                                                                    aria-label="Default select example">
+                                                                    <option value="yes">Yes</option>
+                                                                    <option value="no">No</option>
+                                                                </select>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="email-div" class="form-label">Contact</label>
-                                                            <select class="form-select form-control" name="contact_type[]"
-                                                                aria-label="Default select example" >
-                                                                <option value="0" disabled>Select Contact</option>
-                                                                <option value="contact 1">contact 1</option>
-                                                                <option value="contact 2">contact 2</option>
-                                                            </select>
+                                                        <div class="col-sm-2">
+                                                            <div class="mb-3">
+                                                                <label for="email-div" class="form-label">Contact</label>
+                                                                <select class="form-select form-control" name="contact_type[]"
+                                                                    aria-label="Default select example">
+                                                                    <option value="0" disabled>Select Contact</option>
+                                                                    <option value="contact 1">contact 1</option>
+                                                                    <option value="contact 2">contact 2</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="flexRadioDefaulte"
-                                                                cldss="form-label">Active?</label>
+                                                        <div class="col-sm-2">
+                                                            <div class="mb-3">
+                                                                <label for="flexRadioDefaulte"
+                                                                    cldss="form-label">Active?</label>
                                                                 <select class="form-select form-control"
-                                                                name="active_service[]"
-                                                                aria-label="Default select example"
-                                                                >
-                                                                <option value="yes">Yes</option>
-                                                                <option value="no">No</option>
-                                                            </select>
+                                                                    name="active_service[]"
+                                                                    aria-label="Default select example">
+                                                                    <option value="yes">Yes</option>
+                                                                    <option value="no">No</option>
+                                                                </select>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <div class="location-div">
-                                                            <div class="row">
-                                                                <div class="col-sm-4">
-                                                                    <div class="mb-3">
-                                                                        <label for="exampleInputstreet"
-                                                                            class="form-label">Street Address or
-                                                                            Latitude, Longitude</label>
-                                                                        <input type="text" name="address[]"
-                                                                            class="form-control" id="exampleInputstreet"
-                                                                            placeholder="Street Address or Latitude, Longitude">
+                                                        <div class="col-sm-12">
+                                                            <div class="location-div">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="mb-3">
+                                                                            <label for="exampleInputstreet"
+                                                                                class="form-label">Street Address or
+                                                                                Latitude, Longitude</label>
+                                                                            <input type="text" name="address[]"
+                                                                                class="form-control" id="exampleInputstreet"
+                                                                                placeholder="Street Address or Latitude, Longitude">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="mb-3">
-                                                                        <label for="exampleInputapt"
-                                                                            class="form-label">Apt/Suite/Unit #</label>
-                                                                        <input type="text" name="aptNo[]"
-                                                                            class="form-control" id="exampleInputapt"
-                                                                            placeholder="Apt Suite Unit #">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="mb-3">
+                                                                            <label for="exampleInputapt"
+                                                                                class="form-label">Apt/Suite/Unit #</label>
+                                                                            <input type="text" name="aptNo[]"
+                                                                                class="form-control" id="exampleInputapt"
+                                                                                placeholder="Apt Suite Unit #">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="mb-3">
-                                                                        <label for="exampleInputcity"
-                                                                            class="form-label">City</label>
-                                                                        <input type="text" name="city[]"
-                                                                            class="form-control" id="exampleInputcity"
-                                                                            placeholder="City Name">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="mb-3">
+                                                                            <label for="exampleInputcity"
+                                                                                class="form-label">City</label>
+                                                                            <input type="text" name="city[]"
+                                                                                class="form-control" id="exampleInputcity"
+                                                                                placeholder="City Name">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="mb-3">
-                                                                        <label for="exampleInputstate"
-                                                                            class="form-label">State/Province</label>
-                                                                        <input type="text" name="state[]"
-                                                                            class="form-control" id="exampleInputstate"
-                                                                            placeholder="State Province">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="mb-3">
+                                                                            <label for="exampleInputstate"
+                                                                                class="form-label">State/Province</label>
+                                                                            <input type="text" name="state[]"
+                                                                                class="form-control" id="exampleInputstate"
+                                                                                placeholder="State Province">
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-sm-2">
-                                                                    <div class="mb-3">
-                                                                        <label for="exampleInputzip"
-                                                                            class="form-label">Zip/Postal Code</label>
-                                                                        <input type="text" name="zip[]"
-                                                                            class="form-control" id="exampleInputzip"
-                                                                            placeholder="Zip Postal Code">
+                                                                    <div class="col-sm-2">
+                                                                        <div class="mb-3">
+                                                                            <label for="exampleInputzip"
+                                                                                class="form-label">Zip/Postal Code</label>
+                                                                            <input type="text" name="zip[]"
+                                                                                class="form-control" id="exampleInputzip"
+                                                                                placeholder="Zip Postal Code">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     </p>
                                                     <p id="ser_append">
 
@@ -410,8 +402,9 @@
                                                         <div class="mb-3">
                                                             <label for="exampleInputcustomertag"
                                                                 class="form-label">Customer Tags</label>
-                                                            <input type="text" class="form-control" name="customer_tag"
-                                                                id="exampleInputcustomertag" placeholder="Customer Tags">
+                                                            <input type="text" class="form-control"
+                                                                name="customer_tag" id="exampleInputcustomertag"
+                                                                placeholder="Customer Tags">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="referral-div form-control"
@@ -445,10 +438,8 @@
                                                         <div class="mb-3">
                                                             <label for="flexRadioDefaulttax"
                                                                 class="form-label">Taxable?</label>
-                                                                <select class="form-select form-control"
-                                                                name="taxable"
-                                                                aria-label="Default select example"
-                                                                id="email-div">
+                                                            <select class="form-select form-control" name="taxable"
+                                                                aria-label="Default select example" id="email-div">
                                                                 <option value="yes">Yes</option>
                                                                 <option value="no">No</option>
                                                             </select>
@@ -478,8 +469,10 @@
                                                                         Rep</label>
                                                                     <select class="form-select form-control"
                                                                         name="assigned_rep"
-                                                                        aria-label="Default select example" id="agent-div">
-                                                                        <option value="1">Do Not Assign Agent/Rep</option>
+                                                                        aria-label="Default select example"
+                                                                        id="agent-div">
+                                                                        <option value="1">Do Not Assign Agent/Rep
+                                                                        </option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="commission1-div">

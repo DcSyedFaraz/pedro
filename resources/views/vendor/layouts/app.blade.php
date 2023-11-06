@@ -167,15 +167,11 @@
                         <!--Start Accounting Modules -->
                         <li
                             class="nav-item
-                            {{ request()->routeIs('pages.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('invoice.create') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('invoice.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('invoice.*') ? 'menu-open' : '' }}
                             ">
-                                <a href="#"
+                            <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                                {{ request()->routeIs('invoice.create') ? 'active' : '' }}
-                                {{ request()->routeIs('invoice.index') ? 'active' : '' }}
+                                {{ request()->routeIs('invoice.*') ? 'active' : '' }}
                                 ">
                                 <i class="nav-icon fas fa-money-bill text-success"></i>
                                 <p>
@@ -187,7 +183,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('invoice.index') }}"
-                                        class="nav-link {{ request()->routeIs('invoice.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('invoice.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Invoice dashboard</p>
                                     </a>
@@ -203,7 +199,7 @@
                             {{ request()->routeIs('company_profile.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}
                             ">
-                                <a href="#"
+                            <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('company_profile.create') ? 'active' : '' }}
                                 {{ request()->routeIs('company_profile.index') ? 'active' : '' }}
@@ -234,7 +230,7 @@
                             {{ request()->routeIs('userproblem.show') ? 'menu-open' : '' }}
 
                             ">
-                                <a href="#"
+                            <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('userproblem.index') ? 'active' : '' }}
                                 {{ request()->routeIs('userproblem.edit') ? 'active' : '' }}
@@ -250,7 +246,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('userproblem.index') }}"
-                                        class="nav-link {{ request()->routeIs('userproblem.index') || request()->routeIs('userproblem.edit')|| request()->routeIs('userproblem.show') ? 'active' : '' }}
+                                        class="nav-link {{ request()->routeIs('userproblem.index') || request()->routeIs('userproblem.edit') || request()->routeIs('userproblem.show') ? 'active' : '' }}
                                         ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Reports</p>
@@ -376,8 +372,8 @@
     </script>
 
     <!-- Change password -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js" type="text/javascript">
-    </script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js" type="text/javascript">
+    </script> --}}
 
 
 
@@ -419,10 +415,6 @@
                 "responsive": true,
             });
         });
-
-
-
-
     </script>
 
 

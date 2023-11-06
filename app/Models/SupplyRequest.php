@@ -9,7 +9,7 @@ class SupplyRequest extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    public function user()
+    public function users()
 {
     return $this->belongsTo(User::class,'createdBy');
 }

@@ -2,6 +2,13 @@
 
 
 @section('content')
+<style>
+    a {
+        color: #5c5555;
+        text-decoration: none;
+        background-color: transparent;
+    }
+</style>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -90,7 +97,13 @@
                                                         </div>
                                                         <br />
                                                         <div class="row w-25 d-flex flex-column">
+                                                            @if (isset($invoice))
 
+                                                            <input type="hidden" name="job_id" value="{{$invoice->job_id}}">
+                                                            @else
+
+                                                            <input type="hidden" name="job_id" value="{{$job[0]}}">
+                                                            @endif
                                                             <div class="col-md-12">
                                                                 <strong>Status</strong>
                                                             </div>
@@ -167,10 +180,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <!-- No Change -->
                                                     <div id="no-change" class="tab-pane fade show">
-                                                        <h6>No Change</h6>
+                                                        @include('admin.job.partials.not_billable')
                                                     </div>
                                                 </div>
                                             </div>

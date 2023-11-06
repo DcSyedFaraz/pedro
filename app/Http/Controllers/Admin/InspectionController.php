@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ChecklistItem;
 use App\Models\Inspection;
 use App\Models\InspectionChecklist;
+use DB;
 use Illuminate\Http\Request;
 
 class InspectionController extends Controller
@@ -31,10 +32,10 @@ class InspectionController extends Controller
         $user = auth()->user();
         if ($user->hasRole('Admin')) {
             // Fetch all records if the user is an admin
-            $checklist = InspectionChecklist::orderBy('id','desc')->get();
+            $checklist = InspectionChecklist::orderBy('id', 'desc')->get();
         } else {
             // Fetch records created by the user
-            $checklist = InspectionChecklist::where('createdBy', $user->id )->orderBy('id','desc')->get();
+            $checklist = InspectionChecklist::where('createdBy', $user->id)->orderBy('id', 'desc')->get();
         }
         return view('manager.inspection.index', compact('checklist'));
     }
@@ -46,33 +47,45 @@ class InspectionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'checklist_items' => 'array', // Ensure checklist_items is an array
-    ]);
-    $user = auth()->user()->id;
-// dd($user);
-    // Create a new inspection checklist
-    $inspectionChecklist = InspectionChecklist::create([
-        'name' => $request->input('name'),
-        'createdBy' => $user,
-    ]);
+    {
 
-    // Add checklist items to the inspection checklist
-    $checklistItems = $request->input('checklist_items');
-    foreach ($checklistItems as $itemText) {
-        if (!empty($itemText)) { // Ensure the item is not empty
-            $checklistItem = new ChecklistItem([
-                'description' => $itemText,
+        try {
+            DB::beginTransaction();
+
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'checklist_items' => 'array',
             ]);
-            $inspectionChecklist->checklistItems()->save($checklistItem);
-        }
-    }
 
-    // Redirect back with a success message or to a different page
-    return redirect()->route('checklists.create')->with('success', 'Checklist created successfully.');
-}
+            $user = auth()->user()->id;
+            // dd($user);
+            $inspectionChecklist = InspectionChecklist::create([
+                'name' => $request->input('name'),
+                'createdBy' => $user,
+            ]);
+
+            $checklistItems = $request->input('checklist_items');
+            foreach ($checklistItems as $itemText) {
+                if (!empty($itemText)) { // Ensure the item is not empty
+                    $checklistItem = new ChecklistItem([
+                        'description' => $itemText,
+                    ]);
+                    $inspectionChecklist->checklistItems()->save($checklistItem);
+                }
+            }
+
+            DB::commit(); // If everything is successful, commit the transaction
+
+            return redirect()->route('checklists.create')->with('success', 'Checklist created successfully.');
+
+        } catch (\Exception $e) {
+            DB::rollback(); // If an exception occurs, rollback the transaction
+
+            return redirect()->back()->with('error', 'An error occurred while creating the checklist. Please try again or contact support for assistance.');
+        }
+
+
+    }
 
     /**
      * Display the specified resource.
@@ -126,6 +139,6 @@ class InspectionController extends Controller
                 $ProductandServices->delete();
             }
         }
-        return redirect()->back()->with('error','Sheet deleted Successfully');
+        return redirect()->back()->with('error', 'Sheet deleted Successfully');
     }
 }

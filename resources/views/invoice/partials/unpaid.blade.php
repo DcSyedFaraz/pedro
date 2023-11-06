@@ -37,12 +37,19 @@
                                 <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
                                 </td>
                                 <td class="btn-group">
-                                    <a href="{{ route('invoice.show', $inv->id) }}"
-                                        class="btn btn-info "><i class="fa fa-eye"></i></a>
-                                        &nbsp;
-                                        <a href="{{ route('invoice.edit', $inv->id) }}"
-                                            class="btn btn-primary"><i class="fa fa-edit"></i></a>
-
+                                    <a href="{{ route('invoice.show', $inv->id) }}" class="btn btn-info btn-sm "><i
+                                            class="fa fa-eye"></i></a>
+                                    &nbsp;
+                                    <a href="{{ route('invoice.edit', $inv->id) }}" class="btn btn-primary btn-sm"><i
+                                            class="fa fa-edit"></i></a>&nbsp;
+                                    <form action="{{ route('invoice.destroy', $inv->id) }}" method="POST"
+                                        class="">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm dltBtn" data-id="{{$inv->id}}"
+                                            ><i
+                                            class="fas fa-trash"></i></a></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

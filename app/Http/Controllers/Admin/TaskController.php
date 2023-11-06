@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\Task;
 use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
@@ -17,13 +19,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = Task::with('jobs')->get();
+        $task = Task::with('jobs')->orderby('created_at','desc')->get();
         $user = User::withRole('User')->get();
         $manager = User::withRole('account manager')->get();
         $jobs = Job::all();
 
         // dd($task);
-        return view('admin.task.index', compact('task','user','manager','jobs'));
+        return view('admin.task.index', compact('task', 'user', 'manager', 'jobs'));
     }
 
     /**
@@ -44,19 +46,47 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $job = Job::find($request->job_id);
-        $job->user_id = $request->user_id;
-        $job->save();
 
+        try {
+            // Validate the request data
+            $validator = Validator::make($request->all(), [
+                'job_id' => 'required|exists:jobs,id',
+                'user_id' => 'required',
+                'due_date' => 'required',
+                'assignment' => 'required',
+                'description' => 'required',
+            ]);
 
-        Task::create([
-            'job_id' => $request['job_id'],
-            'manager_id' => $job->account_manager_id,
-            'user_id' => $request['user_id'],
-            'description' => $request['description'],
-        ]);
-        return redirect()->back()->with('success', 'Task Created successfully');
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput()
+                    ->with('error', 'Validation failed');
+            }
+
+            DB::beginTransaction();
+
+            $job = Job::find($request->job_id);
+            $job->user_id = $request->user_id;
+            $job->save();
+
+            Task::create([
+                'job_id' => $request->job_id,
+                'manager_id' => $job->account_manager_id,
+                'user_id' => $request->user_id,
+                'due_date' => $request->due_date,
+                'assignment' => $request->assignment,
+                'description' => $request->description,
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Task Created successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'An error occurred. Please try again later.');
+        }
     }
 
     /**

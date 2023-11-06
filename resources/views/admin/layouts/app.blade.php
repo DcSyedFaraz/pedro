@@ -174,7 +174,7 @@
                             {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('technicians.index') ? 'menu-open' : '' }} ">
+                            {{ request()->routeIs('technicians.*') ? 'menu-open' : '' }} ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('customer.index') ? 'active' : '' }}
@@ -187,7 +187,7 @@
                                 {{ request()->routeIs('job-source.index') ? 'active' : '' }}
                                 {{ request()->routeIs('inventory.index') ? 'active' : '' }}
 
-                                {{ request()->routeIs('technicians.index') ? 'active' : '' }} ">
+                                {{ request()->routeIs('technicians.*') ? 'active' : '' }} ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     My Workroom
@@ -204,7 +204,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('technicians.index') }}"
-                                        class="nav-link {{ request()->routeIs('technicians.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('technicians.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Manage Technicians</p>
                                     </a>
@@ -548,14 +548,12 @@
                         <li
                             class="nav-item
                             {{ request()->routeIs('pages.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('invoice.create') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('invoice.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('invoice.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}
                             ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                                {{ request()->routeIs('invoice.create') ? 'active' : '' }}
-                                {{ request()->routeIs('invoice.index') ? 'active' : '' }}
+                                {{ request()->routeIs('invoice.*') ? 'active' : '' }}
                                 ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
@@ -573,7 +571,7 @@
                                 </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('invoice.index') }}"
-                                        class="nav-link {{ request()->routeIs('invoice.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('invoice.*') ? 'active' : '' }} ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Invoice dashboard</p>
                                     </a>
@@ -828,7 +826,7 @@
     <!-- jQuery -->
 
     <script src="{{ asset('/admin/plugins/jquery/jquery.min.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('/admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -952,7 +950,7 @@
         });
     </script>
 
-
+@yield('scripts')
 </body>
 
 </html>

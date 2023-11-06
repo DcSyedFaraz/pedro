@@ -12,7 +12,7 @@ class TechniciansController extends Controller
 {
     public function index()
     {
-        $technicians = Technicians::all();
+        $technicians = Technicians::orderby("created_at","desc")->get();
         return view('admin.technicians.index', compact('technicians'));
     }
 
@@ -24,7 +24,7 @@ class TechniciansController extends Controller
     public function store(Request $request)
     {
         Technicians::create($request->all());
-        return redirect()->route('technicians.index');
+        return redirect()->route('technicians.index')->with('success','Technician Created Successfully');
     }
 
     public function show($id)
@@ -43,7 +43,7 @@ class TechniciansController extends Controller
     {
         $technician = Technicians::findOrFail($id);
         $technician->update($request->all());
-        return redirect()->route('technicians.index');
+        return redirect()->route('technicians.index')->with('success','Technician Updated Successfully');
     }
 
     public function destroy($id)
