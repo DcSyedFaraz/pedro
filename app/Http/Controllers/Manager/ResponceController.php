@@ -90,8 +90,8 @@ class ResponceController extends Controller
             return redirect()->back()->with('success', 'Responses submitted successfully');
         } catch (\Exception $e) {
             DB::rollback();
-            throw $e;
-            return redirect()->back()->with('error', 'An error occurred. Please try again.{{$e->getMessage()}}');
+            // throw $e;
+            return redirect()->back()->with('error', 'An error occurred. Please try again.'.$e->getMessage());
         }
 
     }

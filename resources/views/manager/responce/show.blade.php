@@ -17,7 +17,7 @@
                             {{-- @dd($response) --}}
                             @foreach ($response as $response1)
                                 <div class="card-header">
-                                    <h3 class="card-title">Inspection Checklist for {{ $response1->checklist->name ?? '' }}
+                                    <h3 class="card-title">Inspection Checklist for <span class="font-weight-bold">{{ $response1->checklist->name ?? '' }}</span>
                                     </h3>
                                 </div>
 

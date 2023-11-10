@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app': 'default.app'))))
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app' : 'default.app'))))
 
 
 @section('content')
@@ -28,12 +28,6 @@
                     <div class="col-12">
 
                         <div class="card">
-                            <!-- <div class="card-header">
-                                                              <h3 class="card-title">User Managment</h3>
-                                                            </div> -->
-                            <!-- /.card-header -->
-
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
@@ -55,7 +49,125 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        @if ($shows->inspectionResponse->count() > 0)
+                                                        @if ($shows->inspectionResponse->count() > 0 )
+                                                            @php
+                                                                $reAssignItems = $shows->inspectionChecklists->load('checklistItems')->filter(function ($item) {
+                                                                    return str_contains($item->name, 'reasign');
+                                                                });
+                                                            @endphp
+                                                            {{-- @dd($reAssignItems) --}}
+                                                            @if ($reAssignItems->count() > 0 )
+                                                                <button class="btn btn-danger btn-sm" data-toggle="modal"
+                                                                    data-target="#rchecklistModal_">Re assigned</button>
+                                                                <!-- Modal for Checklist Items -->
+                                                                <div class="modal fade" id="rchecklistModal_" tabindex="-1"
+                                                                    role="dialog" aria-labelledby="checklistModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="checklistModalLabel">
+                                                                                    Re-assigned Checklist for
+                                                                                    {{ $shows->name }}
+                                                                                </h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <!-- Inspection Response Form -->
+                                                                                <form action="{{ route('responce.store') }}"
+                                                                                    enctype="multipart/form-data"
+                                                                                    method="POST">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="location_id"
+                                                                                        value="{{ $shows->id }}"
+                                                                                        id="">
+                                                                                    @foreach ($reAssignItems as $checklist)
+                                                                                        <li
+                                                                                            class="text-uppercase font-weight-bold my-2">
+                                                                                            {{ $checklist->name }}</li>
+                                                                                        <ul>
+                                                                                            @foreach ($checklist->checklistItems as $item)
+                                                                                                <li class="my-2">
+                                                                                                    {{ $item->description }}
+                                                                                                    <input type="hidden"
+                                                                                                        name="checklist_item_id[]"
+                                                                                                        value="{{ $item->id }}"
+                                                                                                        id="">
+                                                                                                    <input type="hidden"
+                                                                                                        name="checklist_id[]"
+                                                                                                        value="{{ $checklist->id }}"
+                                                                                                        id="">
+                                                                                                    <br>
+                                                                                                    <label
+                                                                                                        for="rating_{{ $item->id }}">Rating:</label>
+                                                                                                    <select name="rating[]"
+                                                                                                        id="rating_{{ $item->id }}"
+                                                                                                        class="form-select">
+                                                                                                        <option
+                                                                                                            value="green">
+                                                                                                            Green</option>
+                                                                                                        <option
+                                                                                                            value="yellow">
+                                                                                                            Yellow</option>
+                                                                                                        <option
+                                                                                                            value="red">
+                                                                                                            Red</option>
+                                                                                                    </select>
+                                                                                                    <br>
+                                                                                                    <label
+                                                                                                        for="remarks_{{ $item->id }}">Remarks:</label>
+                                                                                                    <textarea class="form-control" name="remarks[]" id="remarks_{{ $item->id }}"></textarea>
+                                                                                                </li>
+                                                                                            @endforeach
+
+                                                                                        </ul>
+                                                                                    @endforeach
+
+                                                                                    <div class="mb-3">
+                                                                                        <label for="remarks"
+                                                                                            class="form-label">Notes:</label>
+                                                                                        <textarea class="form-control" name="notes" id="remarks"></textarea>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                for="exampleInputFile">File
+                                                                                            </label>
+                                                                                            <div class="input-group">
+                                                                                                <div class="custom-file">
+                                                                                                    <input type="file"
+                                                                                                        class="custom-file-input"
+                                                                                                        accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
+                                                                                                        id="exampleInputFile"
+                                                                                                        name="file">
+                                                                                                    <p class="custom-file-label"
+                                                                                                        id="selectedFileName"
+                                                                                                        for="exampleInputFile">
+                                                                                                        Choose
+                                                                                                        file</p>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-success">Submit
+                                                                                        Inspection</button>
+                                                                                </form>
+
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                             <a class="btn btn-info"
                                                                 href="{{ route('responce.show', $shows->id) }}">Show</a>
                                                             <button class="btn btn-primary" data-toggle="modal"
@@ -71,7 +183,8 @@
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title"
                                                                                 id="checklistModalLabel">
-                                                                                Checklist Items for {{ $shows->name }}</h5>
+                                                                                Checklist Items for {{ $shows->name }}
+                                                                            </h5>
                                                                             <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
@@ -79,7 +192,8 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <!-- Given Response Form -->
-                                                                            <form action="{{ route('responce.store') }}" enctype="multipart/form-data"
+                                                                            <form action="{{ route('responce.store') }}"
+                                                                                enctype="multipart/form-data"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 <input type="hidden" name="location_id"
@@ -131,7 +245,8 @@
                                                                                         </label>
                                                                                         <div class="input-group">
                                                                                             <div class="custom-file">
-                                                                                                <input type="file" accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
+                                                                                                <input type="file"
+                                                                                                    accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
                                                                                                     class="custom-file-input"
                                                                                                     id="exampleInputFile"
                                                                                                     name="file">
@@ -145,8 +260,9 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     @if (isset($item->notess->file))
-
-                                                                                    <img src="{{asset('storage/'.$item->notess->file)}}" alt="" srcset="" class="img-thumbnail">
+                                                                                        <img src="{{ asset('storage/' . $item->notess->file) }}"
+                                                                                            alt="" srcset=""
+                                                                                            class="img-thumbnail">
                                                                                     @endif
                                                                                 </div>
                                                                                 <button type="submit"
@@ -156,7 +272,8 @@
                                                                         </div>
 
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary"
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
                                                                                 data-dismiss="modal">Close</button>
                                                                         </div>
                                                                     </div>
@@ -164,11 +281,12 @@
                                                             </div>
                                                         @else
                                                             <button class="btn btn-primary" data-toggle="modal"
-                                                                data-target="#checklistModal_{{ $shows->id }}">Response</button>
+                                                                data-target="#achecklistModal_{{ $shows->id }}">Response</button>
                                                             <!-- Modal for Checklist Items -->
-                                                            <div class="modal fade" id="checklistModal_{{ $shows->id }}"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="checklistModalLabel" aria-hidden="true">
+                                                            <div class="modal fade"
+                                                                id="achecklistModal_{{ $shows->id }}" tabindex="-1"
+                                                                role="dialog" aria-labelledby="checklistModalLabel"
+                                                                aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
@@ -183,7 +301,8 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <!-- Inspection Response Form -->
-                                                                            <form action="{{ route('responce.store') }}" enctype="multipart/form-data"
+                                                                            <form action="{{ route('responce.store') }}"
+                                                                                enctype="multipart/form-data"
                                                                                 method="POST">
                                                                                 @csrf
                                                                                 <input type="hidden" name="location_id"
@@ -238,7 +357,8 @@
                                                                                         <div class="input-group">
                                                                                             <div class="custom-file">
                                                                                                 <input type="file"
-                                                                                                    class="custom-file-input" accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
+                                                                                                    class="custom-file-input"
+                                                                                                    accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
                                                                                                     id="exampleInputFile"
                                                                                                     name="file">
                                                                                                 <p class="custom-file-label"

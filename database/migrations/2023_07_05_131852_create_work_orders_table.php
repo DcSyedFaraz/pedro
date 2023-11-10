@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('status');
             $table->integer('deadline');
             $table->integer('payment_info');
+            $table->integer('priority');
             $table->timestamps();
         });
     }

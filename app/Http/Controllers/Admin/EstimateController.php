@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Estimate;
 use App\Models\EstimatePrimaryContact;
 use App\Models\Job;
+use App\Models\JobPrimaryContact;
 use App\Models\User;
 use App\Models\job_Category;
 use App\Models\JobSubCategory;
 use App\Models\job_priority_category;
 use App\Models\job_source_category;
+use DB;
 use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -269,15 +271,69 @@ class EstimateController extends Controller
         return redirect()->back()->with('success', 'Primary Contact deleted successfully');
     }
 
-    public function updateSelectedJobs(Request $request)
+    public function updateSelectedJobs($id)
     {
-        $SelectJob = $request->selectedJobs;
-        foreach ($SelectJob as $jobs) {
-            $job = Job::where('id', $jobs)->first();
-            $job->estimate_id = $request->estimate_id;
-            $job->mark_description = $request->markDescription;
-            $job->save();
+        // return $id;
+        try {
+            DB::beginTransaction();
+        $estimate = Estimate::find($id);
+
+        $job = new Job();
+        $job->name = $estimate->name;
+        $job->estimate_id = $estimate->id; 
+        $job->customer_id = $estimate->customer_id;
+        $job->account_manager_id = $estimate->account_manager_id;
+        $job->user_id = $estimate->user_id;
+        $job->location_name = $estimate->location_name;
+        $job->location_gated_property = $estimate->location_gated_property;
+        $job->location_address = $estimate->location_address;
+        $job->location_unit = $estimate->location_unit;
+        $job->location_city = $estimate->location_city;
+        $job->location_state = $estimate->location_state;
+        $job->location_zipcode = $estimate->location_zipcode;
+        $job->job_cat_id = $estimate->job_cat_id;
+        $job->job_sub_cat_id = $estimate->job_sub_cat_id;
+        $job->job_sub_description = $estimate->job_sub_description;
+        $job->job_description = $estimate->job_description;
+        $job->po_no = $estimate->po_no;
+        $job->job_source = $estimate->job_source;
+        $job->agent = $estimate->agent;
+        $job->first_name = $estimate->first_name;
+        $job->last_name = $estimate->last_name;
+        $job->customer_homeowner = $estimate->customer_homeowner;
+        $job->customer_unit_cordination = $estimate->customer_unit_cordination;
+        $job->current_status = $estimate->current_status;
+        $job->image = $estimate->image;
+        $job->document = $estimate->document;
+        $job->start_date = $estimate->start_date;
+        $job->end_date = $estimate->end_date;
+        $job->start_duration = $estimate->start_duration;
+        $job->end_duration = $estimate->end_duration;
+        $job->assigned_tech = $estimate->assigned_tech;
+        $job->notify_tech_assign = $estimate->notify_tech_assign;
+        $job->notes_for_tech = $estimate->notes_for_tech;
+        $job->completion_notes = $estimate->completion_notes;
+        $job->scheduled_at = $estimate->scheduled_at;
+
+        $job->save();
+
+        $estimatePrimaryContacts = EstimatePrimaryContact::where('estimate_id', $id)->get();
+
+        foreach ($estimatePrimaryContacts as $estimatePrimaryContact) {
+            $jobPrimaryContact = new JobPrimaryContact();
+            $jobPrimaryContact->job_id = $job->id;
+            $jobPrimaryContact->phone = $estimatePrimaryContact->phone;
+            $jobPrimaryContact->ext = $estimatePrimaryContact->ext;
+            $jobPrimaryContact->email = $estimatePrimaryContact->email;
+            $jobPrimaryContact->save();
         }
-        return redirect()->route('estimates.index')->with('success', 'Job Selected Successfully');
+        DB::commit();
+        return redirect()->back()->with('success', 'Estimate data copied to Job successfully');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        // throw $e;
+        return redirect()->back()->with('error', 'An error occurred. Please try again.');
+    }
+
     }
 }

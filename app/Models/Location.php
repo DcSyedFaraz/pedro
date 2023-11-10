@@ -9,4 +9,5 @@ class Location extends Model
 {
     use HasFactory;
     protected $table ='location_inspection_checklist';
+    protected $guarded = [];
 }

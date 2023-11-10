@@ -21,6 +21,10 @@ class Estimate extends Model
     {
         return $this->hasOne(User::class,'id','customer_id');
     }
+    public function jobs()
+    {
+        return $this->hasOne(Job::class,'estimate_id');
+    }
 
     public function job_category()
     {

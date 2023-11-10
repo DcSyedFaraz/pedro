@@ -19,8 +19,8 @@ class VendorController extends Controller
         // Retrieve and display assigned work orders for the vendor
         $WorkOrders = WorkOrders::where('vendor_id', auth()->user()->id)
             ->whereNotIn('status', ['declined'])
-            ->get();
-
+            ->orderby('priority','asc')->get();
+// return $WorkOrders;
         return view('vendor.work_orders.index', compact('WorkOrders'));
     }
 

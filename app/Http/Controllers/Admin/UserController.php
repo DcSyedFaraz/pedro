@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Customer;
 use App\Models\PrimaryContact;
 use App\Models\StoredService;
+use App\Models\WorkOrders;
 use App\Rules\PersonalEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,6 +24,24 @@ class UserController extends Controller
         $data = User::orderBy('id', 'DESC')->get();
         return view('admin.users.index', compact('data'))
            ;
+    }
+    public function sort(Request $request)
+    {
+        // dd($request->input('order'));
+        $newOrder = $request->input('order');
+
+        // Assuming you have an Eloquent model named 'Item' and a 'priority' column.
+        // You may need to adjust this based on your actual model and column names.
+        foreach ($newOrder as $position => $itemId) {
+            $item = WorkOrders::find($itemId);
+            if ($item) {
+                $item->update(['priority' => $position + 1]); // +1 to start from 1
+            }
+        }
+
+        return response()->json(['message' => 'Priorities updated successfully']);
+    
+
     }
     public function manager(Request $request)
     {

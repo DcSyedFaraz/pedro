@@ -38,7 +38,7 @@ class CheckListController extends Controller
     {
         $job = Job::find($id);
         $response = InspectionResponse::with('checklistItem','checklistItem.inspectionChecklist')->where('location_id',$id)->get();
-        return view('admin.checklist.response', compact('response','job'));
+        return view('admin.checklist.response', compact('response','job','id'));
     }
 
     /**

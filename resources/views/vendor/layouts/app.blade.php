@@ -396,8 +396,8 @@
 
     <script>
         $(function() {
-            $('#summernote').summernote();
-            $('#summernote1').summernote();
+            // $('#summernote').summernote();
+            // $('#summernote1').summernote();
 
             $("#example1").DataTable({
                 "responsive": true,
@@ -417,7 +417,7 @@
         });
     </script>
 
-
+@yield('scripts')
 </body>
 
 </html>

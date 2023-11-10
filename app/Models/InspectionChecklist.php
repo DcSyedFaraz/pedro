@@ -15,7 +15,7 @@ class InspectionChecklist extends Model
 }
 public function checklistItems()
 {
-    return $this->hasMany(ChecklistItem::class);
+    return $this->hasMany(ChecklistItem::class,'inspection_checklist_id');
 }
 public function users()
 {

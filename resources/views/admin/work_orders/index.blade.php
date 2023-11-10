@@ -52,7 +52,7 @@
                   @foreach($WorkOrders as $workOrder)
 
 
-                  <tr>
+                  <tr data-id="{{ $workOrder->id }}">
                     <td>{{ $workOrder->id ?? '' }}</td>
                     <td>{{ $workOrder->jobname->name ?? '' }}</td>
                     <td>{{ $workOrder->vendor->name ?? '' }}</td>
@@ -104,7 +104,6 @@
   </section>
   <!-- /.content -->
 </div>
-
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 

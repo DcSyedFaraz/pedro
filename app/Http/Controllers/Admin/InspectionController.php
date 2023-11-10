@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\ChecklistItem;
 use App\Models\Inspection;
 use App\Models\InspectionChecklist;
+use App\Models\InspectionResponse;
+use App\Models\Location;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -141,4 +144,39 @@ class InspectionController extends Controller
         }
         return redirect()->back()->with('error', 'Sheet deleted Successfully');
     }
+
+
+
+    public function reassign_checklist($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $insresp = InspectionResponse::where("rating", "red")->where("location_id", $id)->get();
+
+            $inc = InspectionChecklist::create([
+                "name" => "Re-assign",
+                "createdBy" => Auth::id(),
+            ]);
+
+            foreach ($insresp as $k => $v) {
+                $inc->checklistItems()->create([
+                    "description" => $v->checklistItem->description,
+                ]);
+            }
+
+            Location::create([
+                "job_id" => $id,
+                "inspection_checklist_id" => $inc->id,
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Re-assigned Red points');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'An error occurred during the re-assignment.');
+        }
+    }
+
 }

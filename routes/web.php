@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('userproblem', VendorProblemController::class);
     //Responce
     Route::resource('responce', ResponceController::class);
+
 });
 
 
@@ -133,6 +134,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     // Routes for work
     // Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('.index');
     Route::resource('work_orders', adminWorkOrderController::class);
+    Route::get('reassign-checklist/{id}', [InspectionController::class,"reassign_checklist"])->name("reassign_checklist");
 
 
 
@@ -186,6 +188,8 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 });
 
 Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], function () {
+    Route::post('/sort', [UserController::class, 'sort'])->name('sort');
+
 
     //Manage Work Order & Execute Work Order
     Route::resource('manage_work_orders', vendorController::class);
@@ -235,7 +239,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'role:account manag
     Route::resource('problem', ProblemReportingController::class);
 
     Route::resource('estimates', EstimateController::class);
-    Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
+    Route::post('estimates/update-selected-jobs/{id}', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
     Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
 
     //Ready Invoice
