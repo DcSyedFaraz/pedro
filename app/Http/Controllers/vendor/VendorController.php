@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
+    public function schedule()
+    {
+        $jobs = Job::all();
+
+        return view('vendor.schedule.schedule', compact('jobs'));
+    }
     public function index()
     {
         // Retrieve and display assigned work orders for the vendor

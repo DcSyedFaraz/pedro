@@ -183,15 +183,15 @@ $(document).ready(function () {
         }
 
         // Validate Job Sub Category
-        const jobSubcategoryId = $('#jobSubcategory').val();
-        if (jobSubcategoryId === '') {
-            $('#jobSubcategory').addClass('error');
-            $('#jobSubcategory_error').text('select a job subcategory');
-            isValid = false;
-        } else {
-            $('#jobSubcategory').removeClass('error');
-            $('#jobSubcategory_error').text('');
-        }
+        // const jobSubcategoryId = $('#jobSubcategory').val();
+        // if (jobSubcategoryId === '') {
+        //     $('#jobSubcategory').addClass('error');
+        //     $('#jobSubcategory_error').text('select a job subcategory');
+        //     isValid = false;
+        // } else {
+        //     $('#jobSubcategory').removeClass('error');
+        //     $('#jobSubcategory_error').text('');
+        // }
 
         // Validate Job Source
         const jobSource = $('#job_sour').val();

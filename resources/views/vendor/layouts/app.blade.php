@@ -159,9 +159,16 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('supply.index') }}"
-                                class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('supply.*') ? 'active' : '' }} ">
                                 <i class="fas fa-truck nav-icon text-danger"></i>
                                 <p>Supply Request</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('schedule.index') }}"
+                                class="nav-link {{ request()->routeIs('schedule.*') ? 'active' : '' }}">
+                                <i class="fas fa-truck nav-icon text-danger"></i>
+                                <p>Schedule</p>
                             </a>
                         </li>
                         <!--Start Accounting Modules -->

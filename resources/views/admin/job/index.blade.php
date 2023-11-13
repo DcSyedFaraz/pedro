@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 @section('content')
@@ -29,8 +29,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                  <h3 class="card-title">User Managment</h3>
-                </div> -->
+                          <h3 class="card-title">User Managment</h3>
+                        </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success" href="{{ route('job.create') }}"> Create Job </a>
@@ -40,17 +40,19 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>S.N</th>
                                             <th>Customer Name</th>
-                                            <th>Job Name</th>
+                                            <th>Location Name</th>
                                             <th>Assigned Manager</th>
                                             <th>Status</th>
+                                            <th>Created at</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @if ($job)
-                                            @foreach ($job as $jobs)
+                                            @foreach ($job as $key => $jobs)
                                                 @php
                                                     $phones = isset($jobs->phone) ? $jobs->phone : [];
                                                     $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
@@ -62,63 +64,48 @@
                                                     $emailList = implode(',', $emailAddresses);
                                                 @endphp
                                                 <tr>
+                                                    <td>{{ $key+1 }}</td>
                                                     <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
-                                                    <td>{{ isset($jobs->name) ? $jobs->name : '' }}
+                                                    <td>{{ isset($jobs->location_name) ? $jobs->location_name : '' }}
                                                     </td>
                                                     <td>
                                                         {{ isset($jobs->account_manager_id) ? $jobs->manager->name : 'null' }}
                                                     </td>
-                                                    @if ($jobs->current_status == 1)
-                                                        <td class="text-primary">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 2)
-                                                        <td class="text-secondary">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 3)
-                                                        <td class="text-warning">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 4)
-                                                        <td class="text-info">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 5)
-                                                        <td class="text-light bg-dark">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 6)
-                                                        <td class="text-dark">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 7)
-                                                        <td class="text-danger">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 8)
-                                                        <td class="text-muted">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @elseif($jobs->current_status == 9)
-                                                        <td class="text-success">
-                                                            <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
-                                                    @else
-                                                        <td class="text-success"><strong>---</strong></td>
-                                                    @endif
+                                                    @php
+                                                        $statusClasses = [
+                                                            1 => 'text-primary',
+                                                            2 => 'text-secondary',
+                                                            3 => 'text-warning',
+                                                            4 => 'text-info',
+                                                            5 => 'text-light bg-dark',
+                                                            6 => 'text-dark',
+                                                            7 => 'text-danger',
+                                                            8 => 'text-muted',
+                                                            9 => 'text-success',
+                                                        ];
+                                                        $parsedStatus = isset($jobs) ? $jobs->parsedStatus : '---';
+                                                        $currentStatus = isset($jobs) ? $jobs->current_status : null;
+                                                    @endphp
+
+                                                    <td class="{{ $statusClasses[$currentStatus] ?? 'text-success' }}">
+                                                        <strong>{{ $parsedStatus }}</strong>
+                                                    </td>
+<td>
+    {{ $jobs->created_at->diffforhumans() }}
+</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                                        <button type="button" class="btn-sm btn btn-success"
+                                                            data-toggle="modal"
                                                             data-target="#exampleModal{{ $jobs->id }}">
                                                             Assign
                                                         </button>
-                                                        <a class="btn btn-primary"
+                                                        <a class="btn-sm btn btn-primary"
                                                             href="{{ route('job.edit', $jobs->id) }}">Edit</a>
                                                         <form action="{{ route('job.destroy', $jobs->id) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger"
+                                                            <button type="submit" class="btn-sm btn btn-danger"
                                                                 onclick="return confirm('Are you sure you want to delete this job?')">Delete</button>
                                                         </form>
 
@@ -149,12 +136,11 @@
                                                                                 <option value="">Choose any
                                                                                     option</option>
                                                                                 @foreach ($manager as $data)
-                                                                                <option
-                                                                                {{ isset($jobs->account_manager_id) && $data->id == old('account_manager_id', $jobs->account_manager_id) ? 'selected' : '' }}
-                                                                                value="{{ $data->id }}">
-                                                                                {{ ucfirst($data->name) }}
-                                                                            </option>
-
+                                                                                    <option
+                                                                                        {{ isset($jobs->account_manager_id) && $data->id == old('account_manager_id', $jobs->account_manager_id) ? 'selected' : '' }}
+                                                                                        value="{{ $data->id }}">
+                                                                                        {{ ucfirst($data->name) }}
+                                                                                    </option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>

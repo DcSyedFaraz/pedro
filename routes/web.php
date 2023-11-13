@@ -188,9 +188,10 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'role:User']], funct
 });
 
 Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], function () {
+
     Route::post('/sort', [UserController::class, 'sort'])->name('sort');
 
-
+    Route::get('/schedule', [vendorController::class, 'schedule'])->name('schedule.index');
     //Manage Work Order & Execute Work Order
     Route::resource('manage_work_orders', vendorController::class);
 
@@ -238,8 +239,9 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'role:account manag
     //Problem Reporting
     Route::resource('problem', ProblemReportingController::class);
 
+    Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
     Route::resource('estimates', EstimateController::class);
-    Route::post('estimates/update-selected-jobs/{id}', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
+    Route::get('/estimatess/destroy/{id}', [EstimateController::class, 'destroy'])->name('estimates.destroy');
     Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
 
     //Ready Invoice

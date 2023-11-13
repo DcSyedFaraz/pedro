@@ -22,11 +22,12 @@ class JobController extends Controller
         $now = now();
         $next72Hours = now()->addHours(72);
 
-        $job = Job::with('customer', 'job_category', 'job_prioirty')->whereNull('scheduled_at') // Change 'scheduled_at' to your actual column name
-            ->orWhere(function ($query) use ($now, $next72Hours) {
-                $query->where('scheduled_at', '>', $next72Hours);
-                //   ->orWhere('due_at', '<', $now);
-            })->get();
+        // $job = Job::with('customer', 'job_category', 'job_prioirty')->whereNull('scheduled_at') // Change 'scheduled_at' to your actual column name
+        //     ->orWhere(function ($query) use ($now, $next72Hours) {
+        //         $query->where('scheduled_at', '>', $next72Hours);
+        //         //   ->orWhere('due_at', '<', $now);
+        //     })->get();
+        $job = Job::with('customer', 'job_category', 'job_prioirty')->orderby('created_at','desc')->get();
             $manager = User::withRole('account manager')->get();
 
 

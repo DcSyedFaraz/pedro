@@ -166,7 +166,7 @@
                         <!--Start Miscellaneous Modules -->
                         <li
                             class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('estimates.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('estimates.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('work_orders.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('purchase-orders.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('job-category.index') ? 'menu-open' : '' }}
@@ -178,7 +178,7 @@
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('customer.index') ? 'active' : '' }}
-                                {{ request()->routeIs('estimates.index') ? 'active' : '' }}
+                                {{ request()->routeIs('estimates.*') ? 'active' : '' }}
                                 {{ request()->routeIs('work_orders.index') ? 'active' : '' }}
                                 {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
                                 {{ request()->routeIs('job-category.index') ? 'active' : '' }}
@@ -211,7 +211,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('estimates.index') }}"
-                                        class="nav-link {{ request()->routeIs('estimates.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('estimates.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Estimates</p>
                                     </a>
@@ -276,7 +276,7 @@
                         <!--End Miscellaneous Modules -->
                         <li
                             class="nav-item
-                            {{ request()->routeIs('job.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('job.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('today.job.schedule') ? 'menu-open' : '' }}
                             {{ request()->routeIs('today.job.next.48.hours') ? 'menu-open' : '' }}
                             {{ request()->routeIs('job.needing.scheduling') ? 'menu-open' : '' }}
@@ -284,13 +284,13 @@
                             {{ request()->routeIs('jobs.complete') ? 'menu-open' : '' }}
                             {{ request()->routeIs('jobperregion.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('jobpermanager.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('readyinvoice.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('readyinvoice.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('location.index') ? 'menu-open' : '' }}
 
                              ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                            {{ request()->routeIs('job.index') ? 'active' : '' }}
+                            {{ request()->routeIs('job.*') ? 'active' : '' }}
                             {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}
                             {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}
                             {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}
@@ -298,7 +298,7 @@
                             {{ request()->routeIs('jobs.complete') ? 'active' : '' }}
                             {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}
                             {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}
-                            {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}
+                            {{ request()->routeIs('readyinvoice.*') ? 'active' : '' }}
                             {{ request()->routeIs('location.index') ? 'active' : '' }}
 
                             {{ request()->routeIs('ins_category.index') ? 'active' : '' }}">
@@ -311,7 +311,7 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('job.index') }}"
-                                        class="nav-link {{ request()->routeIs('job.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('job.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Job List</p>
                                     </a>
@@ -360,7 +360,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('readyinvoice.index') }}"
-                                        class="nav-link {{ request()->routeIs('readyinvoice.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('readyinvoice.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ready to be invoiced</p>
                                     </a>

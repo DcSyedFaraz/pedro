@@ -29,56 +29,71 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                              <h3 class="card-title">User Managment</h3>
-                            </div> -->
+                                  <h3 class="card-title">User Managment</h3>
+                                </div> -->
                             <!-- /.card-header -->
-                            <div class="card-header">
-                                <a class="btn btn-success" href="{{ route('estimates.create') }}"> Create Estimates </a>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Customer Name</th>
-                                            <th>Jobs</th>
-                                            <th>Primary Contact</th>
-                                            <th>E-Signature</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
+                            <form action="{{ route('estimates.updateSelectedJobs') }}" method="POST">
+                                @csrf
+                                <div class="card-header">
+                                    <a class="btn btn-success" href="{{ route('estimates.create') }}"> Create Estimates </a>
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary dltBtn" id="convertSelectedBtn">Convert Selected</button>
 
-                                    <tbody>
-                                        @if ($estimates)
-                                            @foreach ($estimates as $estimate)
-                                                @php
-                                                    $phones = isset($estimate->phone) ? $estimate->phone : [];
-                                                    $ext_ids = isset($estimate->ext_id) ? $estimate->ext_id : [];
-                                                    $exts = isset($estimate->ext) ? $estimate->ext : [];
-                                                    $emailAddresses = isset($estimate->email) ? $estimate->email : [];
-                                                    $phone = implode(',', $phones);
-                                                    $ext_id = implode(',', $ext_ids);
-                                                    $ext = implode(',', $exts);
-                                                    $emailList = implode(',', $emailAddresses);
-                                                @endphp
-                                                <tr>
-                                                    <td>{{ isset($estimate->customer->name) ? $estimate->customer->name : '' }}
-                                                    </td>
-                                                    <td>{{ isset($estimate->job_category->name) ? $estimate->job_category->name : '' }}
-                                                    </td>
-                                                    <td>Primary Contact:
-                                                        {{ $estimate->first_name . '-' . $estimate->last_name }}
-                                                        </br> {{ $emailList }}
-                                                        </br> Phone: {{ $phone }} Ext: {{ $ext }}
-                                                    </td>
-                                                    <td>
-                                                        @if (isset($estimate->signature))
-                                                            <a href="{{ $estimate->signature }}" target="blank"
-                                                                class="btn btn-warning">E-Signature</a>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Select</th>
+                                                <th>Customer Name</th>
+                                                <th>Location Name</th>
+                                                <th>Primary Contact</th>
+                                                <th>E-Signature</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @if ($estimates)
+                                                @foreach ($estimates as $estimate)
+                                                    @php
+                                                        $phones = isset($estimate->phone) ? $estimate->phone : [];
+                                                        $ext_ids = isset($estimate->ext_id) ? $estimate->ext_id : [];
+                                                        $exts = isset($estimate->ext) ? $estimate->ext : [];
+                                                        $emailAddresses = isset($estimate->email) ? $estimate->email : [];
+                                                        $phone = implode(',', $phones);
+                                                        $ext_id = implode(',', $ext_ids);
+                                                        $ext = implode(',', $exts);
+                                                        $emailList = implode(',', $emailAddresses);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>
+                                                             @if (!empty($estimate->jobs))
+                                                            <span class="badge badge-primary">Converted to job</span>
+                                                        @else
+                                                        <input type="checkbox" name="selected_estimates[]" class="form-control form-control-sm"
+                                                        value="{{ $estimate->id }}">
                                                         @endif
-                                                    </td>
-                                                    <td>
-                                                        {{-- @if (!empty($estimate->jobs))
+
+                                                        </td>
+                                                        <td>{{ isset($estimate->customer->name) ? $estimate->customer->name : '' }}
+                                                        </td>
+                                                        <td>{{ isset($estimate->location_name) ? $estimate->location_name : '' }}
+                                                        </td>
+                                                        <td>Primary Contact:
+                                                            {{ $estimate->first_name . '-' . $estimate->last_name }}
+                                                            </br> {{ $emailList }}
+                                                            </br> Phone: {{ $phone }} Ext: {{ $ext }}
+                                                        </td>
+                                                        <td>
+                                                            @if (isset($estimate->signature))
+                                                                <a href="{{ $estimate->signature }}" target="blank"
+                                                                    class="btn btn-warning">E-Signature</a>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            {{-- @if (!empty($estimate->jobs))
                                                             <span class="badge badge-primary">Converted to job</span>
                                                         @else
                                                             <form
@@ -89,24 +104,24 @@
                                                                    >Convert</button>
                                                             </form>
                                                         @endif --}}
-                                                        <a class="btn btn-success"
-                                                            href="{{ route('estimates.edit', $estimate->id) }}">Edit</a>
-                                                        <form action="{{ route('estimates.destroy', $estimate) }}"
-                                                            method="POST" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this estimate?')">Delete</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
-                                    </tbody>
-                                </table>
-
-                            </div>
-                            <!-- /.card-body -->
+                                                            <a class="btn btn-success"
+                                                                href="{{ route('estimates.edit', $estimate->id) }}">Edit</a>
+                                                            {{-- <form action="{{ route('estimates.destroy', $estimate) }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE') --}}
+                                                                <a href="{{ route('estimates.destroy', $estimate->id) }}" class="btn btn-danger"
+                                                                    onclick="return confirm('Are you sure you want to delete this estimate?')">Delete</a>
+                                                            {{-- </form> --}}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </form>
                         </div>
                         <!-- /.card -->
                     </div>
@@ -125,10 +140,18 @@
 
 @endsection
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 
     <script>
+         $(document).ready(function() {
+        $('#convertSelectedBtn').prop('disabled', true);
+
+        $('input[type="checkbox"]').change(function() {
+            var anyCheckboxChecked = $('input[type="checkbox"]:checked').length > 0;
+            $('#convertSelectedBtn').prop('disabled', !anyCheckboxChecked);
+        });
+    });
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -143,7 +166,7 @@
                 swal({
 
                         title: "Confirmation",
-                        text: "Are you sure you want to convert this estimate to a job?",
+                        text: "Are you sure you want to convert these estimates to a job?",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
