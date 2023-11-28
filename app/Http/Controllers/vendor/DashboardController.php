@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProblemReporting;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -34,27 +35,27 @@ class DashboardController extends Controller
     public function index()
     {
         // return Auth::user();
-        $data['users'] = User::all()->count();
-        
+        $data['reports'] = ProblemReporting::where('createdBy', auth()->user()->id)->count();
+
         return view('vendor.dashboard',$data);
     }
-    
+
     public function profile()
     {
         return view('vendor.profile');
     }
-    
+
 
     public function UserProfileUpdate(Request $request)
     {
         $id = Auth::user()->id;
-       
+
         $this->validate($request, [
             'first_name' => 'nullable',
             'last_name' => 'nullable',
             'email' => 'nullable',
         ]);
-    
+
         $password = Hash::make($request->password);
 
         $user = User::find($id);
@@ -69,10 +70,10 @@ class DashboardController extends Controller
 
     }
 
-    
-    
+
+
     public function UserEditProfile(Request $request){
-   
+
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
         $user->paypal_email = $request->paypal_email;
@@ -84,7 +85,7 @@ class DashboardController extends Controller
         return redirect()->back();
     }
     public function UserBankDetail(Request $request){
-        
+
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
         $user->account_number = $request->account_number;
@@ -110,7 +111,7 @@ class DashboardController extends Controller
           'password_confirmation' => 'required',
         ]);
 
-        if(Hash::check($request->oldpassword, $userPassword)) 
+        if(Hash::check($request->oldpassword, $userPassword))
         {
             return back()->with(['error'=>'Old password not match']);
         }
@@ -122,5 +123,5 @@ class DashboardController extends Controller
     }
 
 
-    
+
 }

@@ -379,13 +379,13 @@ $(document).ready(function () {
     }
 
     // Handle form submission
-    $('#myForm').submit(function (e) {
-        e.preventDefault();
-        if (validateForm()) {
-            // Submit the form if valid
-            this.submit();
-        }
-    });
+    // $('#myForm').submit(function (e) {
+    //     e.preventDefault();
+    //     if (validateForm()) {
+    //         // Submit the form if valid
+    //         this.submit();
+    //     }
+    // });
 
     // Clear error messages on input focus
     $('input, select, textarea').focus(function () {
@@ -684,7 +684,6 @@ $(document).ready(function () {
         var newRow = `
             <tr>
                 <td colspan="2"><input type="text" class="form-control est_inv_desc" name="description" placeholder="Description"></td>
-                <td><input type="text" class="form-control est_inv_whr" name="warehouse" placeholder="Warehouse"></td>
                 <td><input type="number" class="form-control est_inv_qty" name="qty_hrs" placeholder="Qty"></td>
                 <td><input type="number" class="form-control est_inv_rate" name="rate" placeholder="Rate"></td>
                 <td><input type="number" class="form-control est_inv_total" name="total" placeholder="Total" readonly></td>

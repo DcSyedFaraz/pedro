@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estimate;
+use App\Models\Inventory;
+use App\Models\Invoice;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -35,15 +39,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::all()->count();
+        $data['inventory'] = Inventory::all()->count();
+        $data['job'] = Job::all()->count();
+        $data['estimate'] = Estimate::all()->count();
+        $data['invoice'] = Invoice::where('status', 'paid')->avg('amount');
         return view('admin.dashboard',$data);
     }
-    
+
     public function profile()
     {
         return view('admin.profile');
     }
-    
+
     public function update(Request $request)
     {
         $id = Auth::user()->id;
@@ -51,9 +58,9 @@ class DashboardController extends Controller
             'name' => 'required',
             'phone' => 'required',
         ]);
-    
+
         $input = $request->all();
-    
+
         $user = User::find($id);
         $user->update($input);
 
@@ -77,7 +84,7 @@ class DashboardController extends Controller
           'password_confirmation' => 'required',
         ]);
 
-        if(Hash::check($request->oldpassword, $userPassword)) 
+        if(Hash::check($request->oldpassword, $userPassword))
         {
             return back()->with(['error'=>'Old password not match']);
         }
@@ -94,14 +101,14 @@ class DashboardController extends Controller
         $users =User::with('wallet')->where('role',3)->get();
         return view('admin.wallet.wallet_user_list',["users"=>$users]);
      }
- 
+
      public function walletdeposit($id){
          $users = User::findOrFail($id);
          return view('admin.wallet.deposit',["users"=>$users]);
      }
- 
+
      public function createdeposite(Request $request){
-         
+
         // dd($request->all());
          $id =$request->user_id;
             $deposit_amount=$request->dep_amount;
@@ -121,7 +128,7 @@ class DashboardController extends Controller
             // dd($users);
          return redirect()->back()->with('success','Wallet Amount Deposit Has been submitted successfully');
      }
- 
+
      public function walletwithdraw($id){
          $users = User::findOrFail($id);
          return view('admin.wallet.withdraw',["users"=>$users]);

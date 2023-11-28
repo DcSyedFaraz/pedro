@@ -32,13 +32,16 @@ class CheckListController extends Controller
         $locations = Job::get();
         $checklists = InspectionChecklist::get();
         $show = Job::with('inspectionChecklists')->get();
-        return view('admin.checklist.location', compact('locations','checklists','show'));
+        return view('admin.checklist.location', compact('locations', 'checklists', 'show'));
     }
     public function response($id)
     {
-        $job = Job::find($id);
-        $response = InspectionResponse::with('checklistItem','checklistItem.inspectionChecklist')->where('location_id',$id)->get();
-        return view('admin.checklist.response', compact('response','job','id'));
+        $response = InspectionResponse::selectRaw('MAX(id) as id, checklist_id, MAX(rating) as rating, MAX(remarks) as remarks')->with('checklistItem', 'checklistItem.inspectionChecklist')
+            ->where('location_id', $id)
+            ->groupBy('checklist_id')
+            ->get();
+        $new = InspectionResponse::where('location_id', $id)->first();
+        return view('manager.responce.show', compact('response', 'new', 'id'));
     }
 
     /**

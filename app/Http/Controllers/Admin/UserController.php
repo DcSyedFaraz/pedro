@@ -40,7 +40,7 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => 'Priorities updated successfully']);
-    
+
 
     }
     public function manager(Request $request)

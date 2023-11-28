@@ -54,6 +54,7 @@ return new class extends Migration
             $table->string('notify_tech_assign')->nullable();
             $table->string('notes_for_tech')->nullable();
             $table->string('completion_notes')->nullable();
+            $table->string('billable')->nullable();
             $table->timestamps();
         });
     }

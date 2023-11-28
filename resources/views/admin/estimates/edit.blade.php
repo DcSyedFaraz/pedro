@@ -63,12 +63,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Jobs</h1>
+                        <h1>Edit Estimate</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Jobs</li>
+                            <li class="breadcrumb-item active">Edit Estimate</li>
                         </ol>
                     </div>
                 </div>
@@ -111,11 +111,11 @@
                                                         aria-selected="true"><i class="fas fa-list-alt fa-fw"></i>
                                                         Summary</a>
                                                 </li>
-                                                <li class="nav-item">
+                                                {{-- <li class="nav-item">
                                                     <a class="nav-link" id="cut-tab" data-toggle="tab" href="#cut"
                                                         role="tab" aria-controls="cut" aria-selected="false"><i
                                                             class="fas fa-columns fa-fw"></i> Customer Flds</a>
-                                                </li>
+                                                </li> --}}
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="pic-tab" data-toggle="tab" href="#pic"
                                                         role="tab" aria-controls="pic" aria-selected="false"><i
@@ -136,10 +136,10 @@
                                                             role="tabpanel" aria-labelledby="sum-tab">
                                                             @include('admin.estimates.partials.summary')
                                                         </div>
-                                                        <div class="tab-pane fade" id="cut" role="tabpanel"
+                                                        {{-- <div class="tab-pane fade" id="cut" role="tabpanel"
                                                             aria-labelledby="cut-tab">
                                                             @include('admin.estimates.partials.customer_fields')
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="tab-pane fade show" id="pic" role="tabpanel"
                                                             aria-labelledby="pic-tab">
                                                             @include('admin.estimates.partials.picture')

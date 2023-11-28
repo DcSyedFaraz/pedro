@@ -75,16 +75,24 @@
                             UnRead Notifications</span>
                         <div class="dropdown-divider"></div>
                         @foreach (auth()->user()->unreadnotifications as $notifications)
-                            <a href="{{ route('markasread', $notifications->id) }}" class="dropdown-item my-2">
-                                <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}@if (isset($notifications->data['message']))
-                                    {{ $notifications->data['message'] }}
+
+                        <a href="{{ route('markasread', $notifications->id) }}" class="dropdown-item my-2 text-wrap ">
+                            <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
+
+                            @if (isset($notifications->data['message']))
+                                {{ $notifications->data['message'] }}
+
+                                <!-- Check if 'response' is present in the message and display the button -->
+                                @if (strpos($notifications->data['message'], 'response') !== false)
+                                    <a href="{{ route('location') }}" class="btn btn-success ml-1 btn-sm float-left">view reponse</a>
                                 @endif
+                            @endif
 
-                                <span
-                                    class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
-                            </a>
+                            <span class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                        </a>
 
-                            <div class="dropdown-divider "></div>
+                        {{-- <hr> --}}
+                            {{-- <div class="dropdown-divider "></div> --}}
                         @endforeach
                         <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
                             Notifications</a>
@@ -167,24 +175,18 @@
                         <li
                             class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('estimates.*') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('work_orders.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('work_orders.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('purchase-orders.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('job-category.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('job-sub-category.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('job-priority.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('job-source.index') ? 'menu-open' : '' }}
+
                             {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('technicians.*') ? 'menu-open' : '' }} ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('customer.index') ? 'active' : '' }}
                                 {{ request()->routeIs('estimates.*') ? 'active' : '' }}
-                                {{ request()->routeIs('work_orders.index') ? 'active' : '' }}
+                                {{ request()->routeIs('work_orders.*') ? 'active' : '' }}
                                 {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
-                                {{ request()->routeIs('job-category.index') ? 'active' : '' }}
-                                {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}
-                                {{ request()->routeIs('job-priority.index') ? 'active' : '' }}
-                                {{ request()->routeIs('job-source.index') ? 'active' : '' }}
+
                                 {{ request()->routeIs('inventory.index') ? 'active' : '' }}
 
                                 {{ request()->routeIs('technicians.*') ? 'active' : '' }} ">
@@ -218,7 +220,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('work_orders.index') }}"
-                                        class="nav-link {{ request()->routeIs('work_orders.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('work_orders.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Work Order List</p>
                                     </a>
@@ -237,40 +239,7 @@
                                         <p>Inventory</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inpection Category</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('job-category.index') }}"
-                                        class="nav-link {{ request()->routeIs('job-category.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Category</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('job-sub-category.index') }}"
-                                        class="nav-link {{ request()->routeIs('job-sub-category.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Sub Category</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('job-priority.index') }}"
-                                        class="nav-link {{ request()->routeIs('job-priority.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Priority</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('job-source.index') }}"
-                                        class="nav-link {{ request()->routeIs('job-source.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Source</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
                         <!--End Miscellaneous Modules -->
@@ -487,7 +456,7 @@
                                             <a href="{{ route('location') }}"
                                                 class="nav-link {{ request()->routeIs('location') ? 'active' : '' }} {{ request()->routeIs('adminresponse') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>location</p>
+                                                <p>location/Responce</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -728,27 +697,57 @@
                                 </li>
                             </ul>
                         </li>
-                        @can('general_setting')
-                            <li class="nav-item {{ request()->routeIs('general_setting.index') ? 'menu-open' : '' }} ">
-                                <a href="#"
-                                    class="nav-link nav-dropdown-toggle {{ request()->routeIs('general_setting.index') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-table"></i>
-                                    <p>
-                                        Manage General Setting
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('general_setting.index') }}"
-                                            class="nav-link {{ request()->routeIs('general_setting.index') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>General Setting</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endcan
+
+                        <li
+                            class="nav-item {{ request()->routeIs(['job-category.*', 'job-sub-category.*', 'job-priority.*', 'job-source.*'])
+                                ? 'menu-open'
+                                : '' }}">
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle {{ request()->routeIs(['job-category.*', 'job-sub-category.*', 'job-priority.*', 'job-source.*'])
+                                    ? 'active'
+                                    : '' }}">
+
+
+
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Job Settings
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="{{ route('job-category.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-category.*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-sub-category.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-sub-category.*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Sub Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-priority.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-priority.*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Priority</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('job-source.index') }}"
+                                        class="nav-link {{ request()->routeIs('job-source.*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Source</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li
                             class="nav-item {{ request()->routeIs('change_password') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
                             <a href="#"
@@ -760,19 +759,13 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-
-                                <!-- @can('permission-list')
-    -->
-                                    <li class="nav-item">
-                                        <a href="{{ route('profile.index') }}"
-                                            class="nav-link {{ request()->routeIs('profile.index') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Profile</p>
-                                        </a>
-                                    </li>
-
-                                    <!--
-@endcan -->
+                                <li class="nav-item">
+                                    <a href="{{ route('profile.index') }}"
+                                        class="nav-link {{ request()->routeIs('profile.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Profile</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="{{ route('change_password') }}"
                                         class="nav-link {{ request()->routeIs('change_password') ? 'active' : '' }}">
@@ -784,21 +777,21 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('estimate_requests.index') }}"
-                                class="nav-link {{ request()->routeIs('estimate_requests.index') ? 'active' : '' }} {{ request()->routeIs('estimate_requests.show') ? 'active' : '' }} {{ request()->routeIs('estimate_requests.create') ? 'active' : '' }} {{ request()->routeIs('estimate_requests.edit') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('estimate_requests.*') ? 'active' : '' }} ">
+                                <i class="far fa-calendar-alt nav-icon text-warning"></i>
                                 <p>Estimate Request</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('supply.index') }}"
-                                class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                class="nav-link {{ request()->routeIs('supply.*') ? 'active' : '' }}">
+                                <i class="far fa-dot-circle nav-icon text-success"></i>
                                 <p>Supply Request</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('/logout') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-sign-out-alt nav-icon text-danger"></i>
                                 <p>Logout</p>
                             </a>
                         </li>
@@ -921,7 +914,7 @@
             $('#summernote1').summernote();
 
             $("#example1").DataTable({
-                "responsive": true,
+                "responsive": false,
                 "lengthChange": false,
                 "autoWidth": true,
                 "rowReorder": true,
@@ -931,7 +924,7 @@
                 "paging": true,
                 "lengthChange": true,
                 "searching": true,
-                "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
@@ -950,8 +943,25 @@
             }
         });
     </script>
-
-@yield('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#showDescription').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#descriptionContainer').fadeIn('slow');
+                } else {
+                    $('#descriptionContainer').fadeOut('slow');
+                }
+            });
+            $('#showBill').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#BillContainer').fadeIn('slow');
+                } else {
+                    $('#BillContainer').fadeOut('slow');
+                }
+            });
+        });
+    </script>
+    @yield('scripts')
 </body>
 
 </html>

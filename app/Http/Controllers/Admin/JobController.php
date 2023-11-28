@@ -114,6 +114,7 @@ class JobController extends Controller
         $job->notify_tech_assign = $request->notify_tech_assign;
         $job->notes_for_tech = $request->notes_for_tech;
         $job->completion_notes = $request->completion_notes;
+        $job->billable = $request->billable;
         $job->save();
 
         foreach ($request['phone'] as $key => $value) {
@@ -222,6 +223,7 @@ class JobController extends Controller
         $job->notify_tech_assign = $request->notify_tech_assign;
         $job->notes_for_tech = $request->notes_for_tech;
         $job->completion_notes = $request->completion_notes;
+        $job->billable = $request->billable;
         $job->save();
 
         $ProductandService = JobPrimaryContact::where('job_id', $id)->get();

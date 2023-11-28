@@ -223,16 +223,20 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="jobSubcategory">Job Sub Category</label>
-            <select id="jobSubcategory" name="job_sub_cat_id" class="form-control">
+            <label for="showDescription">Job Sub Category</label>
+            <input type="checkbox"
+                {{ isset($job->job_sub_cat_id) && $job->job_sub_cat_id ? 'checked' : '' }}
+                id="showDescription" name="job_sub_cat_id" class="form-control form-control-sm form-check">
+            {{-- <select id="jobSubcategory" name="job_sub_cat_id" class="form-control">
                 <option value="">Select a job subcategory</option>
-            </select>
+            </select> --}}
             <span class="error-message error-messages" id="jobSubcategory_error"></span><br>
         </div>
     </div>
 
 </div>
-<div class="row">
+<div class="row" id="descriptionContainer"
+    style="{{ isset($job->job_sub_cat_id) && $job->job_sub_cat_id ? '' : 'display: none;' }}">
     <div class="col-md-4">
         <strong>&nbsp;</strong>
     </div>
@@ -244,7 +248,6 @@
         </div>
     </div>
 </div>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <strong>Job Description</strong>
@@ -302,5 +305,13 @@
             <span class="error-message error-messages" id="customer_id_error"></span><br>
         </div>
 
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <label for="showBill">Billable?</label>
+        <input type="checkbox"
+            {{ isset($job->billable) && $job->billable ? 'checked' : '' }}
+            id="showBill" name="billable" class="form-control form-control-sm form-check">
     </div>
 </div>

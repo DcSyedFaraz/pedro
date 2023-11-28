@@ -54,9 +54,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                {{-- @foreach ($response->checklist as $checklist)
-                    <h3>{{$checklist->description}}</h3>
-                    @endforeach --}}
+
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -68,8 +66,8 @@
                                     <tbody>
                                         @foreach ($response as $responses)
                                             <tr>
-                                                <td>{{ $responses->checklistItem->inspectionChecklist->name }}</td>
-                                                <td>{{ $responses->checklistItem->description }}</td>
+                                                <td>{{ $responses->checklistItem->inspectionChecklist->name ?? '' }}</td>
+                                                <td>{{ $responses->checklistItem->description ?? '' }}</td>
                                                 <td>
                                                     @if ($responses->rating === 'red')
                                                         <span class="badge badge-danger">Red</span>

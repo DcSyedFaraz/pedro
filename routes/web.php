@@ -192,6 +192,7 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
     Route::post('/sort', [UserController::class, 'sort'])->name('sort');
 
     Route::get('/schedule', [vendorController::class, 'schedule'])->name('schedule.index');
+    Route::post('/update_job/{id}', [vendorController::class, 'Updateschedule'])->name('schedule.update');
     //Manage Work Order & Execute Work Order
     Route::resource('manage_work_orders', vendorController::class);
 

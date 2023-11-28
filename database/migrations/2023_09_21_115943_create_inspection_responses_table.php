@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('checklist_item_id');
             $table->string('rating');
             $table->text('remarks')->nullable();
+            $table->string('file_path')->nullable();
             $table->timestamps();
 
 

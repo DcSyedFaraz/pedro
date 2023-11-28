@@ -49,14 +49,14 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        @if ($shows->inspectionResponse->count() > 0 )
+                                                        @if ($shows->inspectionResponse->count() > 0)
                                                             @php
                                                                 $reAssignItems = $shows->inspectionChecklists->load('checklistItems')->filter(function ($item) {
                                                                     return str_contains($item->name, 'reasign');
                                                                 });
                                                             @endphp
                                                             {{-- @dd($reAssignItems) --}}
-                                                            @if ($reAssignItems->count() > 0 )
+                                                            @if ($reAssignItems->count() > 0)
                                                                 <button class="btn btn-danger btn-sm" data-toggle="modal"
                                                                     data-target="#rchecklistModal_">Re assigned</button>
                                                                 <!-- Modal for Checklist Items -->
@@ -170,7 +170,9 @@
                                                             @endif
                                                             <a class="btn btn-info"
                                                                 href="{{ route('responce.show', $shows->id) }}">Show</a>
-                                                            <button class="btn btn-primary" data-toggle="modal"
+                                                            <a class="btn btn-warning"
+                                                                href="{{ route('responce.edit', $shows->id) }}">Edit</a>
+                                                            {{-- <button class="btn btn-primary" data-toggle="modal"
                                                                 data-target="#checklistModal_{{ $shows->id }}">Update
                                                                 Response</button>
 
@@ -278,7 +280,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                         @else
                                                             <button class="btn btn-primary" data-toggle="modal"
                                                                 data-target="#achecklistModal_{{ $shows->id }}">Response</button>
@@ -341,6 +343,18 @@
                                                                                                 <label
                                                                                                     for="remarks_{{ $item->id }}">Remarks:</label>
                                                                                                 <textarea class="form-control" name="remarks[]" id="remarks_{{ $item->id }}"></textarea>
+                                                                                                <br>
+                                                                                                <div>
+
+                                                                                                    <input type="file"
+                                                                                                        class="form-control"
+                                                                                                        accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
+                                                                                                        id="exampleInputFile"
+                                                                                                        name="files[]">
+
+
+
+                                                                                                </div>
                                                                                             </li>
                                                                                         @endforeach
 
@@ -360,7 +374,7 @@
                                                                                                     class="custom-file-input"
                                                                                                     accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
                                                                                                     id="exampleInputFile"
-                                                                                                    name="file">
+                                                                                                    name="notesFile">
                                                                                                 <p class="custom-file-label"
                                                                                                     id="selectedFileName"
                                                                                                     for="exampleInputFile">

@@ -33,12 +33,12 @@
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
-                            <div class="card-body">
+                            <div class="card-body table-responsive-xl">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>S.N</th>
-                                            <th>Work Order ID</th>
+                                            <th>Work Order#</th>
                                             <th>Job Name</th>
                                             <th>Vendor</th>
                                             <th>Status</th>
@@ -91,37 +91,37 @@
                                                         @if ($workOrder->status == 'pending')
                                                             <!-- Show Accept Button -->
                                                             <a href="{{ route('vendor.accept', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-success"
+                                                                class="btn btn-sm btn-success"
                                                                 onclick="return confirm('Are you sure you want to Accept this Work Order?')">
                                                                 <i class="fa fa-check"></i> Accept
                                                             </a>
                                                             <!-- Show Decline Button -->
                                                             <a href="{{ route('vendor.decline', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-danger"
+                                                                class="btn btn-sm btn-danger"
                                                                 onclick="return confirm('Are you sure you want to Decline this Work Order?')">
                                                                 <i class="fa fa-times"></i> Decline
                                                             </a>
                                                         @else
                                                             <a title="ask for quick pay"
                                                                 href="{{ route('vendor.quick_pay', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-primary"
+                                                                class="btn btn-sm btn-primary"
                                                                 onclick="return confirm('Are you sure you want to Apply For Quick Pay?')">
                                                                 <i class="fa fa-hand-holding-usd"></i>
                                                             </a>
                                                             <a title="add images and notes"
                                                                 href="{{ route('vendor.doc', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-warning">
+                                                                class="btn btn-sm btn-warning">
                                                                 <i class="fa fa-plus"></i>
                                                             </a>
                                                             <a title="add images and notes"
                                                                 href="{{ route('invoice.create', $workOrder->id) }}"
-                                                                class="btn btn-secondary">
+                                                                class="btn btn-sm btn-secondary">
                                                                 Create Invoice
                                                             </a>
                                                         @endif
                                                         <a title="view details"
                                                             href="{{ route('manage_work_orders.show', $workOrder->job_id) }}"
-                                                            class="btn btn-info">View</a>
+                                                            class="btn btn-sm btn-info">View</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

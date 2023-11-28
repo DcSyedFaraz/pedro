@@ -157,7 +157,58 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!--invoice Start -->
+                            <div class="card" id="BillContainer" style="{{ isset($job->billable) && $job->billable ? '' : 'display: none;' }}">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="container mt-5">
+                                                <div class="tab-content mt-3">
+                                                    <div id="single-invoice" class="tab-pane fade show active">
+                                                        <ul class="nav nav-tabs mt-4">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" data-toggle="tab"
+                                                                    href="#products-services">Invoice</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content mt-3">
+                                                            <div id="products-services" class="tab-pane fade show active">
+                                                                @include('admin.estimates.partials.invoice')
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="note-to-customer">Note To Customer</label>
+                                                                <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4"></textarea>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row mt-3 invoice">
+                                                                    <div class="col">
+                                                                        <p>Estimates Total</p>
+                                                                        <p>Job Cost</p>
+                                                                        <p>Gross Profit <span
+                                                                                id="est-gross-profit-percentage">(0.00%)</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <p><span
+                                                                                id="est-product-and-service-taxes-and-fees">$0.00</span>
+                                                                        </p>
+                                                                        <p><span id="est_total_cost">$0.00</span></p>
+                                                                        <p style="color:#09af2f"><span
+                                                                                id="est-gross-profit">$0.00</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- End Invoice End -->
                         </form>
                     </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\vendor;
 use App\Http\Controllers\Controller;
 use App\Models\Files;
 use App\Models\Job;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Models\WorkOrders;
 use File;
@@ -16,9 +18,19 @@ class VendorController extends Controller
 {
     public function schedule()
     {
-        $jobs = Job::all();
+        // $jobs = Job::all();
+        $jobs = Job::whereHas('workOrder', function ($query) {
+            $query->where('vendor_id', auth()->user()->id)->where('status', 'accepted');
+        })->get();
 
         return view('vendor.schedule.schedule', compact('jobs'));
+    }
+    public function Updateschedule(Request $request,$id)
+    {
+        // dd($id);
+        $schedule = Job::find($id);
+        $schedule->update($request->all());
+        return response()->json(['message' => 'Job scheduled successfully']);
     }
     public function index()
     {
@@ -101,6 +113,11 @@ class VendorController extends Controller
             // Update the status to 'Accepted'
             $workOrder->status = 'accepted';
             $workOrder->save();
+            // Notification
+            $user = auth()->user();
+            $admin = User::find(1);
+            $message = "accepted the Work Order# {$id}";
+            $admin->notify(new UserNotification($user, $message));
         }
 
         return redirect()->back()->with('success', 'Work Order Accepted Successfully');
@@ -111,9 +128,13 @@ class VendorController extends Controller
         $workOrder = WorkOrders::find($id);
 
         if ($workOrder && $workOrder->status === 'pending') {
-            // Update the status to 'Accepted'
             $workOrder->status = 'declined';
             $workOrder->save();
+            // Notification
+            $user = auth()->user();
+            $admin = User::find(1);
+            $message = "declined the Work Order# {$id}";
+            $admin->notify(new UserNotification($user, $message));
         }
 
         return redirect()->back()->with('warning', 'Work Order Declined Successfully');

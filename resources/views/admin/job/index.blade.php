@@ -29,18 +29,19 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                          <h3 class="card-title">User Managment</h3>
-                        </div> -->
+                              <h3 class="card-title">User Managment</h3>
+                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success" href="{{ route('job.create') }}"> Create Job </a>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                            <div class="card-body table-responsive-xl">
+                                <table id="example1" class="table  table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>S.N</th>
+                                            <th>Job#</th>
                                             <th>Customer Name</th>
                                             <th>Location Name</th>
                                             <th>Assigned Manager</th>
@@ -64,7 +65,8 @@
                                                     $emailList = implode(',', $emailAddresses);
                                                 @endphp
                                                 <tr>
-                                                    <td>{{ $key+1 }}</td>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $jobs->id }}</td>
                                                     <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
                                                     <td>{{ isset($jobs->location_name) ? $jobs->location_name : '' }}
                                                     </td>
@@ -90,16 +92,16 @@
                                                     <td class="{{ $statusClasses[$currentStatus] ?? 'text-success' }}">
                                                         <strong>{{ $parsedStatus }}</strong>
                                                     </td>
-<td>
-    {{ $jobs->created_at->diffforhumans() }}
-</td>
                                                     <td>
+                                                        {{ $jobs->created_at->diffforhumans() }}
+                                                    </td>
+                                                    <td class="d-flex">
                                                         <button type="button" class="btn-sm btn btn-success"
                                                             data-toggle="modal"
                                                             data-target="#exampleModal{{ $jobs->id }}">
                                                             Assign
                                                         </button>
-                                                        <a class="btn-sm btn btn-primary"
+                                                        <a class="btn-sm btn btn-primary mx-1"
                                                             href="{{ route('job.edit', $jobs->id) }}">Edit</a>
                                                         <form action="{{ route('job.destroy', $jobs->id) }}" method="POST"
                                                             class="d-inline">

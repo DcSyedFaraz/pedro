@@ -18,7 +18,7 @@
                                     <td colspan="2"><input type="text" class="form-control est_inv_desc" name="description" placeholder="Description"></td>
                                     <td><input type="number" class="form-control est_inv_qty" name="qty_hrs" placeholder="Qty"></td>
                                     <td><input type="number" class="form-control est_inv_rate" name="rate" placeholder="Rate"></td>
-                                    <td><input type="number" class="form-control est_inv_total" name="total" placeholder="Total"></td>
+                                    <td><input type="number" class="form-control est_inv_total" name="total" placeholder="Total" readonly></td>
                                     <td><input type="number" class="form-control est_inv_cost" name="cost" placeholder="Cost"></td>
                                     <td><input type="number" class="form-control est_inv_tax" name="margin_tax" placeholder="Tax"></td>
                                     <td><button type="button" class="btn calculate-button" id="est_multiples_primary" data-row="1"><i class="fas fa-plus text-primary"></i></button></td>

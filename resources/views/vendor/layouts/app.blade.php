@@ -110,15 +110,13 @@
                             class="nav-item
            {{ request()->routeIs('checklists.create') ? 'menu-open' : '' }}
            {{ request()->routeIs('location.index') ? 'menu-open' : '' }}
-           {{ request()->routeIs('responce.index') ? 'menu-open' : '' }}
-           {{ request()->routeIs('responce.show') ? 'menu-open' : '' }}
+           {{ request()->routeIs('responce.*') ? 'menu-open' : '' }}
                    ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
            {{ request()->routeIs('checklists.create') ? 'active' : '' }}
            {{ request()->routeIs('location.index') ? 'active' : '' }}
-           {{ request()->routeIs('responce.index') ? 'active' : '' }}
-           {{ request()->routeIs('responce.show') ? 'active' : '' }}
+           {{ request()->routeIs('responce.*') ? 'active' : '' }}
                    ">
                                 <i class="nav-icon fas fa-search text-warning"></i>
                                 <p>
@@ -143,7 +141,7 @@
                                 </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('responce.index') }}"
-                                        class="nav-link {{ request()->routeIs('responce.index') ? 'active' : '' }} {{ request()->routeIs('responce.show') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('responce.*') ? 'active' : '' }} ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Responce</p>
                                     </a>
@@ -167,8 +165,8 @@
                         <li class="nav-item">
                             <a href="{{ route('schedule.index') }}"
                                 class="nav-link {{ request()->routeIs('schedule.*') ? 'active' : '' }}">
-                                <i class="fas fa-truck nav-icon text-danger"></i>
-                                <p>Schedule</p>
+                                <i class="fas fa-calendar-alt nav-icon "></i>
+                                <p>Schedule Job</p>
                             </a>
                         </li>
                         <!--Start Accounting Modules -->
@@ -202,14 +200,12 @@
                         <li
                             class="nav-item
                             {{ request()->routeIs('pages.index') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('company_profile.create') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('company_profile.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('company_profile.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}
                             ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                                {{ request()->routeIs('company_profile.create') ? 'active' : '' }}
-                                {{ request()->routeIs('company_profile.index') ? 'active' : '' }}
+                                {{ request()->routeIs('company_profile.*') ? 'active' : '' }}
                                 ">
                                 <i class="nav-icon fas fa-user text-primary"></i>
                                 <p>

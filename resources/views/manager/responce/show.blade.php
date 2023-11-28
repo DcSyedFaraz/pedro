@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app': 'default.app'))))
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app' : 'default.app'))))
 
 
 @section('content')
@@ -13,11 +13,21 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            @if (auth()->user()->hasRole('Admin'))
+                                <div class="card-header ">
+                                    <h3 class="card-title font-weight-bolder"></h3>
+
+                                    <a class="btn btn-danger btn-sm"
+                                        href="{{ route('reassign_checklist', ['id' => $id]) }}">Re
+                                        Assign</a>
+                                </div>
+                            @endif
                             <!-- /.card-header -->
                             {{-- @dd($response) --}}
                             @foreach ($response as $response1)
                                 <div class="card-header">
-                                    <h3 class="card-title">Inspection Checklist for <span class="font-weight-bold">{{ $response1->checklist->name ?? '' }}</span>
+                                    <h3 class="card-title">Inspection Checklist for <span
+                                            class="font-weight-bold">{{ $response1->checklist->name ?? '' }}</span>
                                     </h3>
                                 </div>
 
@@ -30,28 +40,45 @@
                                                 <th>Task</th>
                                                 <th>Rating</th>
                                                 <th>Remarks</th>
+                                                <th>Image</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($response1->checklist->checklistItems as $responses)
-                                                {{-- @dd($responses) --}}
-                                                {{-- <h3 class="card-title">Inspection Checklist for
-                                                {{ $response1->checklist->name ?? '' }}</h3> --}}
-                                                <tr>
-                                                    <td>{{ $responses->description ?? '' }}</td>
-                                                    {{-- <td>{{ $responses->checklistItem->description ?? '' }}</td> --}}
-                                                    <td>
-                                                        @if ($responses->inspectionResponses1->rating === 'red')
-                                                            <span class="badge badge-danger">Red</span>
-                                                        @elseif ($responses->inspectionResponses1->rating === 'yellow')
-                                                            <span class="badge badge-warning">Yellow</span>
-                                                        @elseif ($responses->inspectionResponses1->rating === 'green')
-                                                            <span class="badge badge-success">Green</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $responses->inspectionResponses1->remarks }}</td>
-                                                </tr>
-                                            @endforeach
+                                            @if (!empty($response1->checklist->checklistItems))
+                                                @foreach ($response1->checklist->checklistItems as $responses)
+                                                    @php
+                                                        $result = \App\Models\InspectionResponse::where('checklist_item_id', $responses->id)
+                                                            ->where('location_id', $id)
+                                                            ->first();
+                                                    @endphp
+                                                    {{-- @dd($result) --}}
+
+                                                    <tr>
+                                                        <td>{{ $responses->description ?? '' }}</td>
+                                                        {{-- <td>{{ $responses->checklistItem->description ?? '' }}</td> --}}
+                                                        <td>
+                                                            @if ($result->rating === 'red')
+                                                                <span class="badge badge-danger">Red</span>
+                                                            @elseif ($result->rating === 'yellow')
+                                                                <span class="badge badge-warning">Yellow</span>
+                                                            @elseif ($result->rating === 'green')
+                                                                <span class="badge badge-success">Green</span>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $result->remarks }}</td>
+                                                        <td>
+                                                            @if (isset($result->file_path))
+                                                                <a href="{{ asset('storage/' . $result->file_path) }}"
+                                                                    target="blank">
+                                                                    <img src="{{ asset('storage/' . $result->file_path) }}"
+                                                                        alt="" srcset="" class="img-thumbnail"
+                                                                        style="max-width: 100px">
+                                                                </a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -73,8 +100,10 @@
                                     </td>
                                     <td>
                                         @if (isset($new->notess->file))
-                                            <img src="{{ asset('storage/' . $new->notess->file) }}" alt=""
-                                                srcset="" class="img-thumbnail">
+                                            <a href="{{ asset('storage/' . $new->notess->file) }}" target="blank">
+                                                <img src="{{ asset('storage/' . $new->notess->file) }}" alt=""
+                                                    srcset="" class="img-thumbnail" style="max-width: 200px">
+                                            </a>
                                         @endif
                                     </td>
                                 </tbody>
