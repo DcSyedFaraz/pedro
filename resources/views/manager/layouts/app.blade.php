@@ -36,6 +36,68 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
+                </li>
+
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+
+
+
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="far fa-bell"></i>
+                        <span
+                            class="badge badge-danger navbar-badge">{{ auth()->user()->unreadnotifications->count() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">{{ auth()->user()->unreadnotifications->count() }}
+                            UnRead Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        @foreach (auth()->user()->unreadnotifications as $notifications)
+
+                        <a href="{{ route('markasread', $notifications->id) }}" class="dropdown-item my-2 text-wrap ">
+                            <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
+
+                            @if (isset($notifications->data['message']))
+                                {{ $notifications->data['message'] }}
+
+                                <!-- Check if 'response' is present in the message and display the button -->
+                                @if (strpos($notifications->data['message'], 'response') !== false)
+                                    <a href="{{ route('location') }}" class="btn btn-success ml-1 btn-sm float-left">view reponse</a>
+                                @endif
+                            @endif
+
+                            <span class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                        </a>
+
+                        {{-- <hr> --}}
+                            {{-- <div class="dropdown-divider "></div> --}}
+                        @endforeach
+                        <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
+                            Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
@@ -684,12 +746,7 @@
 
 
     </script>
-    <script>
-        Toast.fire({
-            icon: 'error',
-            title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-        })
-    </script>
+   
     @yield('script')
 </body>
 

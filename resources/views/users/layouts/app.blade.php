@@ -33,6 +33,63 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                        class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{ route('users.dashboard') }}" class="nav-link">Home</a>
+            </li>
+        </ul>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+
+
+
+            <!-- Notifications Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="far fa-bell"></i>
+                    <span
+                        class="badge badge-danger navbar-badge">{{ auth()->user()->unreadnotifications->count() }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                    <span class="dropdown-item dropdown-header">{{ auth()->user()->unreadnotifications->count() }}
+                        UnRead Notifications</span>
+                    <div class="dropdown-divider"></div>
+                    @foreach (auth()->user()->unreadnotifications as $notifications)
+                        <a href="{{ route('markasread', $notifications->id) }}"
+                            class="dropdown-item my-2 text-wrap ">
+                            <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
+
+                            @if (isset($notifications->data['message']))
+                                {{ $notifications->data['message'] }}
+                            @endif
+
+                            <span
+                                class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                        </a>
+
+                        {{-- <hr> --}}
+                        {{-- <div class="dropdown-divider "></div> --}}
+                    @endforeach
+                    <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
+                        Notifications</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
@@ -201,8 +258,8 @@
                 </li>
               </ul>
           </li>
-          <li class="nav-item {{ request()->routeIs('games.index') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link nav-dropdown-toggle  {{ request()->routeIs('users.profile') ? 'active' : '' }} {{ request()->routeIs('games.index') ? 'active' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
+          <li class="nav-item ">
+            <a href="#" class="nav-link nav-dropdown-toggle  {{ request()->routeIs('users.profile') ? 'active' : '' }} ">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Account Setting
@@ -229,14 +286,14 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('estimate_request.index') }}"
-                class="nav-link {{ request()->routeIs('estimate_request.index') ? 'active' : '' }} {{ request()->routeIs('estimate_request.show') ? 'active' : '' }} {{ request()->routeIs('estimate_request.create') ? 'active' : '' }} {{ request()->routeIs('estimate_request.edit') ? 'active' : '' }}">
+                class="nav-link {{ request()->routeIs('estimate_request.*') ? 'active' : '' }} ">
                 <i class="fas fa-file-invoice nav-icon"></i>
                 <p>Estimate Requests</p>
             </a>
         </li>
           <li class="nav-item">
             <a href="{{ route('supply.index') }}"
-                class="nav-link {{ request()->routeIs('supply.index') ? 'active' : '' }} {{ request()->routeIs('supply.show') ? 'active' : '' }} {{ request()->routeIs('supply.create') ? 'active' : '' }}">
+                class="nav-link {{ request()->routeIs('supply.*') ? 'active' : '' }}">
                 <i class="fas fa-shopping-cart nav-icon"></i>
                 <p>Supply Requests</p>
             </a>
@@ -370,6 +427,6 @@
 
 </script>
 
-
+@yield('scripts')
 </body>
 </html>

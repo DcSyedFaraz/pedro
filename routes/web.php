@@ -7,10 +7,13 @@ use App\Http\Controllers\Manager\LocationController;
 use App\Http\Controllers\Manager\ResponceController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\users\EstimateRequestController;
+use App\Http\Controllers\vendor\AttendanceController;
 use App\Http\Controllers\vendor\CompanyProfileController;
 use App\Http\Controllers\vendor\VendorProblemController;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
@@ -94,6 +97,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('userproblem', VendorProblemController::class);
     //Responce
     Route::resource('responce', ResponceController::class);
+    // Map/ Location
+    Route::resource('attendance', AttendanceController::class);
 
 });
 

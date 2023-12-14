@@ -5,6 +5,8 @@ namespace App\Http\Controllers\vendor;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\ProblemReporting;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +49,19 @@ class VendorProblemController extends Controller
     {
         try {
             $request['createdBy'] = auth()->user()->id;
-            ProblemReporting::create($request->all());
+            $problemReport= ProblemReporting::create($request->all());
+
+            // Admin Notification
+            $admin = User::find(1);
+            $user = auth()->user();
+            $message = "created a problem report# {$problemReport->id}";
+            $admin->notify(new UserNotification($user, $message));
+
+            // Customer Notification
+            $cust = User::find($problemReport->createdBy);
+            $messages = "created your job's problem report# {$problemReport->id}";
+            $cust->notify(new UserNotification($user, $messages));
+
             return redirect()->route('userproblem.index')->with('success', 'New Report Created Successfully');
         } catch (QueryException $e) {
             return redirect()->route('userproblem.index')->with('error', 'An error occurred while creating the report: ' . $e->getMessage());
@@ -102,6 +116,18 @@ class VendorProblemController extends Controller
         try {
             $problemReport = ProblemReporting::findOrFail($id);
             $problemReport->update($request->all());
+
+            // Admin Notification
+            $admin = User::find(1);
+            $user = auth()->user();
+            $message = "updated a problem report# {$id}";
+            $admin->notify(new UserNotification($user, $message));
+
+            // Customer Notification
+            $cust = User::find($problemReport->createdBy);
+            $messages = "updated your job's problem report# {$id}";
+            $cust->notify(new UserNotification($user, $messages));
+
             return redirect()->route('userproblem.index')->with('success', 'Report Updated Successfully');
         } catch (QueryException $e) {
             return redirect()->route('userproblem.index')->with('error', 'An error occurred while updating the report: ' . $e->getMessage());

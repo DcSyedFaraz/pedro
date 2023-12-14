@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventory;
 use App\Models\ProductandService;
 use App\Models\PurchaseOrder;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -19,8 +20,8 @@ class InventoryController extends Controller
     public function create()
     {
         $purchase = PurchaseOrder::get();
-        // return $purchase;
-        return view('admin.inventory.create', compact('purchase'));
+        $vendor = User::withRole('vendor')->select('id','name')->get();
+        return view('admin.inventory.create', compact('purchase','vendor'));
     }
 
     public function store(Request $request)
@@ -38,11 +39,13 @@ class InventoryController extends Controller
     public function edit(Inventory $inventory)
     {
         $purchase = PurchaseOrder::get();
-        return view('admin.inventory.edit', compact('inventory','purchase'));
+        $vendor = User::withRole('vendor')->select('id','name')->get();
+        return view('admin.inventory.edit', compact('inventory','purchase','vendor'));
     }
 
     public function update(Request $request, Inventory $Inventory)
     {
+        // return $request;
         $Inventory->update($request->all());
         return redirect()->route('inventory.index')
             ->with('success', 'Inventory updated successfully');

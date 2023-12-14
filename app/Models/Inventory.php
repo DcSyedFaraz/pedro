@@ -9,4 +9,9 @@ class Inventory extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function vendor_name()
+    {
+        return $this->belongsTo(User::class, 'vendor','id');
+    }
 }

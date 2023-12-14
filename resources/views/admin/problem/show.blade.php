@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                           <th>Created By</th>
-                          <td>{{ $problemReport->usname->name }}</td>
+                          <td>{{ $problemReport->usname->name ?? '' }}</td>
                         </tr>
                         <tr>
                           <th>Location</th>
@@ -63,7 +63,7 @@
                             @endif
                           </td>
                         </tr>
-                       
+
                         <tr>
                           <th>Problem Date</th>
                           <td>{{ $problemReport->problem_date }}</td>

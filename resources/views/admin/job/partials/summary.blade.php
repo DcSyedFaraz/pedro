@@ -111,6 +111,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <input type="tel" class="form-control" name="phone[]" id="" placeholder="Phone number">
+                <small class="text-danger text-wrap">Job Info will be send to this number only</small>
                 <p class="error-message phone-error error-messages" style="display: none;"> Add at least phone </p>
             </div>
         </div>

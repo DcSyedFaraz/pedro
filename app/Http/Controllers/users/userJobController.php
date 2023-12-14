@@ -5,6 +5,8 @@ namespace App\Http\Controllers\users;
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use App\Models\Job;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,7 +21,7 @@ class userJobController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $job = Job::where('customer_id',$user->id)->get();
+        $job = Job::where('customer_id',$user->id)->orderby('updated_at','desc')->get();
         // dd($user);
         return view('users.job.index', compact('job'));
     }
@@ -77,7 +79,7 @@ class userJobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::beginTransaction(); 
+        DB::beginTransaction();
 
         try {
             if ($request->hasFile('file')) {
@@ -86,12 +88,16 @@ class userJobController extends Controller
                 $path = $file->storeAs('feedback', $fileName, 'public');
             }
 
-            Feedback::create([
+          $feed =  Feedback::create([
                 'job_id' => $id,
                 'rating' => $request->rating,
                 'comment' => $request->comment,
                 'file' => $path ?? null, // Set to null if no file is uploaded
             ]);
+            $admin = User::find(1);
+            $user = auth()->user();
+            $message = "submitted a feedback report# {$feed->id}";
+            $admin->notify(new UserNotification($user, $message));
 
             DB::commit();
 

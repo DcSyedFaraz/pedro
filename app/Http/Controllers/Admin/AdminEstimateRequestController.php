@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use App\Models\EstimateRequest;
 use Illuminate\Support\Facades\Storage;
@@ -89,9 +91,13 @@ class AdminEstimateRequestController extends Controller
                 $picturePath = $request->file('picture')->storeAs('supply_pic', $fileName, 'public');
                 $supply->picture = $picturePath;
             }
-
-
             $supply->save();
+
+            $admin = User::find(1);
+            $user = auth()->user();
+            $message = "created an estimate request# {$supply->id}";
+            $admin->notify(new UserNotification($user, $message));
+
             return redirect()->route('estimate_requests.index')->with('success', 'Request created successfully');
 
         } catch (\Exception $e) {
@@ -177,6 +183,21 @@ class AdminEstimateRequestController extends Controller
             }
 
             $supply->save();
+
+            if (auth()->user()->hasRole('Admin') || auth()->user()->hasRole('account manager')) {
+
+                $admin = User::find($supply->createdBy);
+                $user = auth()->user();
+                $message = "updated an estimate request# {$id}";
+                $admin->notify(new UserNotification($user, $message));
+            } else {
+                $admin = User::find(1);
+                $user = auth()->user();
+                $message = "updated an estimate request# {$id}";
+                $admin->notify(new UserNotification($user, $message));
+
+            }
+
             return redirect()->route('estimate_requests.index')->with('info', 'Request updated successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -192,15 +213,14 @@ class AdminEstimateRequestController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
 
             $supply = EstimateRequest::find($id);
             $supply->delete();
-            return redirect()->back()->with('error','Estimate Request Deleted Successfully');
-        }
-     catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Estimate Request Deleted Successfully');
+        } catch (\Exception $e) {
 
-        return redirect()->back()->with('error', 'An error occurred while processing the supply request: ' . $e->getMessage());
-    }
+            return redirect()->back()->with('error', 'An error occurred while processing the supply request: ' . $e->getMessage());
+        }
     }
 }

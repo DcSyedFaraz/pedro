@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Notifications\UserNotification;
 use App\Models\SupplyRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -20,11 +22,11 @@ class SupplyController extends Controller
 
             $user = auth()->user();
             if ($user->hasRole('Admin')) {
-                $supply = SupplyRequest::orderBy('id','desc')->get();
+                $supply = SupplyRequest::orderBy('id', 'desc')->get();
                 return view('supply.index', compact('supply'));
 
             } else {
-                $supply = SupplyRequest::where('createdBy',$user->id)->get();
+                $supply = SupplyRequest::where('createdBy', $user->id)->get();
                 return view('supply.index', compact('supply'));
             }
 
@@ -82,7 +84,12 @@ class SupplyController extends Controller
             $validatedData['order_ref'] = Str::uuid()->toString();
             $validatedData['createdBy'] = auth()->user()->id;
 
-            SupplyRequest::create($validatedData);
+            $supply = SupplyRequest::create($validatedData);
+
+            $admin = User::find(1);
+            $user = auth()->user();
+            $message = "created an estimate request# {$supply->id}";
+            $admin->notify(new UserNotification($user, $message));
 
             return redirect()->route('supply.index')->with('success', 'Supply Request Sent Successfully');
         } catch (\Exception $e) {
@@ -135,12 +142,24 @@ class SupplyController extends Controller
                 $request['order_ref'] = $supply->order_ref;
                 $request['createdBy'] = $supply->createdBy;
                 $supply->update($request->all());
+                if (auth()->user()->hasRole('Admin') || auth()->user()->hasRole('account manager')) {
+
+                    $admin = User::find($supply->createdBy);
+                    $user = auth()->user();
+                    $message = "updated a supply request# {$id}";
+                    $admin->notify(new UserNotification($user, $message));
+                } else {
+
+                    $admin = User::find(1);
+                    $user = auth()->user();
+                    $message = "updated a supply request# {$id}";
+                    $admin->notify(new UserNotification($user, $message));
+                }
             } else {
-                // Handle the case where the supply request with the given ID is not found.
-                // You can redirect or show an error message here.
+                return redirect()->back()->with('error', 'An error occurred while finding the supply request: ');
             }
 
-            return redirect()->route('supply.index')->with('success','Request Updated Successfully');
+            return redirect()->route('supply.index')->with('success', 'Request Updated Successfully');
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'An error occurred while processing the supply request: ' . $e->getMessage());
         }
@@ -155,16 +174,15 @@ class SupplyController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
 
             $supply = SupplyRequest::find($id);
             $supply->delete();
-            return redirect()->back()->with('error','Supply Request Deleted Successfully');
-        }
-     catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Supply Request Deleted Successfully');
+        } catch (\Exception $e) {
 
-        return redirect()->back()->with('error', 'An error occurred while processing the supply request: ' . $e->getMessage());
-    }
+            return redirect()->back()->with('error', 'An error occurred while processing the supply request: ' . $e->getMessage());
+        }
 
     }
 }

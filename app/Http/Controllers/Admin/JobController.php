@@ -11,11 +11,22 @@ use App\Models\JobSubCategory;
 use App\Models\job_priority_category;
 use App\Models\job_source_category;
 use App\Models\Task;
+use App\Notifications\UserNotification;
+use App\Services\TwilioService;
+use Brick\Math\Exception\NumberFormatException;
+use Exception;
 use File;
 use Illuminate\Http\Request;
+use libphonenumber\PhoneNumberFormat;
 
 class JobController extends Controller
 {
+    protected $twilioService;
+
+    public function __construct(TwilioService $twilioService)
+    {
+        $this->twilioService = $twilioService;
+    }
     public function index()
     {
 
@@ -27,12 +38,12 @@ class JobController extends Controller
         //         $query->where('scheduled_at', '>', $next72Hours);
         //         //   ->orWhere('due_at', '<', $now);
         //     })->get();
-        $job = Job::with('customer', 'job_category', 'job_prioirty')->orderby('created_at','desc')->get();
-            $manager = User::withRole('account manager')->get();
+        $job = Job::with('customer', 'job_category', 'job_prioirty')->orderby('created_at', 'desc')->get();
+        $manager = User::withRole('account manager')->get();
 
 
         // $job = Job::with('customer','job_category','job_prioirty','job_source')->get();
-        return view('admin.job.index', compact('job','manager'));
+        return view('admin.job.index', compact('job', 'manager'));
     }
 
     public function create()
@@ -48,86 +59,124 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
-        // return $request;
 
-        // $request->validate([
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Adjust the validation rules as needed
-        //     'document' => 'required|mimes:pdf,doc,docx', // Adjust the validation rules as needed
-        // ]);
+        $to = $request['phone'][0];
 
+        $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 
+        try {
 
-        $job = new Job();
-        $job->name = $request->name;
-        $job->customer_id = $request->customer_id;
-        $job->first_name = $request->first_name;
-        $job->last_name = $request->last_name;
-        //Array Value
-        $job->location_name = $request->location_name;
-        $job->location_gated_property = $request->location_gated_property;
-        $job->location_address = $request->location_address;
-        $job->location_unit = $request->location_unit;
-        $job->location_city = $request->location_city;
-        $job->location_state = $request->location_state;
-        $job->location_zipcode = $request->location_zipcode;
-        $job->job_cat_id = $request->job_cat_id;
-        $job->job_sub_cat_id = $request->job_sub_cat_id;
-        $job->job_sub_description = $request->job_sub_description;
-        $job->job_description = $request->job_description;
-        $job->po_no = $request->po_no;
-        $job->job_source = $request->job_source;
-        $job->job_priority = $request->job_priority;
-        $job->agent = $request->agent;
-        // Job customer Fields
-        $job->customer_homeowner = $request->customer_homeowner;
-        $job->customer_unit_cordination = $request->customer_unit_cordination;
-        //Job Picture
+            $phoneNumberObject = $phoneNumberUtil->parse($to, null);
 
-        if ($request->hasFile('image')) {
-            $file = request()->file('image');
-            $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
-            $file->move('uploads/image/', $fileName);
-            $image = asset('uploads/image/' . $fileName);
+        } catch (NumberFormatException $e) {
+
+            return redirect()->back()->with('error', 'Invalid phone number');
         }
 
+        $formattedPhoneNumber = $phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
+        // dd($formattedPhoneNumber);
 
-        //Job document
-        if ($request->hasFile('document')) {
-            $file = request()->file('document');
-            $fileName = md5($file->getClientOriginalName() . time()) . "doc." . $file->getClientOriginalExtension();
-            $file->move('uploads/document/', $fileName);
-            $document = asset('uploads/document/' . $fileName);
+
+        try {
+            $job = new Job();
+            $job->name = $request->name;
+            $job->customer_id = $request->customer_id;
+            $job->first_name = $request->first_name;
+            $job->last_name = $request->last_name;
+            //Array Value
+            $job->location_name = $request->location_name;
+            $job->location_gated_property = $request->location_gated_property;
+            $job->location_address = $request->location_address;
+            $job->location_unit = $request->location_unit;
+            $job->location_city = $request->location_city;
+            $job->location_state = $request->location_state;
+            $job->location_zipcode = $request->location_zipcode;
+            $job->job_cat_id = $request->job_cat_id;
+            $job->job_sub_cat_id = $request->job_sub_cat_id;
+            $job->job_sub_description = $request->job_sub_description;
+            $job->job_description = $request->job_description;
+            $job->po_no = $request->po_no;
+            $job->job_source = $request->job_source;
+            $job->job_priority = $request->job_priority;
+            $job->agent = $request->agent;
+            // Job customer Fields
+            $job->customer_homeowner = $request->customer_homeowner;
+            $job->customer_unit_cordination = $request->customer_unit_cordination;
+            //Job Picture
+
+            if ($request->hasFile('image')) {
+                $file = request()->file('image');
+                $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
+                $file->move('uploads/image/', $fileName);
+                $image = asset('uploads/image/' . $fileName);
+                $job->image = $image;
+            }
+
+
+            //Job document
+            if ($request->hasFile('document')) {
+                $file = request()->file('document');
+                $fileName = md5($file->getClientOriginalName() . time()) . "doc." . $file->getClientOriginalExtension();
+                $file->move('uploads/document/', $fileName);
+                $document = asset('uploads/document/' . $fileName);
+                $job->document = $document;
+            }
+            // Job Information
+            //Job image
+
+            //Job document
+
+            $job->current_status = $request->current_status;
+            $job->start_date = $request->start_date;
+            $job->end_date = $request->end_date;
+            $job->start_time = $request->start_time;
+            $job->end_time = $request->end_time;
+            $job->start_duration = $request->start_duration;
+            $job->end_duration = $request->end_duration;
+            $job->assigned_tech = $request->assigned_tech;
+            $job->notify_tech_assign = $request->notify_tech_assign;
+            $job->notes_for_tech = $request->notes_for_tech;
+            $job->completion_notes = $request->completion_notes;
+            $job->billable = $request->billable;
+            $job->save();
+
+            foreach ($request['phone'] as $key => $value) {
+                JobPrimaryContact::create([
+                    'job_id' => $job->id,
+                    'phone' => $value,
+                    'ext' => $request['ext'][$key],
+                    'email' => $request['email'][$key],
+
+                ]);
+            }
+
+            // SMS
+            $jobInfoSMS = "New Job Alert!\n";
+            $jobInfoSMS .= "Customer: {$job->customer->name}\n";
+            $jobInfoSMS .= "Location: {$job->location_name}\n";
+            $jobInfoSMS .= "Address: {$job->location_address}, {$job->location_unit}, {$job->location_city}, {$job->location_state}, {$job->location_zipcode}\n";
+            $jobInfoSMS .= "Description: {$job->job_description}\n";
+            $jobInfoSMS .= "Start Date: {$job->start_date}\n";
+            $jobInfoSMS .= "Start Time: {$job->start_time}\n";
+            $jobInfoSMS .= "Gated Property: " . ($job->location_gated_property ? 'Yes' : 'No') . "\n";
+            $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
+            $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
+
+
+            $this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
+
+            // Notification
+            $user = User::find($request->input('customer_id'));
+            $admin = auth()->user();
+            $message = "created your Job# {$job->id}";
+            $user->notify(new UserNotification($admin, $message));
+
+            return redirect()->route('job.index')->with('success', 'Job Created successfully');
+
+        } catch (Exception $e) {
+            // throw $e;
+            return redirect()->back()->with('error', 'An error occurred while creating Job.');
         }
-        // Job Information
-        //Job image
-        $job->image = $image;
-        //Job document
-        $job->document = $document;
-        $job->current_status = $request->current_status;
-        $job->start_date = $request->start_date;
-        $job->end_date = $request->end_date;
-        $job->start_time = $request->start_time;
-        $job->end_time = $request->end_time;
-        $job->start_duration = $request->start_duration;
-        $job->end_duration = $request->end_duration;
-        $job->assigned_tech = $request->assigned_tech;
-        $job->notify_tech_assign = $request->notify_tech_assign;
-        $job->notes_for_tech = $request->notes_for_tech;
-        $job->completion_notes = $request->completion_notes;
-        $job->billable = $request->billable;
-        $job->save();
-
-        foreach ($request['phone'] as $key => $value) {
-            JobPrimaryContact::create([
-                'job_id' => $job->id,
-                'phone' => $value,
-                'ext' => $request['ext'][$key],
-                'email' => $request['email'][$key],
-
-            ]);
-        }
-
-        return redirect()->route('job.index')->with('success', 'Job Created successfully');
     }
 
     public function show($id)
@@ -189,7 +238,7 @@ class JobController extends Controller
             if (File::exists(public_path($job->image))) {
                 File::delete(public_path($job->image));
             }
-// dd('hasfile');
+            // dd('hasfile');
             // Upload and store the new image
             $file = $request->file('image');
             $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
@@ -243,6 +292,11 @@ class JobController extends Controller
                 'email' => $request['email'][$key],
 
             ]);
+
+            $user = User::find($request->input('customer_id'));
+            $admin = auth()->user();
+            $message = "updated your Job# {$job->id}";
+            $user->notify(new UserNotification($admin, $message));
         }
         return redirect()->route('job.index')->with('success', 'Job updated successfully');
     }
@@ -251,7 +305,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $job->delete();
-        return redirect()->route('job.index');
+        return redirect()->route('job.index')->with('success','Job Deleted Successfully');
     }
     public function job_pri($id)
     {
@@ -316,7 +370,7 @@ class JobController extends Controller
         //         $query->whereNull('end_date')
         //             ->orWhere('end_date', '<=', $now);
         //     })->get();
-        $jobs_needing_scheduling = Job::where('current_status','1')->get();
+        $jobs_needing_scheduling = Job::where('current_status', '1')->get();
 
         return view('admin.job.job_needing_scheduling', compact('jobs_needing_scheduling'));
     }
@@ -347,14 +401,14 @@ class JobController extends Controller
         $user = Job::with('task')->find($id);
 
         $user->update($input);
-if($user->task != null){
-            $task = Task::where('job_id',$id)->first();
+        if ($user->task != null) {
+            $task = Task::where('job_id', $id)->first();
 
             $task->manager_id = $user->account_manager_id;
             $task->save();
         }
 
         return redirect()->back()
-                        ->with('success','Job Assigned Successfully');
+            ->with('success', 'Job Assigned Successfully');
     }
 }

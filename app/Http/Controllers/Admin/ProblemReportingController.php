@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\ProblemReporting;
+use App\Models\User;
+use App\Notifications\UserNotification;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProblemReportingController extends Controller
@@ -19,7 +22,7 @@ class ProblemReportingController extends Controller
         $problemReports = ProblemReporting::all();
         $job = Job::get();
         // return $problem;
-        return view('admin.problem.index', compact('problemReports','job'));
+        return view('admin.problem.index', compact('problemReports', 'job'));
     }
 
     /**
@@ -42,8 +45,13 @@ class ProblemReportingController extends Controller
     public function store(Request $request)
     {
         $request['createdBy'] = auth()->user()->id;
-        ProblemReporting::create($request->all());
-        
+        $problemReport = ProblemReporting::create($request->all());
+
+        $user = auth()->user();
+        $cust = User::find($problemReport->jobname->customer->id);
+        $message = "creats your job's problem report# {$problemReport->id}";
+        $cust->notify(new UserNotification($user, $message));
+
         return redirect()->route('problem.index')->with('success', 'New Report Created Successfully');
     }
 
@@ -69,7 +77,7 @@ class ProblemReportingController extends Controller
     {
         $problemReport = ProblemReporting::findOrFail($id);
         $job = Job::get();
-        return view('admin.problem.edit', compact('problemReport','job'));
+        return view('admin.problem.edit', compact('problemReport', 'job'));
     }
 
     /**
@@ -81,9 +89,27 @@ class ProblemReportingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $problemReport = ProblemReporting::findOrFail($id);
-        $problemReport->update($request->all());
-        return redirect()->route('problem.index')->with('success', 'Report Updated Successfully');
+        try {
+
+            $problemReport = ProblemReporting::findOrFail($id);
+            // dd($problemReport->jobname->customer->id);
+            $problemReport->update($request->all());
+
+            if ($problemReport->createdBy != auth()->user()->id) {
+
+                $admin = User::find($problemReport->createdBy);
+                $user = auth()->user();
+                $cust = User::find($problemReport->jobname->customer->id);
+                $message = "updated your problem report# {$id}";
+                $messages = "updated your job's problem report# {$id}";
+                $admin->notify(new UserNotification($user, $message));
+                $cust->notify(new UserNotification($user, $messages));
+
+            }
+            return redirect()->route('problem.index')->with('success', 'Report Updated Successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while retrieving the data: ' . $e->getMessage());
+        }
     }
 
     /**

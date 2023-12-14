@@ -46,8 +46,9 @@
                                                                 aria-label="Default select example" id="vender-div">
                                                                 <option value="0" disabled selected hidden>Select a
                                                                     Vendor</option>
-                                                                <option value="Vendor 1">Vendor 1</option>
-                                                                <option value="Vendor 2">Vendor 2</option>
+                                                                    @foreach ($vendor as $vendors )
+                                                                    <option value="{{$vendors->id}}">{{$vendors->name}}</option>
+                                                                    @endforeach
                                                             </select>
 
                                                         </div>

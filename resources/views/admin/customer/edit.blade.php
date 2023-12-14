@@ -580,12 +580,14 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-2">
-                                                            <a href="{{ route('service.destroy', $service->id) }}"
-                                                                type="button" id="remove-ser"
-                                                                class="add-more-btn mt-4"><i
-                                                                    class="fas fa-trash text-danger"></i></a>
-                                                        </div>
+                                                        @if (!$loop->first)
+                                                            <div class="col-sm-2">
+                                                                <a href="{{ route('service.destroy', $service->id) }}"
+                                                                    type="button" id="remove-ser"
+                                                                    class="add-more-btn mt-4"><i
+                                                                        class="fas fa-trash text-danger"></i></a>
+                                                            </div>
+                                                        @endif
                                                         <div class="col-sm-12">
                                                             <div class="location-div">
                                                                 <div class="row">

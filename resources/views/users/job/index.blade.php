@@ -104,8 +104,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                          <h3 class="card-title">User Managment</h3>
-                        </div> -->
+                              <h3 class="card-title">User Managment</h3>
+                            </div> -->
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
@@ -113,6 +113,8 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>S.N</th>
+                                            <th>Job#</th>
                                             <th>Customer Name</th>
                                             <th>Jobs</th>
                                             <th>Assigned Manager</th>
@@ -123,7 +125,7 @@
 
                                     <tbody>
                                         @if ($job)
-                                            @foreach ($job as $jobs)
+                                            @foreach ($job as $key=> $jobs)
                                                 @php
                                                     $phones = isset($jobs->phone) ? $jobs->phone : [];
                                                     $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
@@ -135,6 +137,8 @@
                                                     $emailList = implode(',', $emailAddresses);
                                                 @endphp
                                                 <tr>
+                                                    <td>{{ $key+1 }}</td>
+                                                    <td>{{ isset($jobs->id) ? $jobs->id : '' }}</td>
                                                     <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
                                                     <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}
                                                     </td>
@@ -182,16 +186,16 @@
                                                     @endif
                                                     <td>
                                                         @if ($jobs->current_status == 9)
-                                                        @if (optional($jobs->feedback)->count() > 0)
-                                                       <span class="badge badge-btn badge-success">Thanks for Sharing
-                                                        </span>
-                                                        @else
-
-                                                        <button type="button" class="btn btn-success" data-toggle="modal"
-                                                            data-target="#exampleModal{{ $jobs->id }}">
-                                                            Feedback
-                                                        </button>
-                                                        @endif
+                                                            @if (optional($jobs->feedback)->count() > 0)
+                                                                <span class="badge badge-btn badge-success">Feedback Submitted
+                                                                </span>
+                                                            @else
+                                                                <button type="button" class="btn btn-success"
+                                                                    data-toggle="modal"
+                                                                    data-target="#exampleModal{{ $jobs->id }}">
+                                                                    Feedback
+                                                                </button>
+                                                            @endif
                                                         @endif
 
                                                         <a class="btn btn-primary"
@@ -247,11 +251,12 @@
                                                                                 <input type="file"
                                                                                     class="custom-file-input"
                                                                                     id="exampleInputFile" name="file">
-                                                                                <p class="custom-file-label" id="selectedFileName"
+                                                                                <p class="custom-file-label"
+                                                                                    id="selectedFileName"
                                                                                     for="exampleInputFile">Choose
                                                                                     file</p>
                                                                             </div>
-                                                                            
+
                                                                         </div>
                                                                     </div>
                                                             </div>
@@ -301,18 +306,17 @@
             });
         });
 
-const fileInput = document.getElementById('exampleInputFile');
+        const fileInput = document.getElementById('exampleInputFile');
 
-const selectedFileName = document.getElementById('selectedFileName');
+        const selectedFileName = document.getElementById('selectedFileName');
 
-fileInput.addEventListener('change', function() {
-    if (fileInput.files && fileInput.files[0]) {
-        selectedFileName.textContent = fileInput.files[0].name;
-    } else {
-        selectedFileName.textContent = 'No file selected';
-    }
-});
-
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files && fileInput.files[0]) {
+                selectedFileName.textContent = fileInput.files[0].name;
+            } else {
+                selectedFileName.textContent = 'No file selected';
+            }
+        });
     </script>
 
     {{-- <script src="{{ asset('js/style.js') }}"></script> --}}

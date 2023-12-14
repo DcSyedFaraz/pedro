@@ -114,7 +114,7 @@
 
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 ">
             <!-- Brand Logo -->
             <a href="{{ route('admin.dashboard') }}" class="brand-link">
                 <img src="{{ asset('/admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
@@ -176,18 +176,18 @@
                             class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
                             {{ request()->routeIs('estimates.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('work_orders.*') ? 'menu-open' : '' }}
-                            {{ request()->routeIs('purchase-orders.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('purchase-orders.*') ? 'menu-open' : '' }}
 
-                            {{ request()->routeIs('inventory.index') ? 'menu-open' : '' }}
+                            {{ request()->routeIs('inventory.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('technicians.*') ? 'menu-open' : '' }} ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('customer.index') ? 'active' : '' }}
                                 {{ request()->routeIs('estimates.*') ? 'active' : '' }}
                                 {{ request()->routeIs('work_orders.*') ? 'active' : '' }}
-                                {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}
+                                {{ request()->routeIs('purchase-orders.*') ? 'active' : '' }}
 
-                                {{ request()->routeIs('inventory.index') ? 'active' : '' }}
+                                {{ request()->routeIs('inventory.*') ? 'active' : '' }}
 
                                 {{ request()->routeIs('technicians.*') ? 'active' : '' }} ">
                                 <i class="nav-icon fas fa-table"></i>
@@ -227,14 +227,14 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('purchase-orders.index') }}"
-                                        class="nav-link {{ request()->routeIs('purchase-orders.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('purchase-orders.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Purchase Order</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('inventory.index') }}"
-                                        class="nav-link {{ request()->routeIs('inventory.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Inventory</p>
                                     </a>
@@ -851,8 +851,10 @@
 
 
     <!-- Toastr -->
-    <script src="{{ asset('/admin/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
     <script>
+        // toastr.info("{{auth()->user()->id}}");
+
         @if (session('success'))
             toastr.success("{{ session('success') }}");
         @endif

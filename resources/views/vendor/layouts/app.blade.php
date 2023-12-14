@@ -31,12 +31,109 @@
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+    {{-- <style>
+        /* This is a compiled file, to make changes persist, consider editing under the templates directory */
+        .pace {
+            -webkit-pointer-events: none;
+            pointer-events: none;
 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            -webkit-transform: translate3d(0, -50px, 0);
+            -ms-transform: translate3d(0, -50px, 0);
+            transform: translate3d(0, -50px, 0);
+
+            -webkit-transition: -webkit-transform .5s ease-out;
+            -ms-transition: -webkit-transform .5s ease-out;
+            transition: transform .5s ease-out;
+        }
+
+        .pace.pace-active {
+            -webkit-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .pace .pace-progress {
+            display: block;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            right: 100%;
+            width: 100%;
+            height: 10px;
+            background: #000000;
+
+            pointer-events: none;
+        }
+    </style> --}}
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed ">
     <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
+                </li>
+            </ul>
 
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+
+
+
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="far fa-bell"></i>
+                        <span
+                            class="badge badge-danger navbar-badge">{{ auth()->user()->unreadnotifications->count() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">{{ auth()->user()->unreadnotifications->count() }}
+                            UnRead Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        @foreach (auth()->user()->unreadnotifications as $notifications)
+                            <a href="{{ route('markasread', $notifications->id) }}"
+                                class="dropdown-item my-2 text-wrap ">
+                                <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
+
+                                @if (isset($notifications->data['message']))
+                                    {{ $notifications->data['message'] }}
+                                @endif
+
+                                <span
+                                    class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                            </a>
+
+                            {{-- <hr> --}}
+                            {{-- <div class="dropdown-divider "></div> --}}
+                        @endforeach
+                        <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
+                            Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
@@ -50,7 +147,7 @@
             <a href="index3.html" class="brand-link">
                 <img src="{{ asset('/admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">vendor Dashboard</span>
+                <span class="brand-text font-weight-light">Vendor Dashboard</span>
             </a>
 
             <!-- Sidebar -->
@@ -396,6 +493,8 @@
     <!-- Summernote -->
     <script src="{{ asset('/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('js/style.js') }}"></script>
+    <!-- pace-progress -->
+{{-- <script src="{{asset('admin/plugins/pace-progress/pace.min.js')}}"></script> --}}
 
     <script>
         $(function() {
@@ -420,7 +519,7 @@
         });
     </script>
 
-@yield('scripts')
+    @yield('scripts')
 </body>
 
 </html>

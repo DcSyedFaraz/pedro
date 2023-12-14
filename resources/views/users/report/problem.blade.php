@@ -33,7 +33,7 @@
                                 <table id="example1" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Report#</th>
                                             <th>Job Name</th>
                                             <th>Location</th>
                                             <th>Type</th>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Notifications\UserNotification;
+use App\Services\TwilioService;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\VeriantSize;
@@ -11,9 +12,16 @@ use App\Models\PageCategory;
 use App\Models\PageSections;
 use App\Models\VeriantColor;
 use Illuminate\Support\Facades\Storage;
+use Twilio\Rest\Client;
 
 class HomeController extends Controller
 {
+    protected $twilioService;
+
+    public function __construct(TwilioService $twilioService)
+    {
+        $this->twilioService = $twilioService;
+    }
     public function index()
     {
 
@@ -29,37 +37,34 @@ class HomeController extends Controller
     public function markasread($id)
     {
 
-        if($id){
-            auth()->user()->notifications->where('id',$id)->markasread();
-            return back()->with('success','Mark as read');
+        if ($id) {
+            auth()->user()->notifications->where('id', $id)->markasread();
+            return back()->with('success', 'Mark as read');
         }
 
     }
     public function test()
     {
+        $to = '+923472783689';
+        $message = 'Hello';
 
-        if(auth()->user()){
-            $user = User::first();
-            auth()->user()->notify(new UserNotification($user));
-           }
+        $this->twilioService->sendSMS($to, $message);
+
+        return "done";
+
 
     }
 
-    public function login(){
+    public function login()
+    {
         // $this->middleware('auth')->except('logout');
         return view('auth.login');
     }
-    public function manager(){
+    public function manager()
+    {
         $data['users'] = User::all()->count();
-        return view('manager.dashboard',$data);
+        return view('manager.dashboard', $data);
     }
 
-    public function product_detail($id)
-    {
-        $data['product'] = Product::find($id);
-        $data['size'] = VeriantSize::where('product_id',$id)->first();
-        // return json_decode($size->name);
-        $data['color'] = VeriantColor::where('product_id',$id)->first();
-        return view('admin.product_detail',$data);
-    }
+    
 }

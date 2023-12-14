@@ -25,7 +25,7 @@ class VendorController extends Controller
 
         return view('vendor.schedule.schedule', compact('jobs'));
     }
-    public function Updateschedule(Request $request,$id)
+    public function Updateschedule(Request $request, $id)
     {
         // dd($id);
         $schedule = Job::find($id);
@@ -37,8 +37,8 @@ class VendorController extends Controller
         // Retrieve and display assigned work orders for the vendor
         $WorkOrders = WorkOrders::where('vendor_id', auth()->user()->id)
             ->whereNotIn('status', ['declined'])
-            ->orderby('priority','asc')->get();
-// return $WorkOrders;
+            ->orderby('priority', 'asc')->get();
+        // return $WorkOrders;
         return view('vendor.work_orders.index', compact('WorkOrders'));
     }
 
@@ -147,6 +147,11 @@ class VendorController extends Controller
             // Update the status to 'Accepted'
             $workOrder->payment_info = 'quick_pay';
             $workOrder->save();
+
+            $user = auth()->user();
+            $admin = User::find(1);
+            $message = "applied for Quick Pay for Work Order# {$id}";
+            $admin->notify(new UserNotification($user, $message));
 
             return redirect()->back()->with('info', 'Successfully Applied For Quick Pay');
         } else {

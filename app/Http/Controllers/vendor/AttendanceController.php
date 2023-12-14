@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
-use App\Models\MoodReport;
-use App\Models\User;
-use App\Notifications\UserNotification;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-class MoodReportController extends Controller
-{
+class AttendanceController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $report = MoodReport::orderBy('created_at', 'desc')->get();
-        return view('admin.report.index', compact('report'));
+    public function index() {
+        return view('map');
     }
 
     /**
@@ -26,8 +21,7 @@ class MoodReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -37,19 +31,30 @@ class MoodReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $request['user_id'] = auth()->user()->id;
-        $mood = MoodReport::create($request->all());
+    public function store(Request $request) {
 
+        $data = $request->all();
 
-        $admin = User::find(1);
-        $user = auth()->user();
-        $message = "created a mood report# {$mood->id}";
-        $admin->notify(new UserNotification($user, $message));
+        // dd($data['longitude']);
+        $client = new Client();
 
+        $response = $client->get('https://api.opencagedata.com/geocode/v1/json', [
+            'query' => [
+                'key' => 'ab5facf267b84f5ba20bace2281864a1',
+                'q' => "{$data['latitude']},{$data['longitude']}",
+            ],
+        ]);
 
-        return redirect()->back()->with('success', 'Report Submitted Successfully');
+        $data = json_decode($response->getBody(), true);
+
+        if($data['total_results'] > 0) {
+            return $data['results'][0]['formatted'];
+        }
+
+        return [
+            'success' => false,
+            'message' => 'No location found for the provided coordinates.',
+        ];
     }
 
     /**
@@ -58,8 +63,7 @@ class MoodReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -69,8 +73,7 @@ class MoodReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -81,8 +84,7 @@ class MoodReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -92,8 +94,7 @@ class MoodReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }

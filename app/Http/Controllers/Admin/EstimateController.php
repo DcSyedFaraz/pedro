@@ -12,6 +12,7 @@ use App\Models\job_Category;
 use App\Models\JobSubCategory;
 use App\Models\job_priority_category;
 use App\Models\job_source_category;
+use App\Notifications\UserNotification;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -334,6 +335,10 @@ class EstimateController extends Controller
                     $jobPrimaryContact->email = $estimatePrimaryContact->email;
                     $jobPrimaryContact->save();
                 }
+                $user = User::find($estimate->customer_id);
+                $admin = auth()->user();
+                $message = "created your Job# {$job->id}";
+                $user->notify(new UserNotification($admin, $message));
             }
             DB::commit();
             return redirect()->back()->with('success', 'Estimate data copied to Job successfully');

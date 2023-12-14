@@ -41,6 +41,7 @@
                                         <th>Location</th>
                                         <th>Created By</th>
                                         <th>Type</th>
+                                        <th>Created at</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -64,9 +65,13 @@
                                                 <span class="badge badge-success">Low</span>
                                             @endif
                                         </td>
+                                        <td class="text-muted">
+                                            {{$report->created_at->diffforhumans()}}
+                                        </td>
                                         <td>
                                             <a href="{{ route('problem.show', $report->id) }}" class="btn btn-info">View</a>
                                             <a href="{{ route('problem.edit', $report->id) }}" class="btn btn-primary">Edit</a>
+                                            {{-- <a href="{{ route('problem.destroy', $report->id) }}" class="btn btn-danger">Delete</a> --}}
                                             {{-- Add delete button or other actions here --}}
                                         </td>
                                     </tr>

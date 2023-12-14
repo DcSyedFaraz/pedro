@@ -57,15 +57,6 @@
 
 
     <script>
-        // function getRandomColor() {
-        //     var letters = '0123456789ABCDEF';
-        //     var color = '#';
-        //     for (var i = 0; i < 6; i++) {
-        //         color += letters[Math.floor(Math.random() * 16)];
-        //     }
-        //     return color;
-        // }
-
         $(function() {
 
 
@@ -75,11 +66,7 @@
             /* initialize the calendar
              -----------------------------------------------------------------*/
             //Date for the calendar events (dummy data)
-            var date = new Date()
-            var d = date.getDate(),
-                m = date.getMonth(),
-                y = date.getFullYear()
-
+           
             var Calendar = FullCalendar.Calendar;
             var Draggable = FullCalendar.Draggable;
 
@@ -92,7 +79,7 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
                 themeSystem: 'bootstrap',
-                //Random default events
+                //Default events
                 events: [
                     @foreach ($jobs as $job)
                         {
@@ -100,22 +87,19 @@
                             title: '{{ $job->location_name }}',
                             start: '{{ $job->start_date }}',
                             end: '{{ $job->end_date }}',
-                            url: '{{ route('manage_work_orders.show', $job->id) }}'
+                            url: '{{ route('manage_work_orders.show', $job->id) }}',
+                            backgroundColor: '#{{ substr(md5(microtime()), 0, 6) }}',
+                            borderColor: '#{{ substr(md5(microtime()), 0, 6) }}'
                         },
                     @endforeach
 
                 ],
-                // eventRender: function(info) {
-                //     // Add logic here to set a unique color for each job
-                //     info.el.style.backgroundColor = getRandomColor();
-                // },
+
 
                 editable: true,
                 droppable: true, // this allows things to be dropped onto the calendar !!!
                 drop: function(info) {
-                    // is the "remove after drop" checkbox checked?
                     if (checkbox.checked) {
-                        // if so, remove the element from the "Draggable Events" list
                         info.draggedEl.parentNode.removeChild(info.draggedEl);
                     }
                 },
@@ -166,10 +150,6 @@
             });
 
             calendar.render();
-            // $('#calendar').fullCalendar()
-
-
-
         })
     </script>
 @endsection

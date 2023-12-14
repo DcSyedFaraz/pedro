@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\User;
+use App\Notifications\UserNotification;
+use Exception;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\WorkOrders;
@@ -24,7 +26,7 @@ class WorkOrdersController extends Controller
     {
         $jobs = Job::all();
         $vendors = User::withRole('vendor')->get();
-        return view('admin.work_orders.create',compact('jobs','vendors'));
+        return view('admin.work_orders.create', compact('jobs', 'vendors'));
     }
 
     public function store(Request $request)
@@ -34,9 +36,20 @@ class WorkOrdersController extends Controller
             'vendor_id' => 'required',
             'deadline' => 'required',
         ]);
+        try {
 
-        WorkOrders::create($validatedData);
-        return redirect()->route('work_orders.index')->with('success', 'Work order created successfully!');
+            $work = WorkOrders::create($validatedData);
+
+            $user = User::find($request->input('vendor_id'));
+            $admin = auth()->user();
+         $message = "Assigned a word order# {$work->id}";
+            $user->notify(new UserNotification($admin, $message));
+
+            return redirect()->route('work_orders.index')->with('success', 'Work order created successfully!');
+
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function show($id)
@@ -49,22 +62,31 @@ class WorkOrdersController extends Controller
     {
         $jobs = Job::all();
         $vendors = User::withRole('vendor')->get();
-        return view('admin.work_orders.edit', compact('workOrder','jobs','vendors'));
+        return view('admin.work_orders.edit', compact('workOrder', 'jobs', 'vendors'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $workOrder = WorkOrders::findOrFail($id);
+        try {
+            $workOrder = WorkOrders::findOrFail($id);
 
-        // Check if vendor_id is being changed
-        if ($workOrder->vendor_id != $request->input('vendor_id')|| $workOrder->job_id != $request->input('job_id')) {
-            $request->merge(['status' => 'pending','payment_info' => '---']);
+            // Check if vendor_id is being changed
+            if ($workOrder->vendor_id != $request->input('vendor_id') || $workOrder->job_id != $request->input('job_id')) {
+                $request->merge(['status' => 'pending', 'payment_info' => '---']);
+
+                $user = User::find($request->input('vendor_id'));
+                $admin = auth()->user();
+                $message = "Assigned a work order# {$id}";
+                $user->notify(new UserNotification($admin, $message));
+            }
+
+            $workOrder->update($request->all());
+
+            return redirect()->route('work_orders.index')->with('success', 'Work order updated successfully!');
+        } catch (Exception $e) {
+            throw $e;
         }
-
-        $workOrder->update($request->all());
-
-        return redirect()->route('work_orders.index')->with('success', 'Work order updated successfully!');
     }
     public function destroy($id)
     {
