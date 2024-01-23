@@ -13,6 +13,7 @@ use App\Models\JobSubCategory;
 use App\Models\job_priority_category;
 use App\Models\job_source_category;
 use App\Notifications\UserNotification;
+use App\Services\TwilioService;
 use DB;
 use File;
 use Illuminate\Http\Request;
@@ -22,6 +23,11 @@ use App\Mail\SendEstimate;
 
 class EstimateController extends Controller
 {
+    protected $twilioService;
+    public function __construct(TwilioService $twilioService)
+    {
+        $this->twilioService = $twilioService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -134,6 +140,14 @@ class EstimateController extends Controller
                 'email' => $request['email'][$key],
 
             ]);
+        }
+        $user = User::find($job->customer_id);
+        $admin = auth()->user();
+        $message = "created your Estimate# {$job->id}";
+        $user->notify(new UserNotification($admin, $message));
+
+        if ($user->phone != null) {
+            $this->twilioService->sendSMS($user->phone, $message);
         }
 
         return redirect()->route('estimates.index')->with('success', 'Estimate Created Successfully');
@@ -256,6 +270,13 @@ class EstimateController extends Controller
 
             ]);
         }
+        $user = User::find($job->customer_id);
+        $admin = auth()->user();
+        $message = "updated your Estimate# {$job->id}";
+        $user->notify(new UserNotification($admin, $message));
+        if ($user->phone != null) {
+            $this->twilioService->sendSMS($user->phone, $message);
+        }
 
         return redirect()->route('estimates.index')->with('success', 'Estimate updated successfully');
     }
@@ -285,6 +306,7 @@ class EstimateController extends Controller
 
             foreach ($selectedEstimates as $estimateId) {
                 $estimate = Estimate::find($estimateId);
+                // dd($estimate->customer->phone);
 
                 $job = new Job();
                 $job->name = $estimate->name;
@@ -339,6 +361,23 @@ class EstimateController extends Controller
                 $admin = auth()->user();
                 $message = "created your Job# {$job->id}";
                 $user->notify(new UserNotification($admin, $message));
+
+                // SMS
+                $jobInfoSMS = "New Job Alert!\n";
+                $jobInfoSMS .= "Customer: {$job->customer->name}\n";
+                $jobInfoSMS .= "Location: {$job->location_name}\n";
+                $jobInfoSMS .= "Address: {$job->location_address}, {$job->location_unit}, {$job->location_city}, {$job->location_state}, {$job->location_zipcode}\n";
+                $jobInfoSMS .= "Description: {$job->job_description}\n";
+                $jobInfoSMS .= "Start Date: {$job->start_date}\n";
+                $jobInfoSMS .= "Start Time: {$job->start_time}\n";
+                $jobInfoSMS .= "Gated Property: " . ($job->location_gated_property ? 'Yes' : 'No') . "\n";
+                $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
+                $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
+
+                if($estimate->customer->phone != null){
+
+                    $this->twilioService->sendSMS($estimate->customer->phone, $jobInfoSMS);
+                }
             }
             DB::commit();
             return redirect()->back()->with('success', 'Estimate data copied to Job successfully');

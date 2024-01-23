@@ -118,11 +118,11 @@ class DashboardController extends Controller
 
     public function user_edit_profile(Request $request)
     {
-
+// dd($request->phone);
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
         $user->name = $request->name;
-        $user->email = $request->email;
+        // $user->email = $request->email;
         $user->phone = $request->phone;
         $user->save();
 

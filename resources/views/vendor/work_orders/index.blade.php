@@ -114,10 +114,15 @@
                                                                 <i class="fa fa-plus"></i>
                                                             </a>
                                                             <a title="add images and notes"
-                                                                href="{{ route('invoice.create', $workOrder->id) }}"
-                                                                class="btn btn-sm btn-secondary">
-                                                                Create Invoice
-                                                            </a>
+                                                            href="{{ route('invoice.create', $workOrder->id) }}"
+                                                            class="btn btn-sm btn-secondary">
+                                                            Create Invoice
+                                                        </a>
+                                                        <a title="add images and notes"
+                                                            href="{{ route('vendor.alert', ['id' => $workOrder->job_id]) }}"
+                                                            class="btn btn-sm btn-Indigo" style="background-color: #6610f2!important; color: white">
+                                                            <i class="fas fa-bell"></i> Alert
+                                                        </a>
                                                         @endif
                                                         <a title="view details"
                                                             href="{{ route('manage_work_orders.show', $workOrder->job_id) }}"

@@ -162,8 +162,10 @@ class JobController extends Controller
             $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
             $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
 
+            if($formattedPhoneNumber != null){
 
-            $this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
+                $this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
+            }
 
             // Notification
             $user = User::find($request->input('customer_id'));
@@ -297,6 +299,10 @@ class JobController extends Controller
             $admin = auth()->user();
             $message = "updated your Job# {$job->id}";
             $user->notify(new UserNotification($admin, $message));
+
+            if ($user->phone != null) {
+                $this->twilioService->sendSMS($user->phone, $message);
+            }
         }
         return redirect()->route('job.index')->with('success', 'Job updated successfully');
     }

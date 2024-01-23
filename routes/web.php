@@ -219,6 +219,7 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
     Route::get('/decline/{id}', [VendorController::class, 'declineWorkOrder'])->name('vendor.decline');
     Route::get('/quick_pay/{id}', [VendorController::class, 'quick_pay'])->name('vendor.quick_pay');
     Route::get('/doc/{id}', [VendorController::class, 'doc'])->name('vendor.doc');
+    Route::get('/alert/{id}', [VendorController::class, 'alert'])->name('vendor.alert');
     Route::put('/upload/{id}', [VendorController::class, 'upload'])->name('vendor.upload');
     Route::delete('/upload/delete/{id}', [VendorController::class, 'delete'])->name('vendor.delete');
 

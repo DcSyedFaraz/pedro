@@ -5,15 +5,33 @@ namespace App\Http\Controllers\vendor;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AttendanceController extends Controller {
+class AttendanceController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         return view('map');
+    }
+    public function apitest()
+    {
+        $user = auth()->user();
+        // return $user;
+        // $roles = $user->token()->scopes['roles'];
+        // return response()->json($user->currentAccessToken()->abilities['roles'][0]);
+
+
+
+        if ($user->tokenCan('Admin')) {
+            return response()->json('Admin');
+
+        }
+        return response()->json('notAdmin', 200);
     }
 
     /**
@@ -21,8 +39,22 @@ class AttendanceController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //
+    public function login(Request $request)
+    {
+        // return response()->json(['token' => $request->email]);
+        $credentials = $request->only('email', 'password');
+        // return $credentials;
+        if (Auth::attempt($credentials)) {
+
+            $user = auth()->user();
+            $roles = $user->getRoleNames()->toArray();
+            // return $roles[0];
+            $token = $user->createToken('authToken', [$roles[0]])->plainTextToken;
+
+            return response()->json(['token' => $token, 'success' => true], 200);
+        }
+
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     /**
@@ -31,11 +63,12 @@ class AttendanceController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function stores(Request $request)
+    {
 
         $data = $request->all();
 
-        // dd($data['longitude']);
+        dd($data);
         $client = new Client();
 
         $response = $client->get('https://api.opencagedata.com/geocode/v1/json', [
@@ -47,7 +80,7 @@ class AttendanceController extends Controller {
 
         $data = json_decode($response->getBody(), true);
 
-        if($data['total_results'] > 0) {
+        if ($data['total_results'] > 0) {
             return $data['results'][0]['formatted'];
         }
 
@@ -57,14 +90,59 @@ class AttendanceController extends Controller {
         ];
     }
 
+
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        //
+    public function store(Request $request)
+    {
+        // dd($request);
+        $userLat = $request->latitude; // User's latitude
+        $userLon =  $request->longitude;
+
+        $jobLat = $request->Joblatitude;
+        $jobLon = $request->Joblongitude;
+
+        $thresholdDistance = 30;
+
+        $distance = $this->calculateDistance($userLat, $userLon, $jobLat, $jobLon);
+
+        if ($distance <=  $thresholdDistance) {
+            $attendanceStatus = 'present';
+
+            return [
+                'success' => true,
+                'distance' => $distance,
+                'message' => 'Attendance marked: User is within 30 meters.',
+            ];
+        } else {
+            return [
+                'success' => false,
+                'distance' => $distance,
+                'message' => 'Attendance not marked: User is outside 30 meters.',
+            ];
+        }
+    }
+    private function calculateDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        $R = 6371e3;
+        $φ1 = deg2rad($lat1);
+        $φ2 = deg2rad($lat2);
+        $Δφ = deg2rad($lat2 - $lat1);
+        $Δλ = deg2rad($lon2 - $lon1);
+
+        $a = sin($Δφ / 2) * sin($Δφ / 2) +
+            cos($φ1) * cos($φ2) *
+            sin($Δλ / 2) * sin($Δλ / 2);
+
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        $distance = $R * $c;
+        return $distance;
     }
 
     /**
@@ -73,7 +151,8 @@ class AttendanceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -84,7 +163,8 @@ class AttendanceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -94,7 +174,8 @@ class AttendanceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
 }

@@ -7,6 +7,8 @@ use App\Models\Files;
 use App\Models\Job;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use App\Services\TwilioService;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\WorkOrders;
 use File;
@@ -16,6 +18,12 @@ use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
+    protected $twilioService;
+
+    public function __construct(TwilioService $twilioService)
+    {
+        $this->twilioService = $twilioService;
+    }
     public function schedule()
     {
         // $jobs = Job::all();
@@ -94,6 +102,36 @@ class VendorController extends Controller
             DB::rollBack();
 
             return redirect()->back()->with('error', 'An error occurred while uploading files and saving notes.');
+        }
+    }
+    public function alert($id)
+    {
+        try {
+
+        // Send SMS to the vendor about new work order
+        $job = Job::select('customer_id', 'location_name')->where('id', $id)->with('customer')->first();
+        if ($job != null) {
+            $message1 = "On-the-way Jobsite Alert:
+            Vendor is on the way for the job, location:{$job->location_name}. Please prepare for the service.
+            ";
+            // dd($job->customer->phone);
+            if ($job->customer->phone != null) {
+
+                $this->twilioService->sendSMS($job->customer->phone, $message1);
+            }
+            // Notification
+            $user = auth()->user();
+            $admin = User::find(1);
+            $message = "is on-the-way jobsite alert for the job, location: '{$job->location_name}'.";
+            $admin->notify(new UserNotification($user, $message));
+
+            return redirect()->back()->with('success', 'Alert Sent successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Job Not Found.');
+
+        }
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error sending alert'.$e);
         }
     }
     public function delete($id)

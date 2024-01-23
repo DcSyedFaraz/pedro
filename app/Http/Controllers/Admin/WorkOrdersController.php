@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use App\Services\TwilioService;
 use Exception;
 use Illuminate\Http\Request;
 use Validator;
@@ -15,6 +16,12 @@ use Carbon\Carbon;
 
 class WorkOrdersController extends Controller
 {
+    protected $twilioService;
+
+    public function __construct(TwilioService $twilioService)
+    {
+        $this->twilioService = $twilioService;
+    }
     public function index()
     {
         $WorkOrders = WorkOrders::get();
@@ -42,8 +49,18 @@ class WorkOrdersController extends Controller
 
             $user = User::find($request->input('vendor_id'));
             $admin = auth()->user();
-         $message = "Assigned a word order# {$work->id}";
+            $message = "Assigned a word order# {$work->id}";
             $user->notify(new UserNotification($admin, $message));
+
+            $message1 = "{$admin->name} Assigned your job's work order# {$work->id} to vendor {$user->name}";
+
+            // Send SMS to the vendor about new work order
+            $job = Job::select('customer_id')->where('id',$request->job_id)->with('customer')->first();
+            // dd($job->customer->phone);
+            if($job->customer->phone != null){
+
+                $this->twilioService->sendSMS($job->customer->phone, $message1);
+            }
 
             return redirect()->route('work_orders.index')->with('success', 'Work order created successfully!');
 
