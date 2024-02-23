@@ -217,7 +217,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('users.work-orders.index')}}" class="nav-link {{ request()->routeIs('users.work-orders')? 'active' : '' }}">
+                  <a href="{{route('users.work-orders.index')}}" class="nav-link {{ request()->routeIs('users.work-orders.*')? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Work Order List</p>
                   </a>

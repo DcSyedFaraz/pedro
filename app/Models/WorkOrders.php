@@ -18,6 +18,14 @@ class WorkOrders extends Model
     {
         return $this->hasOne(User::class, 'id', 'vendor_id');
     }
+    public function JobLocation()
+    {
+        return $this->hasOne(JobLocation::class);
+    }
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'work_orders_id');
+    }
     public function files()
     {
         return $this->hasMany(Files::class,'job_id','job_id');

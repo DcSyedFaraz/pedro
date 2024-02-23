@@ -247,7 +247,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('manage_work_orders.index') }}"
-                                class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} {{ request()->routeIs('vendor.doc') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} {{ request()->routeIs('vendor.*') ? 'active' : '' }}">
                                 <i class="fas fa-file-invoice nav-icon text-info"></i>
                                 <p>Vendor Work Order</p>
                             </a>

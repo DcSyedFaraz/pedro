@@ -88,6 +88,8 @@ Route::get('/manager/dashboard', [HomeController::class, 'manager'])->name('mana
 
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::post('/put_location/{id}', [AttendanceController::class, 'update'])->name('put_location');
+
     // Inspection
     Route::resource('checklists', InspectionController::class);
     Route::resource('location', LocationController::class);
@@ -222,6 +224,8 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
     Route::get('/alert/{id}', [VendorController::class, 'alert'])->name('vendor.alert');
     Route::put('/upload/{id}', [VendorController::class, 'upload'])->name('vendor.upload');
     Route::delete('/upload/delete/{id}', [VendorController::class, 'delete'])->name('vendor.delete');
+    Route::get('/attendance/{id}', [AttendanceController::class, 'attendance'])->name('vendor.attendance');
+    Route::post('/attendance/store', [AttendanceController::class, 'attendanceStore'])->name('attendance.vendor');
 
 });
 Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account manager']], function () {
@@ -231,6 +235,12 @@ Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account mana
 
 });
 Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'role:account manager|Admin']], function () {
+
+    Route::get('/attendance/manager', [AttendanceController::class, 'Managerattendance'])->name('manager.attendance');
+    Route::get('/attendance/vendor', [AttendanceController::class, 'Vendorattendance'])->name('vendor.attendance');
+    Route::get('/attendance/today', [AttendanceController::class, 'getTodayAttendance'])->name('attendance.today');
+    Route::post('/attendance/store', [AttendanceController::class, 'managerStore'])->name('manager.attendance.store');
+
     Route::resource('job', JobController::class);
     Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
     Route::resource('general_setting',\App\Http\Controllers\Admin\GeneralSettingController::class);

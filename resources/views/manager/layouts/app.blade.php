@@ -622,6 +622,13 @@
                             </ul>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('manager.attendance') }}"
+                                class="nav-link {{ request()->routeIs('manager.attendance') ? 'active' : '' }}">
+                                <i class="far fa-dot-circle nav-icon text-success"></i>
+                                <p>Attendance</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Logout</p>
@@ -746,8 +753,9 @@
 
 
     </script>
-   
+
     @yield('script')
+    @yield('scripts')
 </body>
 
 </html>

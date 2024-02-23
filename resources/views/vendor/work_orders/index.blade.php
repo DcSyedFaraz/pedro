@@ -27,12 +27,7 @@
                     <div class="col-12">
 
                         <div class="card">
-                            <!-- <div class="card-header">
-                                          <h3 class="card-title">User Managment</h3>
-                                        </div> -->
-                            <!-- /.card-header -->
 
-                            <!-- /.card-header -->
                             <div class="card-body table-responsive-xl">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
@@ -48,13 +43,15 @@
                                         </tr>
                                     </thead>
 
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
                                     <tbody>
-                                        <meta name="csrf-token" content="{{ csrf_token() }}">
 
                                         @if ($WorkOrders)
                                             @foreach ($WorkOrders as $key => $workOrder)
                                                 <tr data-id="{{ $workOrder->id }}">
-                                                    <td><a href="#"><i class="fas fa-arrows-alt cursor-pointer"></i></a>&nbsp;{{$key+1}}</td>
+                                                    <td><a href="#"><i
+                                                                class="fas fa-arrows-alt cursor-pointer"></i></a>&nbsp;{{ $key + 1 }}
+                                                    </td>
                                                     <td> {{ $workOrder->id ?? '' }}</td>
                                                     <td>{{ $workOrder->jobname->name ?? '' }}</td>
                                                     <td>{{ $workOrder->vendor->name ?? '' }}</td>
@@ -91,38 +88,57 @@
                                                         @if ($workOrder->status == 'pending')
                                                             <!-- Show Accept Button -->
                                                             <a href="{{ route('vendor.accept', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-sm btn-success"
+                                                                class="btn btn-sm btn-success mr-2"
                                                                 onclick="return confirm('Are you sure you want to Accept this Work Order?')">
                                                                 <i class="fa fa-check"></i> Accept
                                                             </a>
                                                             <!-- Show Decline Button -->
                                                             <a href="{{ route('vendor.decline', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-sm btn-danger"
+                                                                class="btn btn-sm btn-danger mr-2"
                                                                 onclick="return confirm('Are you sure you want to Decline this Work Order?')">
                                                                 <i class="fa fa-times"></i> Decline
                                                             </a>
                                                         @else
-                                                            <a title="ask for quick pay"
-                                                                href="{{ route('vendor.quick_pay', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-sm btn-primary"
-                                                                onclick="return confirm('Are you sure you want to Apply For Quick Pay?')">
-                                                                <i class="fa fa-hand-holding-usd"></i>
-                                                            </a>
-                                                            <a title="add images and notes"
-                                                                href="{{ route('vendor.doc', ['id' => $workOrder->id]) }}"
-                                                                class="btn btn-sm btn-warning">
-                                                                <i class="fa fa-plus"></i>
-                                                            </a>
-                                                            <a title="add images and notes"
-                                                            href="{{ route('invoice.create', $workOrder->id) }}"
-                                                            class="btn btn-sm btn-secondary">
-                                                            Create Invoice
-                                                        </a>
-                                                        <a title="add images and notes"
-                                                            href="{{ route('vendor.alert', ['id' => $workOrder->job_id]) }}"
-                                                            class="btn btn-sm btn-Indigo" style="background-color: #6610f2!important; color: white">
-                                                            <i class="fas fa-bell"></i> Alert
-                                                        </a>
+                                                            <div class="btn-group btn-group-sm" role="group">
+                                                                <a title="ask for quick pay"
+                                                                    href="{{ route('vendor.quick_pay', ['id' => $workOrder->id]) }}"
+                                                                    class="btn btn-primary mr-2"
+                                                                    onclick="return confirm('Are you sure you want to Apply For Quick Pay?')">
+                                                                    <i class="fa fa-hand-holding-usd"></i>
+                                                                </a>
+                                                                <a title="add images and notes"
+                                                                    href="{{ route('vendor.doc', ['id' => $workOrder->id]) }}"
+                                                                    class="btn btn-warning mr-2">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </a>
+                                                                <a title="Create Invoice"
+                                                                    href="{{ route('invoice.create', $workOrder->id) }}"
+                                                                    class="btn btn-secondary mr-2">
+                                                                    Create Invoice
+                                                                </a>
+                                                                <a title="Alert the customer about work order completion"
+                                                                    href="{{ route('vendor.alert', ['id' => $workOrder->job_id]) }}"
+                                                                    class="btn btn-Indigo"
+                                                                    style="background-color: #6610f2!important; color: white">
+                                                                    <i class="fas fa-bell"></i> Alert
+                                                                </a>
+                                                            </div>
+                                                            @if (!$workOrder->JobLocation)
+                                                                <span class="badge badge-danger">No Job Location Set Yet!</span>
+                                                            @else
+                                                                @if ($workOrder->attendance->contains('attendance', 'checkOut'))
+                                                                    <!-- Assuming you have a relationship set up -->
+                                                                    <span class="badge badge-success"
+                                                                        style="background-color: #39cccc!important; color: black">Checked Out</span>
+                                                                @else
+                                                                    <a title="attendance"
+                                                                        href="{{ route('vendor.attendance', ['id' => $workOrder->id]) }}"
+                                                                        class="btn btn-sm btn-maroon"
+                                                                        style="background-color: #d81b60!important; color: white">
+                                                                        <i class="fas fa-user-clock"></i> Attendance
+                                                                    </a>
+                                                                @endif
+                                                            @endif
                                                         @endif
                                                         <a title="view details"
                                                             href="{{ route('manage_work_orders.show', $workOrder->job_id) }}"

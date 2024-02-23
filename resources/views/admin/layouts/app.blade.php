@@ -75,23 +75,25 @@
                             UnRead Notifications</span>
                         <div class="dropdown-divider"></div>
                         @foreach (auth()->user()->unreadnotifications as $notifications)
+                            <a href="{{ route('markasread', $notifications->id) }}"
+                                class="dropdown-item my-2 text-wrap ">
+                                <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
 
-                        <a href="{{ route('markasread', $notifications->id) }}" class="dropdown-item my-2 text-wrap ">
-                            <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
+                                @if (isset($notifications->data['message']))
+                                    {{ $notifications->data['message'] }}
 
-                            @if (isset($notifications->data['message']))
-                                {{ $notifications->data['message'] }}
-
-                                <!-- Check if 'response' is present in the message and display the button -->
-                                @if (strpos($notifications->data['message'], 'response') !== false)
-                                    <a href="{{ route('location') }}" class="btn btn-success ml-1 btn-sm float-left">view reponse</a>
+                                    <!-- Check if 'response' is present in the message and display the button -->
+                                    @if (strpos($notifications->data['message'], 'response') !== false)
+                                        <a href="{{ route('location') }}"
+                                            class="btn btn-success ml-1 btn-sm float-left">view reponse</a>
+                                    @endif
                                 @endif
-                            @endif
 
-                            <span class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
-                        </a>
+                                <span
+                                    class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                            </a>
 
-                        {{-- <hr> --}}
+                            {{-- <hr> --}}
                             {{-- <div class="dropdown-divider "></div> --}}
                         @endforeach
                         <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
@@ -775,6 +777,34 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('*.attendance') ? 'menu-open' : '' }}">
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle  {{ request()->routeIs('*.attendance') ? 'active' : '' }} ">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Attendance
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="{{ route('manager.attendance') }}"
+                                        class="nav-link {{ request()->routeIs('manager.attendance') ? 'active' : '' }}">
+                                        <i class="far fa-dot-circle nav-icon text-success"></i>
+                                        <p>Manager's </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('vendor.attendance') }}"
+                                        class="nav-link {{ request()->routeIs('vendor.attendance') ? 'active' : '' }}">
+                                        <i class="far fa-dot-circle nav-icon text-success"></i>
+                                        <p>Vendor's </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('estimate_requests.index') }}"
                                 class="nav-link {{ request()->routeIs('estimate_requests.*') ? 'active' : '' }} ">
@@ -844,7 +874,7 @@
     <script src="{{ asset('/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
-    <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script> --}}
     <script src="{{ asset('js/style.js') }}"></script>
 
     <!-- geo Location -->
@@ -853,7 +883,7 @@
     <!-- Toastr -->
     <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
     <script>
-        // toastr.info("{{auth()->user()->id}}");
+        // toastr.info("{{ auth()->user()->id }}");
 
         @if (session('success'))
             toastr.success("{{ session('success') }}");
