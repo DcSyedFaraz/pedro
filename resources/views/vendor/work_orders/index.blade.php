@@ -32,7 +32,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.N</th>
+                                            <th>Queue</th>
                                             <th>Work Order#</th>
                                             <th>Job Name</th>
                                             <th>Vendor</th>
@@ -120,7 +120,7 @@
                                                                     href="{{ route('vendor.alert', ['id' => $workOrder->job_id]) }}"
                                                                     class="btn btn-Indigo"
                                                                     style="background-color: #6610f2!important; color: white">
-                                                                    <i class="fas fa-bell"></i> Alert
+                                                                    <i class="fas fa-bell"></i> Enroute
                                                                 </a>
                                                             </div>
                                                             @if (!$workOrder->JobLocation)

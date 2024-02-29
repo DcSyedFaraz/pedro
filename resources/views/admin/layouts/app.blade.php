@@ -796,8 +796,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('vendor.attendance') }}"
-                                        class="nav-link {{ request()->routeIs('vendor.attendance') ? 'active' : '' }}">
+                                    <a href="{{ route('vendors.attendance') }}"
+                                        class="nav-link {{ request()->routeIs('vendors.attendance') ? 'active' : '' }}">
                                         <i class="far fa-dot-circle nav-icon text-success"></i>
                                         <p>Vendor's </p>
                                     </a>

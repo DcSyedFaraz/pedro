@@ -621,12 +621,33 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('manager.attendance') }}"
-                                class="nav-link {{ request()->routeIs('manager.attendance') ? 'active' : '' }}">
-                                <i class="far fa-dot-circle nav-icon text-success"></i>
-                                <p>Attendance</p>
+                        <li class="nav-item {{ request()->routeIs('*.attendance') ? 'menu-open' : '' }}">
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle  {{ request()->routeIs('*.attendance') ? 'active' : '' }} ">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Attendance
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="{{ route('manager.attendance') }}"
+                                        class="nav-link {{ request()->routeIs('manager.attendance') ? 'active' : '' }}">
+                                        <i class="far fa-dot-circle nav-icon text-success"></i>
+                                        <p>Manager's </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('vendors.attendance') }}"
+                                        class="nav-link {{ request()->routeIs('vendors.attendance') ? 'active' : '' }}">
+                                        <i class="far fa-dot-circle nav-icon text-success"></i>
+                                        <p>Vendor's </p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('/logout') }}" class="nav-link">

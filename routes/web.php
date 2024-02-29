@@ -228,16 +228,14 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
     Route::post('/attendance/store', [AttendanceController::class, 'attendanceStore'])->name('attendance.vendor');
 
 });
-Route::group(['prefix' => 'manager', 'middleware' => ['auth', 'role:account manager']], function () {
-
-
-
-
+Route::group(['prefix' => '{locale}'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboards');
 });
+
 Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'role:account manager|Admin']], function () {
 
     Route::get('/attendance/manager', [AttendanceController::class, 'Managerattendance'])->name('manager.attendance');
-    Route::get('/attendance/vendor', [AttendanceController::class, 'Vendorattendance'])->name('vendor.attendance');
+    Route::get('/attendance/vendor', [AttendanceController::class, 'Vendorattendance'])->name('vendors.attendance');
     Route::get('/attendance/today', [AttendanceController::class, 'getTodayAttendance'])->name('attendance.today');
     Route::post('/attendance/store', [AttendanceController::class, 'managerStore'])->name('manager.attendance.store');
 
