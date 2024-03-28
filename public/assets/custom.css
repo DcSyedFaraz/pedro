@@ -1,8 +1,8 @@
-		/*Hammad CSS Start*/
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/*Hammad CSS Start*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 body {
-    font-family: 'Poppins';
+    font-family: "Poppins";
 }
 
 .toggle-button-cover {
@@ -80,7 +80,7 @@ body {
 
 /* Button 1 */
 #button-1 .knobs:before {
-    content: 'YES';
+    content: "YES";
     position: absolute;
     top: 4px;
     left: 4px;
@@ -92,18 +92,18 @@ body {
     text-align: center;
     line-height: 1;
     padding: 9px 4px;
-    background-color: #03A9F4;
+    background-color: #03a9f4;
     border-radius: 50%;
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-#button-1 .checkbox:checked+.knobs:before {
-    content: 'NO';
+#button-1 .checkbox:checked + .knobs:before {
+    content: "NO";
     left: 42px;
     background-color: #f44336;
 }
 
-#button-1 .checkbox:checked~.layer {
+#button-1 .checkbox:checked ~ .layer {
     background-color: #fcebeb;
 }
 
@@ -136,12 +136,9 @@ body {
     padding: 10px 35px;
 }
 
-
 .inner-section .float-1 {
     text-align: right;
 }
-
-
 
 .inner-header {
     margin-bottom: 20px;
@@ -150,7 +147,6 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
-
 }
 
 .name-main-div {
@@ -249,14 +245,14 @@ body {
     position: relative;
     top: 18px;
     right: 0;
-    font-weight:400;
+    font-weight: 400;
 }
 
 .product-view-btn.active {
     border-bottom: 6px double #f8f9fa;
 }
 
-		/*Hammad CSS End*/
+/*Hammad CSS End*/
 
 /*---Habron Start--*/
 .bg-colored {
@@ -272,7 +268,7 @@ body {
 }
 .innerinputs {
     padding: 25px;
-	width:100%;
+    width: 100%;
 }
 table.table-condensed {
     width: 200px;
@@ -319,3 +315,7 @@ table.table-condensed {
     margin-bottom: 13.6px !important;
 }
 /*--Habron End--*/
+.btn-indigo {
+    background-color: #6610f2 !important;
+    color: white;
+}

@@ -13,6 +13,7 @@
         });
         const channel = pusher.subscribe('post-liked');
     </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -37,7 +38,8 @@
     <link rel="stylesheet" href="{{ asset('/admin/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+   <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+    @yield('links')
 
 </head>
 
@@ -848,7 +850,6 @@
 
     <!-- jQuery -->
 
-    <script src="{{ asset('/admin/plugins/jquery/jquery.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('/admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>

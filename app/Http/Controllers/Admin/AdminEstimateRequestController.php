@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bid;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\EstimateRequest;
 use Illuminate\Support\Facades\Storage;
@@ -55,6 +57,66 @@ class AdminEstimateRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function vendors_save(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $request->validate([
+                'request_id' => 'required|exists:estimate_requests,id',
+                'vendors.*' => 'required|exists:users,id',
+            ]);
+
+            DB::beginTransaction();
+
+            foreach ($request->vendors as $vendorId) {
+                $bid = Bid::create([
+                    'estimate_request_id' => $request->request_id,
+                    'user_id' => $vendorId,
+                ]);
+
+                $vendor = User::find($vendorId);
+                $user = auth()->user();
+                $message = "invited to bid on estimate request #{$bid->estimate_request_id}. Please review the details and submit your bid.";
+                $vendor->notify(new UserNotification($user, $message));
+            }
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Bids saved successfully!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Error saving bids. Please try again later');
+        }
+    }
+    public function bid(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $selectedBid = Bid::findOrFail($request->bid);
+
+            Bid::where('estimate_request_id', $selectedBid->estimate_request_id)
+                ->update(['selected' => false]);
+
+            // Select the chosen bid
+            $selectedBid->selected = true;
+            $selectedBid->save();
+
+            DB::beginTransaction();
+
+            $vendor = User::find($selectedBid->user_id);
+            $user = auth()->user();
+            $message = "has approved your bid on estimate request #{$selectedBid->estimate_request_id}.";
+            $vendor->notify(new UserNotification($user, $message));
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Bids saved successfully!');
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return redirect()->back()->with('error', 'Error saving bids. Please try again later');
+        }
+    }
     public function store(Request $request)
     {
         try {
@@ -116,6 +178,12 @@ class AdminEstimateRequestController extends Controller
     {
         $estimate = EstimateRequest::find($id);
         return view('admin.estimate_req.show', compact('estimate'));
+    }
+    public function vendors($id)
+    {
+        $vendors = User::role('vendor')->select('id', 'name')->get();
+        $bids = Bid::where('estimate_request_id', $id)->get();
+        return view('admin.estimate_req.vendors', compact('vendors', 'bids', 'id'));
     }
 
     /**

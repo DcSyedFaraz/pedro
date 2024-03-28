@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('stored_services', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('customer_id');
+            $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customer_details')->onDelete('cascade');
             $table->string('nick_name')->nullable();
             $table->string('primary')->nullable();

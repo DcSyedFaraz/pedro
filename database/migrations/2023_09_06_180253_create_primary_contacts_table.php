@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('primary_contacts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('customer_id');
+            $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customer_details')->onDelete('cascade');
             $table->string('fname')->nullable();
             $table->string('lname')->nullable();

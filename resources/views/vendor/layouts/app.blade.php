@@ -31,6 +31,7 @@
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+    @yield('links')
     {{-- <style>
         /* This is a compiled file, to make changes persist, consider editing under the templates directory */
         .pace {
@@ -250,6 +251,13 @@
                                 class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} {{ request()->routeIs('vendor.*') ? 'active' : '' }}">
                                 <i class="fas fa-file-invoice nav-icon text-info"></i>
                                 <p>Vendor Work Order</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('vendor_estimate_requests.index') }}"
+                                class="nav-link {{ request()->routeIs('vendor_estimate_requests.*') ? 'active' : '' }} ">
+                                <i class="far fa-calendar-alt nav-icon text-warning"></i>
+                                <p>Estimate Request</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -494,7 +502,7 @@
     <script src="{{ asset('/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('js/style.js') }}"></script>
     <!-- pace-progress -->
-{{-- <script src="{{asset('admin/plugins/pace-progress/pace.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('admin/plugins/pace-progress/pace.min.js')}}"></script> --}}
 
     <script>
         $(function() {

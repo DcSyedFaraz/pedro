@@ -8,6 +8,7 @@ use App\Http\Controllers\Manager\ResponceController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\users\EstimateRequestController;
 use App\Http\Controllers\vendor\AttendanceController;
+use App\Http\Controllers\vendor\BidController;
 use App\Http\Controllers\vendor\CompanyProfileController;
 use App\Http\Controllers\vendor\VendorProblemController;
 use App\Models\User;
@@ -198,6 +199,9 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth','role:vendor']], fun
 
     Route::post('/sort', [UserController::class, 'sort'])->name('sort');
 
+    //Estimate Request
+    Route::resource('vendor_estimate_requests', BidController::class);
+
     Route::get('/schedule', [vendorController::class, 'schedule'])->name('schedule.index');
     Route::post('/update_job/{id}', [vendorController::class, 'Updateschedule'])->name('schedule.update');
     //Manage Work Order & Execute Work Order
@@ -270,6 +274,9 @@ Route::group(['prefix' => 'manage', 'middleware' => ['auth', 'role:account manag
     Route::resource('task', TaskController::class);
     //Estimate Request
     Route::resource('estimate_requests', AdminEstimateRequestController::class);
+    Route::get('/estimate_requests/vendors/{id}', [AdminEstimateRequestController::class, 'vendors'])->name('estimate_requests.vendors');
+    Route::post('/estimate_requests/vendors', [AdminEstimateRequestController::class, 'vendors_save'])->name('estimate_requests.vendor.store');
+    Route::post('/estimate_requests/bid', [AdminEstimateRequestController::class, 'bid'])->name('bid.accept');
 
     Route::resource('job-category', JobCategoryController::class);
     Route::resource('job-sub-category', JobSubCategoryController::class);
