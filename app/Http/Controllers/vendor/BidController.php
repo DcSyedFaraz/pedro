@@ -111,7 +111,7 @@ class BidController extends Controller
             $admin = User::role(['Admin', 'account manager'])->get();
 
             // Send the notification to eligible users
-            $message = "has placed a bid on request number #{$selectedBid->id}.";
+            $message = "has placed a bid on request number #{$id}.";
 
             Notification::send($admin, new UserNotification($user, $message));
 

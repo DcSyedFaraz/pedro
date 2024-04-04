@@ -58,19 +58,18 @@
                                 @foreach ($bids as $bid)
                                     <tr>
                                         <td>
-                                            {{-- @dump($bid) --}}
+                                            {{-- @dump($bid->selected) --}}
                                             <div class="form-check">
                                                 <input type="radio" name="bid" value="{{ $bid->id }}"
-                                                    class="bid-radio"
-                                                    {{ $bid->selected ? 'checked disabled' : ($bid->selected == 0 ? 'disabled' : '') }}
-                                                    required>
+                                                    class="bid-radio" {{ $bid->selected ? 'checked' : '' }} {{ $bids->contains('selected', true) ? 'disabled' : '' }} required>
 
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     {{ $bid->user->name }} {{ $bid->selected ? '(Selected)' : '' }}
+                                                </label>
+                                            </div>
                                         </td>
-                                        </label>
                                         <td class="@if (!$bid->bid) text-muted font-italic @endif">
-                                            {{ $bid->bid .' USD' ?? 'No bid yet' }}</td>
+                                            {{ $bid->bid . ' USD' ?? 'No bid yet' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
