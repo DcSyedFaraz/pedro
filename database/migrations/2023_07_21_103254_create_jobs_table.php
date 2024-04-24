@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('customer_id')->nullable();
             $table->string('account_manager_id')->nullable();
             $table->string('user_id')->nullable();
+            $table->text('job_sub_description')->nullable();
+            $table->string('job_sub_cat_id')->nullable();
+            $table->string('location_unit')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
             $table->string('location_address')->nullable();
@@ -43,6 +46,8 @@ return new class extends Migration
             //job information
             $table->string('current_status')->nullable();
             $table->string('start_date')->nullable();
+            $table->string('start_duration')->nullable();
+            $table->string('end_duration')->nullable();
             $table->string('end_date')->nullable();
             $table->string('multe_job')->nullable();
             $table->string('start_time')->nullable();
@@ -54,6 +59,8 @@ return new class extends Migration
             $table->string('notify_tech_assign')->nullable();
             $table->string('notes_for_tech')->nullable();
             $table->string('completion_notes')->nullable();
+            $table->string('image')->nullable();
+            $table->string('document')->nullable();
             $table->string('billable')->nullable();
             $table->timestamps();
         });

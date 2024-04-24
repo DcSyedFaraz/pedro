@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('job');
             $table->string('location');
+            $table->integer('createdBy');
             $table->string('location_supervisor');
             $table->date('problem_date');
             $table->string('type_of_problem');

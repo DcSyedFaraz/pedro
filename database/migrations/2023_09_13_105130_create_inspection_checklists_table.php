@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('inspection_checklists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('createdBy');
             $table->text('description')->nullable();
             // Add other checklist-related fields here
             $table->timestamps();

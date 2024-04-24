@@ -83,7 +83,7 @@ class InspectionController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback(); // If an exception occurs, rollback the transaction
-
+            throw $e;
             return redirect()->back()->with('error', 'An error occurred while creating the checklist. Please try again or contact support for assistance.');
         }
 

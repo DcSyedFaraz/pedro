@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('checklist_items', function (Blueprint $table) {
+        Schema::create('location_inspection_checklist', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('inspection_checklist_id');
-            $table->string('description');
-            $table->timestamps();
-
             $table->foreign('inspection_checklist_id')->references('id')->on('inspection_checklists')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inspection_category_rows');
+        //
     }
 };

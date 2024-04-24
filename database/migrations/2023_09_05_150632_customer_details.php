@@ -21,10 +21,11 @@ return new class extends Migration
             $table->string('service_agreement')->nullable();
             $table->string('acnum')->nullable();
             $table->string('activeCustomer')->nullable();
-            
+
             $table->string('contact')->nullable();
 
             $table->string('estimate_template')->nullable();
+            $table->string('customer_tag')->nullable();
             $table->string('job_template')->nullable();
             $table->string('invoice_template')->nullable();
             $table->string('notes')->nullable();
