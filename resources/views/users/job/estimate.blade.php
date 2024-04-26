@@ -1,5 +1,7 @@
 @extends('users.layouts.app')
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -28,8 +30,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                          <h3 class="card-title">User Managment</h3>
-                                        </div> -->
+                                                                                                                              <h3 class="card-title">User Managment</h3>
+                                                                                                                            </div> -->
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
@@ -69,33 +71,34 @@
                                                     <td>
                                                         {{-- @dd($jobs->client_status) --}}
                                                         @switch($jobs->client_status)
-                                                        @case('pending')
-                                                            <span class="badge bg-warning">Pending</span>
-                                                        @break
+                                                            @case('pending')
+                                                                <span class="badge bg-warning">Pending</span>
+                                                            @break
 
-                                                        @case('accepted')
-                                                            <span class="badge bg-success">Accepted</span>
-                                                        @break
+                                                            @case('accepted')
+                                                                <span class="badge bg-success">Accepted</span>
+                                                            @break
 
-                                                        @case('declined')
-                                                            <span class="badge bg-danger">Declined</span>
-                                                        @break
+                                                            @case('declined')
+                                                                <span class="badge bg-danger">Declined</span>
+                                                            @break
 
-                                                        @default
-                                                            {{ $jobs->client_status }}
-                                                    @endswitch
+                                                            @default
+                                                                {{ $jobs->client_status }}
+                                                        @endswitch
                                                     </td>
 
                                                     <td>
                                                         @if ($jobs->client_status == 'pending')
+                                                            <a class="btn btn-success"
+                                                                href="{{ route('users.accept', $jobs->id) }}"
+                                                                onclick="return confirm('Are Sure want to Accept this Estimate')"><i
+                                                                    class="fas fa-check"></i></a>
 
-                                                        <a class="btn btn-success"
-                                                            href="{{ route('users.accept', $jobs->id) }}" onclick="return confirm('Are Sure want to Accept this Estimate')"><i
-                                                                class="fas fa-check"></i></a>
-
-                                                        <a class="btn btn-danger"
-                                                            href="{{ route('users.decline', $jobs->id) }}" onclick="return confirm('Are Sure want to Decline this Estimate')"><i
-                                                                class="fas fa-times"></i></a>
+                                                            <a class="btn btn-danger"
+                                                                href="{{ route('users.decline', $jobs->id) }}"
+                                                                onclick="return confirm('Are Sure want to Decline this Estimate')"><i
+                                                                    class="fas fa-times"></i></a>
                                                         @endif
 
                                                         <a class="btn btn-primary"
@@ -103,18 +106,53 @@
                                                     </td>
                                                     <td class="w-25">
                                                         @if (empty($jobs->signature))
+                                                            <div class="d-flex">
+                                                                <button type="button" class="btn btn-success"
+                                                                    data-toggle="modal"
+                                                                    data-target="#signatureModal{{ $jobs->id }}">
+                                                                    Sign
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade"
+                                                                    id="signatureModal{{ $jobs->id }}" tabindex="-1"
+                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">Sign Here</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <canvas
+                                                                                    id="signature-pad-{{ $jobs->id }}"
+                                                                                    class="signature-pad" width=400
+                                                                                    height=200></canvas>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Close</button>
+                                                                                <button class="btn btn-success btn-sm mt-2"
+                                                                                    id="save-signature-{{ $jobs->id }}"><i
+                                                                                        class="fas fa-check"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                        <div class="d-flex">
-                                                            <form method="POST" action="{{route('esignature',$jobs->id)}}" enctype="multipart/form-data">
+
+                                                                {{-- <form method="POST" action="{{route('esignature',$jobs->id)}}" enctype="multipart/form-data">
                                                                 @csrf
                                                             <input type="file" class="form-control form-control-sm w-75" id="formFile" name="signature" accept=".png,.jpg,.jpeg,.pdf,.doc,.docx">
                                                             <button class="btn btn-success btn-sm mt-2"><i
-                                                                class="fas fa-check"></i></button></form>
-                                                                {{-- <small>The signature must be a file of type: png, jpg, jpeg, pdf, doc, docx.</small> --}}
-                                                            </div>
+                                                                class="fas fa-check"></i></button></form> --}}
                                                             @else
-                                                            <p class="badge badge-info">E-Signature Uploaded</p>
-                                                            @endif
+                                                                <p class="badge badge-info">E-Signature Uploaded</p>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -137,7 +175,93 @@
     </div>
 
 
-</html>
 
 
+
+@endsection
+@section('scripts')
+    <script>
+        function initializeSignaturePad(canvasId) {
+            var canvas = document.getElementById(canvasId);
+            var signaturePad = new SignaturePad(canvas);
+
+            // Add event listener for the save button
+            document.getElementById('save-signature-' + canvasId.split('-')[2]).addEventListener('click', function() {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide a signature first.");
+                } else {
+                    var canvas = document.getElementById(canvasId);
+                    const dataURI = canvas.toDataURL('image/png');
+                    // console.log('Data URI:', dataURI);
+                    // const blob = dataURItoBlob(dataURI);
+                    // downloadImage(blob, 'signature.png');
+
+                    var jobId = canvasId.split('-')[2];
+                    var formData = new FormData();
+                    formData.append('signature', dataURI);
+                    formData.append('job_id', jobId);
+                    console.log(formData);
+                    $.ajax({
+                        url: '{{ route('esignature', ':id') }}'.replace(':id', jobId),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            if (response.status == 200) {
+                                toastr.success(response.message);
+                                location.reload();
+                            } else {
+                                toastr.error(response.error);
+
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error saving signature: ', error);
+                        }
+                    });
+                }
+            });
+        }
+
+        function dataURItoBlob(dataURI) {
+            const byteString = atob(dataURI.split(',')[1]);
+            const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+
+            return new Blob([ab], {
+                type: mimeString
+            });
+        }
+
+        function downloadImage(blob, filename) {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            @foreach ($job as $jobs)
+                $('#signatureModal{{ $jobs->id }}').on('shown.bs.modal', function() {
+                    var canvasId = $(this).find('.signature-pad').attr('id');
+                    initializeSignaturePad(canvasId);
+                });
+            @endforeach
+        });
+    </script>
 @endsection

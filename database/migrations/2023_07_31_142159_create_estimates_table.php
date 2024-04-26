@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('estimates', function (Blueprint $table) {
             $table->id();
             $table->string('client_name');
-            $table->string('signature');
+            $table->longText('signature')->nullable();
             $table->decimal('total_amount', 10, 2);
             $table->date('valid_until');
             $table->timestamps();

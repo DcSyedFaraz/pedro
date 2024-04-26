@@ -29,15 +29,16 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                  <h3 class="card-title">User Managment</h3>
-                                </div> -->
+                                                                          <h3 class="card-title">User Managment</h3>
+                                                                        </div> -->
                             <!-- /.card-header -->
                             <form action="{{ route('estimates.updateSelectedJobs') }}" method="POST">
                                 @csrf
                                 <div class="card-header">
                                     <a class="btn btn-success" href="{{ route('estimates.create') }}"> Create Estimates </a>
                                     @csrf
-                                    <button type="submit" class="btn btn-primary dltBtn" id="convertSelectedBtn">Convert Selected</button>
+                                    <button type="submit" class="btn btn-primary dltBtn" id="convertSelectedBtn">Convert
+                                        Selected</button>
 
                                 </div>
                                 <!-- /.card-header -->
@@ -61,7 +62,9 @@
                                                         $phones = isset($estimate->phone) ? $estimate->phone : [];
                                                         $ext_ids = isset($estimate->ext_id) ? $estimate->ext_id : [];
                                                         $exts = isset($estimate->ext) ? $estimate->ext : [];
-                                                        $emailAddresses = isset($estimate->email) ? $estimate->email : [];
+                                                        $emailAddresses = isset($estimate->email)
+                                                            ? $estimate->email
+                                                            : [];
                                                         $phone = implode(',', $phones);
                                                         $ext_id = implode(',', $ext_ids);
                                                         $ext = implode(',', $exts);
@@ -69,12 +72,16 @@
                                                     @endphp
                                                     <tr>
                                                         <td>
-                                                             @if (!empty($estimate->jobs))
-                                                            <span class="badge badge-primary"><a class="text-light" href="{{ route('job.edit', $estimate->jobs->id) }}">Converted to job#{{$estimate->jobs->id}} <i class="fas fa-external-link-alt"></i></a></span>
-                                                        @else
-                                                        <input type="checkbox" name="selected_estimates[]" class="form-control form-control-sm"
-                                                        value="{{ $estimate->id }}">
-                                                        @endif
+                                                            @if (!empty($estimate->jobs))
+                                                                <span class="badge badge-primary"><a class="text-light"
+                                                                        href="{{ route('job.edit', $estimate->jobs->id) }}">Converted
+                                                                        to job#{{ $estimate->jobs->id }} <i
+                                                                            class="fas fa-external-link-alt"></i></a></span>
+                                                            @else
+                                                                <input type="checkbox" name="selected_estimates[]"
+                                                                    class="form-control form-control-sm"
+                                                                    value="{{ $estimate->id }}">
+                                                            @endif
 
                                                         </td>
                                                         <td>{{ isset($estimate->customer->name) ? $estimate->customer->name : '' }}
@@ -88,11 +95,45 @@
                                                         </td>
                                                         <td>
                                                             @if (isset($estimate->signature))
-                                                                <a href="{{ $estimate->signature }}" target="blank"
-                                                                    class="btn btn-warning">E-Signature</a>
+                                                                {{-- <a href="{{ asset('storage/' . $estimate->signature) }}"
+                                                                    <i class="fas fa-link"></i>
+                                                                    target="blank" class="btn btn-warning">E-Signature</a> --}}
+                                                                <!-- Use Font Awesome or any other icon library -->
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    data-toggle="modal"
+                                                                    data-target="#signatureModal{{ $estimate->id }}">
+                                                                    Show Signature
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade"
+                                                                    id="signatureModal{{ $estimate->id }}" tabindex="-1"
+                                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">Signature</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <img src="{{ $estimate->signature }}"
+                                                                                    alt="Signature{{ $estimate->id }}">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">Close</button>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             @endif
                                                         </td>
-                                                        <td>
+                                                        <td class="d-flex">
                                                             {{-- @if (!empty($estimate->jobs))
                                                             <span class="badge badge-primary">Converted to job</span>
                                                         @else
@@ -110,8 +151,9 @@
                                                                 method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('DELETE') --}}
-                                                                <a href="{{ route('estimates.destroy', $estimate->id) }}" class="btn btn-danger"
-                                                                    onclick="return confirm('Are you sure you want to delete this estimate?')">Delete</a>
+                                                            <a href="{{ route('estimates.destroy', $estimate->id) }}"
+                                                                class="btn btn-danger mx-2"
+                                                                onclick="return confirm('Are you sure you want to delete this estimate?')">Delete</a>
                                                             {{-- </form> --}}
                                                         </td>
                                                     </tr>
@@ -144,14 +186,14 @@
 
 
     <script>
-         $(document).ready(function() {
-        $('#convertSelectedBtn').prop('disabled', true);
+        $(document).ready(function() {
+            $('#convertSelectedBtn').prop('disabled', true);
 
-        $('input[type="checkbox"]').change(function() {
-            var anyCheckboxChecked = $('input[type="checkbox"]:checked').length > 0;
-            $('#convertSelectedBtn').prop('disabled', !anyCheckboxChecked);
+            $('input[type="checkbox"]').change(function() {
+                var anyCheckboxChecked = $('input[type="checkbox"]:checked').length > 0;
+                $('#convertSelectedBtn').prop('disabled', !anyCheckboxChecked);
+            });
         });
-    });
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {

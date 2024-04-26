@@ -22,8 +22,8 @@ class userEstimateController extends Controller
     {
         $user = auth()->user();
         $job = Estimate::where('customer_id', $user->id)->get();
-// dd($job);
-    return view('users.job.estimate', compact('job'));
+        // dd($job);
+        return view('users.job.estimate', compact('job'));
 
     }
     public function accept($id)
@@ -57,7 +57,7 @@ class userEstimateController extends Controller
     public function esignature(Request $request, $id)
     {
         $request->validate([
-            'signature' => 'required|file|mimes:png,jpg,jpeg,pdf,doc,docx',
+            'signature' => 'required',
         ]);
         // dd($request->all());
         $estimate = Estimate::find($id);
@@ -65,19 +65,19 @@ class userEstimateController extends Controller
 
         try {
             // Handle file uploads
-            if ($request->hasFile('signature')) {
+            if ($request->signature) {
 
-                    $fileName = Str::random(15) . '.' . $request->file('signature')->getClientOriginalExtension();
-                    $path = $request->file('signature')->storeAs('uploads/image', $fileName, 'public');
+                // $fileName = Str::random(15) . '.' . $request->file('signature')->getClientOriginalExtension();
+                // $path = $request->file('signature')->storeAs('signature', $fileName, 'public');
 
+                // dd($request->signature);
 
-
-                        $estimate->signature = asset('storage/' . $path);
-                        $estimate->save();
-                        $user = auth()->user();
-                        $admin = User::find(1);
-                        $message = 'Uploaded E-Signature';
-                        $admin->notify(new UserNotification($user,$message));
+                $estimate->signature = $request->signature;
+                $estimate->save();
+                $user = auth()->user();
+                $admin = User::find(1);
+                $message = 'Uploaded E-Signature';
+                $admin->notify(new UserNotification($user, $message));
 
 
             }
@@ -87,12 +87,12 @@ class userEstimateController extends Controller
             // Commit the transaction
             DB::commit();
 
-            return redirect()->back()->with('success', 'Signature uploaded Successfully.');
+            return response()->json(['message' => 'Signature uploaded successfully', 'status' => 200], 200);
         } catch (\Exception $e) {
             // Rollback the transaction in case of an error
             DB::rollBack();
 
-            return redirect()->back()->with('error', 'An error occurred while uploading signature.');
+            return response()->json(['error' => 'An error occurred while uploading signature' . $e->getMessage(), 'status' => 500], 500);
         }
 
 
