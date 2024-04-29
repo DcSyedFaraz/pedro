@@ -84,12 +84,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Job List</h1>
+                        <h1>{{ __('user/job/index.job_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Job List</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('user/job/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('user/job/index.job_list') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                              <h3 class="card-title">User Managment</h3>
-                            </div> -->
+                                      <h3 class="card-title">{{ __('user/job/index.user_managment') }}</h3>
+                                    </div> -->
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
@@ -114,18 +114,18 @@
                                     <thead>
                                         <tr>
                                             <th>S.N</th>
-                                            <th>Job#</th>
-                                            <th>Customer Name</th>
-                                            <th>Jobs</th>
-                                            <th>Assigned Manager</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+                                            <th>{{ __('user/job/index.job#') }}</th>
+                                            <th>{{ __('user/job/index.customer_name') }}</th>
+                                            <th>{{ __('user/job/index.job_category') }}</th>
+                                            <th>{{ __('user/job/index.assigned_manager') }}</th>
+                                            <th>{{ __('user/job/index.status') }}</th>
+                                            <th>{{ __('user/job/index.actions') }}</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @if ($job)
-                                            @foreach ($job as $key=> $jobs)
+                                            @foreach ($job as $key => $jobs)
                                                 @php
                                                     $phones = isset($jobs->phone) ? $jobs->phone : [];
                                                     $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
@@ -137,9 +137,10 @@
                                                     $emailList = implode(',', $emailAddresses);
                                                 @endphp
                                                 <tr>
-                                                    <td>{{ $key+1 }}</td>
+                                                    <td>{{ $key + 1 }}</td>
                                                     <td>{{ isset($jobs->id) ? $jobs->id : '' }}</td>
-                                                    <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
+                                                    <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}
+                                                    </td>
                                                     <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}
                                                     </td>
                                                     <td>
@@ -187,19 +188,20 @@
                                                     <td>
                                                         @if ($jobs->current_status == 9)
                                                             @if (optional($jobs->feedback)->count() > 0)
-                                                                <span class="badge badge-btn badge-success">Feedback Submitted
+                                                                <span
+                                                                    class="badge badge-btn badge-success">{{ __('user/job/index.feedback_submitted') }}
                                                                 </span>
                                                             @else
                                                                 <button type="button" class="btn btn-success"
                                                                     data-toggle="modal"
                                                                     data-target="#exampleModal{{ $jobs->id }}">
-                                                                    Feedback
+                                                                    {{ __('user/job/index.feedback') }}
                                                                 </button>
                                                             @endif
                                                         @endif
 
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('joblist.show', $jobs->id) }}">show</a>
+                                                            href="{{ route('joblist.show', ['joblist' => $jobs->id]) }}">{{ __('user/job/index.show') }}</a>
                                                     </td>
                                                 </tr>
                                                 <div class="modal fade" id="exampleModal{{ $jobs->id }}" tabindex="-1"
@@ -207,7 +209,8 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Feedback
+                                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                                    {{ __('user/job/index.feedback') }}
                                                                 </h5>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
@@ -219,7 +222,7 @@
                                                                     method="post" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('put')
-                                                                    <h2>Rate the Work</h2>
+                                                                    <h2>{{ __('user/job/index.rate_the_work') }}</h2>
                                                                     <div class="rating">
                                                                         <input class="star" data-rating="5" type="radio"
                                                                             id="star5" name="rating" value="5">
@@ -242,10 +245,13 @@
                                                                         <label for="star1">&#9733;</label>
 
                                                                     </div>
-                                                                    <p>Your Rating: <span id="selectedRating">0</span>/5</p>
-                                                                    <textarea id="comments" placeholder="Add Comments" name="comment"></textarea>
+                                                                    <p>{{ __('user/job/index.your_rating') }}: <span
+                                                                            id="selectedRating">0</span>/5</p>
+                                                                    <textarea id="comments" placeholder="{{ __('user/job/index.add_comments') }}" name="comment"></textarea>
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputFile">File </label>
+                                                                        <label
+                                                                            for="exampleInputFile">{{ __('user/job/index.choose_file') }}
+                                                                        </label>
                                                                         <div class="input-group">
                                                                             <div class="custom-file">
                                                                                 <input type="file"
@@ -253,8 +259,8 @@
                                                                                     id="exampleInputFile" name="file">
                                                                                 <p class="custom-file-label"
                                                                                     id="selectedFileName"
-                                                                                    for="exampleInputFile">Choose
-                                                                                    file</p>
+                                                                                    for="exampleInputFile">
+                                                                                    {{ __('user/job/index.choose_file') }}</p>
                                                                             </div>
 
                                                                         </div>
@@ -262,9 +268,9 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Save
-                                                                    changes</button>
+                                                                    data-dismiss="modal">{{ __('user/job/index.close') }}</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">{{ __('user/job/index.save_changes') }}</button>
                                                                 <a href="">
 
                                                                 </a>
