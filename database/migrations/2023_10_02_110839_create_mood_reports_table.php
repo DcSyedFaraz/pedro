@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('mood_reports', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('mood');
+            $table->string('mood');
             $table->text('comments')->nullable();
             $table->timestamps();
         });

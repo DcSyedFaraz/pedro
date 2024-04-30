@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('job_primary_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('job_id')->nullable();
+            $table->integer('job_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('ext')->nullable();
             $table->string('email')->nullable();

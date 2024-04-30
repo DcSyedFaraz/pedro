@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
             $table->integer('job_id');
-            $table->integer('rating');
+            $table->string('rating');
             $table->string('comments');
             $table->string('file');
             $table->timestamps();

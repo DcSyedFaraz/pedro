@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('job_id');
+            $table->integer('job_id');
             $table->string('checklist_id');
             $table->timestamps();
         });

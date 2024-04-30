@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('estimate_primary_contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('estimate_id')->nullable();
+            $table->integer('estimate_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('ext')->nullable();
             $table->string('email')->nullable();
