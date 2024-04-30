@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Estimate List</h1>
+                        <h1>{{ __('user/job/estimate.estimate_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Estimate List</li>
+                            <li class="breadcrumb-item active">{{ __('user/job/estimate.estimate_list') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                                                                                                              <h3 class="card-title">User Managment</h3>
-                                                                                                                            </div> -->
+                                                                                                                                  <h3 class="card-title">User Managment</h3>
+                                                                                                                                </div> -->
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
@@ -39,12 +39,12 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Customer Name</th>
-                                            <th>Jobs</th>
-                                            <th>Assigned Manager</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                            <th>E-Signature</th>
+                                            <th>{{ __('user/job/estimate.customer_name') }}</th>
+                                            <th>{{ __('user/job/estimate.jobs') }}</th>
+                                            <th>{{ __('user/job/estimate.assigned_manager') }}</th>
+                                            <th>{{ __('user/job/estimate.status') }}</th>
+                                            <th>{{ __('user/job/estimate.actions') }}</th>
+                                            <th>{{ __('user/job/estimate.e_signature') }}</th>
                                         </tr>
                                     </thead>
 
@@ -69,7 +69,6 @@
                                                         {{ isset($jobs->account_manager_id) ? $jobs->manager->name : 'null' }}
                                                     </td>
                                                     <td>
-                                                        {{-- @dd($jobs->client_status) --}}
                                                         @switch($jobs->client_status)
                                                             @case('pending')
                                                                 <span class="badge bg-warning">Pending</span>
@@ -92,17 +91,17 @@
                                                         @if ($jobs->client_status == 'pending')
                                                             <a class="btn btn-success"
                                                                 href="{{ route('users.accept', $jobs->id) }}"
-                                                                onclick="return confirm('Are Sure want to Accept this Estimate')"><i
+                                                                onclick="return confirm('{{ __('user/job/estimate.are_sure_want_accept_this_estimate') }}')"><i
                                                                     class="fas fa-check"></i></a>
 
                                                             <a class="btn btn-danger"
                                                                 href="{{ route('users.decline', $jobs->id) }}"
-                                                                onclick="return confirm('Are Sure want to Decline this Estimate')"><i
+                                                                onclick="return confirm('{{ __('user/job/estimate.are_sure_want_decline_this_estimate') }}')"><i
                                                                     class="fas fa-times"></i></a>
                                                         @endif
 
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('estimate.show', $jobs->id) }}">show</a>
+                                                            href="{{ route('estimate.show', $jobs->id) }}">{{ __('user/job/estimate.show') }}</a>
                                                     </td>
                                                     <td class="w-25">
                                                         @if (empty($jobs->signature))
@@ -110,7 +109,7 @@
                                                                 <button type="button" class="btn btn-success"
                                                                     data-toggle="modal"
                                                                     data-target="#signatureModal{{ $jobs->id }}">
-                                                                    Sign
+                                                                    {{ __('user/job/estimate.sign') }}
                                                                 </button>
                                                                 <!-- Modal -->
                                                                 <div class="modal fade"
@@ -120,7 +119,9 @@
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
-                                                                                    id="exampleModalLabel">Sign Here</h5>
+                                                                                    id="exampleModalLabel">
+                                                                                    {{ __('user/job/estimate.sign_here') }}
+                                                                                </h5>
                                                                                 <button type="button" class="close"
                                                                                     data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
@@ -135,7 +136,7 @@
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
-                                                                                    data-dismiss="modal">Close</button>
+                                                                                    data-dismiss="modal">{{ __('user/job/estimate.close') }}</button>
                                                                                 <button class="btn btn-success btn-sm mt-2"
                                                                                     id="save-signature-{{ $jobs->id }}"><i
                                                                                         class="fas fa-check"></i></button>
@@ -151,7 +152,8 @@
                                                             <button class="btn btn-success btn-sm mt-2"><i
                                                                 class="fas fa-check"></i></button></form> --}}
                                                             @else
-                                                                <p class="badge badge-info">E-Signature Uploaded</p>
+                                                                <p class="badge badge-info">
+                                                                    {{ __('user/job/estimate.signature_uploaded') }}</p>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -175,9 +177,6 @@
     </div>
 
 
-
-
-
 @endsection
 @section('scripts')
     <script>
@@ -188,7 +187,7 @@
             // Add event listener for the save button
             document.getElementById('save-signature-' + canvasId.split('-')[2]).addEventListener('click', function() {
                 if (signaturePad.isEmpty()) {
-                    alert("Please provide a signature first.");
+                    alert("{{ __('user/job/estimate.please_provide_signature') }}");
                 } else {
                     var canvas = document.getElementById(canvasId);
                     const dataURI = canvas.toDataURL('image/png');

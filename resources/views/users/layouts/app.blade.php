@@ -205,9 +205,9 @@
                             </ul>
                         </li>
                         <!-- Estimate  -->
-                        <li class="nav-item {{ request()->routeIs('estimate.index') ? 'menu-open' : '' }} ">
+                        <li class="nav-item {{ request()->routeIs('estimate.*') ? 'menu-open' : '' }} ">
                             <a href="#"
-                                class="nav-link nav-dropdown-toggle {{ request()->routeIs('estimate.index') ? 'active' : '' }}">
+                                class="nav-link nav-dropdown-toggle {{ request()->routeIs('estimate.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     {{ __('user/layout/layout.estimate_manage') }}
@@ -217,9 +217,9 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('estimate.index') }}"
-                                        class="nav-link {{ request()->routeIs('estimate.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('estimate.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ 'user/layout/layout.estimate_list' }}</p>
+                                        <p>{{ __('user/layout/layout.estimate_list') }}</p>
                                     </a>
                                 </li>
                             </ul>
