@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('createdBy');
             $table->string('location_supervisor');
             $table->date('problem_date');
+            $table->date('problem_detail');
             $table->string('type_of_problem');
             $table->text('description_of_problem');
             $table->string('investigator_of_problem');

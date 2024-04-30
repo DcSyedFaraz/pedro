@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('customer_id')->nullable();
-            $table->string('account_manager_id')->nullable();
-            $table->string('user_id')->nullable();
+            $table->integer('customer_id')->nullable();
+            $table->integer('account_manager_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->text('job_sub_description')->nullable();
-            $table->string('job_sub_cat_id')->nullable();
+            $table->integer('job_sub_cat_id')->nullable();
             $table->string('location_unit')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('location_city')->nullable();
             $table->string('location_state')->nullable();
             $table->string('location_zipcode')->nullable();
-            $table->string('job_cat_id')->nullable();
+            $table->integer('job_cat_id')->nullable();
             $table->string('job_description')->nullable();
             $table->string('po_no')->nullable();
             $table->string('job_source')->nullable();
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
-            $table->string('ext_id')->nullable();
+            $table->integer('ext_id')->nullable();
             $table->string('ext')->nullable();
             $table->string('email')->nullable();
             //    custom filed
@@ -58,10 +58,13 @@ return new class extends Migration
             // $table->string('assigned_tech')->nullable();
             $table->string('notify_tech_assign')->nullable();
             $table->string('notes_for_tech')->nullable();
-            $table->string('completion_notes')->nullable();
+            $table->string('schedule_at')->nullable();
+            $table->string('completion_notes')->nullable(); 
             $table->string('image')->nullable();
             $table->string('document')->nullable();
             $table->string('billable')->nullable();
+            $table->string('mark_description')->nullable();
+            
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('customer_details', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('customer_name')->nullable();
             $table->string('service_agreement')->nullable();
             $table->string('acnum')->nullable();
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('assigned_contract')->nullable();
             $table->string('taxable')->nullable();
             $table->string('tax_item')->nullable();
-            $table->string('bussiness_id')->nullable();
+            $table->integer('bussiness_id')->nullable();
             $table->string('assigned_rep')->nullable();
             $table->string('commission_sign')->nullable();
             $table->string('commission')->nullable();

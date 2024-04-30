@@ -44,6 +44,7 @@ return new class extends Migration
             $table->string('tax_paid')->nullable();
             $table->string('ship_cost')->nullable();
             $table->string('grand_total')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
