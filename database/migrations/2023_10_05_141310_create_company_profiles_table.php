@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('company_profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('vendor_id');
             $table->text('areas_of_work')->nullable();
             $table->text('services_performed')->nullable();
             $table->timestamps();

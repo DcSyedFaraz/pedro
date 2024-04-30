@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('job_id');
-            $table->text('vendor_id');
-            $table->integer('status');
-            $table->integer('deadline');
-            $table->integer('payment_info');
-            $table->integer('priority');
+            $table->integer('job_id');
+            $table->integer('vendor_id');
+            $table->string('status');
+            $table->string('deadline');
+            $table->string('payment_info');
+            $table->string('priority')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
