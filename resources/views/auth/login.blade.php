@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="{{asset('/admin/plugins/toastr/toastr.min.css')}}">
 </head>
 <body class="hold-transition login-page">
+    <div id="google_translate_element"></div>
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
@@ -103,6 +104,34 @@
         toastr.error("{{$error}}")
         @endforeach
     @endif
+</script>
+<script type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+  <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+  }
+
+  function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 1000);
+    function checkReady() {
+      if (document.getElementsByTagName('body')[0] !== undefined) {
+        window.clearInterval(intervalID);
+        callback.call(this);
+      }
+    }
+  }
+
+  function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+  }
+
+  onReady(function () {
+    show('page', true);
+    show('loading', false);
+  });
 </script>
 </body>
 </html>

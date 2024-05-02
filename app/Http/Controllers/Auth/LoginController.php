@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // use Auth;
 use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -39,44 +40,42 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectTo() {
-
+    public function redirectTo()
+    {
         $role = Auth::user()->getRoleNames();
 
-        // dd($role) ;
         switch ($role[0]) {
-
             case 'Admin':
-                return 'admin/dashboard';
-            break;
+                return '/admin/dashboard';
+                break;
             case 'User':
-                return 'users/dashboard';
-             break;
-             case 'vendor':
-                return 'vendor/dashboard';
-              break;
-              case 'agent':
-                return 'agent/dashboard';
-              break;
-              case 'account manager':
-                return 'manager/dashboard';
-              break;
-              default:
-                return '/login';
-            break;
+                return '/users/dashboard';
+                break;
+            case 'vendor':
+                return '/vendor/dashboard';
+                break;
+            case 'agent':
+                return '/agent/dashboard';
+                break;
+            case 'account manager':
+                return '/manager/dashboard';
+                break;
+            default:
+                return 'login';
+                break;
         }
-     }
+    }
+
 
 
 
 
     public function logout()
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::logout();
             return redirect()->to('/')->with('success', 'User Logout successfully.');
-        }else{
+        } else {
             return redirect()->to('/')->with('error', 'User Logout successfully.');
         }
     }
@@ -87,10 +86,10 @@ class LoginController extends Controller
 
         $message = 'Sorry your email cannot be identified.';
 
-        if(!is_null($verifyUser) ){
+        if (!is_null($verifyUser)) {
             $user = $verifyUser->users;
 
-            if(!$user->is_email_verified) {
+            if (!$user->is_email_verified) {
                 $verifyUser->users->is_email_verified = 1;
                 $verifyUser->users->save();
                 $message = "Your e-mail is verified. You can now login.";
@@ -99,6 +98,6 @@ class LoginController extends Controller
             }
         }
 
-      return redirect()->route('login')->with('message', $message);
+        return redirect()->route('login')->with('message', $message);
     }
 }

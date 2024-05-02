@@ -55,6 +55,7 @@ class userJobController extends Controller
      */
     public function show($id)
     {
+        // dd($id);
         $job = Job::findOrFail($id);
         return view('users.job.show', compact('job'));
     }
