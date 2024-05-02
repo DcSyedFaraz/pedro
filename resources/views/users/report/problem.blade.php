@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Problem Reports</h1>
+                        <h1>{{ __('user/problem/index.report_problem') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Problem Reports</li>
+                            <li class="breadcrumb-item active">{{ __('user/problem/index.report_problem') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -33,11 +33,13 @@
                                 <table id="example1" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Report#</th>
-                                            <th>Job Name</th>
-                                            <th>Location</th>
-                                            <th>Type</th>
-                                            <th>Action</th>
+
+                                            
+                                            <th>{{ __('user/problem/index.report') }}</th>
+                                            <th>{{ __('user/problem/index.job_name') }}</th>
+                                            <th>{{ __('user/problem/index.location') }}</th>
+                                            <th>{{ __('user/problem/index.type') }}</th>     
+                                            <th>{{ __('user/problem/index.actions') }}</th> 
                                         </tr>
                                     </thead>
                                     <tbody>

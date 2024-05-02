@@ -8,6 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
+
                         <h1>{{ __('user/invoice/index.invoices_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
@@ -38,6 +39,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead class="thead-light">
                                         <tr>
+
                                             <th>{{ __('user/invoice/index.date') }}</th>
                                             <th>{{ __('user/invoice/index.customer_name') }}</th>
                                             <th>{{ __('user/invoice/index.invoice_number') }}</th>

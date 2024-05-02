@@ -9,6 +9,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
+
                         <h1>{{ __('work_order') }}</h1>
                     </div>
                     <div class="col-sm-6">
@@ -40,6 +41,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+
                                             <th>{{ __('work_order_id') }}</th>
                                             <th>{{ __('job_name') }}</th>
                                             <th>{{ __('vendor') }}</th>

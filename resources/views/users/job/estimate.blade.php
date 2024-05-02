@@ -10,6 +10,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
+
                         <h1>{{ __('user/job/estimate.estimate_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
@@ -39,6 +40,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+
                                             <th>{{ __('user/job/estimate.customer_name') }}</th>
                                             <th>{{ __('user/job/estimate.jobs') }}</th>
                                             <th>{{ __('user/job/estimate.assigned_manager') }}</th>

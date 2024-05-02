@@ -1,6 +1,7 @@
 <?php
 
 return [
+    
     'invoices_list' => 'Invoices List',
     'create_new_invoice' => 'Create New Invoice',
     'date' => 'Date',
@@ -11,6 +12,7 @@ return [
     'total' => 'Total',
     'total_due' => 'Total Due',
     'actions' => 'Actions',
+
     'no_records_available' => 'No Records Available',
     'unpaid' => 'Unpaid',
     'paid' => 'Paid',

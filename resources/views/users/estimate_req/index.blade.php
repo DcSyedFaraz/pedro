@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Estimate Request</h1>
+                        <h1>{{ __('user/inspecrequest/index.estimate_request') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Estimate Request</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('user/inspecrequest/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('user/inspecrequest/index.estimate_request') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -40,14 +40,14 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Request #</th>
-                                            <th>Name</th>
-                                            <th>Phone #</th>
-                                            @if (auth()->user()->hasRole('Admin'))
-                                            <th>Created By</th>
-                                            @endif
-                                            <th>Email</th>
-                                            <th>Action</th>
+                                              
+
+
+                                            <th>{{ __('user/inspecrequest/index.request') }}</th>
+                                            <th>{{ __('user/inspecrequest/index.name') }}</th>
+                                            <th>{{ __('user/inspecrequest/index.phone') }}</th>
+                                            <th>{{ __('user/inspecrequest/index.email') }}</th>                 
+                                            <th>{{ __('user/inspecrequest/index.actions') }}</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
