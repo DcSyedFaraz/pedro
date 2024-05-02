@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Supply Request</h1>
+                        <h1>{{ __('user/supply/index.supply_request') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Supply Request</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('user/supply/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('user/supply/index.supply_request') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -41,14 +41,13 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Order #</th>
-                                            <th>Order Ref#</th>
-                                            <th>Order Progress</th>
-                                            @if (auth()->user()->hasRole('Admin'))
-                                            <th>Created By</th>
-                                            @endif
-                                            <th>Order Date</th>
-                                            <th>Action</th>
+                                            
+
+                                            <th>{{ __('user/supply/index.order') }}</th>
+                                            <th>{{ __('user/supply/index.order_ref') }}</th>
+                                            <th>{{ __('user/supply/index.order_progress') }}</th>
+                                            <th>{{ __('user/supply/index.order_date') }}</th>
+                                            <th>{{ __('user/supply/index.actions') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

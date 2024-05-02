@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Invoices List</h1>
+                        <h1>{{ __('user/invoice/index.invoice_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Invoices List</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('user/invoice/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('user/invoice/index.invoice_list') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -38,14 +38,17 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>Date</th>
-                                            <th>Customer Name</th>
-                                            <th>Invoice#</th>
-                                            <th>PO#</th>
-                                            <th>Status</th>
-                                            <th>Total</th>
-                                            <th>Total Due</th>
-                                            <th>Actions</th>
+                                         
+
+
+                                            <th>{{ __('user/invoice/index.date') }}</th>
+                                            <th>{{ __('user/invoice/index.customer_name') }}</th>
+                                            <th>{{ __('user/invoice/index.invoice') }}</th>
+                                            <th>{{ __('user/invoice/index.po') }}</th>
+                                            <th>{{ __('user/invoice/index.status') }}</th>
+                                            <th>{{ __('user/invoice/index.total') }}</th>
+                                            <th>{{ __('user/invoice/index.total_due') }}</th>
+                                            <th>{{ __('user/invoice/index.actions') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

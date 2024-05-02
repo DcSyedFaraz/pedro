@@ -44,6 +44,7 @@
                                             <th>Assigned Manager</th>
                                             <th>Status</th>
                                             <th>Actions</th>
+  
                                         </tr>
                                     </thead>
 

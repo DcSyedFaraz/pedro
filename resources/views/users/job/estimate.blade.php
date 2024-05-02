@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Estimate List</h1>
+                        <h1>{{ __('user/estimate/index.estimate_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Estimate List</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('user/estimate/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('user/estimate/index.estimate_list') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -39,12 +39,14 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Customer Name</th>
-                                            <th>Jobs</th>
-                                            <th>Assigned Manager</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                            <th>E-Signature</th>
+                                          
+
+                                            <th>{{ __('user/estimate/index.customer_name') }}</th>
+                                            <th>{{ __('user/estimate/index.jobs') }}</th>
+                                            <th>{{ __('user/estimate/index.assigned_manager') }}</th>
+                                            <th>{{ __('user/estimate/index.status') }}</th>
+                                            <th>{{ __('user/estimate/index.actions') }}</th>     
+                                            <th>{{ __('user/estimate/index.e_signature') }}</th>     
                                         </tr>
                                     </thead>
 

@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Work Order</h1>
+                        <h1>{{ __('user/workorder/index.work_order') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Work Order</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('user/workorder/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('user/workorder/index.work_order') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -40,13 +40,14 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Work Order ID</th>
-                                            <th>Job Name</th>
-                                            <th>Vendor</th>
-                                            <th>Status</th>
-                                            <th>Deadline</th>
-                                            {{-- <th>Payment</th> --}}
-                                            <th>Action</th>
+
+                                            <th>{{ __('user/workorder/index.work_order_id') }}</th>
+                                            <th>{{ __('user/workorder/index.job_name') }}</th>
+                                            <th>{{ __('user/workorder/index.vendor') }}</th>
+                                            <th>{{ __('user/workorder/index.status') }}</th>
+                                            <th>{{ __('user/workorder/index.deadline') }}</th>
+                                           {{-- <th>{{ __('user/workorder/index.payment') }}</th> --}}
+                                            <th>{{ __('user/workorder/index.actions') }}</th>
                                         </tr>
                                     </thead>
 
