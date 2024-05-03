@@ -26,4 +26,5 @@ return [
     'save_changes' => 'Guardar cambios',
     'location_saved_successfully' => 'Ubicación guardada con éxito.',
     'an_error_occurred_while_saving_location' => 'Ocurrió un error al guardar la ubicación.',
+    'work_order_id' => 'id_orden_trabajo',
 ];

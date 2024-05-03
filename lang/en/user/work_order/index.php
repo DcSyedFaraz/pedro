@@ -26,4 +26,5 @@ return [
     'save_changes' => 'Save changes',
     'location_saved_successfully' => 'Location saved successfully.',
     'an_error_occurred_while_saving_location' => 'An error occurred while saving location.',
+    'work_order_id' => 'Work Order Id',
 ];

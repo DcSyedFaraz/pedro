@@ -177,7 +177,7 @@
                                                     @elseif($jobs->current_status == 8)
                                                         <td class="text-muted">
                                                             <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td>
+                                                        </td    >
                                                     @elseif($jobs->current_status == 9)
                                                         <td class="text-success">
                                                             <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
