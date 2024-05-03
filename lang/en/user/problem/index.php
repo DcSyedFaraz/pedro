@@ -7,6 +7,10 @@ return [
     'type' => 'Type',
     'actions' => 'Actions',
     'home' => 'Home',
+    'job' => 'Job',
+    'problem_date' => 'Problem Date',
+    'investigator' => 'Investigator',
+    'suggestions' => 'Suggestions',
    
 ];
 ?>

@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Estimate Request</h1>
+                        <h1>{{ __('user/inspecrequest/index.estimate_request') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Estimate Request</li>
+                            <li class="breadcrumb-item active">{{ __('user/inspecrequest/index.estimate_request') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -28,44 +28,44 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>First Name:</th>
+                                    <th>{{ __('user/inspecrequest/index.first_name') }}:</th>
                                     <td>{{ $estimate->first_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Last Name:</th>
+                                    <th>{{ __('user/inspecrequest/index.last_name') }}:</th>
                                     <td>{{ $estimate->last_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Phone Number:</th>
+                                    <th>{{ __('user/inspecrequest/index.phone_number') }}:</th>
                                     <td>{{ $estimate->phone_number }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Email:</th>
+                                    <th>{{ __('user/inspecrequest/index.email') }}:</th>
                                     <td>{{ $estimate->email }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Street Address:</th>
+                                    <th>{{ __('user/inspecrequest/index.street_address') }}:</th>
                                     <td>{{ $estimate->street_address }}</td>
                                 </tr>
                                 <tr>
-                                    <th>City:</th>
+                                    <th>{{ __('user/inspecrequest/index.city') }}:</th>
                                     <td>{{ $estimate->city }}</td>
                                 </tr>
                                 <tr>
-                                    <th>State:</th>
+                                    <th>{{ __('user/inspecrequest/index.state') }}:</th>
                                     <td>{{ $estimate->state }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Zip Code:</th>
+                                    <th>{{ __('user/inspecrequest/index.zip_code') }}:</th>
                                     <td>{{ $estimate->zip_code }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Details:</th>
+                                    <th>{{ __('user/inspecrequest/index.details') }}:</th>
                                     <td>{{ $estimate->details }}</td>
                                 </tr>
                                 @if ($estimate->picture)
                                     <tr>
-                                        <th>Picture:</th>
+                                        <th>{{ __('user/inspecrequest/index.picture') }}:</th>
                                         <td>
                                             <img src="{{ asset('storage/' . $estimate->picture) }}" alt="User Picture" class="img-fluid">
                                         </td>
