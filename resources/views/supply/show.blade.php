@@ -29,33 +29,33 @@
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Field</th>
-                                    <th>Value</th>
+                                    <th>{{ __('user/supply/index.field') }}</th>
+                                    <th>{{ __('user/supply/index.value') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Order Progress</td>
+                                    <td>{{ __('user/supply/index.order_progress') }}</td>
                                     <td>{{ $supplyRequest->order_progress }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Order Date</td>
+                                    <td>{{ __('user/supply/index.order_date') }}</td>
                                     <td>{{ $supplyRequest->order_date }}</td>
                                 </tr>
                                 <tr>
-                                    <td>PO#</td>
+                                    <td>{{ __('user/supply/index.po') }}#</td>
                                     <td>{{ $supplyRequest->po_num }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Account Manager's Email</td>
+                                    <td>{{ __('user/supply/index.account_managers_email') }}</td>
                                     <td>{{ $supplyRequest->manager_email }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Sent Date</td>
+                                    <td>{{ __('user/supply/index.sent_date') }}</</td>
                                     <td>{{ $supplyRequest->sent_date }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Receipt Status</td>
+                                    <td>{{ __('user/supply/index.receipt_status') }}</</td>
                                     <td>{{ $supplyRequest->receipt_status }}</td>
                                 </tr>
                             </tbody>
