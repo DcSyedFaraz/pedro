@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{{ asset('/admin/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
-   <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
     @yield('links')
 
 </head>
@@ -196,7 +196,7 @@
                                 {{ request()->routeIs('technicians.*') ? 'active' : '' }} ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    My Workroom
+                                    {{ __('admin/layout/app.my_workroom') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -205,42 +205,42 @@
                                     <a href="{{ route('customer.index') }}"
                                         class="nav-link {{ request()->routeIs('customer.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Customer</p>
+                                        <p>{{ __('admin/layout/app.customer') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('technicians.index') }}"
                                         class="nav-link {{ request()->routeIs('technicians.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Manage Technicians</p>
+                                        <p>Manage {{ __('admin/layout/app.technicians') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('estimates.index') }}"
                                         class="nav-link {{ request()->routeIs('estimates.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Estimates</p>
+                                        <p>{{ __('admin/layout/app.estimates') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('work_orders.index') }}"
                                         class="nav-link {{ request()->routeIs('work_orders.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Work Order List</p>
+                                        <p>{{ __('admin/layout/app.work_orders') }} List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('purchase-orders.index') }}"
                                         class="nav-link {{ request()->routeIs('purchase-orders.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Purchase Order</p>
+                                        <p>{{ __('admin/layout/app.purchase_orders') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('inventory.index') }}"
                                         class="nav-link {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inventory</p>
+                                        <p>{{ __('admin/layout/app.inventory') }}</p>
                                     </a>
                                 </li>
 
@@ -277,7 +277,7 @@
                             {{ request()->routeIs('ins_category.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Jobs
+                                    {{ __('admin/layout/app.jobs') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -286,70 +286,71 @@
                                     <a href="{{ route('job.index') }}"
                                         class="nav-link {{ request()->routeIs('job.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Job List</p>
+                                        <p>{{ __('admin/layout/app.job_list') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('location.index') }}"
                                         class="nav-link {{ request()->routeIs('location.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Assign Checklist</p>
+                                        <p>{{ __('admin/layout/app.assign_checklist') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('today.job.schedule') }}"
                                         class="nav-link {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Today's Schedule</p>
+                                        <p>{{ __('admin/layout/app.today_schedule') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('today.job.next.48.hours') }}"
                                         class="nav-link {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Within 48 hours</p>
+                                        <p>{{ __('admin/layout/app.within_48_hours') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('job.needing.scheduling') }}"
                                         class="nav-link {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Unscheduled</p>
+                                        <p>{{ __('admin/layout/app.unscheduled') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobs.in.progress') }}"
                                         class="nav-link {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>In-progress</p>
+                                        <p>{{ __('admin/layout/app.in_progress') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobs.complete') }}"
                                         class="nav-link {{ request()->routeIs('jobs.complete') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Completed</p>
+                                        <p>{{ __('admin/layout/app.completed') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('readyinvoice.index') }}"
                                         class="nav-link {{ request()->routeIs('readyinvoice.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Ready to be invoiced</p>
+                                        <p>{{ __('admin/layout/app.ready_to_be_invoiced') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobpermanager.index') }}"
                                         class="nav-link {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p style="font-size: 15px;">Jobs per Account Manager</p>
+                                        <p style="font-size: 15px;">
+                                            {{ __('admin/layout/app.jobs_per_account_manager') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobperregion.index') }}"
                                         class="nav-link {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Jobs per region</p>
+                                        <p>{{ __('admin/layout/app.jobs_per_region') }}</p>
                                     </a>
                                 </li>
 
@@ -380,7 +381,7 @@
                                 ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Operations
+                                    {{ __('admin/layout/app.operations') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -392,28 +393,28 @@
                                         class="nav-link nav-dropdown-toggle {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-table"></i>
                                         <p>
-                                            Inspections
-                                            <i class="fas fa-plus right"></i>
+                                            {{ __('admin/layout/app.inspections') }} <i
+                                                class="fas fa-plus right"></i>
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Account Manager</p>
+                                                <p>{{ __('admin/layout/app.account_managers') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Location</p>
+                                                <p>{{ __('admin/layout/app.location') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('checklists.create') }}"
                                                 class="nav-link {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Inspection Sheet</p>
+                                                <p>{{ __('admin/layout/app.inspection_sheet') }}</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -446,34 +447,37 @@
                                         <li class="nav-item">
                                             <a href="{{ route('checklist.index') }}" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Overall Checklist</p>
+                                                <p>{{ __('admin/layout/app.overall_checklist') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('finalized') }}"
                                                 class="nav-link {{ request()->routeIs('finalized') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Finalized</p>
+                                                <p>{{ __('admin/layout/app.finalized') }}</p>
                                             </a>
                                         </li>
+
                                         <li class="nav-item">
                                             <a href="{{ route('location') }}"
                                                 class="nav-link {{ request()->routeIs('location') ? 'active' : '' }} {{ request()->routeIs('adminresponse') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>location/Responce</p>
+                                                <p>{{ __('admin/layout/app.location') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('managers.index') }}"
                                                 class="nav-link {{ request()->routeIs('managers.index') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Account Manager</p>
+                                                <p>{{ __('admin/layout/app.account_managers') }}
+                                                </p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Field Member</p>
+                                                <p>{{ __('admin/layout/app.field_employees') }}
+                                                </p>
                                             </a>
                                         </li>
                                     </ul>
