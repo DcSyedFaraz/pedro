@@ -55,4 +55,5 @@ return [
     'change_password' => 'Cambiar contraseña',
     'manager_attendance' => 'Asistencia de gerente',
     'vendors_attendance' => 'Asistencia de proveedor',
+    'invoice_dashboard' => 'Tablero de Facturación',
 ];

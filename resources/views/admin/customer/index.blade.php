@@ -1,5 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
-
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -9,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>{{ __('admin/customer/index.client') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('admin/customer/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('admin/customer/index.client') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -29,22 +28,23 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                              <h3 class="card-title">User Managment</h3>
-                            </div> -->
+                                  <h3 class="card-title">{{ __('admin/customer/index.user_management') }}</h3>
+                                </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
-                                <a class="btn btn-success" href="{{ route('customer.create') }}"> New Customer </a>
+                                <a class="btn btn-success"
+                                    href="{{ route('customer.create') }}">{{ __('admin/customer/index.new_customer') }}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Name</th>
-                                            <th>Account#</th>
-                                            <th>Roles</th>
-                                            <th width="560px">Action</th>
+                                            <th>{{ __('admin/customer/index.no') }}</th>
+                                            <th>{{ __('admin/customer/index.name') }}</th>
+                                            <th>{{ __('admin/customer/index.account_num') }}</th>
+                                            <th>{{ __('admin/customer/index.roles') }}</th>
+                                            <th width="560px">{{ __('admin/customer/index.action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -63,16 +63,16 @@
 
                                                     </td>
                                                     <td>
-                                                        <!-- <a class="btn btn-info" href="{{ route('users.show', $customer->id) }}">Show</a> -->
+                                                        <!-- <a class="btn btn-info" href="{{ route('users.show', $customer->id) }}">{{ __('admin/customer/index.show') }}</a> -->
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('customer.edit', $customer->id) }}">Edit</a>
+                                                            href="{{ route('customer.edit', $customer->id) }}">{{ __('admin/customer/index.edit') }}</a>
 
                                                         <form action="{{ route('customer.destroy', $customer->id) }}"
                                                             method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this Customer?')">Delete</button>
+                                                                onclick="return confirm('{{ __('admin/customer/index.confirm_delete') }}')">{{ __('admin/customer/index.delete') }}</button>
                                                         </form>
                                                     </td>
 
@@ -95,60 +95,5 @@
         <!-- /.content -->
     </div>
 
-
-
-    <!-- End withdraw -->
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        $(function() {
-            var $form = $(".require-validation");
-            $('form.require-validation').bind('submit', function(e) {
-                var $form = $(".require-validation"),
-                    inputSelector = ['input[type=email]', 'input[type=password]', 'input[type=text]',
-                        'input[type=file]', 'textarea'
-                    ].join(', '),
-                    $inputs = $form.find('.required').find(inputSelector),
-                    $errorMessage = $form.find('div.error'),
-                    valid = true;
-                $errorMessage.addClass('hide');
-                $('.has-error').removeClass('has-error');
-                $inputs.each(function(i, el) {
-                    var $input = $(el);
-                    if ($input.val() === '') {
-                        $input.parent().addClass('has-error');
-                        $errorMessage.removeClass('hide');
-                        e.preventDefault();
-                    }
-                });
-                if (!$form.data('cc-on-file')) {
-                    e.preventDefault();
-                    Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                    Stripe.createToken({
-                        number: $('.card-number').val(),
-                        cvc: $('.card-cvc').val(),
-                        exp_month: $('.card-expiry-month').val(),
-                        exp_year: $('.card-expiry-year').val()
-                    }, stripeResponseHandler);
-                }
-            });
-
-            function stripeResponseHandler(status, response) {
-                if (response.error) {
-                    $('.error')
-                        .removeClass('hide')
-                        .find('.alert')
-                        .text(response.error.message);
-                } else {
-                    /* token contains id, last4, and card type */
-                    var token = response['id'];
-                    $form.find('input[type=text]').empty();
-                    $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                    $form.get(0).submit();
-                }
-            }
-        });
-    </script>
-
 @endsection
