@@ -30,22 +30,22 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Problem Report #{{ $problemReport->id }}</h3>
+                    <h3 class="card-title">{{ __('user/problem/index.report_problem') }} #{{ $problemReport->id }}</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
                     <table class="table table-bordered">
                       <tbody>
                         <tr>
-                          <th>Job</th>
+                          <th>{{ __('user/problem/index.job') }}</th>
                           <td>{{ $problemReport->jobname->name }}</td>
                         </tr>
                         <tr>
-                          <th>Location</th>
+                          <th>{{ __('user/problem/index.location') }}</th>
                           <td>{{ $problemReport->location }}</td>
                         </tr>
                         <tr>
-                          <th>Type</th>
+                          <th>{{ __('user/problem/index.type') }}</th>
                           <td>
                             @if ($problemReport->type_of_problem === 'critical')
                               <span class="badge badge-danger">Critical</span>
@@ -60,19 +60,19 @@
                         </tr>
                        
                         <tr>
-                          <th>Problem Date</th>
+                          <th>{{ __('user/problem/index.problem_date') }}</th>
                           <td>{{ $problemReport->problem_date }}</td>
                         </tr>
                         <tr>
-                          <th>Investigator</th>
+                          <th>{{ __('user/problem/index.investigator') }}</th>
                           <td>{{ $problemReport->investigator_of_problem }}</td>
                         </tr>
                         <tr>
-                          <th>Result of Investigation</th>
+                          <th>{{ __('user/problem/index.problem_date') }}</th>
                           <td>{{ $problemReport->result_of_investigation }}</td>
                         </tr>
                         <tr>
-                          <th>Suggestions</th>
+                          <th>{{ __('user/problem/index.suggestions') }}</th>
                           <td>{{ $problemReport->suggestions }}</td>
                         </tr>
                       </tbody>
