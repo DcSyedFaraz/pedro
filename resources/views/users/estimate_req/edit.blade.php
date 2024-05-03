@@ -14,12 +14,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Estimate Request</h1>
+                        <h1>{{ __('user/inspecrequest/index.estimate_request') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Estimate Request</li>
+                            <li class="breadcrumb-item active">{{ __('user/inspecrequest/index.estimate_request') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -37,35 +37,35 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label for="first_name">First Name</label>
+                                        <label for="first_name">{{ __('user/inspecrequest/index.first_name') }}</label>
                                         <input type="text" class="form-control" id="first_name" name="first_name" required value="{{ old('first_name', $estimate->first_name) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="last_name">Last Name</label>
+                                        <label for="last_name">{{ __('user/inspecrequest/index.last_name') }}</label>
                                         <input type="text" class="form-control" id="last_name" name="last_name" required value="{{ old('last_name', $estimate->last_name) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="phone_number">Phone Number</label>
+                                        <label for="phone_number">{{ __('user/inspecrequest/index.phone_number') }}</label>
                                         <input type="tel" class="form-control" id="phone_number" name="phone_number" required value="{{ old('phone_number', $estimate->phone_number) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Email</label>
+                                        <label for="email">{{ __('user/inspecrequest/index.email') }}</label>
                                         <input type="email" class="form-control" id="email" name="email" required value="{{ old('email', $estimate->email) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="street_address">Street Address</label>
+                                        <label for="street_address">{{ __('user/inspecrequest/index.street_address') }}</label>
                                         <input type="text" class="form-control" id="street_address" name="street_address" required value="{{ old('street_address', $estimate->street_address) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="city">City</label>
+                                        <label for="city">{{ __('user/inspecrequest/index.city') }}</label>
                                         <input type="text" class="form-control" id="city" name="city" required value="{{ old('city', $estimate->city) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="state">State</label>
+                                        <label for="state">{{ __('user/inspecrequest/index.state') }}</label>
                                         <input type="text" class="form-control" id="state" name="state" required value="{{ old('state', $estimate->state) }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="zip_code">Zip Code</label>
+                                        <label for="zip_code">{{ __('user/inspecrequest/index.zip_code') }}</label>
                                         <input type="text" class="form-control" id="zip_code" name="zip_code" required value="{{ old('zip_code', $estimate->zip_code) }}">
                                     </div>
                                     <div class="form-group">

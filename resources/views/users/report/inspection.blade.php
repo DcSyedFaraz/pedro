@@ -57,7 +57,8 @@
 
                                                     @else
                                                       <span class="font-weight-bold">
-                                                          Waiting For Responce
+                                                          
+                                                          {{ __('user/inspection/index.waiting_for_response') }}
                                                         </span>
 
                                                     @endif

@@ -8,7 +8,7 @@ return [
     'order_date' => 'fecha de orden',  
     'actions' => 'comportamiento',
     'home' => 'hogar',
-    'supply_request' => 'solicitud_suministro',
+    'supply_request' => 'solicitud de suministro',
    
 ];
 ?>  

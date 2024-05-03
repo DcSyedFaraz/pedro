@@ -20,7 +20,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="header mb-5">
-                <h1>Inspection Checklist</h1>
+                <h1>{{ __('user/inspection/index.inspection_checklist') }}</h1>
             </div>
 
             <div class="container">
@@ -34,9 +34,9 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Task</th>
-                                            <th>Rating</th>
-                                            <th>Remarks</th>
+                                            <th>{{ __('user/inspection/index.task') }}</th>
+                                            <th>{{ __('user/inspection/index.rating') }}</th>
+                                            <th>{{ __('user/inspection/index.remarks') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

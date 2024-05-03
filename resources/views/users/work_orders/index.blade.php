@@ -10,12 +10,12 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
 
-                        <h1>{{ __('work_order') }}</h1>
+                        <h1>{{ __('user/work_order/index.work_order') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">{{ __('work_order') }}</li>
+                            <li class="breadcrumb-item active">{{ __('user/work_order/index.work_order') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -42,12 +42,12 @@
                                     <thead>
                                         <tr>
 
-                                            <th>{{ __('work_order_id') }}</th>
-                                            <th>{{ __('job_name') }}</th>
-                                            <th>{{ __('vendor') }}</th>
-                                            <th>{{ __('status') }}</th>
-                                            <th>{{ __('deadline') }}</th>
-                                            <th>{{ __('action') }}</th>
+                                            <th>{{ __('user/work_order/index.work_order_id') }}</th>
+                                            <th>{{ __('user/work_order/index.job_name') }}</th>
+                                            <th>{{ __('user/work_order/index.vendor') }}</th>
+                                            <th>{{ __('user/work_order/index.status') }}</th>
+                                            <th>{{ __('user/work_order/index.deadline') }}</th>
+                                            <th>{{ __('user/work_order/index.action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -81,12 +81,12 @@
 
                                                     <td class="text-wrap">
                                                         @if ($workOrder->status == 'pending')
-                                                            <span class="badge badge-warning">{{ __('waiting_for_vendor_to_accept') }}</span>
+                                                            <span class="badge badge-warning">{{ __('user/work_order/index.waiting_for_vendor_to_accept') }}</span>
                                                         @elseif ($workOrder->JobLocation)
-                                                            <span class="badge badge-success">{{ __('location_saved') }}</span>
+                                                            <span class="badge badge-success">{{ __('user/work_order/index.location_saved') }}</span>
                                                         @else
                                                             <span class="badge badge-danger">
-                                                                {{ __('please_provide_a_job_location') }}
+                                                                {{ __('user/work_order/index.please_provide_a_job_location') }}
                                                             </span>
                                                             <button type="button" class="btn btn-primary open-map-modal"
                                                                 data-workorder-id="{{ $workOrder->id }}"><i
@@ -121,7 +121,7 @@
                     <div class="modal-content">
                         <!-- Modal header -->
                         <div class="modal-header">
-                            <h5 class="modal-title" id="assignModalLabel">{{ __('assign_vendor') }}</h5>
+                            <h5 class="modal-title" id="assignModalLabel">{{ __('user/work_order/index.assign_vendor') }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -135,7 +135,7 @@
                                 <input type="hidden" name="work_order_id" id="work_order_id">
 
                                 <div class="form-group">
-                                    <label for="vendor_id">{{ __('select_vendor') }}:</label>
+                                    <label for="vendor_id">{{ __('user/work_order/index.select_vendor') }}:</label>
                                     <select class="form-control" id="vendor_id" name="vendor_id">
                                         @foreach ($vendors as $vendor)
                                             <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
@@ -143,7 +143,7 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">{{ __('assign') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('user/work_order/index.assign') }}</button>
                             </form>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                     <div class="modal-content">
                         <!-- Modal header -->
                         <div class="modal-header">
-                            <h5 class="modal-title" id="assignModalLabel">{{ __('feedback') }}</h5>
+                            <h5 class="modal-title" id="assignModalLabel">{{ __('user/work_order/index.feedback') }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -171,19 +171,19 @@
                                 <input type="hidden" name="work_order_code" id="work_order_code">
 
                                 <div class="form-group">
-                                    <label for="vendor_id">{{ __('order_status') }}</label>
+                                    <label for="vendor_id">{{ __('user/work_order/index.order_status') }}</label>
                                     <select class="form-control" id="status" name="status" required>
                                         <option value="">Select Menu</option>
-                                        <option value="1">{{ __('order_completed') }}</option>
-                                        <option value="2">{{ __('order_rejected') }}</option>
+                                        <option value="1">{{ __('user/work_order/index.order_completed') }}</option>
+                                        <option value="2">{{ __('user/work_order/index.order_rejected') }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="vendor_id">{{ __('feedback') }}</label>
+                                    <label for="vendor_id">{{ __('user/work_order/index.feedback') }}</label>
                                     <textarea name="feedback" class="form-control"></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">{{ __('save') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('user/work_order/index.save') }}</button>
                             </form>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">{{ __('pick_a_location') }}</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">{{ __('user/work_order/index.pick_a_location') }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -211,8 +211,8 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('close') }}</button>
-                            <button class="btn btn-primary" onclick="saveLocation()">{{ __('save_changes') }}</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('user/work_order/index.close') }}</button>
+                            <button class="btn btn-primary" onclick="saveLocation()">{{ __('user/work_order/index.save_changes') }}</button>
                         </div>
                     </div>
                 </div>
@@ -344,7 +344,7 @@
                     error: function(xhr, status, error) {
                         // Handle error
                         console.error(error);
-                        var locationSavedunSuccessfullyMessage = "{{ __('an_error_occurred_while_saving_location') }}";
+                        var locationSavedunSuccessfullyMessage = "{{ __('user/work_order/index.an_error_occurred_while_saving_location') }}";
                         // Show error toastr
                         toastr.error(locationSavedunSuccessfullyMessage);
                     }
