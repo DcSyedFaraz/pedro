@@ -51,7 +51,7 @@
                         <div class="form-group">
 	                        <label>New Password</label>
 	                        <code>*</code>
-	                        <input name="newpassword" id="password" minlength="8" type="password" class="form-control" required>
+	                        <input name="newpassword" id="password" minlength="8" type="password" class="form-control" required>  
 	                    </div>
                         <div class="form-group">
 	                        <label>Confirm Password</label>

@@ -34,7 +34,7 @@
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success" href="{{ route('supply.create') }}"
-                                    class="btn btn-primary">Create Supply Request</a>
+                                    class="btn btn-primary">{{ __('user/supply/index.create_supply_request') }}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
