@@ -41,7 +41,7 @@
                                             <div class="row bordewer">
                                                 <div class="col-sm-12">
                                                     <div class="inner-header bg-colored pt-2 pb-2">
-                                                        <h4 class="primary">Supply Request</h4>
+                                                        <h4 class="primary">{{ __('user/supply/index.supply_request') }}</h4>
                                                     </div>
                                                 </div>
                                                 <div class="innerinputs">
@@ -50,15 +50,14 @@
                                                         <div class="col-lg-7">
                                                             <div class="row">
                                                                 <div class="col-sm-4">
-                                                                    <label for="vender-div" class="form-label">Order
-                                                                        Progress</label>
+                                                                    <label for="vender-div" class="form-label">{{ __('user/supply/index.order_progress') }}</label>
                                                                     <select name="order_progress"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
-                                                                        <option value="Open"
+                                                                        <option value="Open">
                                                                             {{ old('order_progress', $supplyRequest->order_progress) == 'Open' ? 'selected' : '' }}>
                                                                             Open</option>
-                                                                        <option value="Close"
+                                                                        <option value="Close">
                                                                             {{ old('order_progress', $supplyRequest->order_progress) == 'Close' ? 'selected' : '' }}>
                                                                             Close</option>
                                                                     </select>
@@ -68,8 +67,7 @@
                                                                 <!-- 'order_date' field -->
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-                                                                        <label for="order_date" class="form-label">Order
-                                                                            Date</label>
+                                                                        <label for="order_date" class="form-label">{{ __('user/supply/index.order_date') }}</label>
                                                                         <div class="input-group date" id="datepicker">
                                                                             <input name="order_date" type="date"
                                                                                 class="form-control" id="order_date"
@@ -81,7 +79,7 @@
                                                                 <!-- 'po_num' field -->
                                                                 <div class="col-sm-4">
                                                                     <div class="purchase-order-status">
-                                                                        <label for="po_num" class="form-label">PO#</label>
+                                                                        <label for="po_num" class="form-label">{{ __('user/supply/index.po') }}</label>
                                                                         <input name="po_num" type="number"
                                                                             class="form-control" id="po_num"
                                                                             value="{{ old('po_num', $supplyRequest->po_num) }}">
@@ -92,8 +90,7 @@
                                                                 <div class="col-sm-6">
                                                                     <div class="memo-main-div">
                                                                         <label for="manager_email"
-                                                                            class="form-label">Account
-                                                                            Manager's Email</label>
+                                                                            class="form-label">{{ __('user/supply/index.account_managers_email') }}</label>
                                                                         <input name="manager_email" type="email"
                                                                             class="form-control" id="manager_email"
                                                                             value="{{ old('manager_email', $supplyRequest->manager_email) }}">
@@ -103,8 +100,7 @@
                                                                 <!-- 'sent_date' field -->
                                                                 <div class="col-sm-3">
                                                                     <div class="sent-on-div">
-                                                                        <label for="sent_date" class="form-label">Sent
-                                                                            Date</label>
+                                                                        <label for="sent_date" class="form-label">{{ __('user/supply/index.sent_date') }}</label>
                                                                         <input name="sent_date" type="date"
                                                                             class="form-control" id="sent_date"
                                                                             value="{{ old('sent_date', $supplyRequest->sent_date) }}">
@@ -113,8 +109,7 @@
 
                                                                 <!-- 'receipt_status' field -->
                                                                 <div class="col-sm-3">
-                                                                    <label for="receipt_status" class="form-label">Receipt
-                                                                        Status</label>
+                                                                    <label for="receipt_status" class="form-label">{{ __('user/supply/index.receipt_status') }}</label>
                                                                     <select name="receipt_status"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example"
@@ -191,15 +186,14 @@
                                             <div class="row bordewer">
                                                 <div class="col-sm-12">
                                                     <div class="inner-header bg-colored pt-2 pb-2">
-                                                        <h4 class="primary">Item List</h4>
+                                                        <h4 class="primary">{{ __('user/supply/index.item_date') }}</h4>
                                                     </div>
                                                 </div>
                                                 <div class="innerinputs">
                                                     <div class="row">
                                                         <div class="col-sm-4">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Item
-                                                                    Name</label>
+                                                                <label for="addproduct" class="form-label">{{ __('user/supply/index.item_name') }}</label>
                                                                 <input name="item_name" type="text"
                                                                     class="form-control" placeholder="Add Product"
                                                                     id="addproduct"
@@ -210,7 +204,7 @@
                                                         <div class="col-sm-4">
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
-                                                                    class="form-label">Quantity</label>
+                                                                    class="form-label">{{ __('user/supply/index.quantity') }}</label>
                                                                 <input name="qty" type="number" class="form-control"
                                                                     id="addproduct"
                                                                     value="{{ old('qty', $supplyRequest->qty) }}">
@@ -218,7 +212,7 @@
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Job Assignment
+                                                                <label for="addproduct" class="form-label">{{ __('user/supply/index.job_assignment') }}
                                                                 </label>
                                                                 <input name="job_assign" type="text"
                                                                     class="form-control" id="addproduct" value="{{ old('job_assign', $supplyRequest->job_assign) }}">
@@ -233,8 +227,7 @@
                                                     <div class="row">
                                                         <div class="col-8">
                                                             <div class="message-main-div">
-                                                                <label for="description" class="form-label">Item
-                                                                    Description</label>
+                                                                <label for="description" class="form-label">{{ __('user/supply/index.item_description') }}n</label>
                                                                 <textarea name="description" rows="5" cols="126">{{ old('description', $supplyRequest->description) }}</textarea>
                                                             </div>
                                                         </div>
