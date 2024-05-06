@@ -24,7 +24,7 @@
 </style>
 <div class="row">
     <div class="col-md-4">
-        <strong>Date of Request
+        <strong>{{ __('admin/estimates/edit.date_of_request') }}
         </strong>
     </div>
     <div class="col-md-8">
@@ -38,7 +38,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Progress</strong>
+        <strong>{{ __('admin/estimates/edit.progress') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -64,7 +64,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Source of Referral</strong>
+        <strong>{{ __('admin/estimates/edit.source_of_referral') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -84,7 +84,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <strong>Rating Scale</strong>
+        <strong>{{ __('admin/estimates/edit.rating_scale') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -113,7 +113,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Labels</strong>
+        <strong>{{ __('admin/estimates/edit.labels') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -128,7 +128,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <strong>Opportunity Holder</strong>
+        <strong>{{ __('admin/estimates/edit.opportunity_holder') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -144,7 +144,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <strong>On-Site Date
+        <strong>{{ __('admin/estimates/edit.on_site_date') }}
         </strong>
     </div>
     <div class="col-md-4">
@@ -201,7 +201,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <strong>Technician Assigned</strong>
+        <strong>{{ __('admin/estimates/edit.technician_assigned') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -224,7 +224,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Technician Instructions</strong>
+        <strong>{{ __('admin/estimates/edit.technician_instructions') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -237,7 +237,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Finish Notes</strong>
+        <strong>{{ __('admin/estimates/edit.finish_notes') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">

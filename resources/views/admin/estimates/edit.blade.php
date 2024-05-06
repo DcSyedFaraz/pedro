@@ -63,12 +63,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Estimate</h1>
+                        <h1>{{ __('admin/estimates/edit.edit_estimate') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Estimate</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('admin/estimates/edit.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('admin/estimates/edit.edit_estimate') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
             <div class="container-fluid">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <strong>{{ __('admin/estimates/edit.whoops') }}!</strong> {{ __('admin/estimates/edit.problems_with_input') }}<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -97,7 +97,7 @@
                                     <div class="row">
                                         <div class="col-md-6">&nbsp;</div>
                                         <div class="col-md-6 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button type="submit" class="btn btn-primary">{{ __('admin/estimates/edit.save') }}</button>
                                         </div>
                                     </div>
                                     </br>
@@ -109,7 +109,7 @@
                                                     <a class="nav-link active" id="sum-tab" data-toggle="tab"
                                                         href="#sum" role="tab" aria-controls="sum"
                                                         aria-selected="true"><i class="fas fa-list-alt fa-fw"></i>
-                                                        Summary</a>
+                                                        {{ __('admin/estimates/edit.summary') }}</a>
                                                 </li>
                                                 {{-- <li class="nav-item">
                                                     <a class="nav-link" id="cut-tab" data-toggle="tab" href="#cut"
@@ -119,13 +119,13 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="pic-tab" data-toggle="tab" href="#pic"
                                                         role="tab" aria-controls="pic" aria-selected="false"><i
-                                                            class="fas fa-image fa-fw"></i> Pics&nbsp;<span
+                                                            class="fas fa-image fa-fw"></i> {{ __('admin/estimates/edit.pics') }} &nbsp;<span
                                                             class="circle">{{ isset($job_img) ? $job_img : 0 }}</span></a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="doc-tab" data-toggle="tab" href="#doc"
                                                         role="tab" aria-controls="doc" aria-selected="false"><i
-                                                            class="fas fa-file fa-fw"></i> Docs&nbsp;<span
+                                                            class="fas fa-file fa-fw"></i> {{ __('admin/estimates/edit.docs') }} &nbsp;<span
                                                             class="circle">{{ isset($job_doc) ? $job_doc : 0 }}</span></a>
                                                 </li>
                                             </ul>
@@ -159,7 +159,7 @@
                                                     <a class="nav-link active" id="info-tab" data-toggle="tab"
                                                         href="#info" role="tab" aria-controls="info"
                                                         aria-selected="true"><i class="fas fa-calendar fa-fw"></i>
-                                                        Scheduling</a>
+                                                        {{ __('admin/estimates/edit.scheduling') }}</a>
                                                 </li>
                                             </ul>
                                             <div class="card">
@@ -185,7 +185,7 @@
                                                                 <ul class="nav nav-tabs mt-4">
                                                                     <li class="nav-item">
                                                                         <a class="nav-link active" data-toggle="tab"
-                                                                            href="#products-services">Estimate</a>
+                                                                            href="#products-services">{{ __('admin/estimates/edit.estimate') }}</a>
                                                                     </li>
                                                                 </ul>
                                                                 <div class="tab-content mt-3">
@@ -197,15 +197,14 @@
                                                                 <br />
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <label for="note-to-customer">Note To
-                                                                            Customer</label>
+                                                                        <label for="note-to-customer">{{ __('admin/estimates/edit.note_to_customer') }}</label>
                                                                         <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4"></textarea>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="row mt-3 invoice">
                                                                             <div class="col">
-                                                                                <p>Estimates Total</p>
-                                                                                <p>Job Cost</p>
+                                                                                <p>{{ __('admin/estimates/edit.estimates_total') }}</p>
+                                                                                <p>{{ __('admin/estimates/edit.job_cost') }}</p>
                                                                                 <p>Gross Profit <span
                                                                                         id="est-gross-profit-percentage">(0.00%)</span>
                                                                                 </p>
