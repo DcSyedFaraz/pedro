@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Add images and notes</h1>
+                        <h1>{{ __('vendor/company/index.add_images_and_notes') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add images and notes</li>
+                            <li class="breadcrumb-item active">{{ __('vendor/company/index.add_images_and_notes') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
         </section>
 
         <div class="container">
-            <h1 class="mb-4">Complete Vendor Profile</h1>
+            <h1 class="mb-4">{{ __('vendor/company/index.complete_vendor_profile') }}</h1>
 
             <div class="row">
                 <div class="col-md-6">
@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Vendor Information</h5><br>
                             <dl class="row">
-                                <dt class="col-sm-4">Vendor Name:</dt>
+                                <dt class="col-sm-4">{{ __('vendor/company/index.vendor_name') }}:</dt>
                                 <dd class="col-sm-8">{{ isset($vendor) ? $vendor->name : '' }}</dd>
                             </dl>
                         </div>
@@ -38,14 +38,14 @@
                     <!-- Areas of Work and Services Performed -->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title font-weight-bold">Areas of Work</h5>
+                            <h5 class="card-title font-weight-bold">{{ __('vendor/company/index.areas_of_work') }}</h5>
                             <p class="card-text">{{ isset($vendor->userdetail) ? $vendor->userdetail->areas_of_work : '' }}</p>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title font-weight-bold">Services Performed</h5>
+                            <h5 class="card-title font-weight-bold">{{ __('vendor/company/index.services_performed') }}</h5>
                             <p class="card-text">{{ isset($vendor->userdetail) ? $vendor->userdetail->services_performed : '' }}</p>
                         </div>
                     </div>
@@ -55,13 +55,13 @@
                     <!-- Upload Documents -->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">Upload Documents</h5><br>
+                            <h5 class="card-title">{{ __('vendor/company/index.uploaded_documents') }}</h5><br>
                             <form method="POST" action="{{ route('company_profile.update',$vendor->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="form-group">
-                                    <label for="inputTitle" class="col-form-label">Areas of Work</label>
+                                    <label for="inputTitle" class="col-form-label">{{ __('vendor/company/index.areas_of_work') }}</label>
                                   <input id="inputTitle" type="text" name="areas_of_work" placeholder="Enter areas of work"  value="{{$vendor->userdetail->areas_of_work ?? ''}}" class="form-control">
                                   @error('areas_of_work')
                                   <span class="text-danger">{{$message}}</span>
@@ -69,7 +69,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                      <label for="inputEmail" class="col-form-label">Services You Perform</label>
+                                      <label for="inputEmail" class="col-form-label">{{ __('vendor/company/index.services_you_perform') }}</label>
                                     <input  type="text" name="services_performed" placeholder="Enter services performed"  value="{{$vendor->userdetail->services_performed ?? ''}}" class="form-control">
                                     @error('services_performed')
                                     <span class="text-danger">{{$message}}</span>
@@ -77,12 +77,12 @@
                                   </div>
 
                                 <div class="form-group">
-                                    <label for="document">Document</label>
+                                    <label for="document">{{ __('vendor/company/index.document') }}</label>
                                     <input type="file" id="document" name="document[]" multiple class="form-control-file">
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Upload Documents</button>
+                                    <button type="submit" class="btn btn-primary">Uploaded Documents</button>
                                 </div>
                             </form>
                         </div>
@@ -91,7 +91,7 @@
                     <!-- Display Uploaded Documents -->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Uploaded Documents</h5>
+                            <h5 class="card-title">{{ __('vendor/company/index.uploaded_documents') }}</h5>
                             <ul>
                                 @if (isset($vendor->files) && count($vendor->files) > 0)
                                 <div class="mt-5">

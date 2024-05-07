@@ -12,12 +12,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Change Password</h1>
+            <h1 class="m-0">{{ __('user/changepass/index.change_password') }}</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Change Password</li>
+              <li class="breadcrumb-item active">{{ __('user/changepass/index.change_password') }}</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,7 +32,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Change Password </h3>
+                <h3 class="card-title">{{ __('user/changepass/index.change_password') }} </h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -43,18 +43,18 @@
                     <div class="col-sm-6">
 
                     	<div class="form-group">
-	                        <label>Old Password</label>
+	                        <label>{{ __('user/changepass/index.old_password') }}</label>
 	                        <code>*</code>
 	                        <input name="oldpassword" type="password" class="form-control" required>
 	                    </div>
 
                         <div class="form-group">
-	                        <label>New Password</label>
+	                        <label>{{ __('user/changepass/index.new_password') }}</label>
 	                        <code>*</code>
 	                        <input name="newpassword" id="password" minlength="8" type="password" class="form-control" required>  
 	                    </div>
                         <div class="form-group">
-	                        <label>Confirm Password</label>
+	                        <label>{{ __('user/changepass/index.confirm_password') }}</label>
 	                        <code>*</code>
 	                        <input name="password_confirmation" data-rule-equalTo="#password" type="password" class="form-control" required>
 	                    </div>

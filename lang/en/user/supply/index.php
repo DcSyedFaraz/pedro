@@ -21,6 +21,9 @@ return [
     'item_date' => 'Item Date',
     'item_name' => 'Item Name',
     'item_description' => 'Item Description',
+    'show' => 'Show',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
 
    
 ];

@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="header mb-5">
-                <h1>Inspection Checklist</h1>
+                <h1>{{ __('vendor/responce/index.inspection_checklist') }}</h1>
             </div>
 
             <div class="container">
@@ -26,7 +26,7 @@
                             {{-- @dd($response) --}}
                             @foreach ($response as $response1)
                                 <div class="card-header">
-                                    <h3 class="card-title">Inspection Checklist for <span
+                                    <h3 class="card-title">{{ __('vendor/responce/index.inspection_checklist_for') }} <span
                                             class="font-weight-bold">{{ $response1->checklist->name ?? '' }}</span>
                                     </h3>
                                 </div>
@@ -37,10 +37,10 @@
                                         <thead>
                                             <tr>
                                                 {{-- <th>Sheet</th> --}}
-                                                <th>Task</th>
-                                                <th>Rating</th>
-                                                <th>Remarks</th>
-                                                <th>Image</th>
+                                                <th>{{ __('vendor/responce/index.task') }}</th>
+                                                <th>{{ __('vendor/responce/index.rating') }}</th>
+                                                <th>{{ __('vendor/responce/index.remarks') }}</th>
+                                                <th>{{ __('vendor/responce/index.image') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -87,10 +87,10 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            Notes
+                                        {{ __('vendor/responce/index.notes') }}
                                         </th>
                                         <th>
-                                            Image
+                                        {{ __('vendor/responce/index.image') }}
                                         </th>
                                     </tr>
                                 </thead>

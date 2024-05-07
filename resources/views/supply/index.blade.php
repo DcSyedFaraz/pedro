@@ -75,12 +75,12 @@
                                                     <form action="{{ route('supply.destroy', $supplies->id) }}"
                                                         method="POST">
                                                         <a href="{{ route('supply.show', $supplies->id) }}"
-                                                            class="btn btn-info">Show</a>
+                                                            class="btn btn-info">{{ __('user/supply/index.show') }}</a>
                                                         <a href="{{ route('supply.edit', $supplies->id) }}"
-                                                            class="btn btn-primary">Edit</a>
+                                                            class="btn btn-primary">{{ __('user/supply/index.edit') }}</a>
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Request?')">Delete</button>
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Request?')">{{ __('user/supply/index.delete') }}</button>
                                                     </form>
                                                 </td>
                                             </tr>

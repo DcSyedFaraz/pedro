@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Responce</h1>
+                        <h1>{{ __('vendor/responce/index.responce') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Responce</li>
+                            <li class="breadcrumb-item active">{{ __('vendor/responce/index.responce') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -32,9 +32,9 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Location Name</th>
-                                            <th>Assigned Checklists</th>
-                                            <th>Actions</th>
+                                            <th>{{ __('vendor/responce/index.location_name') }}</th>
+                                            <th>{{ __('vendor/responce/index.assigned_checklists') }}</th>
+                                            <th>{{ __('vendor/responce/index.action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -169,9 +169,9 @@
                                                                 </div>
                                                             @endif
                                                             <a class="btn btn-info"
-                                                                href="{{ route('responce.show', $shows->id) }}">Show</a>
+                                                                href="{{ route('responce.show', $shows->id) }}">{{ __('vendor/responce/index.show') }}</a>
                                                             <a class="btn btn-warning"
-                                                                href="{{ route('responce.edit', $shows->id) }}">Edit</a>
+                                                                href="{{ route('responce.edit', $shows->id) }}">{{ __('vendor/responce/index.edit') }}</a>
                                                             {{-- <button class="btn btn-primary" data-toggle="modal"
                                                                 data-target="#checklistModal_{{ $shows->id }}">Update
                                                                 Response</button>
