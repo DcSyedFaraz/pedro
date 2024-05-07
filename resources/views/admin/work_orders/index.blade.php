@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Work Order List</h1>
+                        <h1>{{ __('admin/work_order/index.work_order_list') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Work Order List</li>
+                            <li class="breadcrumb-item active">{{ __('admin/work_order/index.work_order_list') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -31,19 +31,20 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-header">
-                                <a class="btn btn-success" href="{{ route('work_orders.create') }}"> Create Work Order </a>
+                                <a class="btn btn-success" href="{{ route('work_orders.create') }}">
+                                    {{ __('admin/work_order/index.create_work_order') }} </a>
                             </div>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Work Order ID</th>
-                                            <th>Job Name</th>
+                                            <th>ID</th>
+                                            <th>{{ __('admin/work_order/index.job_name') }}</th>
                                             <th>Vendor</th>
                                             <th>Status</th>
-                                            <th>Deadline</th>
-                                            <th>Payment</th>
-                                            <th>Action</th>
+                                            <th>{{ __('admin/work_order/index.deadline') }}</th>
+                                            <th>{{ __('admin/work_order/index.payment') }}</th>
+                                            <th>{{ __('admin/work_order/index.action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -57,15 +58,15 @@
                                                     <td>
                                                         @switch($workOrder->status)
                                                             @case('pending')
-                                                                <span class="badge bg-warning">Pending</span>
+                                                                <span class="badge bg-warning">{{ __('admin/work_order/index.pending') }}</span>
                                                             @break
 
                                                             @case('accepted')
-                                                                <span class="badge bg-success">Accepted</span>
+                                                                <span class="badge bg-success">{{ __('admin/work_order/index.accepted') }}</span>
                                                             @break
 
                                                             @case('declined')
-                                                                <span class="badge bg-danger">Declined</span>
+                                                                <span class="badge bg-danger">{{ __('admin/work_order/index.declined') }}</span>
                                                             @break
 
                                                             @default
@@ -76,7 +77,7 @@
                                                     <td>{{ $workOrder->deadline ?? '' }}</td>
                                                     <td> @switch($workOrder->payment_info)
                                                             @case('quick_pay')
-                                                                <span class="badge bg-success">Quick Pay</span>
+                                                                <span class="badge bg-success">{{ __('admin/work_order/index.quick_pay') }}</span>
                                                             @break
 
                                                             @default
@@ -92,12 +93,12 @@
                                                         <button type="button" class="btn btn-success open-map-modal"
                                                             data-workorder-id="{{ $workOrder->id }}"><i
                                                                 class="fas fa-map-marker-alt"></i>
-                                                                @if (!$workOrder->JobLocation)
-                                                            Put
-                                                                @else
-                                                            Update
-                                                                @endif
-                                                            </button>
+                                                            @if (!$workOrder->JobLocation)
+                                                                {{ __('admin/work_order/index.put') }}
+                                                            @else
+                                                                {{ __('admin/work_order/index.update') }}
+                                                            @endif
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -123,7 +124,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pick a Location</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('admin/work_order/index.pick_a_location') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
