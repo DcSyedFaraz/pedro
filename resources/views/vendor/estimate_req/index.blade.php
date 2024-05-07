@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Estimate Request</h1>
+                        <h1">{{ __('vendor/estimatereq/index.estimate_request') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Estimate Request</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('vendor/estimatereq/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('vendor/estimatereq/index.estimate_request') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -34,13 +34,13 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.N</th>
-                                            <th>Request #</th>
-                                            <th>Name</th>
-                                            <th>Phone #</th>
-                                            <th>Email</th>
-                                            <th class="text-sm">Created at</th>
-                                            <th>Action</th>
+                                            <th>{{ __('vendor/estimatereq/index.s_n') }}</th>
+                                            <th>{{ __('vendor/estimatereq/index.request') }}</th>
+                                            <th>{{ __('vendor/estimatereq/index.name') }}</th>
+                                            <th>{{ __('vendor/estimatereq/index.phone') }}</th>
+                                            <th>{{ __('vendor/estimatereq/index.email') }}</th>
+                                            <th class="text-sm">{{ __('vendor/estimatereq/index.created_at') }}</th>
+                                            <th>{{ __('vendor/estimatereq/index.action') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

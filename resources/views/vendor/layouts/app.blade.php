@@ -148,7 +148,7 @@
             <a href="index3.html" class="brand-link">
                 <img src="{{ asset('/admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Vendor Dashboard</span>
+                <span class="brand-text font-weight-light">{{ __('vendor/layout/layout.vendor_dashboard') }}</span>
             </a>
 
             <!-- Sidebar -->
@@ -188,7 +188,7 @@
                                 class="nav-link nav-dropdown-toggle {{ request()->routeIs('vendor.dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Dashboard
+                                {{ __('vendor/layout/layout.dashboard') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -198,7 +198,7 @@
                                     <a href="{{ route('vendor.dashboard') }}"
                                         class="nav-link {{ request()->routeIs('vendor.dashboard') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard</p>
+                                        <p>{{ __('vendor/layout/layout.dashboard') }}</p>
                                     </a>
                                 </li>
 
@@ -218,7 +218,7 @@
                    ">
                                 <i class="nav-icon fas fa-search text-warning"></i>
                                 <p>
-                                    Inspection
+                                {{ __('vendor/layout/layout.inspection') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -227,21 +227,21 @@
                                     <a href="{{ route('checklists.create') }}"
                                         class="nav-link {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inspection List</p>
+                                        <p>{{ __('vendor/layout/layout.inspection_list') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('location.index') }}"
                                         class="nav-link {{ request()->routeIs('location.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Location</p>
+                                        <p>{{ __('vendor/layout/layout.location') }}</p>
                                     </a>
                                 </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('responce.index') }}"
                                         class="nav-link {{ request()->routeIs('responce.*') ? 'active' : '' }} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Responce</p>
+                                        <p>{{ __('vendor/layout/layout.responce') }}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -250,28 +250,28 @@
                             <a href="{{ route('manage_work_orders.index') }}"
                                 class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} {{ request()->routeIs('vendor.*') ? 'active' : '' }}">
                                 <i class="fas fa-file-invoice nav-icon text-info"></i>
-                                <p>Vendor Work Order</p>
+                                <p>{{ __('vendor/layout/layout.vendor_work_order') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('vendor_estimate_requests.index') }}"
                                 class="nav-link {{ request()->routeIs('vendor_estimate_requests.*') ? 'active' : '' }} ">
                                 <i class="far fa-calendar-alt nav-icon text-warning"></i>
-                                <p>Estimate Request</p>
+                                <p>{{ __('vendor/layout/layout.estimate_request') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('supply.index') }}"
                                 class="nav-link {{ request()->routeIs('supply.*') ? 'active' : '' }} ">
                                 <i class="fas fa-truck nav-icon text-danger"></i>
-                                <p>Supply Request</p>
+                                <p>{{ __('vendor/layout/layout.supply_request') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('schedule.index') }}"
                                 class="nav-link {{ request()->routeIs('schedule.*') ? 'active' : '' }}">
                                 <i class="fas fa-calendar-alt nav-icon "></i>
-                                <p>Schedule Job</p>
+                                <p>{{ __('vendor/layout/layout.schedule_job') }}</p>
                             </a>
                         </li>
                         <!--Start Accounting Modules -->
@@ -285,7 +285,7 @@
                                 ">
                                 <i class="nav-icon fas fa-money-bill text-success"></i>
                                 <p>
-                                    Accounting
+                                {{ __('vendor/layout/layout.accounting') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -295,7 +295,7 @@
                                     <a href="{{ route('invoice.index') }}"
                                         class="nav-link {{ request()->routeIs('invoice.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Invoice dashboard</p>
+                                        <p>{{ __('vendor/layout/layout.invoice_dashboard') }}</p>
                                     </a>
                                 </li>
 
@@ -314,7 +314,7 @@
                                 ">
                                 <i class="nav-icon fas fa-user text-primary"></i>
                                 <p>
-                                    Profile
+                                {{ __('vendor/layout/layout.profile') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -323,7 +323,7 @@
                                     <a href="{{ route('company_profile.index') }}"
                                         class="nav-link {{ request()->routeIs('company_profile.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Company Profile</p>
+                                        <p>{{ __('vendor/layout/layout.company_profile') }}</p>
                                     </a>
                                 </li>
 
@@ -347,7 +347,7 @@
                                 ">
                                 <i class="nav-icon fas fa-exclamation-triangle text-warning"></i>
                                 <p>
-                                    Problem Reporting
+                                {{ __('vendor/layout/layout.problem_reporting') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -357,7 +357,7 @@
                                         class="nav-link {{ request()->routeIs('userproblem.index') || request()->routeIs('userproblem.edit') || request()->routeIs('userproblem.show') ? 'active' : '' }}
                                         ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Reports</p>
+                                        <p>{{ __('vendor/layout/layout.report') }}</p>
                                     </a>
                                 </li>
 
@@ -366,9 +366,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ url('/logout') }}" class="nav-link">
+                            <a href="{{ url('/logout') }}" class="nav-link">    
                                 <i class="far fa-circle nav-icon text-danger"></i>
-                                <p>Logout</p>
+                                <p>{{ __('vendor/layout/layout.logout') }}</p>
                             </a>
                         </li>
 

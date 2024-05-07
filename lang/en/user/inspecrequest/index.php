@@ -19,6 +19,10 @@ return [
     'zip_code' => 'Zip Code',
     'details' => 'Details',
     'picture' => 'Picture',
+    'create_estimate_request' => 'Create Estimate Request',
+    'show' => 'Show',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
    
 ];
 ?>

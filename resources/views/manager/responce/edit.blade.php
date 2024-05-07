@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit Checklist Items for {{ $shows->name }}</div>
+                    <div class="card-header">{{ __('vendor/responce/index.edit_checklist_item_for_job') }} {{ $shows->name }}</div>
 
                     <div class="card-body">
                         <!-- Edit Response Form -->
@@ -34,7 +34,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="remarks_{{ $item->id }}" class="form-label">Remarks:</label>
+                                    <label for="remarks_{{ $item->id }}" class="form-label">{{ __('vendor/responce/index.remarks') }}:</label>
                                     <textarea class="form-control" name="remarks[]" id="remarks_{{ $item->id }}">{{ isset($item->remarks) ? old('remarks', $item->remarks) : '' }}</textarea>
                                 </div>
                                 <div class="mb-3">
@@ -56,12 +56,12 @@
                             @endforeach
 
                             <div class="mb-3">
-                                <label for="notes" class="form-label">Notes:</label>
+                                <label for="notes" class="form-label">{{ __('vendor/responce/index.notes') }}:</label>
                                 <textarea class="form-control" name="notes" id="notes">{{ isset($item->notess->notes) ? old('notes', $item->notess->notes) : '' }}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="file">File</label>
+                                <label for="file">{{ __('vendor/responce/index.file') }}</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file"

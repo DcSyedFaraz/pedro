@@ -19,6 +19,9 @@ return [
     'item_name' => 'nombre del árticulo',
     'item_date' => 'fecha del artículo',
     'item_description' => 'Descripción del Artículo',
+    'show' => 'espectáculo',
+    'edit' => 'editar',
+    'delete' => 'borrar',
    
 ];
 ?>  

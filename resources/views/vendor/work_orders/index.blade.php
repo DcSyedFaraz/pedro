@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Work Order</h1>
+                        <h1>{{ __('vendor/manage_work_order/index.work_order') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Work Order</li>
+                            <li class="breadcrumb-item active">{{ __('vendor/manage_work_order/index.work_order') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -32,14 +32,14 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Queue</th>
-                                            <th>Work Order#</th>
-                                            <th>Job Name</th>
-                                            <th>Vendor</th>
-                                            <th>Status</th>
-                                            <th>Deadline</th>
-                                            <th>Payment</th>
-                                            <th>Action</th>
+                                            <th>{{ __('vendor/manage_work_order/index.queue') }}</th>              
+                                            <th>{{ __('vendor/manage_work_order/index.work_order') }}</th>
+                                            <th>{{ __('vendor/manage_work_order/index.job_name') }}</th>
+                                            <th>{{ __('vendor/manage_work_order/index.vendor') }}</th>
+                                            <th>{{ __('vendor/manage_work_order/index.status') }}</th>
+                                            <th>{{ __('vendor/manage_work_order/index.deadline') }}</th>
+                                            <th>{{ __('vendor/manage_work_order/index.payment') }}</th>
+                                            <th>{{ __('vendor/manage_work_order/index.action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -142,7 +142,7 @@
                                                         @endif
                                                         <a title="view details"
                                                             href="{{ route('manage_work_orders.show', $workOrder->job_id) }}"
-                                                            class="btn btn-sm btn-info">View</a>
+                                                            class="btn btn-sm btn-info">{{ __('vendor/manage_work_order/index.view') }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

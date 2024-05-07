@@ -33,7 +33,7 @@
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success" href="{{ route('estimate_request.create') }}"
-                                    class="btn btn-primary">Create Estimate Request</a>
+                                    class="btn btn-primary">{{ __('user/inspecrequest/index.estimate_request') }}</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -71,12 +71,12 @@
                                                     <form action="{{ route('estimate_request.destroy', $supplies->id) }}"
                                                         method="POST">
                                                         <a href="{{ route('estimate_request.show', $supplies->id) }}"
-                                                            class="btn btn-info">Show</a>
+                                                            class="btn btn-info">{{ __('user/inspecrequest/index.show') }}</a>
                                                         <a href="{{ route('estimate_request.edit', $supplies->id) }}"
-                                                            class="btn btn-primary">Edit</a>
+                                                            class="btn btn-primary">{{ __('user/inspecrequest/index.edit') }}</a>
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Request?')">Delete</button>
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Request?')">{{ __('user/inspecrequest/index.delete') }}</button>
                                                     </form>
                                                 </td>
                                             </tr>

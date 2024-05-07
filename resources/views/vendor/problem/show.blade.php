@@ -30,22 +30,22 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Problem Report #{{ $problemReport->id }}</h3>
+                    <h3 class="card-title">{{__('vendor/problem/index.problem_report') }}#{{ $problemReport->id }}</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body">
                     <table class="table table-bordered">
                       <tbody>
                         <tr>
-                          <th>Job</th>
+                          <th>{{__('vendor/problem/index.job') }}</th>
                           <td>{{ $problemReport->job }}</td>
                         </tr>
                         <tr>
-                          <th>Location</th>
+                          <th>{{__('vendor/problem/index.location') }}</th>
                           <td>{{ $problemReport->location }}</td>
                         </tr>
                         <tr>
-                          <th>Type</th>
+                          <th>{{__('vendor/problem/index.type') }}</th>
                           <td>
                             @if ($problemReport->type_of_problem === 'critical')
                               <span class="badge badge-danger">Critical</span>
@@ -60,19 +60,19 @@
                         </tr>
                        
                         <tr>
-                          <th>Problem Date</th>
+                          <th>{{__('vendor/problem/index.problem_report') }}</th>
                           <td>{{ $problemReport->problem_date }}</td>
                         </tr>
                         <tr>
-                          <th>Investigator</th>
+                          <th>{{__('vendor/problem/index.investigator') }}</th>
                           <td>{{ $problemReport->investigator_of_problem }}</td>
                         </tr>
                         <tr>
-                          <th>Result of Investigation</th>
+                          <th>{{__('vendor/problem/index.result_of_investigation') }}</th>
                           <td>{{ $problemReport->result_of_investigation }}</td>
                         </tr>
                         <tr>
-                          <th>Suggestions</th>
+                          <th>{{__('vendor/problem/index.suggestions') }}</th>
                           <td>{{ $problemReport->suggestions }}</td>
                         </tr>
                       </tbody>
@@ -80,12 +80,12 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <a href="{{ route('userproblem.index') }}" class="btn btn-primary">Back to List</a>
-                    <a href="{{ route('userproblem.edit', $problemReport->id) }}" class="btn btn-info">Edit</a>
+                    <a href="{{ route('userproblem.index') }}" class="btn btn-primary">{{__('vendor/problem/index.back_to_list') }}</a>
+                    <a href="{{ route('userproblem.edit', $problemReport->id) }}" class="btn btn-info">{{__('vendor/problem/index.edit') }}</a>
                     <form action="{{ route('userproblem.destroy', $problemReport->id) }}" method="post" style="display:inline">
                       @method('DELETE')
                       @csrf
-                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Report?')">Delete</button>
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Report?')">{{__('vendor/problem/index.delete') }}</button>
                     </form>
                   </div>
                 </div>

@@ -13,14 +13,14 @@
                 <table id="example" class="table table-bordered table-striped">
                     <thead class="thead-light">
                         <tr>
-                            <th>Date</th>
-                            <th>Customer Name</th>
-                            <th>Invoice#</th>
-                            <th>PO#</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                            <th>Total Due</th>
-                            <th>Actions</th>
+                        <th> {{ __('vendor/invoice/index.date') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.customer_name') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.invoice') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.po') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.status') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.total') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.total_due') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.actions') }}</a></th>
                         </tr>
                     </thead>
                     <tbody>

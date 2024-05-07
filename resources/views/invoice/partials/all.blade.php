@@ -13,15 +13,17 @@
                 <table id="example2" class="table table-bordered table-striped table-responsive">
                     <thead class="thead-light">
                         <tr>
-                            <th>Date</th>
-                            <th>Created By</th>
-                            <th>Customer Name</th>
-                            <th>Invoice#</th>
-                            <th>PO#</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                            <th>Total Due</th>
-                            <th>Actions</th>
+                            <th> {{ __('vendor/invoice/index.date') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.customer_name') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.invoice') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.po') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.status') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.total') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.total_due') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.actions') }}</a></th>
+                            <th></th>
+                           
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -54,8 +56,9 @@
 
                                     <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
                                     </td>
-                                    <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
-                                    </td>
+                                   
+
+
                                     <td class="btn-group">
                                         <a href="{{ route('invoice.show', $inv->id) }}" class="btn btn-info btn-sm "><i
                                                 class="fa fa-eye"></i></a>
@@ -71,6 +74,9 @@
                                                 class="fas fa-trash"></i></a></button>
                                         </form>
                                     </td>
+                                    <td></td>
+                                    
+                                  
                                 </tr>
                             @endforeach
                         @endif

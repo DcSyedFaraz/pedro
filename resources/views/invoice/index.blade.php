@@ -15,12 +15,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Invoice Dashboard</h1>
+                        <h1>{{ __('vendor/invoice/index.invoice_dashboard') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Invoice Dashboard</li>
+                            <li class="breadcrumb-item"><a href="#">{{ __('vendor/invoice/index.home') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('vendor/invoice/index.invoice_dashboard') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -38,24 +38,24 @@
                                 <a class="nav-link active" id="sum-tab" data-toggle="tab" href="#sum" role="tab"
                                     aria-controls="sum" aria-selected="true"><i class="fas fa-exclamation-circle text-danger"></i>
 
-                                    Unpaid Invoices</a>
+                                    {{ __('vendor/invoice/index.unpaid_invoices') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="cut-tab" data-toggle="tab" href="#cut" role="tab"
                                     aria-controls="cut" aria-selected="false"><i class="fas fa-check-circle text-success"></i>
-                                    Paid Invoices</a>
+                                    {{ __('vendor/invoice/index.paid_invoices') }}</a></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pic-tab" data-toggle="tab" href="#pic" role="tab"
                                     aria-controls="pic" aria-selected="false"><i class="fas fa-recycle  text-warning"></i>
 
-                                    Recurring&nbsp;</a>
+                                    {{ __('vendor/invoice/index.recurring') }}</a>&nbsp;</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="doc-tab" data-toggle="tab" href="#doc" role="tab"
                                     aria-controls="doc" aria-selected="false"><i class="fas fa-list text-info"></i>
 
-                                    All Invoices&nbsp;</a>
+                                    {{ __('vendor/invoice/index.all_invoices') }}</a>&nbsp;</a>
                             </li>
                         </ul>
                         <div class="card">
