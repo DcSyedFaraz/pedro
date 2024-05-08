@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Profile</h1>
+            <h1>{{ __('admin/profile/index.edit_profile') }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Edit Profile</li>
+              <li class="breadcrumb-item active">{{ __('admin/profile/index.edit_profile') }}</li>
             </ol>
           </div>
         </div>
@@ -42,25 +42,25 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Name:</strong>
+                                <strong>{{ __('admin/profile/index.name') }}:</strong>
                                 <input class="form-control" value="{{Auth::user()->name}}" name="name" required>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Email:</strong>
+                                <strong>{{ __('admin/profile/index.email') }}:</strong>
                                 <input class="form-control" readonly value="{{Auth::user()->email}}" type="email" name="email" required>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>Phone:</strong>
+                                <strong>{{ __('admin/profile/index.phone') }}:</strong>
                                 <input class="form-control" value="{{Auth::user()->phone}}" type="number" name="phone" required>
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">{{ __('admin/profile/index.submit') }}</button>
                         </div>
                     </div>
                   </form>
