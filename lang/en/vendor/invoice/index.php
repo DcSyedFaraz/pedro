@@ -33,5 +33,6 @@ return[
     'amount' => 'Amount',
     'note_to_customer' => 'Note To Customer',
     'created_by' => 'Created By',
+    'save invoice' => 'Save Invoice',
 ];
 ?>

@@ -32,5 +32,7 @@ return[
     'amount' => 'cantidad',
     'note_to_customer' => 'nota al cliente',
     'created_by' => 'creado por',
+    'save_invoice' => 'guardar factura',
+    'edit_invoice' => 'editar factura',
 ];
 ?>
