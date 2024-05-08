@@ -107,11 +107,6 @@ Route::group(['middleware' => ['language']], function () {
     });
 
 
-
-
-
-
-
     Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
 
         Route::get('/change_password', [DashboardController::class, 'change_password'])->name('change_password');

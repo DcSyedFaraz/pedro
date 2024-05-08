@@ -15,12 +15,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Invoice</h1>
+                        <h1>{{ __('vendor/invoice/index.edit_invoice') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Invoice</li>
+                            <li class="breadcrumb-item active">{{ __('vendor/invoice/index.edit_invoice') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">&nbsp;</div>
                                                     <div class="col-md-6 d-flex justify-content-end">
-                                                        <button type="submit" class="btn btn-primary">Save Invoice</button>
+                                                        <button type="submit" class="btn btn-primary">{{ __('vendor/invoice/index.save_invoice') }}</button>
                                                     </div>
                                                 </div>
                                                 <ul class="nav nav-tabs">
@@ -105,7 +105,7 @@
                                                             <input type="hidden" name="job_id" value="{{$job[0]}}">
                                                             @endif
                                                             <div class="col-md-12">
-                                                                <strong>Status</strong>
+                                                                <strong>{{ __('vendor/invoice/index.status') }}</strong>
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
@@ -116,7 +116,7 @@
                                                                         </option>
                                                                         <option value="unpaid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'unpaid' ? 'selected' : '' }}>UnPaid
                                                                         </option>
-                                                                        <option value="paid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'paid' ? 'selected' : '' }}>Paid
+                                                                        <option value="paid"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'paid' ? 'selected' : '' }}>paid
                                                                         </option>
                                                                         <option value="recurring"  {{ old('status', isset($invoice) ? $invoice->status : '') == 'recurring' ? 'selected' : '' }}>Recurring
                                                                         </option>
@@ -134,7 +134,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <label for="note-to-customer">Note To Customer</label>
+                                                                <label for="note-to-customer">{{ __('vendor/invoice/index.note_to_customer') }}</label>
                                                                 <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4">{{ old('note_to_cust', $invoice->note_to_cust) }}</textarea>
                                                             </div>
                                                             <div class="col-md-6">
