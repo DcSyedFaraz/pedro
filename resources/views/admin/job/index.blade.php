@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Job List</h1>
+                        <h1>{{ __('admin/job/index.Title') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Job List</li>
+                            <li class="breadcrumb-item active">{{ __('admin/job/index.Title') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -29,25 +29,26 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                              <h3 class="card-title">User Managment</h3>
-                            </div> -->
+                                  <h3 class="card-title">User Managment</h3>
+                                </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
-                                <a class="btn btn-success" href="{{ route('job.create') }}"> Create Job </a>
+                                <a class="btn btn-success" href="{{ route('job.create') }}">
+                                    {{ __('admin/job/index.CreateJob') }} </a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive-xl">
                                 <table id="example1" class="table  table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.N</th>
-                                            <th>Job#</th>
-                                            <th>Customer Name</th>
-                                            <th>Location Name</th>
-                                            <th>Assigned Manager</th>
-                                            <th>Status</th>
-                                            <th>Created at</th>
-                                            <th>Actions</th>
+                                            <th>{{ __('admin/job/index.SNo') }}</th>
+                                            <th>{{ __('admin/job/index.JobID') }}</th>
+                                            <th>{{ __('admin/job/index.CustomerName') }}</th>
+                                            <th>{{ __('admin/job/index.LocationName') }}</th>
+                                            <th>{{ __('admin/job/index.AssignedManager') }}</th>
+                                            <th>{{ __('admin/job/index.Status') }}</th>
+                                            <th>{{ __('admin/job/index.CreatedAt') }}</th>
+                                            <th>{{ __('admin/job/index.Actions') }}</th>
                                         </tr>
                                     </thead>
 
@@ -67,7 +68,8 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $jobs->id }}</td>
-                                                    <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
+                                                    <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}
+                                                    </td>
                                                     <td>{{ isset($jobs->location_name) ? $jobs->location_name : '' }}
                                                     </td>
                                                     <td>
@@ -99,16 +101,16 @@
                                                         <button type="button" class="btn-sm btn btn-success"
                                                             data-toggle="modal"
                                                             data-target="#exampleModal{{ $jobs->id }}">
-                                                            Assign
+                                                            {{ __('admin/job/index.Assign') }}
                                                         </button>
                                                         <a class="btn-sm btn btn-primary mx-1"
-                                                            href="{{ route('job.edit', $jobs->id) }}">Edit</a>
+                                                            href="{{ route('job.edit', $jobs->id) }}">{{ __('admin/job/index.Edit') }}</a>
                                                         <form action="{{ route('job.destroy', $jobs->id) }}" method="POST"
                                                             class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn-sm btn btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this job?')">Delete</button>
+                                                                onclick="return confirm('Are you sure you want to delete this job?')">{{ __('admin/job/index.Delete') }}</button>
                                                         </form>
 
                                                     </td>
@@ -118,7 +120,8 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                                                <h5 class="modal-title" id="exampleModalLabel">Assign The
+                                                                    Manager
                                                                 </h5>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
@@ -132,11 +135,12 @@
                                                                     @method('put')
                                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                                         <div class="form-group">
-                                                                            <strong>Account Manager:</strong>
+                                                                            <strong>{{ __('admin/job/index.AccountManager') }}:</strong>
                                                                             <select name="account_manager_id"
                                                                                 class="form-control select-form ">
-                                                                                <option value="">Choose any
-                                                                                    option</option>
+                                                                                <option value="">
+                                                                                    {{ __('admin/job/index.ChooseOption') }}
+                                                                                </option>
                                                                                 @foreach ($manager as $data)
                                                                                     <option
                                                                                         {{ isset($jobs->account_manager_id) && $data->id == old('account_manager_id', $jobs->account_manager_id) ? 'selected' : '' }}
@@ -151,8 +155,8 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Save
-                                                                    changes</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">{{ __('admin/job/index.SaveChanges') }}</button>
                                                                 <a href="">
 
                                                                 </a>
@@ -162,10 +166,10 @@
 
                                                     </div>
                                                 </div>
-                            </div>
-                            @endforeach
-                            @endif
-                            </tbody>
+                                            </div>
+                                        @endforeach
+                                     @endif
+                                </tbody>
                             </table>
 
                         </div>
@@ -182,7 +186,6 @@
     <!-- /.content -->
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
 @endsection
