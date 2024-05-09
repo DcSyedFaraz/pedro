@@ -18,8 +18,7 @@
                                     <h3 class="card-title font-weight-bolder"></h3>
 
                                     <a class="btn btn-danger btn-sm"
-                                        href="{{ route('reassign_checklist', ['id' => $id]) }}">Re
-                                        Assign</a>
+                                        href="{{ route('reassign_checklist', ['id' => $id]) }}">{{ __('admin/checklist/index.reassign') }}</a>
                                 </div>
                             @endif
                             <!-- /.card-header -->
@@ -58,11 +57,11 @@
                                                         {{-- <td>{{ $responses->checklistItem->description ?? '' }}</td> --}}
                                                         <td>
                                                             @if ($result->rating === 'red')
-                                                                <span class="badge badge-danger">Red</span>
+                                                                <span class="badge badge-danger">{{ __('admin/checklist/index.red') }}</span>
                                                             @elseif ($result->rating === 'yellow')
-                                                                <span class="badge badge-warning">Yellow</span>
+                                                                <span class="badge badge-warning">{{ __('admin/checklist/index.yellow') }}</span>
                                                             @elseif ($result->rating === 'green')
-                                                                <span class="badge badge-success">Green</span>
+                                                                <span class="badge badge-success">{{ __('admin/checklist/index.green') }}</span>
                                                             @endif
                                                         </td>
                                                         <td>{{ $result->remarks }}</td>

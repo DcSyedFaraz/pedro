@@ -360,7 +360,7 @@
                         <li
                             class="nav-item
                              {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
-                             {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('problem.*') ? 'menu-open' : '' }}
                              {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
                              {{ request()->routeIs('location') ? 'menu-open' : '' }}
                              {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
@@ -371,7 +371,7 @@
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('task.index') ? 'active' : '' }}
-                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('problem.*') ? 'active' : '' }}
                                 {{ request()->routeIs('finalized') ? 'active' : '' }}
                                 {{ request()->routeIs('location') ? 'active' : '' }}
                                 {{ request()->routeIs('adminresponse') ? 'active' : '' }}
@@ -422,7 +422,6 @@
 
                                 <li
                                     class="nav-item
-                          {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
                           {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
                           {{ request()->routeIs('location') ? 'menu-open' : '' }}
                           {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
@@ -431,7 +430,6 @@
                                     <a href="#"
                                         class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('roles.index') ? 'active' : '' }}
-                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
                                 {{ request()->routeIs('finalized') ? 'active' : '' }}
                                 {{ request()->routeIs('location') ? 'active' : '' }}
                                 {{ request()->routeIs('adminresponse') ? 'active' : '' }}
@@ -486,7 +484,7 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('problem.index') }}"
-                                        class="nav-link {{ request()->routeIs('problem.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('problem.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ __('admin/layout/app.problem_reporting') }}
                                         </p>

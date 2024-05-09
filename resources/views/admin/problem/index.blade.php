@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Problem Report</h1>
+          <h1>{{ __('admin/problem/index.problem_report') }}</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Problem Report</li>
+            <li class="breadcrumb-item"><a href="#">{{ __('admin/problem/index.home') }}</a></li>
+            <li class="breadcrumb-item active">{{ __('admin/problem/index.problem_report') }}</li>
           </ol>
         </div>
       </div>
@@ -29,20 +29,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a class="btn btn-success" href="{{ route('problem.create') }}"> New Report </a>
+                            <a class="btn btn-success" href="{{ route('problem.create') }}"> {{ __('admin/problem/index.new_report') }} </a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Job Name</th>
-                                        <th>Location</th>
-                                        <th>Created By</th>
-                                        <th>Type</th>
-                                        <th>Created at</th>
-                                        <th>Action</th>
+                                        <th>{{ __('admin/problem/index.id') }}</th>
+                                        <th>{{ __('admin/problem/index.job_name') }}</th>
+                                        <th>{{ __('admin/problem/index.location') }}</th>
+                                        <th>{{ __('admin/problem/index.created_by') }}</th>
+                                        <th>{{ __('admin/problem/index.type') }}</th>
+                                        <th>{{ __('admin/problem/index.created_at') }}</th>
+                                        <th>{{ __('admin/problem/index.actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Inspection Category</h1>
+                        <h1>{{ __('admin/inspection/index.inspection_category') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Inspection Sheet</li>
+                            <li class="breadcrumb-item active">{{ __('admin/inspection/index.inspection_sheet') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                             <div class="card-header">
                                 <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal">
-                                    New Inspection Sheet
+                                    {{ __('admin/inspection/index.new_inspection_sheet') }}
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">New Inspection Sheet
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ __('admin/inspection/index.new_inspection_sheet') }}
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
@@ -53,7 +53,7 @@
                                                     @csrf
                                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <div class="form-group">
-                                                            <strong>New Sheet Name:</strong>
+                                                            <strong>{{ __('admin/inspection/index.sheet_name') }}</strong>
                                                             <input type="text" class="form-control" name="name">
                                                             <div id="checklist-items">
                                                                 <!-- Dynamic checklist items will be added here -->
@@ -62,15 +62,11 @@
                                                     </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" id="add-checklist-item">Add
-                                                    Checklist Item</button>
+                                                <button type="button" class="btn btn-success" id="add-checklist-item">{{ __('admin/inspection/index.add_checklist_item') }}</button>
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save
-                                                    changes</button>
-                                                <a href="">
+                                                <button type="submit" class="btn btn-primary">{{ __('admin/inspection/index.save_changes') }}</button>
 
-                                                </a>
                                             </div>
                                             </form>
                                         </div>
@@ -83,13 +79,13 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S. No</th>
-                                            <th>Name</th>
+                                            <th>{{ __('admin/inspection/index.s_n') }}</th>
+                                            <th>{{ __('admin/inspection/index.name') }}</th>
                                             <th>Total Itmes</th>
                                             @if (auth()->user()->hasRole('Admin'))
-                                                <th>Created By</th>
+                                                <th>{{ __('admin/inspection/index.created_by') }}</th>
                                             @endif
-                                            <th>Actions</th>
+                                            <th>{{ __('admin/inspection/index.action') }}</th>
                                         </tr>
                                     </thead>
 
@@ -108,14 +104,13 @@
                                                     @endif
                                                     <td>
                                                         <button class="btn btn-primary" data-toggle="modal"
-                                                            data-target="#checklistModal_{{ $jobcat->id }}">View
-                                                            Checklist Items</button>
+                                                            data-target="#checklistModal_{{ $jobcat->id }}">{{ __('admin/inspection/index.view_checklist_items') }}</button>
                                                         <form action="{{ route('checklists.destroy', $jobcat->id) }}"
                                                             method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this Sheet?')">Delete</button>
+                                                                onclick="return confirm('{{ __('admin/inspection/index.are_you_sure') }}')">{{ __('admin/inspection/index.delete_sheet') }}</button>
                                                         </form>
 
                                                     </td>
@@ -127,7 +122,7 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="checklistModalLabel">
-                                                                        Checklist Items for {{ $jobcat->name }}</h5>
+                                                                        {{ __('admin/inspection/index.checklist_items_for') }} {{ $jobcat->name }}</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
