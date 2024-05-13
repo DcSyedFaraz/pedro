@@ -12,6 +12,7 @@ use App\Models\PageCategory;
 use App\Models\PageSections;
 use App\Models\VeriantColor;
 use Illuminate\Support\Facades\Storage;
+use Session;
 use Twilio\Rest\Client;
 
 class HomeController extends Controller
@@ -54,6 +55,17 @@ class HomeController extends Controller
 
 
     }
+    public function lang($lang)
+    {
+        // dd($lang);
+        if (in_array($lang, ['en', 'es'])) {
+            // app()->setLocale($lang);
+            Session::put('lang', $lang);
+        }
+        return redirect()->back()->with('success', __('flash-messages/index.lang_change'));
+
+
+    }
 
     public function login()
     {
@@ -66,5 +78,5 @@ class HomeController extends Controller
         return view('manager.dashboard', $data);
     }
 
-    
+
 }

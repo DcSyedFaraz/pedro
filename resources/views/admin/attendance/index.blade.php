@@ -6,11 +6,11 @@
 @section('content')
     <div class="content-wrapper">
         <div id="map" style="height: 500px; display: none;"></div>
-        {{-- <button onclick="checkIn()" class="btn bg-indigo ">Check-In</button> --}}
+        {{-- <button onclick="checkIn()" class="btn bg-indigo ">{{ __('admin/attendance/vendor.check_in') }}</button> --}}
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Check-In/Check-Out</h2>
+                    <h2>{{ __('admin/attendance/vendor.check_in') }}/{{ __('admin/attendance/vendor.check_out') }}</h2>
                 </div>
             </div>
 
@@ -19,12 +19,11 @@
                     <div class="col-md-12">
                         <!-- Button trigger modal -->
 
-                        <button class="btn bg-indigo mr-2 check-in-button" onclick="checkIn('checkIn')">Check In</button>
+                        <button class="btn bg-indigo mr-2 check-in-button" onclick="checkIn('checkIn')">{{ __('admin/attendance/vendor.check_in') }}</button>
                         {{-- <input type="hidden" id="job_id" value="{{ $id }}"> --}}
                         <input type="hidden" id="address-display" value="">
                         <button type="submit" class="btn btn-primary float-right check-out-button"
-                            onclick="checkOut('checkOut')">Check
-                            Out</button>
+                            onclick="checkOut('checkOut')">{{ __('admin/attendance/vendor.check_out') }}</button>
                     </div>
 
                 </div>
@@ -36,11 +35,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Duration</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.name') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.address') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.status') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.time') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.duration') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,15 +51,15 @@
                                     <td>
                                         @switch($attendances->attendance)
                                             @case('checkIn')
-                                                <span class="badge bg-success">Check In</span>
+                                                <span class="badge bg-success">{{ __('admin/attendance/vendor.check_in') }}</span>
                                             @break
 
                                             @case('checkOut')
-                                                <span class="badge bg-danger">Check Out</span>
+                                                <span class="badge bg-danger">{{ __('admin/attendance/vendor.check_out') }}</span>
                                             @break
 
                                             @default
-                                                <span class="badge bg-secondary">Unknown</span>
+                                                <span class="badge bg-secondary">{{ __('admin/attendance/vendor.unknown') }}</span>
                                             @break
                                         @endswitch
                                     </td>

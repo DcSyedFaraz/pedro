@@ -95,6 +95,37 @@
             <ul class="navbar-nav ml-auto">
 
 
+                <!-- Language Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        @if (app()->getLocale() == 'en')
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto">
+                        @elseif (app()->getLocale() == 'es')
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto">
+                        @endif
+                        <span class="badge badge-success navbar-badge">{{ app()->getLocale() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">Select Language</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('lang.switch', 'en') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto"> English
+                            @if (app()->getLocale() == 'en')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                        <a href="{{ route('lang.switch', 'es') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto"> Spanish
+                            @if (app()->getLocale() == 'es')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                    </div>
+                </li>
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
@@ -188,7 +219,7 @@
                                 class="nav-link nav-dropdown-toggle {{ request()->routeIs('vendor.dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                {{ __('vendor/layout/layout.dashboard') }}
+                                    {{ __('vendor/layout/layout.dashboard') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -218,7 +249,7 @@
                    ">
                                 <i class="nav-icon fas fa-search text-warning"></i>
                                 <p>
-                                {{ __('vendor/layout/layout.inspection') }}
+                                    {{ __('vendor/layout/layout.inspection') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -285,7 +316,7 @@
                                 ">
                                 <i class="nav-icon fas fa-money-bill text-success"></i>
                                 <p>
-                                {{ __('vendor/layout/layout.accounting') }}
+                                    {{ __('vendor/layout/layout.accounting') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -314,7 +345,7 @@
                                 ">
                                 <i class="nav-icon fas fa-user text-primary"></i>
                                 <p>
-                                {{ __('vendor/layout/layout.profile') }}
+                                    {{ __('vendor/layout/layout.profile') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -347,7 +378,7 @@
                                 ">
                                 <i class="nav-icon fas fa-exclamation-triangle text-warning"></i>
                                 <p>
-                                {{ __('vendor/layout/layout.problem_reporting') }}
+                                    {{ __('vendor/layout/layout.problem_reporting') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -366,7 +397,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ url('/logout') }}" class="nav-link">    
+                            <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon text-danger"></i>
                                 <p>{{ __('vendor/layout/layout.logout') }}</p>
                             </a>

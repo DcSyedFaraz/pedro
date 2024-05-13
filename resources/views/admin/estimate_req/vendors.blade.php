@@ -27,31 +27,31 @@
         <div class="container-fluid mt-5">
             <div class="">
                 <div class="col-md-6">
-                    <h2 class="mb-4">Section 1: Select Vendors</h2>
+                    <h2 class="mb-4">{{ __('admin/estimatereq/vendor.section_1') }}: {{ __('admin/estimatereq/vendor.select_vendors') }}</h2>
                     <form action="{{ route('estimate_requests.vendor.store') }}" method="POST">
                         @csrf
                         <input type="hidden" value="{{ $id }}" name="request_id">
                         <div class="form-group">
-                            <label for="vendors">Select Vendors:</label>
+                            <label for="vendors">{{ __('admin/estimatereq/vendor.select_vendors') }}:</label>
                             <select name="vendors[]" id="vendors" class="form-control select2" multiple>
                                 @foreach ($vendors as $vendor)
                                     <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ __('admin/estimatereq/vendor.submit') }}</button>
                     </form>
                 </div>
                 <div class="col-md-12 mt-5">
-                    <h2 class="mb-4">Section 2: Bids from Vendors</h2>
-                    <form action="{{ route('bid.accept') }}" method="POST">
+                    <h2 class="mb-4">{{ __('admin/estimatereq/vendor.section_2') }}: {{ __('admin/estimatereq/vendor.bids_from_vendors') }}</h2>
+                    <form action="{{ route('bid.accept') }}" method="POST" id="bidForm">
                         @csrf
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     {{-- <th>Select</th> --}}
-                                    <th>Vendor</th>
-                                    <th>Bid Amount</th>
+                                    <th>{{ __('admin/estimatereq/vendor.vendor') }}</th>
+                                    <th>{{ __('admin/estimatereq/vendor.bid_amount') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,14 +69,14 @@
                                             </div>
                                         </td>
                                         <td class="@if (!$bid->bid) text-muted font-italic @endif">
-                                            {{ $bid->bid . ' USD' ?? 'No bid yet' }}</td>
+                                            {{ $bid->bid . ' USD' ??  __('admin/estimatereq/vendor.no_bid_yet')  }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"
-                                {{ $bids->contains('selected', true) ? 'disabled' : '' }}>Approve</button>
+                                {{ $bids->contains('selected', true) ? 'disabled' : '' }}>{{ __('admin/estimatereq/vendor.approve') }}</button>
                         </div>
                     </form>
 
@@ -104,7 +104,7 @@
                 }
             }
             if (!checked) {
-                alert('Please select a bid before submitting.');
+                alert('{{ __('admin/estimatereq/vendor.please_select_bid') }}');
                 event.preventDefault();
             }
         });

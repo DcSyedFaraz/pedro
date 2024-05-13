@@ -54,7 +54,37 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
 
-
+                <!-- Language Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        @if (app()->getLocale() == 'en')
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto">
+                        @elseif (app()->getLocale() == 'es')
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto">
+                        @endif
+                        <span class="badge badge-success navbar-badge">{{ app()->getLocale() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">Select Language</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('lang.switch', 'en') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto"> English
+                            @if (app()->getLocale() == 'en')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                        <a href="{{ route('lang.switch', 'es') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto"> Spanish
+                            @if (app()->getLocale() == 'es')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                    </div>
+                </li>
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
@@ -68,23 +98,25 @@
                             UnRead Notifications</span>
                         <div class="dropdown-divider"></div>
                         @foreach (auth()->user()->unreadnotifications as $notifications)
+                            <a href="{{ route('markasread', $notifications->id) }}"
+                                class="dropdown-item my-2 text-wrap ">
+                                <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
 
-                        <a href="{{ route('markasread', $notifications->id) }}" class="dropdown-item my-2 text-wrap ">
-                            <i class="fas fa-envelope mr-2"></i> {{ $notifications->data['name'] }}
+                                @if (isset($notifications->data['message']))
+                                    {{ $notifications->data['message'] }}
 
-                            @if (isset($notifications->data['message']))
-                                {{ $notifications->data['message'] }}
-
-                                <!-- Check if 'response' is present in the message and display the button -->
-                                @if (strpos($notifications->data['message'], 'response') !== false)
-                                    <a href="{{ route('location') }}" class="btn btn-success ml-1 btn-sm float-left">view reponse</a>
+                                    <!-- Check if 'response' is present in the message and display the button -->
+                                    @if (strpos($notifications->data['message'], 'response') !== false)
+                                        <a href="{{ route('location') }}"
+                                            class="btn btn-success ml-1 btn-sm float-left">view reponse</a>
+                                    @endif
                                 @endif
-                            @endif
 
-                            <span class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
-                        </a>
+                                <span
+                                    class="float-right text-muted text-sm">{{ $notifications->created_at->diffForHumans() }}</span>
+                            </a>
 
-                        {{-- <hr> --}}
+                            {{-- <hr> --}}
                             {{-- <div class="dropdown-divider "></div> --}}
                         @endforeach
                         <a href="{{ route('allNotification') }}" class="dropdown-item dropdown-footer">See All
@@ -771,10 +803,6 @@
                 "responsive": true,
             });
         });
-
-
-
-
     </script>
 
     @yield('script')

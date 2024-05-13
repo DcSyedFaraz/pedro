@@ -53,7 +53,37 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
 
-
+<!-- Language Dropdown Menu -->
+<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+        @if (app()->getLocale() == 'en')
+            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                width="32" height="auto">
+        @elseif (app()->getLocale() == 'es')
+            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                height="auto">
+        @endif
+        <span class="badge badge-success navbar-badge">{{ app()->getLocale() }}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+        <span class="dropdown-item dropdown-header">Select Language</span>
+        <div class="dropdown-divider"></div>
+        <a href="{{ route('lang.switch', 'en') }}" class="dropdown-item my-2 text-wrap ">
+            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                width="32" height="auto"> English
+            @if (app()->getLocale() == 'en')
+                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+            @endif
+        </a>
+        <a href="{{ route('lang.switch', 'es') }}" class="dropdown-item my-2 text-wrap ">
+            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                height="auto"> Spanish
+            @if (app()->getLocale() == 'es')
+                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+            @endif
+        </a>
+    </div>
+</li>
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
