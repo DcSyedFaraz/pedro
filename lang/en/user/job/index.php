@@ -10,6 +10,7 @@ return [
     'feedback' => 'Feedback',
     'rate_the_work' => 'Rate the Work',
     'your_rating' => 'Your Rating',
+    'no_questions' => 'No questions available.',
     'add_comments' => 'Add Comments',
     'choose_file' => 'Choose File',
     'save_changes' => 'Save Changes',

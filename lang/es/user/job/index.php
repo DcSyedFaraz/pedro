@@ -10,6 +10,7 @@ return [
     'feedback' => 'Comentarios',
     'rate_the_work' => 'Calificar el trabajo',
     'your_rating' => 'Tu calificación',
+    'no_questions' => 'No hay preguntas disponibles.',
     'add_comments' => 'Agregar comentarios',
     'choose_file' => 'Seleccionar archivo',
     'save_changes' => 'Guardar cambios',
