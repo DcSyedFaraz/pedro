@@ -101,6 +101,11 @@
                                                                     data-target="#signatureModal{{ $estimate->id }}">
                                                                     {{ __('admin/estimates/index.show_signature') }}
                                                                 </button>
+                                                                <p class="lead" style="font-size: 16px !important;">
+                                                                    {{ \Carbon\Carbon::parse($estimate->signature_time)->format('l, F j, Y h:i A') }}
+
+                                                                </p>
+
                                                                 <!-- Modal -->
                                                                 <div class="modal fade"
                                                                     id="signatureModal{{ $estimate->id }}" tabindex="-1"

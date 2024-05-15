@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('client_name');
             $table->longText('signature')->nullable();
+            $table->string('signature_time')->nullable();
             $table->decimal('total_amount', 10, 2);
             $table->date('valid_until');
             $table->timestamps();

@@ -12,6 +12,8 @@ return [
     'CreatedAt' => 'Created at',
     'Actions' => 'Actions',
     'Assign' => 'Assign',
+    'Feedback' => 'Feedback',
+    'customer_rating' => 'Customer Rating',
     'Edit' => 'Edit',
     'Delete' => 'Delete',
     'ModalTitle' => 'Modal title',

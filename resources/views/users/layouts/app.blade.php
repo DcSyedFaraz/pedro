@@ -480,7 +480,7 @@
             });
         });
     </script>
-    <script type="text/javascript" src="//user/layout/layoutlate.google.com/user/layout/layoutlate_a/element.js?cb=googleUser/layout/layoutlateElementInit">
+    {{-- <script type="text/javascript" src="//user/layout/layoutlate.google.com/user/layout/layoutlate_a/element.js?cb=googleUser/layout/layoutlateElementInit">
     </script>
 
 
@@ -510,7 +510,7 @@
             show('page', true);
             show('loading', false);
         });
-    </script>
+    </script> --}}
 
     @yield('scripts')
 </body>

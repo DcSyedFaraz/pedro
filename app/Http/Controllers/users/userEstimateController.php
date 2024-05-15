@@ -7,6 +7,7 @@ use App\Models\Estimate;
 use App\Models\Job;
 use App\Models\User;
 use App\Notifications\UserNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -73,6 +74,7 @@ class userEstimateController extends Controller
                 // dd($request->signature);
 
                 $estimate->signature = $request->signature;
+                $estimate->signature_time = Carbon::now();
                 $estimate->save();
                 $user = auth()->user();
                 $admin = User::find(1);

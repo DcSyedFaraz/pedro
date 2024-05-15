@@ -12,6 +12,8 @@ return [
     'CreatedAt' => 'Creado en',
     'Actions' => 'Acciones',
     'Assign' => 'Asignar',
+    'Feedback' => 'Comentario',
+    'customer_rating' => 'Puntuación de los clientes',
     'Edit' => 'Editar',
     'Delete' => 'Eliminar',
     'ModalTitle' => 'Título del modal',

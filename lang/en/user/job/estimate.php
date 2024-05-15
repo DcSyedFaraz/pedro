@@ -8,6 +8,7 @@ return [
     'status' => 'Status',
     'actions' => 'Actions',
     'e_signature' => 'E-Signature',
+    'sign' => 'Sign',
     'accept' => 'Accept',
     'decline' => 'Decline',
     'show' => 'Show',
