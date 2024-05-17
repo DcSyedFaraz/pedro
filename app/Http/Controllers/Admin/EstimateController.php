@@ -147,7 +147,7 @@ class EstimateController extends Controller
         $user->notify(new UserNotification($admin, $message));
 
         if ($user->phone != null) {
-            $this->twilioService->sendSMS($user->phone, $message);
+            //$this->twilioService->sendSMS($user->phone, $message);
         }
 
         return redirect()->route('estimates.index')->with('success', 'Estimate Created Successfully');
@@ -275,7 +275,7 @@ class EstimateController extends Controller
         $message = "updated your Estimate# {$job->id}";
         $user->notify(new UserNotification($admin, $message));
         if ($user->phone != null) {
-            $this->twilioService->sendSMS($user->phone, $message);
+            //$this->twilioService->sendSMS($user->phone, $message);
         }
 
         return redirect()->route('estimates.index')->with('success', 'Estimate updated successfully');
@@ -376,7 +376,7 @@ class EstimateController extends Controller
 
                 if ($estimate->customer->phone != null) {
 
-                    $this->twilioService->sendSMS($estimate->customer->phone, $jobInfoSMS);
+                    //$this->twilioService->sendSMS($estimate->customer->phone, $jobInfoSMS);
                 }
             }
             DB::commit();

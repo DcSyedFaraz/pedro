@@ -117,7 +117,7 @@ class VendorController extends Controller
             // dd($job->customer->phone);
             if ($job->customer->phone != null) {
 
-                $this->twilioService->sendSMS($job->customer->phone, $message1);
+                //$this->twilioService->sendSMS($job->customer->phone, $message1);
             }
             // Notification
             $user = auth()->user();

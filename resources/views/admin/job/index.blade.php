@@ -29,8 +29,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                                                  <h3 class="card-title">User Managment</h3>
-                                                                </div> -->
+                                                                      <h3 class="card-title">User Managment</h3>
+                                                                    </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success" href="{{ route('job.create') }}">
@@ -126,58 +126,50 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <form
-                                                                            action="{{ route('jobassign.update', $jobs->id) }}"
-                                                                            method="post">
-                                                                            @csrf
-                                                                            @method('put')
-                                                                            <div class="modal-body">
-                                                                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                                                                    @forelse ($jobs->ratings as $key => $que)
-                                                                                        <h3>
-                                                                                            <span>Q
-                                                                                                {{ $key + 1 }}:</span>
-                                                                                            <span>{{ $que->question->question }}</span>
-                                                                                        </h3>
-                                                                                        <p>{{ __('admin/job/index.customer_rating') }}:
-                                                                                        <div class="input-group mb-3 w-25">
-                                                                                            {{ $que->rating }} / 10
-                                                                                        </div>
-                                                                                        </p>
-                                                                                    @empty
-                                                                                        <p>
-                                                                                            {{ __('user/job/index.no_questions') }}:
-                                                                                        </p>
-                                                                                    @endforelse
-                                                                                    <p class="h4 my-2">Average Rating:</p>
-                                                                                    <span>{{ $jobs->feedback->rating }} /
-                                                                                        10</span>
-                                                                                    <p class="h4 my-2">Comments:</p>
-                                                                                    <span>{{ $jobs->feedback->comment }}</span>
-                                                                                    <p class="h4 my-2">File:</p>
-                                                                                    @if ($jobs->feedback->file)
-                                                                                        <a
-                                                                                            href="{{ asset('storage/' . $jobs->feedback->file) }}" target="_blank">{{ basename($jobs->feedback->file) }}</a>
-                                                                                        <span></span>
-                                                                                    @else
-                                                                                        <span
-                                                                                            class="font-italic text-muted">File
-                                                                                            not provided</span>
-                                                                                    @endif
 
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button"
-                                                                                    class="btn btn-secondary"
-                                                                                    data-dismiss="modal">Close</button>
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary">{{ __('admin/job/index.SaveChanges') }}</button>
-                                                                                <a href="">
+                                                                        <div class="modal-body">
+                                                                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                                                                @forelse ($jobs->ratings as $key => $que)
+                                                                                    <h3>
+                                                                                        <span>Q
+                                                                                            {{ $key + 1 }}:</span>
+                                                                                        <span>{{ $que->question->question }}</span>
+                                                                                    </h3>
+                                                                                    <p>{{ __('admin/job/index.customer_rating') }}:
+                                                                                    <div class="input-group mb-3 w-25">
+                                                                                        {{ $que->rating }} / 10
+                                                                                    </div>
+                                                                                    </p>
+                                                                                @empty
+                                                                                    <p>
+                                                                                        {{ __('user/job/index.no_questions') }}:
+                                                                                    </p>
+                                                                                @endforelse
+                                                                                <p class="h4 my-2">Average Rating:</p>
+                                                                                <span>{{ $jobs->feedback->rating }} /
+                                                                                    10</span>
+                                                                                <p class="h4 my-2">Comments:</p>
+                                                                                <span>{{ $jobs->feedback->comment }}</span>
+                                                                                <p class="h4 my-2">File:</p>
+                                                                                @if ($jobs->feedback->file)
+                                                                                    <a href="{{ asset('storage/' . $jobs->feedback->file) }}"
+                                                                                        target="_blank">{{ basename($jobs->feedback->file) }}</a>
+                                                                                    <span></span>
+                                                                                @else
+                                                                                    <span
+                                                                                        class="font-italic text-muted">File
+                                                                                        not provided</span>
+                                                                                @endif
 
-                                                                                </a>
                                                                             </div>
-                                                                        </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+                                                                            <button type="button" data-dismiss="modal"
+                                                                                class="btn btn-primary">{{ __('admin/job/index.SaveChanges') }}</button>
+
+                                                                        </div>
                                                                     </div>
 
                                                                 </div>

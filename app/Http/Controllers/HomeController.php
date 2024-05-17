@@ -49,7 +49,7 @@ class HomeController extends Controller
         $to = '+923472783689';
         $message = 'Hello';
 
-        $this->twilioService->sendSMS($to, $message);
+        //$this->twilioService->sendSMS($to, $message);
 
         return "done";
 

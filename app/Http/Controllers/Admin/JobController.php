@@ -164,7 +164,7 @@ class JobController extends Controller
 
             if($formattedPhoneNumber != null){
 
-                $this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
+                //$this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
             }
 
             // Notification
@@ -301,7 +301,7 @@ class JobController extends Controller
             $user->notify(new UserNotification($admin, $message));
 
             if ($user->phone != null) {
-                $this->twilioService->sendSMS($user->phone, $message);
+                //$this->twilioService->sendSMS($user->phone, $message);
             }
         }
         return redirect()->route('job.index')->with('success', 'Job updated successfully');
