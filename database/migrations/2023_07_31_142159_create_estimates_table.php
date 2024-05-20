@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('client_status')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
+            
             $table->string('location_address')->nullable();
             $table->string('location_unit')->nullable();
             $table->string('location_city')->nullable();
@@ -58,7 +59,7 @@ return new class extends Migration
             $table->string('notify_tech_assign')->nullable();
             $table->string('notes_for_tech')->nullable();
             $table->string('completion_notes')->nullable();
-            $table->string('scehdule_at')->nullable();
+            $table->string('scheduled_at')->nullable();
         
             $table->timestamps();
         });
