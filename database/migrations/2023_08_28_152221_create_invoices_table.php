@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('note_to_cust');
             $table->string('no_bill_amount_description');
             $table->string('no_bill_amount');
+            $table->string('note_to_cust');
             $table->timestamps();
         });
     }
