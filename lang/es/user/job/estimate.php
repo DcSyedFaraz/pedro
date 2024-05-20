@@ -7,6 +7,7 @@ return [
     'assigned_manager' => 'Gerente Asignado',
     'status' => 'Estado',
     'actions' => 'Acciones',
+    'sign' => 'firmar',
     'e_signature' => 'Firma Electrónica',
     'accept' => 'Aceptar',
     'decline' => 'Rechazar',

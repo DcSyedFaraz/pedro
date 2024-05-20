@@ -1,13 +1,13 @@
 <div class="row">
 
     <div class="col-md-4">
-        <strong>Customer</strong>
+        <strong>{{ __('admin/estimates/edit.customer') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
 
             <select name="customer_id" id="customer_id" class="form-control">
-                <option value="">select Customer</option>
+                <option value="">select {{ __('admin/estimates/edit.customer') }}</option>
                 @foreach ($customer as $cust)
                     <option
                         {{ isset($estimate->customer_id) ? (old('customer_id', $estimate->customer_id) ? 'selected' : '') : '' }}
@@ -27,7 +27,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Main Contact</strong>
+        <strong>{{ __('admin/estimates/edit.main_contact') }}</strong>
     </div>
     <div class="col-md-4">
         <div class="form-group">
@@ -107,13 +107,15 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="tel" class="form-control" name="phone[]" id="" placeholder="Phone number">
+                    <input type="tel" class="form-control" name="phone[]" id=""
+                        placeholder="{{ __('admin/estimates/edit.phone') }}">
                     <p class="error-message phone-error error-messages" style="display: none;"> Add at least phone </p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="tel" class="form-control" name="ext[]" placeholder="Ext">
+                    <input type="tel" class="form-control" name="ext[]"
+                        placeholder="{{ __('admin/estimates/edit.ext') }}">
                     <p class="ext-error error-messages" style="display: none;">Add at least ext</p>
                 </div>
 
@@ -126,7 +128,8 @@
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="tel" class="form-control" name="email[]" placeholder="Email">
+                    <input type="tel" class="form-control" name="email[]"
+                        placeholder="{{ __('admin/estimates/edit.email') }}">
                     <p class="email-error error-messages" style="display: none">Add at least email.</p>
                 </div>
             </div>
@@ -146,7 +149,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Service Location</strong>
+        <strong>{{ __('admin/estimates/edit.service_location') }}</strong>
     </div>
     <div class="col-md-4">
         <div class="form-group">
@@ -157,8 +160,8 @@
     </div>
     <div class="col-md-4">
         <input {{ isset($estimate->location_gated_property) && $estimate->location_gated_property ? 'checked' : '' }}
-            type="checkbox" name="location_gated_property" placeholder="Location Name(e.g Home or Office)"> Gated
-        Property
+            type="checkbox" name="location_gated_property"
+            placeholder="Location Name(e.g Home or Office)">{{ __('admin/estimates/edit.location_gated_property') }}
     </div>
 </div>
 <div class="row">
@@ -170,12 +173,13 @@
             <input
                 value="{{ isset($estimate->location_address) ? old('location_address', $estimate->location_address) : '' }}"
                 type="tel" class="form-control" name="location_address"
-                placeholder="Street Address or Latitude Logitude">
+                placeholder="{{ __('admin/estimates/edit.location_address') }}">
         </div>
     </div>
     <div class="col-md-3">
         <input value="{{ isset($estimate->location_unit) ? old('location_unit', $estimate->location_unit) : '' }}"
-            type="tel" class="form-control" name="location_unit" placeholder="Site/Unit/Apt">
+            type="tel" class="form-control" name="location_unit"
+            placeholder="{{ __('admin/estimates/edit.location_unit') }}">
     </div>
 </div>
 <div class="row">
@@ -185,31 +189,34 @@
         <div class="form-group">
             <input type="text"
                 value="{{ isset($estimate->location_city) ? old('location_city', $estimate->location_city) : '' }}"
-                class="form-control" name="location_city" placeholder="City">
+                class="form-control" name="location_city"
+                placeholder="{{ __('admin/estimates/edit.location_city') }}">
         </div>
     </div>
     <div class="col-md-3">
         <input type="text"
             value="{{ isset($estimate->location_state) ? old('location_state', $estimate->location_state) : '' }}"
-            class="form-control" name="location_state" placeholder="State/Province">
+            class="form-control" name="location_state"
+            placeholder="{{ __('admin/estimates/edit.location_state') }}">
     </div>
     <div class="col-md-2">
         <input type="text"
             value="{{ isset($estimate->location_zipcode) ? old('location_zipcode', $estimate->location_zipcode) : '' }}"
-            class="form-control" name="location_zipcode" placeholder="Zip/Postal Code">
+            class="form-control" name="location_zipcode"
+            placeholder="{{ __('admin/estimates/edit.location_zipcode') }}">
     </div>
 </div>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Work Category</strong>
+        <strong>{{ __('admin/estimates/edit.work_category') }}</strong>
     </div>
 
     <div class="col-md-4">
         <div class="form-group">
-            <label for="jobCategory">Work Category</label>
+            <label for="jobCategory">{{ __('admin/estimates/edit.work_category') }}</label>
             <select id="job-cat-id" name="job_cat_id" class="form-control">
-                <option value="">Select a Work Category</option>
+                <option value="">Select a {{ __('admin/estimates/edit.work_category') }}</option>
                 @foreach ($jobCategories as $category)
                     <option
                         {{ isset($estimate->job_cat_id) ? (old('job_cat_id', $estimate->job_cat_id) ? 'selected' : '') : '' }}
@@ -221,7 +228,7 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <label for="showDescription">Work Sub Category</label>
+            <label for="showDescription">{{ __('admin/estimates/edit.work_sub_category') }}</label>
             <input type="checkbox"
                 {{ isset($estimate->job_sub_cat_id) && $estimate->job_sub_cat_id ? 'checked' : '' }}
                 id="showDescription" name="job_sub_cat_id" class="form-control form-control-sm form-check">
@@ -248,35 +255,36 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <strong>Work Description</strong>
+        <strong>{{ __('admin/estimates/edit.work_description') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <textarea class="form-control" name="job_description" placeholder="Work Desciption">{{ isset($estimate->job_description) ? old('job_description', $estimate->job_description) : '' }}</textarea>
+            <textarea class="form-control" name="job_description"
+                placeholder="{{ __('admin/estimates/edit.work_description') }}">{{ isset($estimate->job_description) ? old('job_description', $estimate->job_description) : '' }}</textarea>
         </div>
     </div>
 </div>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>PO #</strong>
+        <strong>{{ __('admin/estimates/edit.po_number') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
             <input value="{{ isset($estimate->po_no) ? old('po_no', $estimate->po_no) : '' }}" type="tel"
-                class="form-control" name="po_no" placeholder="PO Number">
+                class="form-control" name="po_no" placeholder="{{ __('admin/estimates/edit.po_number') }}">
         </div>
     </div>
 </div>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Work Source</strong>
+        <strong>{{ __('admin/estimates/edit.work_source') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
             <select id="job_sour" name="job_source" class="form-control">
-                <option value="">Select Work Source</option>
+                <option value="">Select {{ __('admin/estimates/edit.work_source') }}</option>
                 @foreach ($job_source as $job_sour)
                     <option
                         {{ isset($estimate->job_source) ? (old('job_source', $estimate->job_source) ? 'selected' : '') : '' }}
@@ -290,7 +298,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>Representative</strong>
+        <strong>{{ __('admin/estimates/edit.representative') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">

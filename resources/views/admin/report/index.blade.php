@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 @section('content')
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Mood Reports</h1>
+                        <h1>{{ __('admin/moodreport/index.Title') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Mood Reports</li>
+                            <li class="breadcrumb-item active">{{ __('admin/moodreport/index.Title') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                              <h3 class="card-title">User Managment</h3>
-                                            </div> -->
+                                                  <h3 class="card-title">User Managment</h3>
+                                                </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#moodReportModal">
-                                    New Reports
+                                    {{ __('admin/moodreport/index.NewReport') }}
                                 </button>
 
 
@@ -57,7 +57,8 @@
                                                 <form method="POST" action="{{ route('moodreport.store') }}">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <label for="mood">Select Your Mood:</label>
+                                                        <label for="mood">Select Your
+                                                            {{ __('admin/moodreport/index.Mood') }}:</label>
                                                         <select class="form-control" id="mood" name="mood" required>
                                                             <option value="1">Very Happy</option>
                                                             <option value="2">Happy</option>
@@ -67,10 +68,11 @@
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="comments">Comments:</label>
+                                                        <label for="comments">{{ __('admin/moodreport/index.Comments') }}:</label>
                                                         <textarea class="form-control" id="comments" name="comments" rows="4"></textarea>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit"
+                                                        class="btn btn-primary">{{ __('admin/moodreport/index.Submit') }}</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -84,17 +86,17 @@
                                     <thead>
                                         <tr>
                                             <th>S. No</th>
-                                            <th>Mood</th>
-                                            <th>Comments</th>
-                                            <th>Employee</th>
-                                            <th>Created at</th>
+                                            <th>{{ __('admin/moodreport/index.Mood') }}</th>
+                                            <th>{{ __('admin/moodreport/index.Comments') }}</th>
+                                            <th>{{ __('admin/moodreport/index.Employee') }}</th>
+                                            <th>{{ __('admin/moodreport/index.CreatedAt') }}</th>
                                             {{-- <th>Actions</th> --}}
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         @if ($report)
-                                         <?php $i = 0; ?>
+                                            <?php $i = 0; ?>
                                             @foreach ($report as $key => $reports)
                                                 <?php $i++; ?>
                                                 <tr>
@@ -104,14 +106,19 @@
                                                     <td>
                                                         @php
                                                             $moods = [
-                                                                1 => ['label' => 'Very Happy', 'class' => 'badge-success'],
+                                                                1 => [
+                                                                    'label' => 'Very Happy',
+                                                                    'class' => 'badge-success',
+                                                                ],
                                                                 2 => ['label' => 'Happy', 'class' => 'badge-info'],
                                                                 3 => ['label' => 'Neutral', 'class' => 'badge-warning'],
                                                                 4 => ['label' => 'Sad', 'class' => 'badge-dark'],
                                                                 5 => ['label' => 'Very Sad', 'class' => 'badge-danger'],
                                                             ];
                                                             $moodData = $moods[$reports->mood] ?? null;
-                                                            $badgeClass = $moodData ? 'badge ' . $moodData['class'] : 'badge badge-secondary';
+                                                            $badgeClass = $moodData
+                                                                ? 'badge ' . $moodData['class']
+                                                                : 'badge badge-secondary';
                                                             $moodText = $moodData ? $moodData['label'] : 'null';
                                                         @endphp
 
@@ -161,9 +168,5 @@
         </section>
         <!-- /.content -->
     </div>
-
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
 
 @endsection

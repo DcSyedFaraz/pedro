@@ -1,6 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
-
-
+@extends(Auth::user()->hasRole('Admin')? 'admin.layouts.app' :  'manager.layouts.app' )
 
 @section('content')
 <div class="content-wrapper">
@@ -9,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create New Work Order</h1>
+            <h1>{{ __('admin/work_order/edit.create_work_order') }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Create New Work Order</li>
+              <li class="breadcrumb-item active">{{ __('admin/work_order/edit.create_work_order') }}</li>
             </ol>
           </div>
         </div>
@@ -25,14 +23,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Create Work Order') }}</div>
+                    <div class="card-header">{{ __('admin/work_order/edit.create_work_order') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('work_orders.store') }}">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="job_id" class="col-md-4 col-form-label text-md-right">{{ __('Job ID') }}</label>
+                                <label for="job_id" class="col-md-4 col-form-label text-md-right">{{ __('admin/work_order/edit.job_id') }}</label>
                                 <div class="col-md-6">
                                     <select id="job_id" name="job_id" class="form-control">
                                         <!-- Populate this select input with job options from your database -->
@@ -66,7 +64,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="deadline" class="col-md-4 col-form-label text-md-right">{{ __('Deadline') }}</label>
+                                <label for="deadline" class="col-md-4 col-form-label text-md-right">{{ __('admin/work_order/edit.deadline') }}</label>
                                 <div class="col-md-6">
                                     <input id="deadline" type="date" class="form-control @error('deadline') is-invalid @enderror" name="deadline" value="{{ old('deadline') }}" required>
                                     @error('deadline')
@@ -77,12 +75,10 @@
                                 </div>
                             </div>
 
-
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Create Work Order') }}
+                                        {{ __('admin/work_order/edit.create_work_order') }}
                                     </button>
                                 </div>
                             </div>

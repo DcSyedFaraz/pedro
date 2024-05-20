@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 <style>
@@ -41,7 +41,8 @@
                                             <div class="row bordewer">
                                                 <div class="col-sm-12">
                                                     <div class="inner-header bg-colored pt-2 pb-2">
-                                                        <h4 class="primary">Purchase Order</h4>
+                                                        <h4 class="primary">
+                                                            {{ __('admin/purchase_order/edit.purchase_order') }}</h4>
                                                     </div>
                                                 </div>
                                                 <div class="innerinputs">
@@ -50,13 +51,20 @@
                                                             <div class="row">
                                                                 <div class="col-sm-4">
                                                                     <label for="exampleInputcustomer"
-                                                                        class="form-label">Supplier</label>
+                                                                        class="form-label">{{ __('admin/purchase_order/edit.supplier') }}</label>
                                                                     <select name="supplier" class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
                                                                         <option value="0" disabled selected hidden>
-                                                                            Select a Supplier</option>
-                                                                        <option value="1">Supplier 1</option>
-                                                                        <option value="2">Supplier 2</option>
+                                                                            {{ __('admin/purchase_order/edit.select_a_supplier') }}
+                                                                        </option>
+                                                                        <option
+                                                                            value="1"{{ old('supplier') == '1' ? 'selected' : '' }}>
+                                                                            {{ __('admin/purchase_order/edit.supplier_1') }}
+                                                                        </option>
+                                                                        <option
+                                                                            value="2"{{ old('supplier') == '2' ? 'selected' : '' }}>
+                                                                            {{ __('admin/purchase_order/edit.supplier_2') }}
+                                                                        </option>
                                                                     </select>
                                                                 </div>
 
@@ -64,46 +72,61 @@
                                                                     <div class="purchase-order-div">
                                                                         <label for="reference" class="form-label">Order
                                                                             Reference</label>
-                                                                        <input name="order_ref" type="number"
-                                                                            class="form-control" placeholder="1011"
+                                                                        <input value="{{ old('order_ref') }}"
+                                                                            name="order_ref" type="number"
+                                                                            class="form-control"
+                                                                            placeholder="1011"
                                                                             id="reference">
 
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-sm-4">
-                                                                    <label for="vender-div" class="form-label">Order
-                                                                        Progress</label>
+                                                                    <label for="vender-div"
+                                                                        class="form-label">{{ __('admin/purchase_order/edit.order_progress') }}</label>
                                                                     <select name="order_progress"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
-                                                                        <option value="Open">Open</option>
-                                                                        <option value="Close">Close</option>
+                                                                        <option
+                                                                            value="Open"{{ old('order_progress') == 'Open' ? 'selected' : '' }}>
+                                                                            {{ __('admin/purchase_order/edit.open') }}
+                                                                        </option>
+                                                                        <option
+                                                                            value="Close"{{ old('order_progress') == 'Close' ? 'selected' : '' }}>
+                                                                            {{ __('admin/purchase_order/edit.close') }}
+                                                                        </option>
                                                                     </select>
                                                                 </div>
 
                                                                 <div class="col-sm-4">
-                                                                    <label for="vender-div" class="form-label">Payment Terms
-                                                                    </label>
+                                                                    <label for="vender-div" class="form-label">Payment
+                                                                        Term</label>
                                                                     <select name="payment_term"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
-                                                                        <option value="0" disabled selected hidden>Cash
-                                                                            on Delivery</option>
-                                                                        <option value="Paypal">Paypal</option>
-                                                                        <option value="Stripe">Stripe</option>
+                                                                        <option value="0" disabled selected hidden>
+                                                                            {{ __('admin/purchase_order/edit.cash_on_delivery') }}
+                                                                        </option>
+                                                                        <option
+                                                                            value="Paypal"{{ old('payment_term') == 'Paypal' ? 'selected' : '' }}>
+                                                                            Paypal</option>
+                                                                        <option
+                                                                            value="Stripe"{{ old('payment_term') == 'Stripe' ? 'selected' : '' }}>
+                                                                            Stripe</option>
                                                                     </select>
 
                                                                 </div>
 
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
-                                                                        <label for="reference" class="form-label">Order
-                                                                            Date</label>
+                                                                        <label for="reference"
+                                                                            class="form-label">{{ __('admin/purchase_order/edit.order_date') }}</label>
                                                                         <div class="input-group date" id="datepicker">
-                                                                            <input name="order_date" type="date"
+                                                                            <input value="{{ old('order_date') }}"
+                                                                                name="order_date" type="date"
                                                                                 class="form-control"
-                                                                                placeholder="08/16/2023" id="date" />
+                                                                                placeholder="{{ __('admin/purchase_order/edit.08_16_2023') }}"
+                                                                                id="date" />
 
                                                                         </div>
                                                                     </div>
@@ -111,43 +134,50 @@
 
                                                                 <div class="col-sm-4">
                                                                     <div class="purchase-order-status">
-                                                                        <label for="vender-div" class="form-label">Sender of
-                                                                            PO
-                                                                        </label>
+                                                                        <label for="vender-div"
+                                                                            class="form-label">{{ __('admin/purchase_order/edit.sender_of_po') }}</label>
                                                                         <select name="sender"
                                                                             class="form-select form-control"
                                                                             aria-label="Default select example"
                                                                             id="vender-div">
-                                                                            <option value="Not Sent">Not Sent</option>
-                                                                            <option value="Self">Self</option>
+                                                                            <option
+                                                                                value="Not Sent"{{ old('sender') == 'Not Sent' ? 'selected' : '' }}>
+                                                                                {{ __('admin/purchase_order/edit.not_sent') }}
+                                                                            </option>
+                                                                            <option
+                                                                                value="Self"{{ old('sender') == 'Self' ? 'selected' : '' }}>
+                                                                                {{ __('admin/purchase_order/edit.self') }}
+                                                                            </option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-sm-6">
                                                                     <div class="memo-main-div">
-                                                                        <label for="reference" class="form-label">Memo ID
-                                                                        </label>
-                                                                        <input name="memo_id" type="number"
-                                                                            class="form-control" id="reference">
+                                                                        <label for="reference"
+                                                                            class="form-label">{{ __('admin/purchase_order/edit.memo_id') }}</label>
+                                                                        <input value="{{ old('memo_id') }}" name="memo_id"
+                                                                            type="number" class="form-control"
+                                                                            id="reference">
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="shipping-method-div">
                                                                         <label for="shipping-method"
-                                                                            class="form-label">Shipping Option
-                                                                        </label>
-                                                                        <input name="ship_option" type="text"
+                                                                            class="form-label">{{ __('admin/purchase_order/edit.shipping_option') }}</label>
+                                                                        <input value="{{ old('ship_option') }}"
+                                                                            name="ship_option" type="text"
                                                                             class="form-control" id="shipping-method">
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="sent-on-div">
-                                                                        <label for="sent-on" class="form-label">Sent Date
-                                                                        </label>
-                                                                        <input name="sent_date" type="date"
+                                                                        <label for="sent-on"
+                                                                            class="form-label">{{ __('admin/purchase_order/edit.sent_date') }}</label>
+                                                                        <input value="{{ old('sent_date') }}"
+                                                                            name="sent_date" type="date"
                                                                             class="form-control" id="sent-on">
 
                                                                     </div>
@@ -158,25 +188,30 @@
                                                         <div class="col-lg-5">
                                                             <div class="row">
                                                                 <div class="col-sm-4">
-                                                                    <label for="vender-div" class="form-label">Receipt
-                                                                        Status
-                                                                    </label>
+                                                                    <label for="vender-div"
+                                                                        class="form-label">{{ __('admin/purchase_order/edit.receipt_status') }}</label>
                                                                     <select name="receipt_status"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example"
                                                                         id="vender-div">
-                                                                        <option value="Not Received">Not Received</option>
-                                                                        <option value="Received">Received</option>
+                                                                        <option
+                                                                            value="Not Received"{{ old('receipt_status') == 'Not Received' ? 'selected' : '' }}>
+                                                                            {{ __('admin/purchase_order/edit.not_received') }}
+                                                                        </option>
+                                                                        <option
+                                                                            value="Received"{{ old('receipt_status') == 'Received' ? 'selected' : '' }}>
+                                                                            {{ __('admin/purchase_order/edit.received') }}
+                                                                        </option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-sm-8">
                                                                     <div class="purchase-order-div">
-                                                                        <label for="reference" class="form-label">Direct
-                                                                            Shipping
-                                                                        </label>
-                                                                        <input name="direct_shipping" type="text"
+                                                                        <label for="reference"
+                                                                            class="form-label">{{ __('admin/purchase_order/edit.direct_shipping') }}</label>
+                                                                        <input value="{{ old('direct_shipping') }}"
+                                                                            name="direct_shipping" type="text"
                                                                             class="form-control"
-                                                                            placeholder="Search by name,phone,street,city or email"
+                                                                            placeholder="{{ __('admin/purchase_order/edit.search_by_name_phone_street_city_or_email') }}"
                                                                             id="reference">
                                                                     </div>
                                                                 </div>
@@ -184,41 +219,49 @@
                                                                 <div class="col-12">
                                                                     <div class="shipping-address-div">
                                                                         <label for="reference"
-                                                                            class="form-label">Recipient's Address
-                                                                        </label>
+                                                                            class="form-label">Reciepent's Address</label>
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <input name="location" type="text"
+                                                                                <input value="{{ old('location') }}"
+                                                                                    name="location" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="Location Name (e.g Home or Office)"
+                                                                                    placeholder="{{ __('admin/purchase_order/edit.location_name_e_g_home_or_office') }}"
                                                                                     id="location-name">
                                                                             </div>
                                                                             <div class="col-sm-8">
-                                                                                <input name="street" type="text"
+                                                                                <input value="{{ old('street') }}"
+                                                                                    name="street" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="Street Address"
+                                                                                    placeholder="{{ __('admin/purchase_order/edit.street_address') }}"
                                                                                     id="streetaddress">
                                                                             </div>
                                                                             <div class="col-sm-4">
-                                                                                <input name="apt" type="text"
+                                                                                <input value="{{ old('apt') }}"
+                                                                                    name="apt" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="Ste/Unit/Apt"
+                                                                                    placeholder="{{ __('admin/purchase_order/edit.ste_unit_apt') }}"
                                                                                     id="steunitapt">
                                                                             </div>
                                                                             <div class="col-sm-5">
-                                                                                <input name="tampa" type="text"
+                                                                                <input value="{{ old('tampa') }}"
+                                                                                    name="tampa" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="Tampa" id="steunitapt">
+                                                                                    placeholder="{{ __('admin/purchase_order/edit.tampa') }}"
+                                                                                    id="steunitapt">
                                                                             </div>
                                                                             <div class="col-sm-4">
-                                                                                <input name="fl" type="text"
-                                                                                    class="form-control" placeholder="FL"
+                                                                                <input value="{{ old('fl') }}"
+                                                                                    name="fl" type="text"
+                                                                                    class="form-control"
+                                                                                    placeholder="{{ __('admin/purchase_order/edit.fl') }}"
                                                                                     id="steunitapt">
                                                                             </div>
                                                                             <div class="col-sm-3">
-                                                                                <input name="num" type="text"
+                                                                                <input value="{{ old('num') }}"
+                                                                                    name="num" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="33602" id="steunitapt">
+                                                                                    placeholder="33602"
+                                                                                    id="steunitapt">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -242,10 +285,11 @@
                                                     <div class="row">
                                                         <div class="col-sm-3">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Item Name
-                                                                </label>
-                                                                <input name="item_name" type="text"
-                                                                    class="form-control" placeholder="Add Product"
+                                                                <label for="addproduct"
+                                                                    class="form-label">{{ __('admin/purchase_order/edit.item_name') }}</label>
+                                                                <input value="{{ old('item_name') }}" name="item_name"
+                                                                    type="text" class="form-control"
+                                                                    placeholder="{{ __('admin/purchase_order/edit.add_product') }}"
                                                                     id="addproduct">
 
                                                             </div>
@@ -253,42 +297,41 @@
 
                                                         <div class="col-sm-1">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Quantity
-                                                                </label>
-                                                                <input name="qty" type="number" class="form-control"
-                                                                    id="addproduct">
+                                                                <label for="addproduct"
+                                                                    class="form-label">{{ __('admin/purchase_order/edit.quantity') }}</label>
+                                                                <input value="{{ old('qty') }}" name="qty"
+                                                                    type="number" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Unit Price
-                                                                </label>
-                                                                <input name="unit_price" type="number"
-                                                                    class="form-control" id="addproduct">
+                                                                <label for="addproduct"
+                                                                    class="form-label">{{ __('admin/purchase_order/edit.unit_price') }}</label>
+                                                                <input value="{{ old('unit_price') }}" name="unit_price"
+                                                                    type="number" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Total Amount
-                                                                </label>
-                                                                <input name="total" type="number" class="form-control"
-                                                                    id="addproduct">
+                                                                <label for="addproduct"
+                                                                    class="form-label">{{ __('admin/purchase_order/edit.total_amount') }}</label>
+                                                                <input value="{{ old('total') }}" name="total"
+                                                                    type="number" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Job Assignment
-                                                                </label>
-                                                                <input name="job_assign" type="text"
-                                                                    class="form-control" id="addproduct">
+                                                                <label for="addproduct"
+                                                                    class="form-label">{{ __('admin/purchase_order/edit.job_assignment') }}</label>
+                                                                <input value="{{ old('job_assign') }}" name="job_assign"
+                                                                    type="text" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Receipt
-                                                                </label>
-                                                                <input name="receipt" type="text" class="form-control"
-                                                                    id="addproduct">
+                                                                <label for="addproduct" class="form-label">Reciept</label>
+                                                                <input value="{{ old('receipt') }}" name="receipt"
+                                                                    type="text" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -299,40 +342,44 @@
                                                         <div class="col-8">
                                                             <div class="message-main-div">
                                                                 <label for="vender-div" class="form-label">Item
-                                                                    Description
-                                                                </label>
-                                                                <textarea name="description" rows="5" cols="80"></textarea>
+                                                                    Description</label>
+                                                                <textarea name="description" rows="5" cols="80">{{ old('description') }}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="col-4 total-cost">
                                                             <div class="inner-inner-inner">
-                                                                <h5>Subtotal</h5>
-                                                                <input type="number" id="subtotal" name="subtotal"
-                                                                    class="total" disabled value="0.00">
+                                                                <h5>{{ __('admin/purchase_order/edit.subtotal') }}</h5>
+                                                                <input value="{{ old('subtotal' ?? '0.00') }}"
+                                                                    type="number" id="subtotal" name="subtotal"
+                                                                    class="total" disabled>
                                                             </div>
                                                             <div class="inner-inner-inner">
-                                                                <h5 style="color:green;">Received Discount
+                                                                <h5 style="color:green;">
+                                                                    {{ __('admin/purchase_order/edit.received_discount') }}
                                                                     (-)</h5>
-                                                                <input type="number" id="discount" name="discount"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('discount' ?? '0.00') }}"
+                                                                    type="number" id="discount" name="discount"
+                                                                    class="total" disabled>
                                                             </div>
                                                             <div class="inner-inner-inner">
-                                                                <h5>Tax Paid
-                                                                </h5>
-                                                                <input type="number" id="tax_paid" name="tax_paid"
-                                                                    class="total" disabled value="0.00">
+                                                                <h5>{{ __('admin/purchase_order/edit.tax_paid') }}</h5>
+                                                                <input value="{{ old('tax_paid' ?? '0.00') }}"
+                                                                    type="number" id="tax_paid" name="tax_paid"
+                                                                    class="total" disabled>
                                                             </div>
                                                             <div class="inner-inner-inner">
-                                                                <h5>Shipping Cost
+                                                                <h5>{{ __('admin/purchase_order/edit.shipping_cost') }}
                                                                 </h5>
-                                                                <input type="number" id="ship_cost" name="ship_cost"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('ship_cost' ?? '0.00') }}"
+                                                                    type="number" id="ship_cost" name="ship_cost"
+                                                                    class="total" disabled>
                                                             </div>
                                                             <div class="inner-inner-inner">
-                                                                <h5>Grand Total Price
+                                                                <h5>{{ __('admin/purchase_order/edit.grand_total_price') }}
                                                                 </h5>
-                                                                <input type="number" id="grand_total" name="grand_total"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('grand_total' ?? '0.00') }}"
+                                                                    type="number" id="grand_total" name="grand_total"
+                                                                    class="total" disabled>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -9,7 +9,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="text-primary">Check-In/Check-Out</h2>
+                    <h2 class="text-primary">{{ __('admin/attendance/vendor.check_in') }}/{{ __('admin/attendance/vendor.check_out') }}</h2>
                 </div>
             </div>
 
@@ -19,12 +19,12 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">WorkOrder ID</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Duration</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.name') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.address') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.status') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.work_order_id') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.time') }}</th>
+                                <th scope="col">{{ __('admin/attendance/vendor.duration') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,20 +36,20 @@
                                     <td>
                                         @switch($attendances->attendance)
                                             @case('checkIn')
-                                                <span class="badge badge-success">Check In</span>
+                                                <span class="badge badge-success">{{ __('admin/attendance/vendor.check_in') }}</span>
                                             @break
 
                                             @case('checkOut')
-                                                <span class="badge badge-danger">Check Out</span>
+                                                <span class="badge badge-danger">{{ __('admin/attendance/vendor.check_out') }}</span>
                                             @break
 
                                             @default
-                                                <span class="badge badge-secondary">Unknown</span>
+                                                <span class="badge badge-secondary">{{ __('admin/attendance/vendor.unknown') }}</span>
                                             @break
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a href="{{ route('work_orders.show', $attendances->work_orders_id) }}"
+                                        <a title="{{ __('admin/attendance/vendor.view_work_order') }}" href="{{ route('work_orders.show', $attendances->work_orders_id) }}"
                                             class="text-primary">{{ $attendances->work_orders_id }}</a>
 
                                     </td>

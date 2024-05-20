@@ -104,8 +104,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                      <h3 class="card-title">{{ __('user/job/index.user_managment') }}</h3>
-                                    </div> -->
+                                                                                                                      <h3 class="card-title">{{ __('user/job/index.user_managment') }}</h3>
+                                                                                                                    </div> -->
                             <!-- /.card-header -->
 
                             <!-- /.card-header -->
@@ -177,7 +177,7 @@
                                                     @elseif($jobs->current_status == 8)
                                                         <td class="text-muted">
                                                             <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
-                                                        </td    >
+                                                        </td>
                                                     @elseif($jobs->current_status == 9)
                                                         <td class="text-success">
                                                             <strong>{{ isset($jobs) ? $jobs->parsedStatus : '' }}</strong>
@@ -223,30 +223,62 @@
                                                                     @csrf
                                                                     @method('put')
                                                                     <h2>{{ __('user/job/index.rate_the_work') }}</h2>
-                                                                    <div class="rating">
-                                                                        <input class="star" data-rating="5" type="radio"
-                                                                            id="star5" name="rating" value="5">
-                                                                        <label for="star5">&#9733;</label>
 
-                                                                        <input class="star" data-rating="4" type="radio"
-                                                                            id="star4" name="rating" value="4">
-                                                                        <label for="star4">&#9733;</label>
+                                                                    @forelse ($ques as $key => $que)
+                                                                        <h3>
+                                                                            <span>Q {{ $key + 1 }}:</span>
+                                                                            <span>{{ $que->question }}</span>
+                                                                        </h3>
+                                                                        {{-- <div class="rating">
+                                                                            <input class="star" data-rating="5"
+                                                                                type="radio" id="star5" name="rating"
+                                                                                value="5">
+                                                                            <label for="star5">&#9733;</label>
 
-                                                                        <input class="star" data-rating="3" type="radio"
-                                                                            id="star3" name="rating" value="3">
-                                                                        <label for="star3">&#9733;</label>
+                                                                            <input class="star" data-rating="4"
+                                                                                type="radio" id="star4" name="rating"
+                                                                                value="4">
+                                                                            <label for="star4">&#9733;</label>
 
-                                                                        <input class="star" data-rating="2" type="radio"
-                                                                            id="star2" name="rating" value="2">
-                                                                        <label for="star2">&#9733;</label>
+                                                                            <input class="star" data-rating="3"
+                                                                                type="radio" id="star3" name="rating"
+                                                                                value="3">
+                                                                            <label for="star3">&#9733;</label>
 
-                                                                        <input class="star" data-rating="1" type="radio"
-                                                                            id="star1" name="rating" value="1">
-                                                                        <label for="star1">&#9733;</label>
+                                                                            <input class="star" data-rating="2"
+                                                                                type="radio" id="star2" name="rating"
+                                                                                value="2">
+                                                                            <label for="star2">&#9733;</label>
 
-                                                                    </div>
-                                                                    <p>{{ __('user/job/index.your_rating') }}: <span
-                                                                            id="selectedRating">0</span>/5</p>
+                                                                            <input class="star" data-rating="1"
+                                                                                type="radio" id="star1" name="rating"
+                                                                                value="1">
+                                                                            <label for="star1">&#9733;</label>
+
+                                                                        </div> --}}
+                                                                        <p>{{ __('user/job/index.your_rating') }}:
+                                                                        <div class="input-group mb-3 w-25">
+
+                                                                            <input type="number" max="10"
+                                                                                name="ratings[{{ $que->id }}]"
+                                                                                class="form-control" placeholder="10"
+                                                                                aria-label="Your rating">
+
+                                                                            {{-- <input type="hidden"
+                                                                                value="{{ $que->id }}"
+                                                                                name="question_id[]"> --}}
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text">/10</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        </p>
+                                                                    @empty
+                                                                        <p>
+                                                                            {{ __('user/job/index.no_questions') }}:
+
+                                                                        </p>
+                                                                    @endforelse
+
                                                                     <textarea id="comments" placeholder="{{ __('user/job/index.add_comments') }}" name="comment"></textarea>
                                                                     <div class="form-group">
                                                                         <label
@@ -260,7 +292,8 @@
                                                                                 <p class="custom-file-label"
                                                                                     id="selectedFileName"
                                                                                     for="exampleInputFile">
-                                                                                    {{ __('user/job/index.choose_file') }}</p>
+                                                                                    {{ __('user/job/index.choose_file') }}
+                                                                                </p>
                                                                             </div>
 
                                                                         </div>

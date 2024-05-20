@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4">
-        <strong>Customer Homeowner</strong>
+        <strong>{{ __('admin/job/edit.customer_homeowner') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -11,7 +11,7 @@
 </hr>
 <div class="row">
     <div class="col-md-4">
-        <strong>Customer Unit/Cordination</strong>
+        <strong>{{ __('admin/job/edit.customer_unit_cordination') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">

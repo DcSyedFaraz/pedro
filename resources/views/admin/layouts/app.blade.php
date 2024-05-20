@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{{ asset('/admin/plugins/summernote/summernote-bs4.min.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
-   <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
     @yield('links')
 
 </head>
@@ -64,6 +64,37 @@
             <ul class="navbar-nav ml-auto">
 
 
+                <!-- Language Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        @if (app()->getLocale() == 'en')
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto">
+                        @elseif (app()->getLocale() == 'es')
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto">
+                        @endif
+                        <span class="badge badge-success navbar-badge">{{ app()->getLocale() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">Select Language</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('lang.switch', 'en') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto"> English
+                            @if (app()->getLocale() == 'en')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                        <a href="{{ route('lang.switch', 'es') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto"> Spanish
+                            @if (app()->getLocale() == 'es')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                    </div>
+                </li>
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
@@ -177,7 +208,7 @@
                         </li>
                         <!--Start Miscellaneous Modules -->
                         <li
-                            class="nav-item {{ request()->routeIs('customer.index') ? 'menu-open' : '' }}
+                            class="nav-item {{ request()->routeIs('customer.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('estimates.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('work_orders.*') ? 'menu-open' : '' }}
                             {{ request()->routeIs('purchase-orders.*') ? 'menu-open' : '' }}
@@ -186,7 +217,7 @@
                             {{ request()->routeIs('technicians.*') ? 'menu-open' : '' }} ">
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
-                                {{ request()->routeIs('customer.index') ? 'active' : '' }}
+                                {{ request()->routeIs('customer.*') ? 'active' : '' }}
                                 {{ request()->routeIs('estimates.*') ? 'active' : '' }}
                                 {{ request()->routeIs('work_orders.*') ? 'active' : '' }}
                                 {{ request()->routeIs('purchase-orders.*') ? 'active' : '' }}
@@ -196,51 +227,51 @@
                                 {{ request()->routeIs('technicians.*') ? 'active' : '' }} ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    My Workroom
+                                    {{ __('admin/layout/app.my_workroom') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{ route('customer.index') }}"
-                                        class="nav-link {{ request()->routeIs('customer.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('customer.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Customer</p>
+                                        <p>{{ __('admin/layout/app.customer') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('technicians.index') }}"
                                         class="nav-link {{ request()->routeIs('technicians.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Manage Technicians</p>
+                                        <p>Manage {{ __('admin/layout/app.technicians') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('estimates.index') }}"
                                         class="nav-link {{ request()->routeIs('estimates.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Estimates</p>
+                                        <p>{{ __('admin/layout/app.estimates') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('work_orders.index') }}"
                                         class="nav-link {{ request()->routeIs('work_orders.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Work Order List</p>
+                                        <p>{{ __('admin/layout/app.work_orders') }} List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('purchase-orders.index') }}"
                                         class="nav-link {{ request()->routeIs('purchase-orders.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Purchase Order</p>
+                                        <p>{{ __('admin/layout/app.purchase_orders') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('inventory.index') }}"
                                         class="nav-link {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Inventory</p>
+                                        <p>{{ __('admin/layout/app.inventory') }}</p>
                                     </a>
                                 </li>
 
@@ -277,7 +308,7 @@
                             {{ request()->routeIs('ins_category.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Jobs
+                                    {{ __('admin/layout/app.jobs') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -286,70 +317,71 @@
                                     <a href="{{ route('job.index') }}"
                                         class="nav-link {{ request()->routeIs('job.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Job List</p>
+                                        <p>{{ __('admin/layout/app.job_list') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('location.index') }}"
                                         class="nav-link {{ request()->routeIs('location.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Assign Checklist</p>
+                                        <p>{{ __('admin/layout/app.assign_checklist') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('today.job.schedule') }}"
                                         class="nav-link {{ request()->routeIs('today.job.schedule') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Today's Schedule</p>
+                                        <p>{{ __('admin/layout/app.today_schedule') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('today.job.next.48.hours') }}"
                                         class="nav-link {{ request()->routeIs('today.job.next.48.hours') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Within 48 hours</p>
+                                        <p>{{ __('admin/layout/app.within_48_hours') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('job.needing.scheduling') }}"
                                         class="nav-link {{ request()->routeIs('job.needing.scheduling') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Unscheduled</p>
+                                        <p>{{ __('admin/layout/app.unscheduled') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobs.in.progress') }}"
                                         class="nav-link {{ request()->routeIs('jobs.in.progress') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>In-progress</p>
+                                        <p>{{ __('admin/layout/app.in_progress') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobs.complete') }}"
                                         class="nav-link {{ request()->routeIs('jobs.complete') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Completed</p>
+                                        <p>{{ __('admin/layout/app.completed') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('readyinvoice.index') }}"
                                         class="nav-link {{ request()->routeIs('readyinvoice.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Ready to be invoiced</p>
+                                        <p>{{ __('admin/layout/app.ready_to_be_invoiced') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobpermanager.index') }}"
                                         class="nav-link {{ request()->routeIs('jobpermanager.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p style="font-size: 15px;">Jobs per Account Manager</p>
+                                        <p style="font-size: 15px;">
+                                            {{ __('admin/layout/app.jobs_per_account_manager') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('jobperregion.index') }}"
                                         class="nav-link {{ request()->routeIs('jobperregion.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Jobs per region</p>
+                                        <p>{{ __('admin/layout/app.jobs_per_region') }}</p>
                                     </a>
                                 </li>
 
@@ -359,7 +391,7 @@
                         <li
                             class="nav-item
                              {{ request()->routeIs('task.index') ? 'menu-open' : '' }}
-                             {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
+                             {{ request()->routeIs('problem.*') ? 'menu-open' : '' }}
                              {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
                              {{ request()->routeIs('location') ? 'menu-open' : '' }}
                              {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
@@ -370,7 +402,7 @@
                             <a href="#"
                                 class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('task.index') ? 'active' : '' }}
-                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
+                                {{ request()->routeIs('problem.*') ? 'active' : '' }}
                                 {{ request()->routeIs('finalized') ? 'active' : '' }}
                                 {{ request()->routeIs('location') ? 'active' : '' }}
                                 {{ request()->routeIs('adminresponse') ? 'active' : '' }}
@@ -380,7 +412,7 @@
                                 ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Operations
+                                    {{ __('admin/layout/app.operations') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -392,28 +424,28 @@
                                         class="nav-link nav-dropdown-toggle {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-table"></i>
                                         <p>
-                                            Inspections
-                                            <i class="fas fa-plus right"></i>
+                                            {{ __('admin/layout/app.inspections') }} <i
+                                                class="fas fa-plus right"></i>
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Account Manager</p>
+                                                <p>{{ __('admin/layout/app.account_managers') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Location</p>
+                                                <p>{{ __('admin/layout/app.location') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('checklists.create') }}"
                                                 class="nav-link {{ request()->routeIs('checklists.create') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Inspection Sheet</p>
+                                                <p>{{ __('admin/layout/app.inspection_sheet') }}</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -421,7 +453,6 @@
 
                                 <li
                                     class="nav-item
-                          {{ request()->routeIs('problem.index') ? 'menu-open' : '' }}
                           {{ request()->routeIs('finalized') ? 'menu-open' : '' }}
                           {{ request()->routeIs('location') ? 'menu-open' : '' }}
                           {{ request()->routeIs('adminresponse') ? 'menu-open' : '' }}
@@ -430,7 +461,6 @@
                                     <a href="#"
                                         class="nav-link nav-dropdown-toggle
                                 {{ request()->routeIs('roles.index') ? 'active' : '' }}
-                                {{ request()->routeIs('problem.index') ? 'active' : '' }}
                                 {{ request()->routeIs('finalized') ? 'active' : '' }}
                                 {{ request()->routeIs('location') ? 'active' : '' }}
                                 {{ request()->routeIs('adminresponse') ? 'active' : '' }}
@@ -446,34 +476,37 @@
                                         <li class="nav-item">
                                             <a href="{{ route('checklist.index') }}" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Overall Checklist</p>
+                                                <p>{{ __('admin/layout/app.overall_checklist') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('finalized') }}"
                                                 class="nav-link {{ request()->routeIs('finalized') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Finalized</p>
+                                                <p>{{ __('admin/layout/app.finalized') }}</p>
                                             </a>
                                         </li>
+
                                         <li class="nav-item">
                                             <a href="{{ route('location') }}"
                                                 class="nav-link {{ request()->routeIs('location') ? 'active' : '' }} {{ request()->routeIs('adminresponse') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>location/Responce</p>
+                                                <p>{{ __('admin/layout/app.location') }}</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ route('managers.index') }}"
                                                 class="nav-link {{ request()->routeIs('managers.index') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Account Manager</p>
+                                                <p>{{ __('admin/layout/app.account_managers') }}
+                                                </p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Field Member</p>
+                                                <p>{{ __('admin/layout/app.field_employees') }}
+                                                </p>
                                             </a>
                                         </li>
                                     </ul>
@@ -482,16 +515,18 @@
 
                                 <li class="nav-item">
                                     <a href="{{ route('problem.index') }}"
-                                        class="nav-link {{ request()->routeIs('problem.index') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs('problem.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Problem Reporting</p>
+                                        <p>{{ __('admin/layout/app.problem_reporting') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item ">
                                     <a href="{{ route('task.index') }}"
                                         class="nav-link {{ request()->routeIs('task.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasks</p>
+                                        <p>{{ __('admin/layout/app.tasks') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -504,13 +539,16 @@
                                     <a href="{{ route('moodreport.index') }}"
                                         class="nav-link {{ request()->routeIs('moodreport.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Mood reporting</p>
+                                        <p>{{ __('admin/layout/app.mood_reporting') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p style="font-size: 15px;">Emp-Vendor performance</p>
+                                        <p style="font-size: 15px;">
+                                            {{ __('admin/layout/app.emp_vendor_performance') }}
+                                        </p>
                                     </a>
                                 </li>
 
@@ -530,7 +568,7 @@
                                 ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Accounting
+                                    {{ __('admin/layout/app.accounting') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -546,7 +584,8 @@
                                     <a href="{{ route('invoice.index') }}"
                                         class="nav-link {{ request()->routeIs('invoice.*') ? 'active' : '' }} ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Invoice dashboard</p>
+                                        <p>{{ __('admin/layout/app.invoice_dashboard') }}
+                                        </p>
                                     </a>
                                 </li>
 
@@ -560,18 +599,18 @@
                                 class="nav-link nav-dropdown-toggle {{ request()->routeIs('roles.index') ? 'active' : '' }} {{ request()->routeIs('users.index') ? 'active' : '' }}{{ request()->routeIs('users.create') ? 'active' : '' }}{{ request()->routeIs('permission.index') ? 'active' : '' }}{{ request()->routeIs('permission.create') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Users
+                                    {{ __('admin/layout/app.users') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item {{ request()->routeIs('roles.index') ? 'menu-open' : '' }} ">
+                                {{-- <li class="nav-item {{ request()->routeIs('roles.index') ? 'menu-open' : '' }} ">
                                     @can('role-list')
                                         <a href="#"
                                             class="nav-link nav-dropdown-toggle {{ request()->routeIs('roles.index') ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-table"></i>
                                             <p>
-                                                Manage Roles
+                                                {{ __('admin/layout/app.emp_vendor_performance') }} Manage Roles
                                                 <i class="fas fa-plus right"></i>
                                             </p>
                                         </a>
@@ -582,7 +621,7 @@
                                                 <a href="{{ route('roles.index') }}"
                                                     class="nav-link {{ request()->routeIs('roles.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>List Roles</p>
+                                                    <p>{{ __('admin/layout/app.emp_vendor_performance') }}List Roles</p>
                                                 </a>
                                             </li>
                                         @endcan
@@ -596,41 +635,36 @@
                                             </li>
                                         @endcan
                                     </ul>
+                                </li> --}}
+                                <li
+                                    class="nav-item {{ request()->routeIs('users.index') ? 'menu-open' : '' }} {{ request()->routeIs('users.create') ? 'menu-open' : '' }}">
+                                    <a href="#"
+                                        class="nav-link nav-dropdown-toggle {{ request()->routeIs('users.index') ? 'active' : '' }} {{ request()->routeIs('users.create') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-table"></i>
+                                        <p>
+                                            {{ __('admin/layout/app.manage_users') }}
+
+                                            <i class="fas fa-plus right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('users.index') }}"
+                                                class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>List {{ __('admin/layout/app.users') }}</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('users.create') }}"
+                                                class="nav-link {{ request()->routeIs('users.create') ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Add {{ __('admin/layout/app.users') }}</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                @can('user-list')
-                                    <li
-                                        class="nav-item {{ request()->routeIs('users.index') ? 'menu-open' : '' }} {{ request()->routeIs('users.create') ? 'menu-open' : '' }}">
-                                        <a href="#"
-                                            class="nav-link nav-dropdown-toggle {{ request()->routeIs('users.index') ? 'active' : '' }} {{ request()->routeIs('users.create') ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-table"></i>
-                                            <p>
-                                                Manage Users
-                                                <i class="fas fa-plus right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            @can('user-list')
-                                                <li class="nav-item">
-                                                    <a href="{{ route('users.index') }}"
-                                                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>List Users</p>
-                                                    </a>
-                                                </li>
-                                            @endcan
-                                            @can('user-create')
-                                                <li class="nav-item">
-                                                    <a href="{{ route('users.create') }}"
-                                                        class="nav-link {{ request()->routeIs('users.create') ? 'active' : '' }}">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>Add Users</p>
-                                                    </a>
-                                                </li>
-                                            @endcan
-                                        </ul>
-                                    </li>
-                                @endcan
-                                @can('permission-list')
+                                {{-- @can('permission-list')
                                     <li
                                         class="nav-item {{ request()->routeIs('permission.index') ? 'menu-open' : '' }} {{ request()->routeIs('permission.create') ? 'menu-open' : '' }}">
                                         <a href="#"
@@ -662,7 +696,7 @@
                                             @endcan
                                         </ul>
                                     </li>
-                                @endcan
+                                @endcan --}}
                                 <li class="nav-item">
                                     <a href="#" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
@@ -715,7 +749,7 @@
 
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Job Settings
+                                    {{ __('admin/layout/app.job_settings') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -725,28 +759,32 @@
                                     <a href="{{ route('job-category.index') }}"
                                         class="nav-link {{ request()->routeIs('job-category.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Category</p>
+                                        <p>{{ __('admin/layout/app.job_category') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('job-sub-category.index') }}"
                                         class="nav-link {{ request()->routeIs('job-sub-category.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Sub Category</p>
+                                        <p>{{ __('admin/layout/app.job_sub_category') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('job-priority.index') }}"
                                         class="nav-link {{ request()->routeIs('job-priority.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Priority</p>
+                                        <p>{{ __('admin/layout/app.job_priority') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('job-source.index') }}"
                                         class="nav-link {{ request()->routeIs('job-source.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Job Source</p>
+                                        <p>{{ __('admin/layout/app.job_source') }}
+                                        </p>
                                     </a>
                                 </li>
                             </ul>
@@ -758,7 +796,8 @@
                                 class="nav-link nav-dropdown-toggle  {{ request()->routeIs('profile.index') ? 'active' : '' }} {{ request()->routeIs('change_password') ? 'menu-open' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Account Setting
+                                    {{ __('admin/layout/app.account_setting') }}
+
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -767,14 +806,16 @@
                                     <a href="{{ route('profile.index') }}"
                                         class="nav-link {{ request()->routeIs('profile.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Profile</p>
+                                        <p>{{ __('admin/layout/app.profile') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('change_password') }}"
                                         class="nav-link {{ request()->routeIs('change_password') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Change Password</p>
+                                        <p>{{ __('admin/layout/app.change_password') }}
+                                        </p>
                                     </a>
                                 </li>
                             </ul>
@@ -784,7 +825,8 @@
                                 class="nav-link nav-dropdown-toggle  {{ request()->routeIs('*.attendance') ? 'active' : '' }} ">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Attendance
+                                    {{ __('admin/layout/app.attendance') }}
+
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -794,14 +836,16 @@
                                     <a href="{{ route('manager.attendance') }}"
                                         class="nav-link {{ request()->routeIs('manager.attendance') ? 'active' : '' }}">
                                         <i class="far fa-dot-circle nav-icon text-success"></i>
-                                        <p>Manager's </p>
+                                        <p>{{ __('admin/layout/app.manager_attendance') }}
+                                        </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('vendors.attendance') }}"
                                         class="nav-link {{ request()->routeIs('vendors.attendance') ? 'active' : '' }}">
                                         <i class="far fa-dot-circle nav-icon text-success"></i>
-                                        <p>Vendor's </p>
+                                        <p>{{ __('admin/layout/app.vendors_attendance') }}
+                                        </p>
                                     </a>
                                 </li>
 
@@ -811,20 +855,20 @@
                             <a href="{{ route('estimate_requests.index') }}"
                                 class="nav-link {{ request()->routeIs('estimate_requests.*') ? 'active' : '' }} ">
                                 <i class="far fa-calendar-alt nav-icon text-warning"></i>
-                                <p>Estimate Request</p>
+                                <p>{{ __('admin/layout/app.estimate_request') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('supply.index') }}"
                                 class="nav-link {{ request()->routeIs('supply.*') ? 'active' : '' }}">
                                 <i class="far fa-dot-circle nav-icon text-success"></i>
-                                <p>Supply Request</p>
+                                <p>{{ __('admin/layout/app.supply_request') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('/logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt nav-icon text-danger"></i>
-                                <p>Logout</p>
+                                <p>{{ __('admin/layout/app.logout') }}</p>
                             </a>
                         </li>
                         <!-- </ul> -->

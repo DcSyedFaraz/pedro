@@ -147,7 +147,7 @@ class EstimateController extends Controller
         $user->notify(new UserNotification($admin, $message));
 
         if ($user->phone != null) {
-            $this->twilioService->sendSMS($user->phone, $message);
+            //$this->twilioService->sendSMS($user->phone, $message);
         }
 
         return redirect()->route('estimates.index')->with('success', 'Estimate Created Successfully');
@@ -275,7 +275,7 @@ class EstimateController extends Controller
         $message = "updated your Estimate# {$job->id}";
         $user->notify(new UserNotification($admin, $message));
         if ($user->phone != null) {
-            $this->twilioService->sendSMS($user->phone, $message);
+            //$this->twilioService->sendSMS($user->phone, $message);
         }
 
         return redirect()->route('estimates.index')->with('success', 'Estimate updated successfully');
@@ -286,7 +286,7 @@ class EstimateController extends Controller
         // return $estimate;
         $estimate = Estimate::findOrFail($id);
         $estimate->delete();
-        return redirect()->route('estimates.index')->with('success', 'Estimate deleted successfully');
+        return redirect()->route('estimates.index')->with('success', __('admin/estimates/index.flash_success_delete'));
     }
     public function est_pri($id)
     {
@@ -374,17 +374,17 @@ class EstimateController extends Controller
                 $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
                 $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
 
-                if($estimate->customer->phone != null){
+                if ($estimate->customer->phone != null) {
 
-                    $this->twilioService->sendSMS($estimate->customer->phone, $jobInfoSMS);
+                    //$this->twilioService->sendSMS($estimate->customer->phone, $jobInfoSMS);
                 }
             }
             DB::commit();
-            return redirect()->back()->with('success', 'Estimate data copied to Job successfully');
+            return redirect()->back()->with('success', __('admin/estimates/index.flash_success_convert'));
         } catch (\Exception $e) {
             DB::rollBack();
             // throw $e;
-            return redirect()->back()->with('error', 'An error occurred. Please try again.');
+            return redirect()->back()->with('error', __('admin/estimates/index.flash_error_convert'));
         }
 
     }

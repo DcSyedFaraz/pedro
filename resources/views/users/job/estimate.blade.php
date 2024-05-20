@@ -138,7 +138,7 @@
                                                                             <div class="modal-footer">
                                                                                 <button type="button"
                                                                                     class="btn btn-secondary"
-                                                                                    data-dismiss="modal">{{ __('user/job/estimate.close') }}</button>
+                                                                                    data-dismiss="modal">Close</button>
                                                                                 <button class="btn btn-success btn-sm mt-2"
                                                                                     id="save-signature-{{ $jobs->id }}"><i
                                                                                         class="fas fa-check"></i></button>

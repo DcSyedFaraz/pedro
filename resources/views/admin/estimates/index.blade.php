@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Estimates</h1>
+                        <h1>{{ __('admin/estimates/index.estimates') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Estimates</li>
+                            <li class="breadcrumb-item active">{{ __('admin/estimates/index.estimates') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -28,17 +28,14 @@
                     <div class="col-12">
 
                         <div class="card">
-                            <!-- <div class="card-header">
-                                                                          <h3 class="card-title">User Managment</h3>
-                                                                        </div> -->
-                            <!-- /.card-header -->
                             <form action="{{ route('estimates.updateSelectedJobs') }}" method="POST">
                                 @csrf
                                 <div class="card-header">
-                                    <a class="btn btn-success" href="{{ route('estimates.create') }}"> Create Estimates </a>
+                                    <a class="btn btn-success" href="{{ route('estimates.create') }}">
+                                        {{ __('admin/estimates/index.create_estimates') }} </a>
                                     @csrf
-                                    <button type="submit" class="btn btn-primary dltBtn" id="convertSelectedBtn">Convert
-                                        Selected</button>
+                                    <button type="submit" class="btn btn-primary dltBtn"
+                                        id="convertSelectedBtn">{{ __('admin/estimates/index.convert_selected') }}</button>
 
                                 </div>
                                 <!-- /.card-header -->
@@ -47,11 +44,11 @@
                                         <thead>
                                             <tr>
                                                 <th>Select</th>
-                                                <th>Customer Name</th>
-                                                <th>Location Name</th>
-                                                <th>Primary Contact</th>
-                                                <th>E-Signature</th>
-                                                <th>Actions</th>
+                                                <th>{{ __('admin/estimates/index.customer_name') }}</th>
+                                                <th>{{ __('admin/estimates/index.location_name') }}</th>
+                                                <th>{{ __('admin/estimates/index.primary_contact') }}</th>
+                                                <th>{{ __('admin/estimates/index.e_signature') }}</th>
+                                                <th>{{ __('admin/estimates/index.actions') }}</th>
                                             </tr>
                                         </thead>
 
@@ -88,7 +85,7 @@
                                                         </td>
                                                         <td>{{ isset($estimate->location_name) ? $estimate->location_name : '' }}
                                                         </td>
-                                                        <td>Primary Contact:
+                                                        <td>{{ __('admin/estimates/index.primary_contact') }}:
                                                             {{ $estimate->first_name . '-' . $estimate->last_name }}
                                                             </br> {{ $emailList }}
                                                             </br> Phone: {{ $phone }} Ext: {{ $ext }}
@@ -102,8 +99,13 @@
                                                                 <button type="button" class="btn btn-success btn-sm"
                                                                     data-toggle="modal"
                                                                     data-target="#signatureModal{{ $estimate->id }}">
-                                                                    Show Signature
+                                                                    {{ __('admin/estimates/index.show_signature') }}
                                                                 </button>
+                                                                <p class="lead" style="font-size: 16px !important;">
+                                                                    {{ \Carbon\Carbon::parse($estimate->signature_time)->format('l, F j, Y h:i A') }}
+
+                                                                </p>
+
                                                                 <!-- Modal -->
                                                                 <div class="modal fade"
                                                                     id="signatureModal{{ $estimate->id }}" tabindex="-1"
@@ -146,14 +148,14 @@
                                                             </form>
                                                         @endif --}}
                                                             <a class="btn btn-success"
-                                                                href="{{ route('estimates.edit', $estimate->id) }}">Edit</a>
+                                                                href="{{ route('estimates.edit', $estimate->id) }}">{{ __('admin/estimates/index.edit') }}</a>
                                                             {{-- <form action="{{ route('estimates.destroy', $estimate) }}"
                                                                 method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('DELETE') --}}
                                                             <a href="{{ route('estimates.destroy', $estimate->id) }}"
                                                                 class="btn btn-danger mx-2"
-                                                                onclick="return confirm('Are you sure you want to delete this estimate?')">Delete</a>
+                                                                onclick="return confirm('Are you sure you want to delete this estimate?')">{{ __('admin/estimates/index.delete') }}</a>
                                                             {{-- </form> --}}
                                                         </td>
                                                     </tr>
@@ -208,7 +210,7 @@
                 swal({
 
                         title: "Confirmation",
-                        text: "Are you sure you want to convert these estimates to a job?",
+                        text: "{{ __('admin/estimates/index.convert_to_job') }}",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,

@@ -6,7 +6,7 @@
     <div class="col-md-8">
         <div class="form-group">
             <input type="file" class="form-control" name="image" style="height: auto;"></input>
-            <p class="image-error error-messages">Please select an image file</p>
+            <p class="image-error error-messages">{{ __('admin/estimates/edit.select_image_file') }}</p>
         </div>
     </div>
     <ul class="list-unstyled mt-2 mb-2 space-y-2" id="fileList">

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('job_id');
             $table->string('rating');
-            $table->string('comments');
-            $table->string('file');
+            $table->text('comments')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

@@ -54,10 +54,10 @@
                                                                     <select name="order_progress"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
-                                                                        <option value="Open">
+                                                                        <option value="Open"
                                                                             {{ old('order_progress', $supplyRequest->order_progress) == 'Open' ? 'selected' : '' }}>
                                                                             Open</option>
-                                                                        <option value="Close">
+                                                                        <option value="Close"
                                                                             {{ old('order_progress', $supplyRequest->order_progress) == 'Close' ? 'selected' : '' }}>
                                                                             Close</option>
                                                                     </select>

@@ -59,7 +59,7 @@ class WorkOrdersController extends Controller
             // dd($job->customer->phone);
             if($job->customer->phone != null){
 
-                $this->twilioService->sendSMS($job->customer->phone, $message1);
+                //$this->twilioService->sendSMS($job->customer->phone, $message1);
             }
 
             return redirect()->route('work_orders.index')->with('success', 'Work order created successfully!');

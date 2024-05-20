@@ -82,6 +82,7 @@ Route::group(['middleware' => ['language']], function () {
     });
 
 
+    Route::get('/lang-switch/{lang}', [HomeController::class, 'lang'])->name('lang.switch');
     Route::get('/testing', [HomeController::class, 'test']);
     Route::get('/notifications', [HomeController::class, 'allNotification'])->name('allNotification');
     Route::get('/markasread/{id}', [HomeController::class, 'markasread'])->name('markasread');

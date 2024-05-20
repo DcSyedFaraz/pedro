@@ -6,18 +6,18 @@
     <div class="col-md-8">
         <div class="form-group">
             <input type="file" class="form-control" name="image" style="height: auto;"></input>
-            <p class="image-error error-messages">Please select an image file</p>
+            <p class="image-error error-messages">{{ __('admin/estimates/edit.select_image_file') }}</p>
         </div>
     </div>
     <ul class="list-unstyled mt-2 mb-2 space-y-2" id="fileList">
-    @if (isset($estimate->image))
-        <li class="list-unstyled">
-            <img src="{{ url($estimate->image) }}" alt="" class="img-thumbnail">
+        @if (isset($estimate->image))
+            <li class="list-unstyled">
+                <img src="{{ url($estimate->image) }}" alt="" class="img-thumbnail">
 
-        </li>
-        <br>
-        <br>
-    @endif
-</ul>
+            </li>
+            <br>
+            <br>
+        @endif
+    </ul>
 
 </div>

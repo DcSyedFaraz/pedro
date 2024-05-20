@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Customer</h1>
+                        <h1>{{ __('admin/customer/edit.edit_customer') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Customer</li>
+                            <li class="breadcrumb-item active">{{ __('admin/customer/edit.edit_customer') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                                     <div class="col-sm-3">
                                                         <div class="mb-3">
                                                             <label for="exampleInputcustomer"
-                                                                class="form-label">Customer</label>
+                                                                class="form-label">{{ __('admin/customer/edit.customer_name') }}</label>
                                                             <input type="text" class="form-control" name="customer_name"
                                                                 id="exampleInputcustomer"
                                                                 value="{{ old('customer_name', $customer->customer_name) }}"
@@ -72,8 +72,7 @@
 
                                                     <div class="col-sm-3">
                                                         <div class="mb-3">
-                                                            <label for="flexRadioDefault3" class="form-label">Service
-                                                                Agreement ?</label>
+                                                            <label for="flexRadioDefault3" class="form-label">{{ __('admin/customer/edit.service_agreement') }} ?</label>
                                                             <select class="form-select form-control"
                                                                 name="service_agreement" aria-label="Default select example"
                                                                 id="email-div">
@@ -89,8 +88,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="mb-3">
-                                                            <label for="exampleInputacount" class="form-label">Account
-                                                                #</label>
+                                                            <label for="exampleInputacount" class="form-label">{{ __('admin/customer/edit.account_number') }}</label>
                                                             <input type="text" name="acnum" class="form-control"
                                                                 value="{{ old('acnum', $customer->acnum) }}"
                                                                 id="exampleInputaccount" placeholder="Account number">
@@ -98,7 +96,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="mb-3">
-                                                            <label for="flexRadioDefault5" class="form-label">Active
+                                                            <label for="flexRadioDefault5" class="form-label">{{ __('admin/customer/edit.active') }}
                                                                 ?</label>
                                                             <select class="form-select form-control" name="activeCustomer"
                                                                 aria-label="Default select example" id="email-div">
@@ -115,9 +113,9 @@
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <div class="inner-header bg-light pt-2 pb-2">
-                                                            <h3 class="primary">Primary Contact</h3>
+                                                            <h3 class="primary">{{ __('admin/customer/edit.primary_contact') }}</h3>
                                                             <button class="add-more-btn" id="add-pri"
-                                                                type="button">&#43;Add Primary Contact</button>
+                                                                type="button">&#43;Add {{ __('admin/customer/edit.primary_contact') }}</button>
                                                         </div>
                                                     </div>
 
@@ -130,8 +128,7 @@
 
                                                                     <div class="mb-3">
                                                                         <label for="exampleInputfirst"
-                                                                            class="form-label">First
-                                                                            Name</label>
+                                                                            class="form-label">{{ __('admin/customer/edit.first_name') }}</label>
                                                                         <input type="text" name="fname[]"
                                                                             value="{{ old('fname', $customer->pricontact[0]->fname ?? '') }}"
                                                                             class="form-control" id="exampleInputfirst"
@@ -139,8 +136,7 @@
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="exampleInputlast"
-                                                                            class="form-label">Last
-                                                                            Name</label>
+                                                                            class="form-label">{{ __('admin/customer/edit.last_name') }}</label>
                                                                         <input type="text" name="lname[]"
                                                                             value="{{ old('lname', $customer->pricontact[0]->lname ?? '') }}"
                                                                             class="form-control" id="exampleInputlast"
@@ -153,7 +149,7 @@
                                                                 <div class="phone-main-div">
                                                                     <div class="col-md-4">
                                                                         <label for="number-div"
-                                                                            class="form-label">Phone</label>
+                                                                            class="form-label">{{ __('admin/customer/edit.phone') }}</label>
                                                                         <select class="form-select form-control"
                                                                             name="phone_type[]"
                                                                             aria-label="Default select example"
@@ -191,7 +187,7 @@
                                                             <div class="col-sm-3">
                                                                 <div class="mb-3">
                                                                     <label for="exampleInputdepartment"
-                                                                        class="form-label">Department</label>
+                                                                        class="form-label">{{ __('admin/customer/edit.department') }}</label>
                                                                     <input type="text" name="department[]"
                                                                         value="{{ old('department', $customer->pricontact[0]->department ?? '') }}"
                                                                         class="form-control" id="exampleInputdepartment"
@@ -200,8 +196,7 @@
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <div class="mb-3">
-                                                                    <label for="exampleInputjob" class="form-label">Job
-                                                                        Title</label>
+                                                                    <label for="exampleInputjob" class="form-label">{{ __('admin/customer/edit.job_title') }}</label>
                                                                     <input type="text" name="job_title[]"
                                                                         value="{{ old('job_title', $customer->pricontact[0]->job_title ?? '') }}"
                                                                         class="form-control" id="exampleInputjob"
@@ -212,7 +207,7 @@
                                                                 <div class="email-address-div">
                                                                     <div class="col-md-4">
                                                                         <label for="email-div"
-                                                                            class="form-label">Email</label>
+                                                                            class="form-label">{{ __('admin/customer/edit.email') }}</label>
                                                                         <select class="form-select form-control"
                                                                             name="email_type[]"
                                                                             aria-label="Default select example"
@@ -221,7 +216,7 @@
                                                                             </option>
                                                                             <option value="personal"
                                                                                 {{ old('email_type', isset($customer->pricontact[0]) ? $customer->pricontact[0]->email_type : '') == 'personal' ? 'selected' : '' }}>
-                                                                                Personal</option>
+                                                                                {{ __('admin/customer/edit.personal_email') }}</option>
                                                                             <option
                                                                                 value="company"{{ old('email_type', isset($customer->pricontact[0]) ? $customer->pricontact[0]->email_type : '') == 'company' ? 'selected' : '' }}>
                                                                                 Company</option>
@@ -250,8 +245,7 @@
 
                                                                                 <div class="mb-3">
                                                                                     <label for="exampleInputfirst"
-                                                                                        class="form-label">First
-                                                                                        Name</label>
+                                                                                        class="form-label">{{ __('admin/customer/edit.first_name') }}</label>
                                                                                     <input type="text" name="fname[]"
                                                                                         value="{{ old('fname', $primary->fname) }}"
                                                                                         class="form-control"
@@ -260,8 +254,7 @@
                                                                                 </div>
                                                                                 <div class="mb-3">
                                                                                     <label for="exampleInputlast"
-                                                                                        class="form-label">Last
-                                                                                        Name</label>
+                                                                                        class="form-label">{{ __('admin/customer/edit.last_name') }}</label>
                                                                                     <input type="text" name="lname[]"
                                                                                         value="{{ old('lname', $primary->lname) }}"
                                                                                         class="form-control"
@@ -275,7 +268,7 @@
                                                                             <div class="phone-main-div">
                                                                                 <div class="col-md-4">
                                                                                     <label for="number-div"
-                                                                                        class="form-label">Phone</label>
+                                                                                        class="form-label">{{ __('admin/customer/edit.phone') }}</label>
                                                                                     <select
                                                                                         class="form-select form-control"
                                                                                         name="phone_type[]"
@@ -315,7 +308,7 @@
                                                                         <div class="col-sm-3">
                                                                             <div class="mb-3">
                                                                                 <label for="exampleInputdepartment"
-                                                                                    class="form-label">Department</label>
+                                                                                    class="form-label">{{ __('admin/customer/edit.department') }}</label>
                                                                                 <input type="text" name="department[]"
                                                                                     value="{{ old('department', $primary->department) }}"
                                                                                     class="form-control"
@@ -326,8 +319,7 @@
                                                                         <div class="col-sm-3">
                                                                             <div class="mb-3">
                                                                                 <label for="exampleInputjob"
-                                                                                    class="form-label">Job
-                                                                                    Title</label>
+                                                                                    class="form-label">{{ __('admin/customer/edit.job_title') }}</label>
                                                                                 <input type="text" name="job_title[]"
                                                                                     value="{{ old('job_title', $primary->job_title) }}"
                                                                                     class="form-control"
@@ -339,7 +331,7 @@
                                                                             <div class="email-address-div">
                                                                                 <div class="col-md-4">
                                                                                     <label for="email-div"
-                                                                                        class="form-label">Email</label>
+                                                                                        class="form-label">{{ __('admin/customer/edit.email') }}</label>
                                                                                     <select
                                                                                         class="form-select form-control"
                                                                                         name="email_type[]"
@@ -347,7 +339,7 @@
                                                                                         id="email-div">
                                                                                         <option
                                                                                             value="personal"{{ old('email_type', $primary->email_type) == 'personal' ? 'selected' : '' }}>
-                                                                                            Personal</option>
+                                                                                            {{ __('admin/customer/edit.personal_email') }}</option>
                                                                                         <option
                                                                                             value="company"{{ old('email_type', $primary->email_type) == 'company' ? 'selected' : '' }}>
                                                                                             Company</option>
@@ -470,7 +462,7 @@
                                                     <div id="some">
                                                     </div>
                                                     <div class="col-sm-6 align-items-end">
-                                                        <label for="email-div" class="form-label">Contact Type</label>
+                                                        <label for="email-div" class="form-label">{{ __('admin/customer/edit.contact_type') }}</label>
                                                         <select class="form-select form-control" name="contact"
                                                             aria-label="Default select example" id="email-div">
                                                             <option value="billing"
@@ -483,7 +475,7 @@
 
                                                     </div>
                                                     <div class="col-sm-6 align-items-end">
-                                                        <label for="email-div" class="form-label">Personal Email</label>
+                                                        <label for="email-div" class="form-label">{{ __('admin/customer/edit.personal_email') }}</label>
                                                         <input type="email" name="per_email"
                                                             value="{{ old('email', isset($customer->usname) ? $customer->usname->email : '') }}"
                                                             class="form-control" placeholder="personal@gmail.com">
@@ -493,7 +485,7 @@
                                                     <div class="col-sm-6"></div>
                                                     <div class="col-sm-12">
                                                         <div class="inner-header bg-light pt-2 pb-2">
-                                                            <h3 class="primary">Stored Service</h3>
+                                                            <h3 class="primary">{{ __('admin/customer/edit.stored_service') }}</h3>
                                                             <button class="add-more-btn" id="add-ser"
                                                                 type="button">&#43;Add Another Service</button>
                                                         </div>
@@ -505,7 +497,7 @@
                                                         <div class="col-sm-2">
                                                             <div class="mb-3">
                                                                 <label for="exampleInputlocation"
-                                                                    class="form-label">Nickname</label>
+                                                                    class="form-label">{{ __('admin/customer/edit.nickname') }}</label>
                                                                 <input type="text" class="form-control"
                                                                     value="{{ old('nick_name', $service->nick_name) }}"
                                                                     name="nick_name[]" id="exampleInputlocation"
@@ -515,7 +507,7 @@
                                                         <div class="col-sm-2">
                                                             <div class="mb-3">
                                                                 <label for="flexRadioDefaulta"
-                                                                    class="form-label">Primary?</label>
+                                                                    class="form-label">{{ __('admin/customer/edit.primary') }}</label>
                                                                 <select class="form-select form-control" name="primary[]"
                                                                     aria-label="Default select example">
                                                                     <option value="yes"
@@ -531,8 +523,7 @@
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="mb-3">
-                                                                <label for="flexRadioDefaultd" cldss="form-label">Billing
-                                                                    Address?</label>
+                                                                <label for="flexRadioDefaultd" cldss="form-label">{{ __('admin/customer/edit.billing_address') }}</label>
                                                                 <select class="form-select form-control"
                                                                     name="billing_address[]"
                                                                     aria-label="Default select example">
@@ -549,7 +540,7 @@
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="mb-3">
-                                                                <label for="email-div" class="form-label">Contact</label>
+                                                                <label for="email-div" class="form-label">{{ __('admin/customer/edit.contact') }}</label>
                                                                 <select class="form-select form-control"
                                                                     name="contact_type[]"
                                                                     aria-label="Default select example">
@@ -566,7 +557,7 @@
                                                         <div class="col-sm-2">
                                                             <div class="mb-3">
                                                                 <label for="flexRadioDefaulte"
-                                                                    cldss="form-label">Active?</label>
+                                                                    cldss="form-label">{{ __('admin/customer/edit.active_service') }}</label>
                                                                 <select class="form-select form-control" name="active_service[]"
                                                                     aria-label="Default select example">
                                                                     <option value="yes"
@@ -595,8 +586,7 @@
                                                                     <div class="col-sm-4">
                                                                         <div class="mb-3">
                                                                             <label for="exampleInputstreet"
-                                                                                class="form-label">Street Address or
-                                                                                Latitude, Longitude</label>
+                                                                                class="form-label">{{ __('admin/customer/edit.street_address') }}</label>
                                                                             <input type="text" name="address[]"
                                                                                 value="{{ old('address', $service->address) }}"
                                                                                 class="form-control"
@@ -607,7 +597,7 @@
                                                                     <div class="col-sm-2">
                                                                         <div class="mb-3">
                                                                             <label for="exampleInputapt"
-                                                                                class="form-label">Apt/Suite/Unit #</label>
+                                                                                class="form-label">{{ __('admin/customer/edit.apt_suite') }}</label>
                                                                             <input type="text" name="aptNo[]"
                                                                                 value="{{ old('aptNo', $service->aptNo) }}"
                                                                                 class="form-control" id="exampleInputapt"
@@ -617,7 +607,7 @@
                                                                     <div class="col-sm-2">
                                                                         <div class="mb-3">
                                                                             <label for="exampleInputcity"
-                                                                                class="form-label">City</label>
+                                                                                class="form-label">{{ __('admin/customer/edit.city') }}</label>
                                                                             <input type="text" name="city[]"
                                                                                 class="form-control"
                                                                                 value="{{ old('city', $service->city) }}"
@@ -628,7 +618,7 @@
                                                                     <div class="col-sm-2">
                                                                         <div class="mb-3">
                                                                             <label for="exampleInputstate"
-                                                                                class="form-label">State/Province</label>
+                                                                                class="form-label">{{ __('admin/customer/edit.state') }}</label>
                                                                             <input type="text" name="state[]"
                                                                                 class="form-control"
                                                                                 value="{{ old('state', $service->state) }}"
@@ -639,8 +629,7 @@
                                                                     <div class="col-sm-2">
                                                                         <div class="mb-3">
                                                                             <label for="exampleInputzip"
-                                                                                class="form-label">Zip/Postal
-                                                                                Code</label>
+                                                                                class="form-label">{{ __('admin/customer/edit.zip') }}</label>
                                                                             <input type="text" name="zip[]"
                                                                                 class="form-control"
                                                                                 value="{{ old('zip', $service->zip) }}"
@@ -659,13 +648,12 @@
                                                     </p>
                                                     <div class="col-sm-12">
                                                         <div class="inner-header bg-light pt-2 pb-2">
-                                                            <h3 class="primary">Default Document Templates</h3>
+                                                            <h3 class="primary">{{ __('admin/customer/edit.default_document_templates') }}</h3>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="mb-3">
-                                                            <label for="estimate-div" class="form-label">Estimate
-                                                                Template</label>
+                                                            <label for="estimate-div" class="form-label">{{ __('admin/customer/edit.estimate_template') }}</label>
                                                             <select class="form-select form-control"
                                                                 name="estimate_template"
                                                                 aria-label="Default select example" id="estimate-div">
@@ -677,8 +665,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="mb-3">
-                                                            <label for="job-div" class="form-label">Job/Work Order
-                                                                Template</label>
+                                                            <label for="job-div" class="form-label">{{ __('admin/customer/edit.job_template') }}</label>
                                                             <select class="form-select form-control" name="job_template"
                                                                 aria-label="Default select example" id="job-div">
                                                                 <option
@@ -689,8 +676,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="mb-3">
-                                                            <label for="invoice-div" class="form-label">Invoice
-                                                                Template</label>
+                                                            <label for="invoice-div" class="form-label">{{ __('admin/customer/edit.invoice_template') }}</label>
                                                             <select class="form-select form-control"
                                                                 name="invoice_template"
                                                                 aria-label="Default select example" id="invoice-div">
@@ -702,11 +688,11 @@
                                                     </div>
                                                     <div class="col-sm-12">
                                                         <div class="inner-header bg-light pt-2 pb-2">
-                                                            <h3 class="primary">Additional Information</h3>
+                                                            <h3 class="primary">{{ __('admin/customer/edit.additional_information') }}</h3>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <label for="notes-div" class="form-label ">Internal/Private
+                                                        <label for="notes-div" class="form-label ">{{ __('admin/customer/edit.internal_notes') }}
                                                             Notes</label>
                                                         <textarea name="notes" class="text-area w-100 form-control" rows="8" id="notes-div"
                                                             placeholder="Internal/Private Notes">{{ old('notes', $customer->notes ?? '') }}</textarea>
@@ -715,15 +701,13 @@
                                                     <div class="col-sm-4">
                                                         <div class="mb-3">
                                                             <label for="exampleInputcustomertag"
-                                                                class="form-label">Customer
-                                                                Tags</label>
+                                                                class="form-label">{{ __('admin/customer/edit.customer_tags') }}</label>
                                                             <input type="text" class="form-control" name="customer_tag" value="{{ old('customer_tag', $customer->customer_tag ?? '') }}"
                                                                 id="exampleInputcustomertag" placeholder="Customer Tags">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="referral-div form-control"
-                                                                class="form-label">Referral
-                                                                Source</label>
+                                                                class="form-label">{{ __('admin/customer/edit.referral_source') }}</label>
                                                             <select class="form-select form-control" name="referral"
                                                                 aria-label="Default select example" id="referral-div">
                                                                 <option value="1"{{ old('referral', $customer->referral) == '1' ? 'selected' : '' }}>Referral 1</option>
@@ -734,15 +718,14 @@
 
                                                         <div class="mb-3">
                                                             <label for="exampleInputamount"
-                                                                class="form-label">Amount</label>
+                                                                class="form-label">{{ __('admin/customer/edit.amount') }}</label>
                                                             <input type="text" name="amount" class="form-control" value="{{ old('amount', $customer->amount ?? '') }}"
                                                                 id="exampleInputamount" placeholder="Amount">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="mb-3">
-                                                            <label for="referral-div" class="form-label">Assigned
-                                                                Contract</label>
+                                                            <label for="referral-div" class="form-label">{{ __('admin/customer/edit.assigned_contract') }}</label>
                                                             <select class="form-select form-control"
                                                                 name="assigned_contract"
                                                                 aria-label="Default select example" id="referral-div">
@@ -752,7 +735,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="flexRadioDefaulttax"
-                                                                class="form-label">Taxable?</label>
+                                                                class="form-label">{{ __('admin/customer/edit.taxable') }}</label>
                                                             <select class="form-select form-control" name="taxable"
                                                                 aria-label="Default select example" id="email-div">
                                                                 <option value="yes"
@@ -765,7 +748,7 @@
 
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="item-div" class="form-label">Tax Item</label>
+                                                            <label for="item-div" class="form-label">{{ __('admin/customer/edit.tax_item') }}</label>
                                                             <select class="form-select form-control" name="tax_item"
                                                                 aria-label="Default select example" id="item-div">
                                                                 <option value="1"{{ old('tax_item', $customer->tax_item) == '1' ? 'selected' : '' }}>Tax 1</option>
@@ -774,8 +757,7 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="exampleInputnumber" class="form-label">Business #
-                                                                & Tax ID</label>
+                                                            <label for="exampleInputnumber" class="form-label">{{ __('admin/customer/edit.business_tax_id') }}</label>
                                                             <input type="text" class="form-control" value="{{ old('bussiness_id', $customer->bussiness_id ?? '0.00') }}"
                                                                 name="bussiness_id" id="exampleInputnumber"
                                                                 placeholder="Business # & Tax ID">
@@ -784,8 +766,7 @@
 
                                                             <div class="agent-inner-div">
                                                                 <div class="commission-div">
-                                                                    <label for="agent-div" class="form-label">Assigned
-                                                                        Rep</label>
+                                                                    <label for="agent-div" class="form-label">{{ __('admin/customer/edit.assigned_rep') }}</label>
                                                                     <select class="form-select form-control"
                                                                         name="assigned_rep"
                                                                         aria-label="Default select example"
@@ -796,7 +777,7 @@
                                                                 </div>
                                                                 <div class="commission1-div">
                                                                     <label for="commission-div"
-                                                                        class="form-label">Commission</label>
+                                                                        class="form-label">{{ __('admin/customer/edit.commission') }}</label>
                                                                     <select class="form-select form-control"
                                                                         name="commission_sign"
                                                                         aria-label="Default select example"

@@ -35,14 +35,14 @@
                             <div class="card-header">
                                 <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal">
-                                    New Task
+                                    {{ __('admin/task/index.new_task') }}
                                 </button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">New Task
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ __('admin/task/index.new_task') }}
                                                 </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
@@ -54,10 +54,10 @@
                                                     @csrf
                                                     <div class="col-xs-6 col-sm-6 col-md-12">
                                                         <div class="form-group">
-                                                            <label for="selectedJobs">Select Jobs(Location Name):</label>
+                                                            <label for="selectedJobs">{{ __('admin/task/index.select_job') }}(Location Name):</label>
                                                             <select class="form-control select-form" id="selectedJobs"
                                                                 name="job_id">
-                                                                <option value="" disabled hidden selected>select job
+                                                                <option value="" disabled hidden selected>{{ __('admin/task/index.select_job') }}
                                                                 </option>
                                                                 @foreach ($jobs as $job)
                                                                     <option value="{{ $job->id }}">
@@ -68,10 +68,10 @@
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-12">
                                                         <div class="form-group">
-                                                            <label for="selectedJobs">Assign to user:</label>
+                                                            <label for="selectedJobs">{{ __('admin/task/index.assigned_user') }}:</label>
                                                             <select class="form-control select-form" id="selectedJobs"
                                                                 name="user_id">
-                                                                <option value="" disabled hidden selected>select user
+                                                                <option value="" disabled hidden selected>{{ __('admin/task/index.select_user') }}
                                                                 </option>
                                                                 @foreach ($user as $job)
                                                                     <option value="{{ $job->id }}">{{ $job->name }}
@@ -82,19 +82,19 @@
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-12">
                                                         <div class="form-group">
-                                                            <label for="selectedJobs">Description:</label>
+                                                            <label for="selectedJobs">{{ __('admin/task/index.description') }}:</label>
                                                             <input type="text" name="description" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-12">
                                                         <div class="form-group">
-                                                            <label for="selectedJobs">Type of Assignment:</label>
+                                                            <label for="selectedJobs">{{ __('admin/task/index.type_of_assignment') }}:</label>
                                                             <input type="text" name="assignment" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-6 col-sm-6 col-md-12">
                                                         <div class="form-group">
-                                                            <label for="selectedJobs">Due Date:</label>
+                                                            <label for="selectedJobs">{{ __('admin/task/index.due_date') }}:</label>
                                                             <input type="datetime-local" name="due_date"
                                                                 class="form-control">
                                                         </div>
@@ -102,9 +102,8 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save
-                                                    changes</button>
+                                                    data-dismiss="modal">{{ __('admin/task/index.close') }}</button>
+                                                <button type="submit" class="btn btn-primary">{{ __('admin/task/index.save_changes') }}</button>
                                                 <a href="">
 
                                                 </a>
@@ -121,11 +120,11 @@
                                     <thead>
                                         <tr>
                                             <th>S.N</th>
-                                            <th>Job Location</th>
-                                            <th>Assigned Manager</th>
-                                            <th>Assigned User</th>
-                                            <th>Description</th>
-                                            <th>Actions</th>
+                                            <th>{{ __('admin/task/index.job_location') }}</th>
+                                            <th>{{ __('admin/task/index.assigned_manager') }}</th>
+                                            <th>{{ __('admin/task/index.assigned_user') }}</th>
+                                            <th>{{ __('admin/task/index.description') }}</th>
+                                            <th>{{ __('admin/task/index.actions') }}</th>
                                         </tr>
                                     </thead>
 
@@ -147,14 +146,14 @@
                                                     <td>
                                                         <button type="button" class="btn btn-success" data-toggle="modal"
                                                             data-target="#exampleModal{{ $jobcat->id }}">
-                                                            Edit
+                                                            {{ __('admin/task/index.edit_task') }}
                                                         </button>
                                                         <form action="{{ route('task.destroy', $jobcat->id) }}"
                                                             method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                                                                onclick="return confirm('{{ __('admin/task/index.are_you_sure') }}')">{{ __('admin/task/index.delete_task') }}</button>
                                                         </form>
                                                     </td>
                                                     <div class="modal fade" id="exampleModal{{ $jobcat->id }}"
@@ -163,8 +162,7 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit
-                                                                        Task
+                                                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('admin/task/index.edit_task') }}
                                                                     </h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
@@ -179,12 +177,11 @@
 
                                                                         <div class="col-xs-6 col-sm-6 col-md-12">
                                                                             <div class="form-group">
-                                                                                <label for="selectedJobs">Assign to
-                                                                                    user:</label>
+                                                                                <label for="selectedJobs">{{ __('admin/task/index.assigned_user') }}:</label>
                                                                                 <select class="form-control select-form"
                                                                                     id="selectedJobs" name="user_id">
                                                                                     <option value="" disabled hidden
-                                                                                        selected>select user
+                                                                                        selected>{{ __('admin/task/index.select_user') }}
                                                                                     </option>
                                                                                     @foreach ($user as $job)
                                                                                         <option
@@ -198,8 +195,7 @@
                                                                         </div>
                                                                         <div class="col-xs-6 col-sm-6 col-md-12">
                                                                             <div class="form-group">
-                                                                                <label for="selectedJobs">Type of
-                                                                                    Assignment:</label>
+                                                                                <label for="selectedJobs">{{ __('admin/task/index.type_of_assignment') }}t:</label>
                                                                                 <input type="text" name="assignment"
                                                                                     class="form-control"
                                                                                     value="{{ $jobcat->assignment }}">
@@ -207,7 +203,7 @@
                                                                         </div>
                                                                         <div class="col-xs-6 col-sm-6 col-md-12">
                                                                             <div class="form-group">
-                                                                                <label for="selectedJobs">Due Date:</label>
+                                                                                <label for="selectedJobs">{{ __('admin/task/index.due_date') }}:</label>
                                                                                 <input type="datetime-local"
                                                                                     name="due_date" class="form-control"
                                                                                     value="{{ $jobcat->due_date }}">
@@ -216,7 +212,7 @@
                                                                         <div class="col-xs-6 col-sm-6 col-md-12">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    for="selectedJobs">Description:</label>
+                                                                                    for="selectedJobs">{{ __('admin/task/index.description') }}:</label>
                                                                                 <textarea name="description" cols="30" rows="1" class="form-control">{{ isset($jobcat->description) ? old('description', $jobcat->description) : '' }}</textarea>
 
                                                                             </div>
@@ -224,9 +220,8 @@
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Save
-                                                                        changes</button>
+                                                                        data-dismiss="modal">{{ __('admin/task/index.close') }}</button>
+                                                                    <button type="submit" class="btn btn-primary">{{ __('admin/task/index.save_changes') }}</button>
 
                                                                 </div>
                                                                 </form>

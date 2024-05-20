@@ -18,7 +18,7 @@ class Language
      */
     public function handle($request, Closure $next)
     {
-            $locale = \Session::get('lang') ?? "es";
+            $locale = \Session::get('lang') ?? "en";
 
 
 
