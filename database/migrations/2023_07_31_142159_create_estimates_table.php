@@ -51,7 +51,7 @@ return new class extends Migration
             $table->string('arrival_end')->nullable();
             $table->string('time_duration')->nullable();
             $table->string('start_duration')->nullable();
-            $table->string('end_duration')->nullable();
+            $table->string('end_duration')->nullable(); 
             $table->string('referral_source')->nullable();
             $table->string('opportunity_rating')->nullable();
             $table->string('opportunity_owner')->nullable();
