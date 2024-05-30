@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer('estimate_id')->nullable();
             $table->integer('account_manager_id')->nullable();
             $table->integer('user_id')->nullable();
-            $table->text('job_sub_description')->nullable();
-            $table->integer('job_sub_cat_id')->nullable();
             $table->string('location_unit')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
@@ -62,12 +60,12 @@ return new class extends Migration
             $table->string('notify_tech_assign')->nullable();
             $table->string('notes_for_tech')->nullable();
             $table->string('scheduled_at')->nullable();
-            $table->string('completion_notes')->nullable(); 
+            $table->string('completion_notes')->nullable();
             $table->string('image')->nullable();
             $table->string('document')->nullable();
             $table->string('billable')->nullable();
             $table->string('mark_description')->nullable();
-            
+
             $table->timestamps();
         });
     }
