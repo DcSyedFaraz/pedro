@@ -54,7 +54,7 @@ class PermissionTableSeeder extends Seeder
             'pages-delete',
             'general_setting',
          ];
-      
+
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
@@ -62,7 +62,8 @@ class PermissionTableSeeder extends Seeder
         $roles =[
             'Admin',
             'User',
-            'Shopper',
+            'vendor',
+            'account manager',
         ];
 
         foreach ($roles as $role) {
@@ -70,19 +71,49 @@ class PermissionTableSeeder extends Seeder
         }
 
 
-        $user =[
+        $admin =[
             'name'=>'Admin',
             'email'=>'admin@gmail.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => date('Y-m-d h:i:s'),
         ];
 
+        $admind = User::create($admin);
+        $admind->assignRole('Admin');
+
+        $manager =[
+            'name'=>'manager',
+            'email'=>'manager@gmail.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => date('Y-m-d h:i:s'),
+        ];
+
+        $managerd = User::create($manager);
+        $managerd->assignRole('account manager');
+
+        $vendor =[
+            'name'=>'vendor',
+            'email'=>'vendor@gmail.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => date('Y-m-d h:i:s'),
+        ];
+
+        $vendord = User::create($vendor);
+        $vendord->assignRole('vendor');
+
+        $user =[
+            'name'=>'user',
+            'email'=>'user@gmail.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => date('Y-m-d h:i:s'),
+        ];
+
         $userd = User::create($user);
-        $userd->assignRole('Admin');
+        $userd->assignRole('User');
 
 
         // permission assig
-        $rolepermission = 
+        $rolepermission =
         [
             ['permission_id' => 1, 'role_id' => 1],
             ['permission_id' => 2, 'role_id' => 1],

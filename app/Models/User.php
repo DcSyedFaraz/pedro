@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -15,7 +16,7 @@ use Bavix\Wallet\Interfaces\Wallet;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,HasFactory,Notifiable,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -59,7 +60,7 @@ class User extends Authenticatable
     }
     public function files()
     {
-        return $this->hasMany(CompanyDocuments::class,'vendor_id','id');
+        return $this->hasMany(CompanyDocuments::class, 'vendor_id', 'id');
     }
 
 }
