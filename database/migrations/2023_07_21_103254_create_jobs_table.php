@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->integer('customer_id')->nullable();
+            $table->integer('estimate_id')->nullable();
             $table->integer('account_manager_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->text('job_sub_description')->nullable();
@@ -29,7 +30,9 @@ return new class extends Migration
             $table->string('location_state')->nullable();
             $table->string('location_zipcode')->nullable();
             $table->integer('job_cat_id')->nullable();
+            $table->integer('job_sub_cat_id')->nullable();
             $table->string('job_description')->nullable();
+            $table->string('job_sub_description')->nullable();
             $table->string('po_no')->nullable();
             $table->string('job_source')->nullable();
             $table->string('agent')->nullable();
@@ -58,7 +61,7 @@ return new class extends Migration
             // $table->string('assigned_tech')->nullable();
             $table->string('notify_tech_assign')->nullable();
             $table->string('notes_for_tech')->nullable();
-            $table->string('schedule_at')->nullable();
+            $table->string('scheduled_at')->nullable();
             $table->string('completion_notes')->nullable(); 
             $table->string('image')->nullable();
             $table->string('document')->nullable();
