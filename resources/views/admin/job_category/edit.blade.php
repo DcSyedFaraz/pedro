@@ -45,14 +45,14 @@
                           <input type="text" name="name" class="form-control" id="name" value="{{ $job_category->name }}" required>
                       </div>
                      </br>
-                     <select name="job_cat_id" id="category" class="form-control">
+                     {{-- <select name="job_cat_id" id="category" class="form-control">
                         <option value="">Select a Sub category</option>
                         @foreach($job_sub_cat as $job_sub_cat)
                             <option value="{{ $job_sub_cat->id }}" {{ $job_sub_cat->id == $job_category->job_sub_category->id ? 'selected' : '' }}>
                                 {{ $job_sub_cat->name }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> --}}
                     </br>
 
                       <div>

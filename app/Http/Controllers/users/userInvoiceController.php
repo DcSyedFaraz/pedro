@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Stripe\Charge;
+use Stripe\Customer;
+use Stripe\Stripe;
 
 class userInvoiceController extends Controller
 {
@@ -18,7 +21,7 @@ class userInvoiceController extends Controller
     {
         $user = auth()->user()->id;
         $invoices = Invoice::whereHas('job', function ($query) use ($user) {
-            $query->where('user_id', $user);
+            $query->where('customer_id', $user);
         })->get();
         // dd($invoices);
         return view('users.invoice.index', compact('invoices'));
@@ -29,9 +32,81 @@ class userInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function stripePost(Request $request)
     {
-        //
+        dd($request->all());
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+
+
+        $customer = Customer::create(
+            array(
+
+                "address" => [
+
+                    "line1" => "Virani Chowk",
+
+                    "postal_code" => "360001",
+
+                    "city" => "Rajkot",
+
+                    "state" => "GJ",
+
+                    "country" => "IN",
+
+                ],
+
+                "email" => "demo@gmail.com",
+
+                "name" => "Hardik Savani",
+
+                "source" => $request->stripeToken
+
+            )
+        );
+
+
+
+        Charge::create([
+
+            "amount" => 100 * 100,
+
+            "currency" => "usd",
+
+            "customer" => $customer->id,
+
+            "description" => "Test payment from itsolutionstuff.com.",
+
+            "shipping" => [
+
+                "name" => "Jenny Rosen",
+
+                "address" => [
+
+                    "line1" => "510 Townsend St",
+
+                    "postal_code" => "98140",
+
+                    "city" => "San Francisco",
+
+                    "state" => "CA",
+
+                    "country" => "US",
+
+                ],
+
+            ]
+
+        ]);
+
+
+
+        Session::flash('success', 'Payment successful!');
+
+
+
+        return back();
+
     }
 
     /**
@@ -53,14 +128,14 @@ class userInvoiceController extends Controller
      */
     public function show($id)
     {
-        $invoice = Invoice::with('service','job')->find($id);
+        $invoice = Invoice::with('service', 'job')->find($id);
         // dd($invoice);
         return view('users.invoice.show', compact('invoice'));
     }
     public function generatePDF($id)
     {
-        $invoice = Invoice::with('service','job')->find($id);
-        $pdf = Pdf::loadView('users.invoice.pdf',  ['invoice' => $invoice]);
+        $invoice = Invoice::with('service', 'job')->find($id);
+        $pdf = Pdf::loadView('users.invoice.pdf', ['invoice' => $invoice]);
 
         return $pdf->stream('invoice.pdf');
         // return view('users.invoice.show', compact('invoice'));

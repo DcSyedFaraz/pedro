@@ -61,7 +61,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>{{ $inventory }}</h3>
+                                {{-- <h3>{{ $inventory }}</h3> --}}
 
                                 <p>Inventory</p>
                             </div>

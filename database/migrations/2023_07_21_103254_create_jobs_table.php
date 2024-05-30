@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->integer('customer_id')->nullable();
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('estimate_id')->nullable();
             $table->integer('account_manager_id')->nullable();
             $table->integer('user_id')->nullable();
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->string('location_state')->nullable();
             $table->string('location_zipcode')->nullable();
             $table->integer('job_cat_id')->nullable();
-            $table->integer('job_sub_cat_id')->nullable();
+            $table->string('job_sub_cat_id')->nullable();
             $table->string('job_description')->nullable();
             $table->string('job_sub_description')->nullable();
             $table->string('po_no')->nullable();

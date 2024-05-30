@@ -52,7 +52,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">&nbsp;</div>
                                                     <div class="col-md-6 d-flex justify-content-end">
-                                                        <button type="submit" class="btn btn-primary">{{ __('vendor/invoice/index.save_invoice') }}</button>
+                                                        <button type="submit" class="btn btn-primary">Save Invoice</button>
                                                     </div>
                                                 </div>
                                                 <ul class="nav nav-tabs">

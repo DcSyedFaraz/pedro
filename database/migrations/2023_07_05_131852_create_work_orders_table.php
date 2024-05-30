@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('vendor_id');
             $table->string('status');
             $table->string('deadline');
-            $table->string('payment_info');
+            $table->string('payment_info')->nullable();
             $table->string('priority')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();

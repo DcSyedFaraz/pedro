@@ -39,7 +39,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data['inventory'] = Inventory::all()->count();
+        // $data['inventory'] = Inventory::all()->count();
         $data['job'] = Job::all()->count();
         $data['estimate'] = Estimate::all()->count();
         $data['invoice'] = Invoice::where('status', 'paid')->avg('amount');
