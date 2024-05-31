@@ -2,228 +2,103 @@
 <html lang="en">
 
 <head>
-    {{-- <style>
-        .col-md-12.bg-primary.rounded-lg.text-center {
-            background-color: #007bff;
-            border-radius: 1rem;
-            text-align: center;
-        }
-
-        .col-md-6 {
-            /* You can add your custom styles for the columns here */
-        }
-
-        .card.card-primary {
-            border: 1px solid #eee;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-
-        .card-body {
-            padding: 1.25rem;
-        }
-
-        .list-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 0;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .list-group-item {
-            border: 1px solid #eee;
-            margin-bottom: -1px;
-            padding: 10px;
-            background-color: #fff;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25em 0.4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: 0.25rem;
-        }
-
-        .badge-danger {
-            color: #fff;
-            background-color: #dc3545;
-        }
-
-        .badge-success {
-            color: #fff;
-            background-color: #28a745;
-        }
-
-        .badge-warning {
-            color: #212529;
-            background-color: #ffc107;
-        }
-
-        /* Bootstrap classes */
-        .bg-primary {
-            background-color: #007bff;
-        }
-
-        .rounded-lg {
-            border-radius: 1rem;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .card {
-            border: 1px solid #eee;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            padding: 15px;
-        }
-
-        .card-body {
-            padding: 1.25rem;
-        }
-
-        .list-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 0;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .list-group-item {
-            border: 1px solid #eee;
-            margin-bottom: -1px;
-            padding: 10px;
-            background-color: #fff;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25em 0.4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: 0.25rem;
-        }
-
-        .badge-danger {
-            color: #fff;
-            background-color: #dc3545;
-        }
-
-        .badge-success {
-            color: #fff;
-            background-color: #28a745;
-        }
-
-        .badge-warning {
-            color: #212529;
-            background-color: #ffc107;
-        }
-
-        /* Vanilla CSS */
+    <style>
+        /* Global Styles */
         body {
-            background-color: #007bff;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f9f9f9;
         }
 
-        .rounded-lg {
-            border-radius: 1rem;
-        }
-
-        .text-center {
-            text-align: center;
+        .content-wrapper {
+            padding: 20px;
         }
 
         .card {
-            border: 1px solid #eee;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
-            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .card-body {
-            padding: 1.25rem;
+            padding: 20px;
         }
 
         .list-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 0;
-            padding-left: 0;
-            list-style: none;
+            margin-bottom: 20px;
         }
 
         .list-group-item {
-            border: 1px solid #eee;
-            margin-bottom: -1px;
             padding: 10px;
-            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .list-group-item strong {
+            font-weight: bold;
+            margin-right: 10px;
         }
 
         .badge {
-            display: inline-block;
-            padding: 0.25em 0.4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: 0.25rem;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 10px;
         }
 
         .badge-danger {
-            color: #fff;
             background-color: #dc3545;
+            color: #fff;
         }
 
         .badge-success {
-            color: #fff;
             background-color: #28a745;
+            color: #fff;
         }
 
         .badge-warning {
-            color: #212529;
             background-color: #ffc107;
+            color: #fff;
         }
-    </style> --}}
 
+        /* Invoice Information Section */
+        .bg-primary {
+            background-color: #337ab7;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .bg-primary h3 {
+            margin-top: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .col-md-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        {{-- <section class="content-header">
-        <h1>Invoice Details</h1>
-    </section> --}}
-
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <!-- Your content goes here -->
 
-                <div class="col-md-12 bg-primary rounded-lg text-center ">
+                <div class="col-md-12 bg-primary rounded-lg text-center">
                     <h3 class="">Invoice Information</h3>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card card-primary">
-
                             <div class="card-body">
                                 @foreach ($invoice->service as $invoices)
                                     <ul class="list-group">
-
                                         <li class="list-group-item">
                                             <strong>Description:</strong>
                                             <span>{{ $invoices->description }}</span>
@@ -253,16 +128,13 @@
                                             <span>{{ $invoices->margin_tax }}</span>
                                         </li>
                                         <br>
-
                                     </ul>
                                 @endforeach
-
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card card-primary">
-
                             <div class="card-body">
                                 <ul class="list-group">
                                     <li class="list-group-item">
@@ -272,7 +144,7 @@
                                     <li class="list-group-item">
                                         <strong>Status:</strong>
                                         <span
-                                            class="badge badge-{{ $invoice->status === 'unpaid' ? 'danger' : ($invoice->status === 'paid' ? 'success' : 'warning') }}">{{ Str::ucfirst($invoice->status) }}</span>
+                                            class="badge badge-{{ $invoice->status === 'unpaid' ? 'danger' : ($invoice->status === 'paid' ? 'uccess' : 'warning') }}">{{ Str::ucfirst($invoice->status) }}</span>
                                     </li>
                                     <li class="list-group-item">
                                         <strong>Drive Time:</strong>
@@ -302,9 +174,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="m-4">
-                    <button class="btn btn-primary" onclick="goBack()">Go Back</button>
-                </div> --}}
                 </div>
                 <!-- /.row -->
             </div>

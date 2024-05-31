@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\ProductandService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Stripe\Charge;
@@ -34,79 +35,36 @@ class userInvoiceController extends Controller
      */
     public function stripePost(Request $request)
     {
-        dd($request->all());
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-
-
-
-        $customer = Customer::create(
-            array(
-
-                "address" => [
-
-                    "line1" => "Virani Chowk",
-
-                    "postal_code" => "360001",
-
-                    "city" => "Rajkot",
-
-                    "state" => "GJ",
-
-                    "country" => "IN",
-
-                ],
-
-                "email" => "demo@gmail.com",
-
-                "name" => "Hardik Savani",
-
-                "source" => $request->stripeToken
-
-            )
-        );
-
-
-
-        Charge::create([
-
-            "amount" => 100 * 100,
-
-            "currency" => "usd",
-
-            "customer" => $customer->id,
-
-            "description" => "Test payment from itsolutionstuff.com.",
-
-            "shipping" => [
-
-                "name" => "Jenny Rosen",
-
-                "address" => [
-
-                    "line1" => "510 Townsend St",
-
-                    "postal_code" => "98140",
-
-                    "city" => "San Francisco",
-
-                    "state" => "CA",
-
-                    "country" => "US",
-
-                ],
-
-            ]
-
+        // Step 1: Validate the request
+        $request->validate([
+            'invoice_id' => 'required|integer|exists:productand_services,invoice_id',
+            'stripeToken' => 'required'
         ]);
 
+        // Step 2: Calculate the sum of the total
+        $invoiceId = $request->input('invoice_id');
+        $totalAmount = ProductandService::where('invoice_id', $invoiceId)
+            ->sum('total');
 
+        if ($totalAmount <= 0) {
+            return redirect()->back()->with('error', 'Invalid total amount.');
+        }
 
-        Session::flash('success', 'Payment successful!');
+        // Step 3: Charge the amount using Stripe
+        try {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
 
+            $charge = Charge::create([
+                "amount" => $totalAmount * 100, // amount in cents
+                "currency" => "usd",
+                "source" => $request->input('stripeToken'),
+                "description" => "Payment for invoice #$invoiceId"
+            ]);
 
-
-        return back();
-
+            return redirect()->back()->with('success', 'Payment successful.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**

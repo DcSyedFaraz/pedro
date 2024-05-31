@@ -119,7 +119,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Card Details</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -134,9 +134,9 @@
 
                                         <div class='form-row row'>
 
-                                            <div class='col-xs-12 form-group required'>
+                                            <div class='col-12 form-group required'>
                                                 <label class='control-label'>Name on Card</label> <input
-                                                    class='form-control' size='4' type='text'>
+                                                    class='form-control' size='20' type='text'>
                                             </div>
 
                                         </div>
@@ -145,7 +145,7 @@
 
                                             <div class='col-12 form-group card required'>
                                                 <label class='control-label'>Card Number</label> <input autocomplete='off'
-                                                    class='form-control card-number' size='20' type='text'>
+                                                    class='form-control card-number' size='20'  type='number' id="cardNumber" placeholder="1234 5678 9012 3456">
                                             </div>
                                         </div>
 
@@ -159,7 +159,7 @@
                                             <div class='col-xs-12 col-md-4 form-group expiration required'>
                                                 <label class='control-label'>Expiration Month</label> <input
                                                     class='form-control card-expiry-month' placeholder='MM' size='2'
-                                                    type='text'>
+                                                    type='number'>
                                             </div>
 
                                             <div class='col-xs-12 col-md-4 form-group expiration required'>
@@ -179,7 +179,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now
-                                                    ({{ $total }})</button>
+                                                    (${{ $total }})</button>
                                             </div>
                                         </div>
 
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -209,10 +209,12 @@
 @endsection
 @section('scripts')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7-beta.19/jquery.inputmask.min.js"></script>
 
 
 
     <script type="text/javascript">
+    Inputmask("9999 9999 9999 9999").mask(document.getElementById('cardNumber'));
         $(function() {
 
             /*------------------------------------------
