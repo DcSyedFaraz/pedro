@@ -111,87 +111,95 @@
                     <button class="btn btn-primary" onclick="goBack()">{{ __('user/invoice/show.go_back') }}</button>
                     <a href="{{ route('invoice.generate', $invoice->id) }}"
                         class="btn btn-warning">{{ __('user/invoice/show.download_pdf') }}</a>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                        Pay Now
-                    </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Card Details</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form role="form" action="{{ route('stripe.post') }}" method="post"
-                                        class="require-validation" data-cc-on-file="false"
-                                        data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
 
-                                        @csrf
-                                        <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
+                    @if ($invoice->status != 'paid')
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                            {{ __('user/invoice/show.pay_now') }}
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Card Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form role="form" action="{{ route('stripe.post') }}" method="post"
+                                            class="require-validation" data-cc-on-file="false"
+                                            data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
 
-                                        <div class='form-row row'>
+                                            @csrf
+                                            <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
 
-                                            <div class='col-12 form-group required'>
-                                                <label class='control-label'>Name on Card</label> <input
-                                                    class='form-control' size='20' type='text'>
+                                            <div class='form-row row'>
+
+                                                <div class='col-12 form-group required'>
+                                                    <label class='control-label'>Name on Card</label> <input
+                                                        class='form-control' size='20' type='text'>
+                                                </div>
+
                                             </div>
 
-                                        </div>
+                                            <div class='form-row row'>
 
-                                        <div class='form-row row'>
+                                                <div class="col-12 form-group card required">
+                                                    <label class="control-label" for="cardNumber">Card Number</label>
+                                                    <input autocomplete="off" class="form-control card-number"
+                                                        maxlength="19" type="text" id="cardNumber"
+                                                        placeholder="1234 5678 9012 3456" inputmode="numeric">
+                                                </div>
 
-                                            <div class='col-12 form-group card required'>
-                                                <label class='control-label'>Card Number</label> <input autocomplete='off'
-                                                    class='form-control card-number' size='20'  type='number' id="cardNumber" placeholder="1234 5678 9012 3456">
-                                            </div>
-                                        </div>
-
-                                        <div class='form-row row'>
-                                            <div class='col-12 col-md-4 form-group cvc required'>
-                                                <label class='control-label'>CVC</label> <input autocomplete='off'
-                                                    class='form-control card-cvc' placeholder='ex. 311' size='4'
-                                                    type='number'>
                                             </div>
 
-                                            <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                <label class='control-label'>Expiration Month</label> <input
-                                                    class='form-control card-expiry-month' placeholder='MM' size='2'
-                                                    type='number'>
+                                            <div class='form-row row'>
+                                                <div class='col-12 col-md-4 form-group cvc required'>
+                                                    <label class='control-label'>CVC</label> <input autocomplete='off'
+                                                        class='form-control card-cvc' placeholder='ex. 311' maxlength="3"
+                                                        type='number'>
+                                                </div>
+
+                                                <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                                    <label class='control-label'>Expiration Month</label> <input
+                                                        class='form-control card-expiry-month' placeholder='MM'
+                                                        maxlength="2" type='number'>
+                                                </div>
+
+                                                <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                                    <label class='control-label'>Expiration Year</label> <input
+                                                        class='form-control card-expiry-year' placeholder='YYYY'
+                                                        maxlength='4' type='number'>
+                                                </div>
                                             </div>
 
-                                            <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                <label class='control-label'>Expiration Year</label> <input
-                                                    class='form-control card-expiry-year' placeholder='YYYY' size='4'
-                                                    type='number'>
+                                            <div class='form-row row'>
+                                                <div class='col-md-12 error form-group hide'>
+                                                    <div class='alert-danger alert'>Please correct the errors and try
+                                                        again.</div>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class='form-row row'>
-                                            <div class='col-md-12 error form-group hide'>
-                                                <div class='alert-danger alert'>Please correct the errors and try
-                                                    again.</div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Pay
+                                                        Now
+                                                        (${{ $total }})</button>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now
-                                                    (${{ $total }})</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
             <!-- /.row -->
@@ -214,7 +222,9 @@
 
 
     <script type="text/javascript">
-    Inputmask("9999 9999 9999 9999").mask(document.getElementById('cardNumber'));
+        $(document).ready(function() {
+            $('#cardNumber').inputmask('9999 9999 9999 9999'); // Mask for credit card number
+        });
         $(function() {
 
             /*------------------------------------------

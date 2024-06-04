@@ -5,8 +5,12 @@ namespace App\Http\Controllers\users;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\ProductandService;
+use App\Models\User;
+use App\Notifications\UserNotification;
 use Barryvdh\DomPDF\Facade\Pdf;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Stripe\Charge;
 use Stripe\Customer;
 use Stripe\Stripe;
@@ -52,6 +56,8 @@ class userInvoiceController extends Controller
 
         // Step 3: Charge the amount using Stripe
         try {
+            DB::beginTransaction();
+
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
             $charge = Charge::create([
@@ -61,8 +67,25 @@ class userInvoiceController extends Controller
                 "description" => "Payment for invoice #$invoiceId"
             ]);
 
+            $invoice = Invoice::find($invoiceId);
+            $invoice->status = 'paid';
+            $invoice->save();
+
+            $user = auth()->user();
+
+            // Get the users except the authenticated user and those with the excluded roles
+            $admin = User::role(['Admin'])->get();
+
+            // Send the notification to eligible users
+            $message = "Payment for invoice #$invoiceId has been successfully processed.";
+
+            Notification::send($admin, new UserNotification($user, $message));
+
+            DB::commit();
+
             return redirect()->back()->with('success', 'Payment successful.');
         } catch (\Exception $e) {
+            DB::rollback();
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

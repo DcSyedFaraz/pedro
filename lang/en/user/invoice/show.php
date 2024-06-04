@@ -23,4 +23,5 @@ return [
     'note_to_customer' => 'Note to Customer:',
     'go_back' => 'Go Back',
     'download_pdf' => 'Download PDF',
+    'pay_now' => 'Pay Now',
 ];
