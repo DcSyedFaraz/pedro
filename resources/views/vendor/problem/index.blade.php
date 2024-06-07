@@ -48,7 +48,7 @@
                                     @foreach ($problemReports as $report)
                                     <tr>
                                         <td>{{ $report->id }}</td>
-                                        <td>{{ $report->jobname->name }}</td>
+                                        <td>{{ $report->jobname->name ?? ''}}</td>
                                         <td>{{ $report->location }}</td>
                                         <td>
                                             @if ($report->type_of_problem === 'critical')

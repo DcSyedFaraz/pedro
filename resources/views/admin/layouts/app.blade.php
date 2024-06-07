@@ -851,40 +851,39 @@
 
                             </ul>
                         </li>
-                           <!-- Start Profile Modules -->
-                                <li class="nav-item
-                                {{ request()->routeIs('pages.index') ? 'menu-open' : '' }}
-                                {{ request()->routeIs('services.*') ? 'menu-open' : '' }}
-                                {{ request()->routeIs('sections.index') ? 'menu-open' : '' }}
+                        <!-- Start Profile Modules -->
+                        <li
+                            class="nav-item
+                            {{ request()->routeIs(['services.*','areas.*']) ? 'menu-open' : '' }}
                                 ">
-                                <a href="#"
-                                    class="nav-link nav-dropdown-toggle
-                                    {{ request()->routeIs('services.*') ? 'active' : '' }}
+                            <a href="#"
+                                class="nav-link nav-dropdown-toggle
+                                    {{ request()->routeIs(['services.*','areas.*']) ? 'active' : '' }}
                                 ">
-                                    <i class="nav-icon fas fa-user text-primary"></i>
-                                    <p>
-                                        {{ __('admin/layout/app.profile') }}
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('services.index') }}"
-                                            class="nav-link {{ request()->routeIs('services.index') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{ __('admin/layout/app.services') }}</p>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="{{ route('areas.index') }}"
-                                            class="nav-link {{ request()->routeIs('areas.index') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{ __('admin/layout/app.areas') }}</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <i class="nav-icon fas fa-user text-primary"></i>
+                                <p>
+                                    {{ __('admin/layout/app.profile') }}
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('services.index') }}"
+                                        class="nav-link {{ request()->routeIs('services.*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{ __('admin/layout/app.services') }}</p>
+                                    </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('areas.index') }}"
+                                        class="nav-link {{ request()->routeIs('areas.*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{ __('admin/layout/app.area') }}</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a href="{{ route('estimate_requests.index') }}"
@@ -915,7 +914,7 @@
         @yield('content')
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2022-{{ now()->year }} <a href="#">Pedro</a>.</strong>
+            <strong>Copyright &copy; 2023-{{ now()->year }} <a href="#">Pedro</a>.</strong>
             All rights reserved.
         </footer>
 

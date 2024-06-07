@@ -57,4 +57,5 @@ return [
     'vendors_attendance' => 'Asistencia de proveedor',
     'invoice_dashboard' => 'Tablero de Facturación',
     'services' => 'Servicios',
+    'area' => 'Áreas',
 ];

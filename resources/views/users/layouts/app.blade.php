@@ -373,7 +373,7 @@
         @yield('content')
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2022-{{ now()->year }} <a href="#">Pedro</a>.</strong>
+            <strong>Copyright &copy; 2023-{{ now()->year }} <a href="#">Pedro</a>.</strong>
             All rights reserved.
         </footer>
 

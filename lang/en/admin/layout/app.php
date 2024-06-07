@@ -57,4 +57,5 @@ return [
     'vendors_attendance' => 'Vendor\'s Attendance',
     'invoice_dashboard' => 'Invoice Dashboard',
     'services' => 'Services',
+    'area' => 'Areas',
 ];

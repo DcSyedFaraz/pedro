@@ -119,8 +119,19 @@ Route::group(['middleware' => ['language']], function () {
         Route::resource('permission', PermissionController::class);
         Route::resource('users', UserController::class);
 
-        Route::resource('services', ServicesController::class);
-        Route::resource('areas', ServicesController::class);
+        Route::controller(ServicesController::class)->group(function () {
+            // Services
+            Route::get('/services', 'index')->name('services.index');
+            Route::post('/services', 'store')->name('services.store');
+            Route::put('/services/{id}', 'update')->name('services.update');
+            Route::delete('/services/{id}', 'destroy')->name('services.destroy');
+
+            // Areas of work
+            Route::get('/areas', 'areaindex')->name('areas.index');
+            Route::post('/areas', 'areastore')->name('areas.store');
+            Route::put('/areas/{id}', 'areaupdate')->name('areas.update');
+            Route::delete('/areas/{id}', 'areadestroy')->name('areas.destroy');
+        });
 
         Route::get('/manager', [UserController::class, 'manager'])->name('managers.index');
         Route::get('/customer', [UserController::class, 'customer'])->name('customer.index');

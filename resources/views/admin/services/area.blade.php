@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Services</h1>
+                        <h1>Areas</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Services</li>
+                            <li class="breadcrumb-item active">Areas</li>
                         </ol>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             <div class="card-header">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#exampleModal">
-                                    Create New Service
+                                    Create New Area
                                 </button>
 
                                 <!-- Modal -->
@@ -46,19 +46,24 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Create New Service</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Create New Area</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="post" action="{{ route('services.store') }}">
+                                            <form method="post" action="{{ route('areas.store') }}">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <label for="name" class="col-form-label">Service Name:</label>
+                                                        <label for="name" class="col-form-label">Area Name:</label>
                                                         <input type="text" class="form-control" id="name"
-                                                            name="name" placeholder="Enter service name">
+                                                            name="name" placeholder="Enter area name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="zip" class="col-form-label">Zip Code:</label>
+                                                        <input type="text" class="form-control" id="zip"
+                                                            name="zip" placeholder="Enter zip code">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -78,22 +83,24 @@
                                         <tr>
                                             <th>S.N</th>
                                             <th>Name</th>
+                                            <th>Zip Code</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($services as $key => $service)
+                                        @foreach ($areas as $key => $area)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $service->name }}</td>
+                                                <td>{{ $area->name }}</td>
+                                                <td>{{ $area->zip }}</td>
                                                 <td class="d-flex">
                                                     <a href="#" class="btn btn-success edit-btn"
-                                                        data-id="{{ $service->id }}">Edit</a>
-                                                    <form action="{{ route('services.destroy', $service->id) }}"
+                                                        data-id="{{ $area->id }}">Edit</a>
+                                                    <form action="{{ route('areas.destroy', $area->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button onclick="return confirm('Are you sure you want to delete this service?')" type="submit" class="btn btn-danger mx-1">Delete</button>
+                                                        <button onclick="return confirm('Are you sure you want to delete this area?')" type="submit" class="btn btn-danger mx-1">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -106,7 +113,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="editModalLabel">Edit Service</h5>
+                                                <h5 class="modal-title" id="editModalLabel">Edit area</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -117,9 +124,14 @@
                                                     @method('PUT')
                                                     @csrf
                                                     <div class="form-group">
-                                                        <label for="name" class="col-form-label">Service Name:</label>
+                                                        <label for="name" class="col-form-label">Area Name:</label>
                                                         <input type="text" class="form-control" id="name"
-                                                            name="name" value="{{ $service->name ?? ''}}">
+                                                            name="name" value="{{ $area->name ?? ''}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="zip" class="col-form-label">Zip Code:</label>
+                                                        <input type="text" class="form-control" id="zip"
+                                                            name="zip" value="{{ $area->zip ?? ''}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -154,7 +166,7 @@
         $(document).on('click', '.edit-btn', function() {
             var serviceId = $(this).data('id');
             $('#editModal').modal('show');
-            $('#editForm').attr('action', '{{ route('services.update', '') }}/' + serviceId);
+            $('#editForm').attr('action', '{{ route('areas.update', '') }}/' + serviceId);
         });
     </script>
 @endsection
