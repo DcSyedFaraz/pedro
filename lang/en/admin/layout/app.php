@@ -56,4 +56,5 @@ return [
     'manager_attendance' => 'Manager\'s Attendance',
     'vendors_attendance' => 'Vendor\'s Attendance',
     'invoice_dashboard' => 'Invoice Dashboard',
+    'services' => 'Services',
 ];

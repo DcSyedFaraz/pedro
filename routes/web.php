@@ -34,6 +34,8 @@ use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\CheckListController;
 use App\Http\Controllers\Admin\InspectionController;
+use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\Admin\AreasController;
 
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\JobSubCategoryController;
@@ -116,6 +118,9 @@ Route::group(['middleware' => ['language']], function () {
         Route::resource('roles', RoleController::class);
         Route::resource('permission', PermissionController::class);
         Route::resource('users', UserController::class);
+
+        Route::resource('services', ServicesController::class);
+        Route::resource('areas', ServicesController::class);
 
         Route::get('/manager', [UserController::class, 'manager'])->name('managers.index');
         Route::get('/customer', [UserController::class, 'customer'])->name('customer.index');
