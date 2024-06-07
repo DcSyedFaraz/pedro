@@ -18,14 +18,14 @@ return new class extends Migration
             $table->integer('job_id');
             $table->integer('createdBy');
             $table->string('status')->default('unpaid');
-            $table->string('drive_time');
-            $table->string('labor_time');
-            $table->string('payments_and_deposits_input');
-            $table->string('amount_description');
-            $table->string('amount');
-            $table->string('note_to_cust');
-            $table->string('no_bill_amount_description');
-            $table->string('no_bill_amount');
+            $table->string('drive_time')->nullable();
+            $table->string('labor_time')->nullable();
+            $table->string('payments_and_deposits_input')->nullable();
+            $table->string('amount_description')->nullable();
+            $table->string('amount')->nullable();
+            $table->string('note_to_cust')->nullable();
+            $table->string('no_bill_amount_description')->nullable();
+            $table->string('no_bill_amount')->nullable();
             $table->timestamps();
         });
     }

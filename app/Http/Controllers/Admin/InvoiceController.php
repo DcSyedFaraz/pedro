@@ -21,19 +21,19 @@ class InvoiceController extends Controller
             $user = auth()->user();
             if ($user->hasRole('Admin')) {
 
-                $invoice = Invoice::where('status', 'unpaid')->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $paid = Invoice::where('status', 'paid')->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $recur = Invoice::where('status', 'recurring')->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $all = Invoice::with('service', 'unpaid')->orderby('created_at','desc')->get();
+                $invoice = Invoice::where('status', 'unpaid')->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $paid = Invoice::where('status', 'paid')->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $recur = Invoice::where('status', 'recurring')->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $all = Invoice::with('service', 'unpaid')->orderby('created_at', 'desc')->get();
                 $add = ProductandService::sum('total');
                 return view('invoice.index', compact('invoice', 'paid', 'recur', 'all', 'add'));
 
             } else {
-                $invoice = Invoice::where('createdBy', $user->id)->where('status', 'unpaid')->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $paid = Invoice::where('createdBy', $user->id)->where('status', 'paid')->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $recur = Invoice::where('createdBy', $user->id)->where('status', 'recurring')->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $all = Invoice::where('createdBy', $user->id)->with('service', 'unpaid')->orderby('created_at','desc')->get();
-                $invoices = Invoice::where('createdBy', $user->id)->orderby('created_at','desc')->get();
+                $invoice = Invoice::where('createdBy', $user->id)->where('status', 'unpaid')->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $paid = Invoice::where('createdBy', $user->id)->where('status', 'paid')->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $recur = Invoice::where('createdBy', $user->id)->where('status', 'recurring')->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $all = Invoice::where('createdBy', $user->id)->with('service', 'unpaid')->orderby('created_at', 'desc')->get();
+                $invoices = Invoice::where('createdBy', $user->id)->orderby('created_at', 'desc')->get();
                 // $add = 0;
                 // foreach ($invoices as $invoicess) {
                 //     foreach ($invoicess->service as $some) {
@@ -74,7 +74,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         // return $request;
-
+        // dd($request->all());
 
         try {
             // Validate the request data
@@ -142,7 +142,7 @@ class InvoiceController extends Controller
             DB::commit();
             $user = auth()->user();
             $admin = User::find(1);
-            $message = 'Created an Invoice';
+            $message = "Created an Invoice #$invoice->id";
             $admin->notify(new UserNotification($user, $message));
 
             return redirect()->route('invoice.index')
@@ -150,7 +150,7 @@ class InvoiceController extends Controller
         } catch (\Exception $e) {
             // Rollback the transaction in case of an exception
             DB::rollBack();
-
+            // throw $e;
             // Handle the exception, you can log it or display an error message
             return redirect()->back()->with('error', 'An error occurred. Please try again later.');
         }

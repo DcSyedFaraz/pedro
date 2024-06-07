@@ -176,7 +176,7 @@ class JobController extends Controller
             return redirect()->route('job.index')->with('success', 'Job Created successfully');
 
         } catch (Exception $e) {
-            // throw $e;
+            throw $e;
             return redirect()->back()->with('error', 'An error occurred while creating Job.');
         }
     }

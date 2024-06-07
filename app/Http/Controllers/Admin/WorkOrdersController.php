@@ -45,11 +45,12 @@ class WorkOrdersController extends Controller
         ]);
         try {
 
+            $validatedData['status'] = 'pending';
             $work = WorkOrders::create($validatedData);
 
             $user = User::find($request->input('vendor_id'));
             $admin = auth()->user();
-            $message = "Assigned a word order# {$work->id}";
+            $message = "Assigned a work order# {$work->id}";
             $user->notify(new UserNotification($admin, $message));
 
             $message1 = "{$admin->name} Assigned your job's work order# {$work->id} to vendor {$user->name}";

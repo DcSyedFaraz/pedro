@@ -72,7 +72,7 @@
                                                         @if ($inv->status === 'unpaid')
                                                             <label
                                                                 class="badge badge-danger">{{ Str::ucfirst($inv->status) }}</label>
-                                                        @elseif ($inv->status=== 'paid')
+                                                        @elseif ($inv->status === 'paid')
                                                             <label
                                                                 class="badge badge-success">{{ Str::ucfirst($inv->status) }}</label>
                                                         @elseif ($inv->status === 'recurring')
@@ -83,7 +83,12 @@
 
                                                     <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
                                                     </td>
-                                                    <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
+                                                    <td>
+                                                        @if ($inv->status != 'paid')
+                                                            {{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
+                                                            @else
+                                                            0
+                                                        @endif
                                                     </td>
                                                     <td class="btn-group">
                                                         <a href="{{ route('invoices.show', $inv->id) }}"

@@ -181,6 +181,11 @@ Route::group(['middleware' => ['language']], function () {
         Route::resource('invoices', userInvoiceController::class);
         Route::get('/invoices/generate/{id}', [userInvoiceController::class, 'generatePDF'])->name('invoice.generate');
 
+        Route::controller(userInvoiceController::class)->group(function () {
+            Route::post('stripe', 'stripePost')->name('stripe.post');
+
+        });
+
         //problem
         Route::get('/problem', [usersDashboardController::class, 'problem'])->name('users.problem');
         Route::get('/problem/show/{id}', [usersDashboardController::class, 'problemshow'])->name('users.problem.show');

@@ -35,12 +35,12 @@
                             <input type="text" name="name" class="form-control" id="title" required>
                         </div>
                        </br>
-                       <select name="job_sub_cat_id" class="form-control" required>
+                       {{-- <select name="job_sub_cat_id" class="form-control" required>
                             <option value="">select Job Sub Category</option>
                           @foreach($job_sub_cat as $sub_cat)
                             <option value="{{$sub_cat->id}}">{{$sub_cat->name}}</option>
                           @endforeach
-                      </select>
+                      </select> --}}
                       </br>
                       <div>
                           <label for="title">Description:</label>

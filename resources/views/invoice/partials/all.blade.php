@@ -13,17 +13,17 @@
                 <table id="example2" class="table table-bordered table-striped table-responsive">
                     <thead class="thead-light">
                         <tr>
-                            <th> {{ __('vendor/invoice/index.date') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.customer_name') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.invoice') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.po') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.status') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.total') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.total_due') }}</a></th>
-                            <th> {{ __('vendor/invoice/index.actions') }}</a></th>
+                            <th> {{ __('vendor/invoice/index.date') }}</th>
+                            <th> {{ __('vendor/invoice/index.customer_name') }}</th>
+                            <th> {{ __('vendor/invoice/index.invoice') }}</th>
+                            <th> {{ __('vendor/invoice/index.po') }}</th>
+                            <th> {{ __('vendor/invoice/index.status') }}</th>
+                            <th> {{ __('vendor/invoice/index.total') }}</th>
+                            <th> {{ __('vendor/invoice/index.total_due') }}</th>
+                            <th> {{ __('vendor/invoice/index.actions') }}</th>
                             <th></th>
-                           
-                          
+
+
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,7 @@
 
                                     <td>{{ isset($inv->unpaid) ? $inv->unpaid->total : 'N/A' }}
                                     </td>
-                                   
+
 
 
                                     <td class="btn-group">
@@ -74,9 +74,8 @@
                                                 class="fas fa-trash"></i></a></button>
                                         </form>
                                     </td>
-                                    <td></td>
-                                    
-                                  
+
+
                                 </tr>
                             @endforeach
                         @endif
