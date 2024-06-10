@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\AreaOfWork;
 use App\Models\CompanyDocuments;
+use App\Models\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -18,8 +20,10 @@ class CompanyProfileController extends Controller
      */
     public function index()
     {
+        $services = Services::get();
+        $areas = AreaOfWork::get();
         $vendor = User::where('id', auth()->user()->id)->with('userdetail', 'files')->first();
-        return view('vendor.profile.profile', compact('vendor'));
+        return view('vendor.profile.profile', compact('vendor', 'areas', 'services'));
     }
 
     /**

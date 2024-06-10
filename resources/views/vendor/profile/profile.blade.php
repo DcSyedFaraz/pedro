@@ -39,14 +39,16 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">{{ __('vendor/company/index.areas_of_work') }}</h5>
-                            <p class="card-text">{{ isset($vendor->userdetail) ? $vendor->userdetail->areas_of_work : '' }}</p>
+                            <p class="card-text">{{ isset($vendor->userdetail) ? $vendor->userdetail->areas_of_work : '' }}
+                            </p>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">{{ __('vendor/company/index.services_performed') }}</h5>
-                            <p class="card-text">{{ isset($vendor->userdetail) ? $vendor->userdetail->services_performed : '' }}</p>
+                            <p class="card-text">
+                                {{ isset($vendor->userdetail) ? $vendor->userdetail->services_performed : '' }}</p>
                         </div>
                     </div>
                 </div>
@@ -56,29 +58,53 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title">{{ __('vendor/company/index.uploaded_documents') }}</h5><br>
-                            <form method="POST" action="{{ route('company_profile.update',$vendor->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('company_profile.update', $vendor->id) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
-                                <div class="form-group">
-                                    <label for="inputTitle" class="col-form-label">{{ __('vendor/company/index.areas_of_work') }}</label>
-                                  <input id="inputTitle" type="text" name="areas_of_work" placeholder="Enter areas of work"  value="{{$vendor->userdetail->areas_of_work ?? ''}}" class="form-control">
-                                  @error('areas_of_work')
-                                  <span class="text-danger">{{$message}}</span>
-                                  @enderror
-                                  </div>
 
-                                  <div class="form-group">
-                                      <label for="inputEmail" class="col-form-label">{{ __('vendor/company/index.services_you_perform') }}</label>
-                                    <input  type="text" name="services_performed" placeholder="Enter services performed"  value="{{$vendor->userdetail->services_performed ?? ''}}" class="form-control">
-                                    @error('services_performed')
-                                    <span class="text-danger">{{$message}}</span>
+                                {{-- <label for="inputTitle" class="col-form-label">{{ __('vendor/company/index.areas_of_work') }}</label> --}}
+
+
+                                <div class="form-group">
+                                    <label for="example">{{ __('vendor/company/index.areas_of_work') }}</label>
+                                    <select class="form-control js-example-basic-multiple text-black" name="areas_of_work[]" id="areas_of_work" multiple="multiple">
+                                        <option hidden>Select Area Of Work</option>
+                                        @forelse ($areas as $area)
+                                            <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                        @empty
+                                            <option>no Area Of Work available</option>
+                                        @endforelse
+                                    </select>
+
+                                    {{-- <input id="inputTitle" type="text" name="areas_of_work" placeholder="Enter areas of work"  value="{{$vendor->userdetail->areas_of_work ?? ''}}" class="form-control"> --}}
+                                    @error('areas_of_work')
+                                        <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                    {{-- <label for="inputEmail" class="col-form-label">{{ __('vendor/company/index.services_you_perform') }}</label> --}}
+                                    <label for="example">{{ __('vendor/company/index.services_you_perform') }}</label>
+                                    <select class="form-control js-example-basic-multiple text-black" name="services_performed[]" id="services_performed" multiple="multiple">
+                                        <option hidden>Select Services</option>
+                                        @forelse ($services as $service)
+                                            <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                        @empty
+                                            <option>no services available</option>
+                                        @endforelse
+                                    </select>
+                                    {{-- <input  type="text" name="services_performed" placeholder="Enter services performed"  value="{{$vendor->userdetail->services_performed ?? ''}}" class="form-control"> --}}
+                                    @error('services_performed')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
                                 <div class="form-group">
                                     <label for="document">{{ __('vendor/company/index.document') }}</label>
-                                    <input type="file" id="document" name="document[]" multiple class="form-control-file">
+                                    <input type="file" id="document" name="document[]" multiple
+                                        class="form-control-file">
                                 </div>
 
                                 <div class="form-group">
@@ -94,30 +120,33 @@
                             <h5 class="card-title">{{ __('vendor/company/index.uploaded_documents') }}</h5>
                             <ul>
                                 @if (isset($vendor->files) && count($vendor->files) > 0)
-                                <div class="mt-5">
+                                    <div class="mt-5">
 
-                                    <div class="row">
-                                        @foreach ($vendor->files as $file)
-                                            <div class="col-md-4">
-                                                <div class="card mb-4">
-                                                    {{-- <img src="{{ asset('storage/' .$file->filename) }}" class="card-img-top"
+                                        <div class="row">
+                                            @foreach ($vendor->files as $file)
+                                                <div class="col-md-4">
+                                                    <div class="card mb-4">
+                                                        {{-- <img src="{{ asset('storage/' .$file->filename) }}" class="card-img-top"
                                                         > --}}
-                                                    <div class="card-body">
-                                                        <a href="{{ asset('storage/' .$file->filename) }}" target="blank">{{ basename($file->filename) }}</a>
-                                                        {{-- <p class="card-text">{{ $file->filename }}</p> --}}
-                                                        <form action="{{ route('company_profile.destroy', $file->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                                onclick="return confirm('Are you sure you want to Delete this?')">Delete</button>
-                                                        </form>
+                                                        <div class="card-body">
+                                                            <a href="{{ asset('storage/' . $file->filename) }}"
+                                                                target="blank">{{ basename($file->filename) }}</a>
+                                                            {{-- <p class="card-text">{{ $file->filename }}</p> --}}
+                                                            <form
+                                                                action="{{ route('company_profile.destroy', $file->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                                    onclick="return confirm('Are you sure you want to Delete this?')">Delete</button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
-                            @endif
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -126,4 +155,11 @@
         </div>
 
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+    </script>
 @endsection
