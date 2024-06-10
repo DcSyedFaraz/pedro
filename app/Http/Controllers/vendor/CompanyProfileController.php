@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\area;
 use App\Models\AreaOfWork;
 use App\Models\CompanyDocuments;
 use App\Models\Services;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -80,39 +82,56 @@ class CompanyProfileController extends Controller
     {
         // return $request;
         $this->validate($request, [
-            'areas_of_work' => 'required',
-            'services_performed' => 'required',
-            // 'document.*' => 'file|mimes:pdf,doc,docx|max:2048',
+            'areas_of_work' => 'required|array',
+            'areas_of_work.*' => 'numeric|exists:area_of_works,id',
+            'services_performed' => 'required|array',
+            'services_performed.*' => 'numeric|exists:services,id',
+            'document.*' => 'nullable|file|max:10240',
         ]);
 
-        $input = $request->all();
-        $user = User::find($id);
+        try {
+            DB::beginTransaction();
+            $user = User::find($id);
 
-        $profileData = [
-            'areas_of_work' => $request->input('areas_of_work'),
-            'services_performed' => $request->input('services_performed'),
+            $areasOfWorkIds = $request->input('areas_of_work');
+            $servicesPerformedIds = $request->input('services_performed');
 
-        ];
+            $user->areasOfWork()->sync($areasOfWorkIds);
 
-        // Check if the user already has a profile; if not, create one
-        $user->userdetail()->updateOrCreate(
-            ['vendor_id' => $user->id],
-            $profileData
-        );
-        if ($request->hasFile('document')) {
-            foreach ($request->file('document') as $file) {
-                $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                $path = $file->storeAs('company_documents', $fileName, 'public');
+            $user->services()->sync($servicesPerformedIds);
 
-                CompanyDocuments::create([
-                    'vendor_id' => $user->id,
-                    'filename' => $path,
-                ]);
+            // $profileData = [
+            //     'areas_of_work' => $request->input('areas_of_work'),
+            //     'services_performed' => $request->input('services_performed'),
+
+            // ];
+
+            // // Check if the user already has a profile; if not, create one
+            // $user->userdetail()->updateOrCreate(
+            //     ['vendor_id' => $user->id],
+            //     $profileData
+            // );
+            if ($request->hasFile('document')) {
+                foreach ($request->file('document') as $file) {
+                    $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                    $path = $file->storeAs('company_documents', $fileName, 'public');
+
+                    CompanyDocuments::create([
+                        'vendor_id' => $user->id,
+                        'filename' => $path,
+                    ]);
+                }
+
             }
+            DB::commit();
+            return redirect()->back()->with('success', 'Files uploaded and detailes saved successfully.');
 
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+            // Handle any exceptions that occur during deletion
+            return redirect()->back()->with('error', 'Error deleting the file: ' . $e->getMessage());
         }
-        return redirect()->back()->with('success', 'Files uploaded and detailes saved successfully.');
-
     }
 
     /**

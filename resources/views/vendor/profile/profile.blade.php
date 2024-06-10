@@ -1,6 +1,57 @@
 @extends('vendor.layouts.app')
 
+<style>
+    /* General Select2 styles */
+    .select2-container--default .select2-selection--multiple {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px;
+    }
 
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #007bff !important;
+        border: 1px solid #006fe6 !important;
+        border-radius: 4px !important;
+        color: white !important;
+        padding: 3px 10px !important;
+        margin: 2px 5px 2px 0 !important;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        color: white !important;
+        cursor: pointer !important;
+        margin-right: 5px !important;
+    }
+
+    /* Hover and focus styles */
+    .select2-container--default .select2-selection--multiple .select2-selection__choice:hover,
+    .select2-container--default .select2-selection--multiple .select2-selection__choice:focus {
+        background-color: #0056b3;
+        border-color: #0047a1;
+    }
+
+    /* Dropdown styles */
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .select2-container--default .select2-results__option[aria-selected=true] {
+        background-color: #cce5ff;
+        color: #004085;
+    }
+
+    .select2-dropdown {
+        border-radius: 4px;
+    }
+
+    /* Placeholder styles */
+    .select2-container--default .select2-selection--multiple .select2-selection__placeholder {
+        color: #6c757d;
+        font-style: italic;
+    }
+</style>
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -8,12 +59,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{ __('vendor/company/index.add_images_and_notes') }}</h1>
+                        {{-- <h1>{{ __('vendor/company/index.complete_vendor_profile') }}</h1> --}}
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">{{ __('vendor/company/index.add_images_and_notes') }}</li>
+                            <li class="breadcrumb-item active">{{ __('vendor/company/index.complete_vendor_profile') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -39,7 +90,8 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">{{ __('vendor/company/index.areas_of_work') }}</h5>
-                            <p class="card-text">{{ isset($vendor->userdetail) ? $vendor->userdetail->areas_of_work : '' }}
+                            <p class="card-text">
+                                {{ $vendor->areasOfWork->pluck('name')->join(', ') ?? __('No areas of work listed.') }}
                             </p>
                         </div>
                     </div>
@@ -48,9 +100,11 @@
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">{{ __('vendor/company/index.services_performed') }}</h5>
                             <p class="card-text">
-                                {{ isset($vendor->userdetail) ? $vendor->userdetail->services_performed : '' }}</p>
+                                {{ $vendor->services->pluck('name')->join(', ') ?? __('No services performed listed.') }}
+                            </p>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="col-md-6">
@@ -63,43 +117,47 @@
                                 @csrf
                                 @method('PUT')
 
-
-                                {{-- <label for="inputTitle" class="col-form-label">{{ __('vendor/company/index.areas_of_work') }}</label> --}}
-
-
                                 <div class="form-group">
-                                    <label for="example">{{ __('vendor/company/index.areas_of_work') }}</label>
-                                    <select class="form-control js-example-basic-multiple text-black" name="areas_of_work[]" id="areas_of_work" multiple="multiple">
-                                        <option hidden>Select Area Of Work</option>
-                                        @forelse ($areas as $area)
-                                            <option value="{{ $area->id }}">{{ $area->name }}</option>
-                                        @empty
-                                            <option>no Area Of Work available</option>
-                                        @endforelse
-                                    </select>
-
-                                    {{-- <input id="inputTitle" type="text" name="areas_of_work" placeholder="Enter areas of work"  value="{{$vendor->userdetail->areas_of_work ?? ''}}" class="form-control"> --}}
+                                    <label for="areas_of_work">{{ __('vendor/company/index.areas_of_work') }}</label>
+                                    @if ($areas->isEmpty())
+                                        <p>No areas of work available</p>
+                                    @else
+                                        <select class="form-control js-example-basic-multiple text-black"
+                                            name="areas_of_work[]" id="areas_of_work" multiple="multiple">
+                                            @foreach ($areas as $area)
+                                                <option value="{{ $area->id }}"
+                                                    {{ in_array($area->id, old('areas_of_work', $vendor->areasOfWork->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
+                                                    {{ $area->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                     @error('areas_of_work')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    {{-- <label for="inputEmail" class="col-form-label">{{ __('vendor/company/index.services_you_perform') }}</label> --}}
-                                    <label for="example">{{ __('vendor/company/index.services_you_perform') }}</label>
-                                    <select class="form-control js-example-basic-multiple text-black" name="services_performed[]" id="services_performed" multiple="multiple">
-                                        <option hidden>Select Services</option>
-                                        @forelse ($services as $service)
-                                            <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                        @empty
-                                            <option>no services available</option>
-                                        @endforelse
-                                    </select>
-                                    {{-- <input  type="text" name="services_performed" placeholder="Enter services performed"  value="{{$vendor->userdetail->services_performed ?? ''}}" class="form-control"> --}}
+                                    <label
+                                        for="services_performed">{{ __('vendor/company/index.services_you_perform') }}</label>
+                                    @if ($services->isEmpty())
+                                        <p>No services available</p>
+                                    @else
+                                        <select class="form-control js-example-basic-multiple text-black"
+                                            name="services_performed[]" id="services_performed" multiple="multiple">
+                                            @foreach ($services as $service)
+                                                <option value="{{ $service->id }}"
+                                                    {{ in_array($service->id, old('services_performed', $vendor->services->pluck('id')->toArray() ?? [])) ? 'selected' : '' }}>
+                                                    {{ $service->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
                                     @error('services_performed')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
 
                                 <div class="form-group">
                                     <label for="document">{{ __('vendor/company/index.document') }}</label>
@@ -130,7 +188,7 @@
                                                         > --}}
                                                         <div class="card-body">
                                                             <a href="{{ asset('storage/' . $file->filename) }}"
-                                                                target="blank">{{ basename($file->filename) }}</a>
+                                                                target="_blank">{{ basename($file->filename) }}</a>
                                                             {{-- <p class="card-text">{{ $file->filename }}</p> --}}
                                                             <form
                                                                 action="{{ route('company_profile.destroy', $file->id) }}"
@@ -159,7 +217,10 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
+            $('.js-example-basic-multiple').select2({
+                placeholder: "Select an option",
+                allowClear: true
+            });
+        });
     </script>
 @endsection

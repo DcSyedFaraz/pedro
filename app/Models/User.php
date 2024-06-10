@@ -62,5 +62,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(CompanyDocuments::class, 'vendor_id', 'id');
     }
+    public function services()
+    {
+        return $this->belongsToMany(Services::class, 'service_user');
+    }
+
+    public function areasOfWork()
+    {
+        return $this->belongsToMany(AreaOfWork::class, 'area_of_work_user');
+    }
 
 }
