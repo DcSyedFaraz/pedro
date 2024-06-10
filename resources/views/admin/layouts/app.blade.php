@@ -39,7 +39,15 @@
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/admin/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/custom.css') }}">
+    <!-- jQuery (necessary for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     @yield('links')
+
+
+
+
+
 
 </head>
 
@@ -1072,7 +1080,9 @@
             });
         });
     </script>
+
     @yield('scripts')
+
 </body>
 
 </html>
