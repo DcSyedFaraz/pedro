@@ -280,7 +280,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('manage_work_orders.index') }}"
-                                class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} {{ request()->routeIs('vendor.*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('manage_work_orders.index') ? 'active' : '' }} {{ request()->routeIs('manage_work_orders.show') ? 'active' : '' }} ">
                                 <i class="fas fa-file-invoice nav-icon text-info"></i>
                                 <p>{{ __('vendor/layout/layout.vendor_work_order') }}</p>
                             </a>

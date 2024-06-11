@@ -2,10 +2,10 @@
  <?php
 
 return [
-    'order_ref' => 'Order',
+    'order' => 'Order',
     'order_ref' => 'Order Ref',
     'order_progress' => 'Order Progress',
-    'order_date' => 'Order Date',  
+    'order_date' => 'Order Date',
     'actions' => 'Actions',
     'home' => 'Home',
     'supply_request' => 'Supply Request',
@@ -25,6 +25,6 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
 
-   
+
 ];
-?>                                      
+?>

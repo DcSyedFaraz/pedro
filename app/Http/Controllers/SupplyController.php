@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\User;
 use App\Notifications\UserNotification;
 use App\Models\SupplyRequest;
@@ -19,26 +20,22 @@ class SupplyController extends Controller
     public function index()
     {
         try {
-
             $user = auth()->user();
             if ($user->hasRole('Admin')) {
                 $supply = SupplyRequest::orderBy('id', 'desc')->get();
+
                 return view('supply.index', compact('supply'));
 
             } else {
                 $supply = SupplyRequest::where('createdBy', $user->id)->get();
+
                 return view('supply.index', compact('supply'));
             }
-
-
-            // dd($add);
-
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
             // view('invoice.index',  ['message' => $e->getMessage()]);
         }
-
     }
 
     /**
@@ -48,7 +45,16 @@ class SupplyController extends Controller
      */
     public function create()
     {
-        return view('supply.create');
+        if (auth()->user()->hasRole('Admin')) {
+            $jobs = Job::get();
+
+        } else {
+            $jobs = Job::whereHas('workOrder', function ($query) {
+                $query->where('vendor_id', auth()->user()->id)->where('status', 'accepted');
+            })->get();
+
+        }
+        return view('supply.create', compact('jobs'));
     }
 
     /**
@@ -60,6 +66,7 @@ class SupplyController extends Controller
     public function store(Request $request)
     {
         // return $request;
+        dd($request->all());
         try {
             $rules = [
                 'order_progress' => 'required|string|max:255',

@@ -32,6 +32,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->string('job_assign');
             $table->string('description');
+            $table->integer('createdBy');
             $table->timestamps();
         });
     }

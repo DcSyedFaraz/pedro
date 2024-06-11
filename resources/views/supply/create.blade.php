@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app': 'default.app'))))
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app' : 'default.app'))))
 
 
 <style>
@@ -48,29 +48,6 @@
                                                     <div class="row">
                                                         <div class="col-lg-7">
                                                             <div class="row">
-                                                                {{-- <div class="col-sm-4">
-                                                                    <label for="exampleInputcustomer"
-                                                                        class="form-label">Supplier</label>
-                                                                    <select name="supplier" class="form-select form-control"
-                                                                        aria-label="Default select example" id="vender-div">
-                                                                        <option value="0" disabled selected hidden>
-                                                                            Select a Supplier</option>
-                                                                        <option value="1">Supplier 1</option>
-                                                                        <option value="2">Supplier 2</option>
-                                                                    </select>
-                                                                </div> --}}
-
-                                                                {{-- <div class="col-sm-4">
-                                                                    <div class="purchase-order-div">
-                                                                        <label for="reference" class="form-label">Order
-                                                                            Reference</label>
-                                                                        <input name="order_ref" type="number"
-                                                                            class="form-control" placeholder="1011"
-                                                                            id="reference">
-
-                                                                    </div>
-                                                                </div> --}}
-
                                                                 <div class="col-sm-4">
                                                                     <label for="vender-div" class="form-label">Order
                                                                         Progress</label>
@@ -81,21 +58,6 @@
                                                                         <option value="Close">Close</option>
                                                                     </select>
                                                                 </div>
-
-                                                                {{-- <div class="col-sm-4">
-                                                                    <label for="vender-div" class="form-label">Payment Terms
-                                                                    </label>
-                                                                    <select name="payment_term"
-                                                                        class="form-select form-control"
-                                                                        aria-label="Default select example" id="vender-div">
-                                                                        <option value="0" disabled selected hidden>Cash
-                                                                            on Delivery</option>
-                                                                        <option value="Paypal">Paypal</option>
-                                                                        <option value="Stripe">Stripe</option>
-                                                                    </select>
-
-                                                                </div> --}}
-
                                                                 <div class="col-sm-4">
                                                                     <div class="form-group">
                                                                         <label for="reference" class="form-label">Order
@@ -114,29 +76,20 @@
                                                                         <label for="vender-div" class="form-label">PO#
                                                                         </label>
                                                                         <input name="po_num" type="number"
-                                                                        class="form-control" id="reference">
+                                                                            class="form-control" id="reference">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-sm-6">
                                                                     <div class="memo-main-div">
-                                                                        <label for="reference" class="form-label">Account Manager's Email
+                                                                        <label for="reference" class="form-label">Account
+                                                                            Manager's Email
                                                                         </label>
                                                                         <input name="manager_email" type="email"
                                                                             class="form-control" id="reference">
 
                                                                     </div>
                                                                 </div>
-                                                                {{-- <div class="col-sm-3">
-                                                                    <div class="shipping-method-div">
-                                                                        <label for="shipping-method"
-                                                                            class="form-label">Shipping Option
-                                                                        </label>
-                                                                        <input name="ship_option" type="text"
-                                                                            class="form-control" id="shipping-method">
-
-                                                                    </div>
-                                                                </div> --}}
                                                                 <div class="col-sm-3">
                                                                     <div class="sent-on-div">
                                                                         <label for="sent-on" class="form-label">Sent Date
@@ -152,8 +105,7 @@
                                                                     </label>
                                                                     <select name="receipt_status"
                                                                         class="form-select form-control"
-                                                                        aria-label="Default select example"
-                                                                        id="vender-div">
+                                                                        aria-label="Default select example" id="vender-div">
                                                                         <option value="Not Received">Not Received</option>
                                                                         <option value="Received">Received</option>
                                                                     </select>
@@ -163,23 +115,10 @@
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <div class="row">
-
-                                                                {{-- <div class="col-sm-8">
-                                                                    <div class="purchase-order-div">
-                                                                        <label for="reference" class="form-label">Direct
-                                                                            Shipping
-                                                                        </label>
-                                                                        <input name="direct_shipping" type="text"
-                                                                            class="form-control"
-                                                                            placeholder="Search by name,phone,street,city or email"
-                                                                            id="reference">
-                                                                    </div>
-                                                                </div> --}}
-
                                                                 <div class="col-12">
                                                                     <div class="shipping-address-div">
-                                                                        <label for="reference"
-                                                                            class="form-label">Service Location
+                                                                        <label for="reference" class="form-label">Service
+                                                                            Location
                                                                         </label>
                                                                         <div class="row">
                                                                             <div class="col-12">
@@ -233,103 +172,45 @@
                                                         <h4 class="primary">Item List</h4>
                                                     </div>
                                                 </div>
-                                                <div class="innerinputs">
-                                                    <div class="row">
-                                                        <div class="col-sm-4">
+                                                <div class="inners innerinputs">
+                                                    <div class="row" id="item-list-row">
+                                                        <div class="col-sm-3">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Item Name
-                                                                </label>
-                                                                <input name="item_name" type="text"
+                                                                <label for="addproduct" class="form-label">Item
+                                                                    Name</label>
+                                                                <input name="item_name[]" type="text"
                                                                     class="form-control" placeholder="Add Product"
                                                                     id="addproduct">
-
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-4">
+                                                        <div class="col-sm-3">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Quantity
-                                                                </label>
-                                                                <input name="qty" type="number" class="form-control"
+                                                                <label for="addproduct"
+                                                                    class="form-label">Quantity</label>
+                                                                <input name="qty[]" type="number" class="form-control"
                                                                     id="addproduct">
                                                             </div>
                                                         </div>
-                                                        {{-- <div class="col-sm-2">
+                                                        <div class="col-sm-3">
                                                             <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Unit Price
-                                                                </label>
-                                                                <input name="unit_price" type="number"
-                                                                    class="form-control" id="addproduct">
-                                                            </div>
-                                                        </div> --}}
-                                                        {{-- <div class="col-sm-2">
-                                                            <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Total Amount
-                                                                </label>
-                                                                <input name="total" type="number" class="form-control"
-                                                                    id="addproduct">
-                                                            </div>
-                                                        </div> --}}
-                                                        <div class="col-sm-4">
-                                                            <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Job Assignment
-                                                                </label>
-                                                                <input name="job_assign" type="text"
-                                                                    class="form-control" id="addproduct">
+                                                                <label for="job_assign" class="form-label">Job
+                                                                    Assignment</label>
+                                                                <select name="job_assign[]" class="form-control">
+                                                                    @forelse ($jobs as $job)
+                                                                        <option value="{{ $job->id }}">
+                                                                            {{ $job->name }}</option>
+                                                                    @empty
+                                                                        <option hidden>no job available</option>
+                                                                    @endforelse
+
+                                                                </select>
                                                             </div>
                                                         </div>
-                                                        {{-- <div class="col-sm-2">
-                                                            <div class="addproduct-div">
-                                                                <label for="addproduct" class="form-label">Receipt
-                                                                </label>
-                                                                <input name="receipt" type="text" class="form-control"
-                                                                    id="addproduct">
-                                                            </div>
-                                                        </div> --}}
-                                                    </div>
-                                                </div>
-                                                <!-- ///////////////////////// -->
-                                                <div class="innerinputs-last">
-                                                    <div class="row">
-                                                        <div class="col-8">
-                                                            <div class="message-main-div">
-                                                                <label for="vender-div" class="form-label">Item
-                                                                    Description
-                                                                </label>
-                                                                <textarea name="description" rows="5" cols="126"></textarea>
-                                                            </div>
+                                                        <div class="col-sm-3 add-row d-flex align-items-end">
+                                                            <button class="btn btn-primary d-flex align-items-end"
+                                                                type="button">Add Row</button>
                                                         </div>
-                                                        {{-- <div class="col-4 total-cost">
-                                                            <div class="inner-inner-inner">
-                                                                <h5>Subtotal</h5>
-                                                                <input type="number" id="subtotal" name="subtotal"
-                                                                    class="total" disabled value="0.00">
-                                                            </div>
-                                                            <div class="inner-inner-inner">
-                                                                <h5 style="color:green;">Received Discount
-                                                                    (-)</h5>
-                                                                <input type="number" id="discount" name="discount"
-                                                                    class="total" disabled value="0.00">
-                                                            </div>
-                                                            <div class="inner-inner-inner">
-                                                                <h5>Tax Paid
-                                                                </h5>
-                                                                <input type="number" id="tax_paid" name="tax_paid"
-                                                                    class="total" disabled value="0.00">
-                                                            </div>
-                                                            <div class="inner-inner-inner">
-                                                                <h5>Shipping Cost
-                                                                </h5>
-                                                                <input type="number" id="ship_cost" name="ship_cost"
-                                                                    class="total" disabled value="0.00">
-                                                            </div>
-                                                            <div class="inner-inner-inner">
-                                                                <h5>Grand Total Price
-                                                                </h5>
-                                                                <input type="number" id="grand_total" name="grand_total"
-                                                                    class="total" disabled value="0.00">
-                                                            </div>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -352,4 +233,26 @@
     </section>
 
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            var rowCount = 1;
+            $(".add-row").click(function() {
+                var row = $("#item-list-row").clone();
+                row.find("input").val("");
+                row.find(".add-row").remove();
+                row.append(
+                    '<div class="col-sm-3 d-flex align-items-end"><button class="btn btn-danger remove-row d-flex align-items-end" type="button">Remove</button></div>'
+                    );
+                row.appendTo(".inners");
+                rowCount++;
+            });
+
+            $(".inners").on("click", ".remove-row", function() {
+                $(this).closest(".row").remove();
+                rowCount--;
+            });
+        });
+    </script>
 @endsection
