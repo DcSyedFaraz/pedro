@@ -1,5 +1,4 @@
-
- <?php
+<?php
 
 return [
     'order' => 'Order',
@@ -10,8 +9,8 @@ return [
     'home' => 'Home',
     'supply_request' => 'Supply Request',
     'create_supply_request' => 'Create Supply Request',
-    'value' => 'valor',
-    'field' => 'campo',
+    'value' => 'Value',
+    'field' => 'Field',
     'receipt_status' => 'Receipt Status',
     'sent_date' => 'Sent Date',
     'account_managers_email' => 'Account Managers Email',
@@ -24,6 +23,7 @@ return [
     'show' => 'Show',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'item_info' => 'Item Info',
 
 
 ];

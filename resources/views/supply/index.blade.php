@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app': 'default.app'))))
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app' : 'default.app'))))
 
 
 @section('content')
@@ -29,11 +29,11 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                  <h3 class="card-title">User Managment</h3>
-                </div> -->
+                      <h3 class="card-title">User Managment</h3>
+                    </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
-                                <a class="btn btn-success" href="{{ route('supply.create') }}"
+                                <a class="btn btn-success" data-toggle="tooltip" title="Create New Supply Request" href="{{ route('supply.create') }}"
                                     class="btn btn-primary">{{ __('user/supply/index.create_supply_request') }}</a>
                             </div>
                             <!-- /.card-header -->
@@ -41,7 +41,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            
+
 
                                             <th>{{ __('user/supply/index.order') }}</th>
                                             <th>{{ __('user/supply/index.order_ref') }}</th>
@@ -52,39 +52,40 @@
                                     </thead>
                                     <tbody>
                                         @if (isset($supply))
+                                            @foreach ($supply as $supplies)
+                                                <tr>
+                                                    <td>{{ $supplies->id }}</td>
+                                                    <td>{{ $supplies->order_ref }}</td>
+                                                    <td>
+                                                        @if ($supplies->order_progress === 'Open')
+                                                            <span class="badge badge-success">Open</span>
+                                                        @elseif ($supplies->order_progress === 'Close')
+                                                            <span class="badge badge-danger">Close</span>
+                                                        @endif
+                                                    </td>
 
-
-
-                                        @foreach ($supply as $supplies)
-                                            <tr>
-                                                <td>{{ $supplies->id }}</td>
-                                                <td>{{ $supplies->order_ref }}</td>
-                                                <td>
-                                                    @if ($supplies->order_progress === 'Open')
-                                                        <span class="badge badge-success">Open</span>
-                                                    @elseif ($supplies->order_progress === 'Close')
-                                                        <span class="badge badge-danger">Close</span>
+                                                    @if (auth()->user()->hasRole('Admin'))
+                                                        <td>{{ $supplies->users->name }}</td>
                                                     @endif
-                                                </td>
-
-                                                @if (auth()->user()->hasRole('Admin'))
-                                                <td>{{ $supplies->users->name }}</td>
-                                                @endif
-                                                <td>{{ $supplies->order_date }}</td>
-                                                <td>
-                                                    <form action="{{ route('supply.destroy', $supplies->id) }}"
-                                                        method="POST">
-                                                        <a href="{{ route('supply.show', $supplies->id) }}"
-                                                            class="btn btn-info">{{ __('user/supply/index.show') }}</a>
-                                                        <a href="{{ route('supply.edit', $supplies->id) }}"
-                                                            class="btn btn-primary">{{ __('user/supply/index.edit') }}</a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Request?')">{{ __('user/supply/index.delete') }}</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                    <td>{{ $supplies->order_date }}</td>
+                                                    <td>
+                                                        <form action="{{ route('supply.destroy', $supplies->id) }}"
+                                                            method="POST">
+                                                            <a data-toggle="tooltip" title="Show Supply Request"
+                                                                href="{{ route('supply.show', $supplies->id) }}"
+                                                                class="btn btn-info">{{ __('user/supply/index.show') }}</a>
+                                                            <a data-toggle="tooltip" title="Edit Supply Request"
+                                                                href="{{ route('supply.edit', $supplies->id) }}"
+                                                                class="btn btn-primary">{{ __('user/supply/index.edit') }}</a>
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button data-toggle="tooltip" title="Delete Supply Request"
+                                                                type="submit" class="btn btn-danger"
+                                                                onclick="return confirm('Are you sure you want to delete this Request?')">{{ __('user/supply/index.delete') }}</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endif
                                     </tbody>
                                 </table>

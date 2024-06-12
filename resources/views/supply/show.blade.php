@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app': 'default.app'))))
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : (Auth::user()->hasRole('User') ? 'users.layouts.app' : 'default.app'))))
 
 
 @section('content')
@@ -51,13 +51,38 @@
                                     <td>{{ $supplyRequest->manager_email }}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{ __('user/supply/index.sent_date') }}</</td>
+                                    <td>{{ __('user/supply/index.sent_date') }}</< /td>
                                     <td>{{ $supplyRequest->sent_date }}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{ __('user/supply/index.receipt_status') }}</</td>
+                                    <td>{{ __('user/supply/index.receipt_status') }}</< /td>
                                     <td>{{ $supplyRequest->receipt_status }}</td>
                                 </tr>
+                            </tbody>
+                        </table>
+                        <h3>{{ __('user/supply/index.item_info') }}</h3>
+
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('user/supply/index.field') }}</th>
+                                    <th>{{ __('user/supply/index.value') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($supplyRequest->supply_item as $key => $item)
+                                    <tr>
+                                        <td>Item {{ $key + 1 }}</td>
+                                        <td>
+                                            <strong>{{ __('user/supply/index.item_name') }}:</strong>
+                                            {{ $item->item_name }}<br>
+                                            <strong>{{ __('user/supply/index.quantity') }}:</strong>
+                                            {{ $item->qty }}<br>
+                                            <strong>{{ __('user/supply/index.job_assignment') }}:</strong>
+                                            {{ $item->jobs->name }}
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

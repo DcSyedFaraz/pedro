@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class SupplyRequest extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+    protected $guarded = [];
     public function users()
-{
-    return $this->belongsTo(User::class,'createdBy');
-}
+    {
+        return $this->belongsTo(User::class, 'createdBy');
+    }
+    public function supply_item()
+    {
+        return $this->hasMany(SupplyItem::class);
+    }
 }

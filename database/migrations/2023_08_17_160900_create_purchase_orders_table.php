@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('qty')->nullable();
             $table->string('unit_price')->nullable();
             $table->string('total')->nullable();
-            $table->string('job_assign')->nullable();
+            $table->string('jobs_id')->nullable();
             $table->string('receipt')->nullable();
             $table->string('desc')->nullable();
             $table->string('subtotal')->nullable();

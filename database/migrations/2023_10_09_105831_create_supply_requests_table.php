@@ -28,10 +28,7 @@ return new class extends Migration
             $table->string('tampa');
             $table->string('fl');
             $table->string('num');
-            $table->string('item_name');
-            $table->integer('qty');
-            $table->string('job_assign');
-            $table->string('description');
+            // $table->string('description');
             $table->integer('createdBy');
             $table->timestamps();
         });

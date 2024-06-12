@@ -54,8 +54,12 @@
                                                                     <select name="order_progress"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
-                                                                        <option value="Open">Open</option>
-                                                                        <option value="Close">Close</option>
+                                                                        <option value="Open"
+                                                                            {{ old('order_progress') == 'Open' ? 'elected' : '' }}>
+                                                                            Open</option>
+                                                                        <option value="Close"
+                                                                            {{ old('order_progress') == 'Close' ? 'elected' : '' }}>
+                                                                            Close</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-sm-4">
@@ -65,49 +69,52 @@
                                                                         <div class="input-group date" id="datepicker">
                                                                             <input name="order_date" type="date"
                                                                                 class="form-control"
-                                                                                placeholder="08/16/2023" id="date" />
-
+                                                                                placeholder="08/16/2023" id="date"
+                                                                                value="{{ old('order_date') }}" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-sm-4">
                                                                     <div class="purchase-order-status">
-                                                                        <label for="vender-div" class="form-label">PO#
-                                                                        </label>
+                                                                        <label for="vender-div"
+                                                                            class="form-label">PO#</label>
                                                                         <input name="po_num" type="number"
-                                                                            class="form-control" id="reference">
+                                                                            class="form-control" id="reference"
+                                                                            value="{{ old('po_num') }}">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-sm-6">
                                                                     <div class="memo-main-div">
                                                                         <label for="reference" class="form-label">Account
-                                                                            Manager's Email
-                                                                        </label>
+                                                                            Manager's Email</label>
                                                                         <input name="manager_email" type="email"
-                                                                            class="form-control" id="reference">
-
+                                                                            class="form-control" id="reference"
+                                                                            value="{{ old('manager_email') }}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="sent-on-div">
-                                                                        <label for="sent-on" class="form-label">Sent Date
-                                                                        </label>
+                                                                        <label for="sent-on" class="form-label">Sent
+                                                                            Date</label>
                                                                         <input name="sent_date" type="date"
-                                                                            class="form-control" id="sent-on">
-
+                                                                            class="form-control" id="sent-on"
+                                                                            value="{{ old('sent_date') }}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-3">
                                                                     <label for="vender-div" class="form-label">Receipt
-                                                                        Status
-                                                                    </label>
+                                                                        Status</label>
                                                                     <select name="receipt_status"
                                                                         class="form-select form-control"
                                                                         aria-label="Default select example" id="vender-div">
-                                                                        <option value="Not Received">Not Received</option>
-                                                                        <option value="Received">Received</option>
+                                                                        <option value="Not Received"
+                                                                            {{ old('receipt_status') == 'Not Received' ? 'elected' : '' }}>
+                                                                            Not Received</option>
+                                                                        <option value="Received"
+                                                                            {{ old('receipt_status') == 'Received' ? 'elected' : '' }}>
+                                                                            Received</option>
                                                                     </select>
                                                                 </div>
 
@@ -118,41 +125,46 @@
                                                                 <div class="col-12">
                                                                     <div class="shipping-address-div">
                                                                         <label for="reference" class="form-label">Service
-                                                                            Location
-                                                                        </label>
+                                                                            Location</label>
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <input name="location" type="text"
                                                                                     class="form-control"
                                                                                     placeholder="Location Name (e.g Home or Office)"
-                                                                                    id="location-name">
+                                                                                    id="location-name"
+                                                                                    value="{{ old('location') }}">
                                                                             </div>
                                                                             <div class="col-sm-8">
                                                                                 <input name="street" type="text"
                                                                                     class="form-control"
                                                                                     placeholder="Street Address"
-                                                                                    id="streetaddress">
+                                                                                    id="streetaddress"
+                                                                                    value="{{ old('street') }}">
                                                                             </div>
                                                                             <div class="col-sm-4">
                                                                                 <input name="apt" type="text"
                                                                                     class="form-control"
                                                                                     placeholder="Ste/Unit/Apt"
-                                                                                    id="steunitapt">
+                                                                                    id="steunitapt"
+                                                                                    value="{{ old('apt') }}">
                                                                             </div>
                                                                             <div class="col-sm-5">
                                                                                 <input name="tampa" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="Tampa" id="steunitapt">
+                                                                                    placeholder="Tampa" id="steunitapt"
+                                                                                    value="{{ old('tampa') }}">
                                                                             </div>
                                                                             <div class="col-sm-4">
                                                                                 <input name="fl" type="text"
                                                                                     class="form-control" placeholder="FL"
-                                                                                    id="steunitapt">
+                                                                                    id="steunitapt"
+                                                                                    value="{{ old('fl') }}">
                                                                             </div>
                                                                             <div class="col-sm-3">
                                                                                 <input name="num" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="33602" id="steunitapt">
+                                                                                    placeholder="33602" id="steunitapt"
+                                                                                    value="{{ old('num') }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -180,7 +192,7 @@
                                                                     Name</label>
                                                                 <input name="item_name[]" type="text"
                                                                     class="form-control" placeholder="Add Product"
-                                                                    id="addproduct">
+                                                                    id="addproduct" >
                                                             </div>
                                                         </div>
 
@@ -189,14 +201,14 @@
                                                                 <label for="addproduct"
                                                                     class="form-label">Quantity</label>
                                                                 <input name="qty[]" type="number" class="form-control"
-                                                                    id="addproduct">
+                                                                    id="addproduct" >
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <div class="addproduct-div">
-                                                                <label for="job_assign" class="form-label">Job
+                                                                <label for="jobs_id" class="form-label">Job
                                                                     Assignment</label>
-                                                                <select name="job_assign[]" class="form-control">
+                                                                <select name="jobs_id[]" class="form-control">
                                                                     @forelse ($jobs as $job)
                                                                         <option value="{{ $job->id }}">
                                                                             {{ $job->name }}</option>
@@ -244,7 +256,7 @@
                 row.find(".add-row").remove();
                 row.append(
                     '<div class="col-sm-3 d-flex align-items-end"><button class="btn btn-danger remove-row d-flex align-items-end" type="button">Remove</button></div>'
-                    );
+                );
                 row.appendTo(".inners");
                 rowCount++;
             });

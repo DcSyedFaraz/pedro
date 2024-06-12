@@ -323,7 +323,7 @@
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.job_assignment') }}</label>
-                                                                <input value="{{ old('job_assign') }}" name="job_assign"
+                                                                <input value="{{ old('jobs_id') }}" name="jobs_id"
                                                                     type="text" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>

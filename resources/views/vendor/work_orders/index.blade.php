@@ -32,10 +32,10 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('vendor/manage_work_order/index.queue') }}</th>              
+                                            <th>{{ __('vendor/manage_work_order/index.queue') }}</th>
                                             <th>{{ __('vendor/manage_work_order/index.work_order') }}</th>
                                             <th>{{ __('vendor/manage_work_order/index.job_name') }}</th>
-                                            <th>{{ __('vendor/manage_work_order/index.vendor') }}</th>
+                                            <th>{{ __('admin/job/index.AssignedManager') }}</th>
                                             <th>{{ __('vendor/manage_work_order/index.status') }}</th>
                                             <th>{{ __('vendor/manage_work_order/index.deadline') }}</th>
                                             <th>{{ __('vendor/manage_work_order/index.payment') }}</th>
@@ -54,7 +54,13 @@
                                                     </td>
                                                     <td> {{ $workOrder->id ?? '' }}</td>
                                                     <td>{{ $workOrder->jobname->name ?? '' }}</td>
-                                                    <td>{{ $workOrder->vendor->name ?? '' }}</td>
+                                                    <td>
+                                                        @if ($workOrder->jobname?->manager?->name)
+                                                            {{ $workOrder->jobname->manager->name }}
+                                                        @else
+                                                            <span class="font-italic text-muted">not assigned</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         @switch($workOrder->status)
                                                             @case('pending')
@@ -100,23 +106,23 @@
                                                             </a>
                                                         @else
                                                             <div class="btn-group btn-group-sm" role="group">
-                                                                <a title="ask for quick pay"
+                                                                <a data-toggle="tooltip" title="ask for quick pay"
                                                                     href="{{ route('vendor.quick_pay', ['id' => $workOrder->id]) }}"
                                                                     class="btn btn-primary mr-2"
                                                                     onclick="return confirm('Are you sure you want to Apply For Quick Pay?')">
                                                                     <i class="fa fa-hand-holding-usd"></i>
                                                                 </a>
-                                                                <a title="add images and notes"
+                                                                <a data-toggle="tooltip" title="add images and notes"
                                                                     href="{{ route('vendor.doc', ['id' => $workOrder->id]) }}"
                                                                     class="btn btn-warning mr-2">
                                                                     <i class="fa fa-plus"></i>
                                                                 </a>
-                                                                <a title="Create Invoice"
+                                                                <a data-toggle="tooltip" title="Create Invoice"
                                                                     href="{{ route('invoice.create', $workOrder->id) }}"
                                                                     class="btn btn-secondary mr-2">
                                                                     Create Invoice
                                                                 </a>
-                                                                <a title="Alert the customer about work order completion"
+                                                                <a data-toggle="tooltip" title="Alert the customer about work order completion"
                                                                     href="{{ route('vendor.alert', ['id' => $workOrder->job_id]) }}"
                                                                     class="btn btn-Indigo"
                                                                     style="background-color: #6610f2!important; color: white">
@@ -124,14 +130,16 @@
                                                                 </a>
                                                             </div>
                                                             @if (!$workOrder->JobLocation)
-                                                                <span class="badge badge-danger">No Job Location Set Yet!</span>
+                                                                <span class="badge badge-danger">No Job Location Set
+                                                                    Yet!</span>
                                                             @else
                                                                 @if ($workOrder->attendance->contains('attendance', 'checkOut'))
                                                                     <!-- Assuming you have a relationship set up -->
                                                                     <span class="badge badge-success"
-                                                                        style="background-color: #39cccc!important; color: black">Checked Out</span>
+                                                                        style="background-color: #39cccc!important; color: black">Checked
+                                                                        Out</span>
                                                                 @else
-                                                                    <a title="attendance"
+                                                                    <a data-toggle="tooltip" title="attendance"
                                                                         href="{{ route('vendor.attendance', ['id' => $workOrder->id]) }}"
                                                                         class="btn btn-sm btn-maroon"
                                                                         style="background-color: #d81b60!important; color: white">
@@ -140,7 +148,7 @@
                                                                 @endif
                                                             @endif
                                                         @endif
-                                                        <a title="view details"
+                                                        <a data-toggle="tooltip" title="view details"
                                                             href="{{ route('manage_work_orders.show', $workOrder->job_id) }}"
                                                             class="btn btn-sm btn-info">{{ __('vendor/manage_work_order/index.view') }}</a>
                                                     </td>
@@ -170,6 +178,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
     <script>
+        
         $(document).ready(function() {
             $(function() {
                 var token = $('meta[name="csrf-token"]').attr('content');

@@ -30,8 +30,8 @@ return new class extends Migration
             $table->string('location_zipcode')->nullable();
             $table->integer('job_cat_id')->nullable();
             $table->string('job_sub_cat_id')->nullable();
-            $table->string('job_description')->nullable();
-            $table->string('job_sub_description')->nullable();
+            $table->longText('job_description')->nullable();
+            $table->longText('job_sub_description')->nullable();
             $table->string('po_no')->nullable();
             $table->string('job_source')->nullable();
             $table->string('agent')->nullable();

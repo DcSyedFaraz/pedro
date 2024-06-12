@@ -85,7 +85,7 @@
                             </dl>
                         </div>
                     </div>
-
+                    {{-- @dd($vendor->services->pluck('name')) --}}
                     <!-- Areas of Work and Services Performed -->
                     <div class="card mb-4">
                         <div class="card-body">

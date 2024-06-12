@@ -23,7 +23,7 @@ return [
     'quantity' => 'Quantity',
     'unit_price' => 'Unit Price',
     'total' => 'Total',
-    'job_assign' => 'Job Assign',
+    'jobs_id' => 'Job Assign',
     'receipt' => 'Receipt',
     'description' => 'Description',
     'subtotal' => 'Subtotal',

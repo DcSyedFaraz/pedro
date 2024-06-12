@@ -259,7 +259,7 @@
                                                         <div class="col-sm-2">
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct" class="form-label">{{ __('admin/purchase_order/edit.job_assignment') }}</label>
-                                                                <input value="{{ old('job_assign', $purchaseOrder->job_assign ?? '') }}" name="job_assign" type="text"
+                                                                <input value="{{ old('jobs_id', $purchaseOrder->jobs_id ?? '') }}" name="jobs_id" type="text"
                                                                     class="form-control" id="addproduct">
                                                             </div>
                                                         </div>

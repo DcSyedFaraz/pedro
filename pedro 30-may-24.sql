@@ -1419,7 +1419,7 @@ CREATE TABLE `purchase_orders` (
   `qty` varchar(255) DEFAULT NULL,
   `unit_price` varchar(255) DEFAULT NULL,
   `total` varchar(255) DEFAULT NULL,
-  `job_assign` varchar(255) DEFAULT NULL,
+  `jobs_id` varchar(255) DEFAULT NULL,
   `receipt` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `subtotal` varchar(255) DEFAULT NULL,
@@ -1435,7 +1435,7 @@ CREATE TABLE `purchase_orders` (
 -- Dumping data for table `purchase_orders`
 --
 
-INSERT INTO `purchase_orders` (`id`, `supplier`, `order_ref`, `order_progress`, `payment_term`, `order_date`, `sender`, `memo_id`, `ship_option`, `sent_date`, `receipt_status`, `direct_shipping`, `location`, `street`, `apt`, `tampa`, `fl`, `num`, `item_name`, `qty`, `unit_price`, `total`, `job_assign`, `receipt`, `description`, `subtotal`, `discount`, `tax_paid`, `ship_cost`, `grand_total`, `created_at`, `updated_at`) VALUES
+INSERT INTO `purchase_orders` (`id`, `supplier`, `order_ref`, `order_progress`, `payment_term`, `order_date`, `sender`, `memo_id`, `ship_option`, `sent_date`, `receipt_status`, `direct_shipping`, `location`, `street`, `apt`, `tampa`, `fl`, `num`, `item_name`, `qty`, `unit_price`, `total`, `jobs_id`, `receipt`, `description`, `subtotal`, `discount`, `tax_paid`, `ship_cost`, `grand_total`, `created_at`, `updated_at`) VALUES
 (2, '2', 16, 'Close', 'Paypal', '1973-01-03', 'Self', '90', 'Adipisci omnis atque', '1970-07-14', 'Received', '07-Jan-2018', 'Marny Schroeder', 'Id dolorem eu atque', 'Corporis assumenda p', 'Ut cupidatat et ut u', 'Eiusmod ex architect', 'Exercitationem quam', 'farazsdas', '764', '77', '455', 'Rhona Rocha', 'Anne Holcomb', 'Eum incidunt ut tem', NULL, NULL, NULL, NULL, NULL, '2023-09-07 11:46:14', '2024-05-07 11:27:37'),
 (3, '0', 88, 'Open', 'Stripe', '2001-10-16', 'Not Sent', '69', 'Aliquip similique su', '2013-03-03', 'Received', '07-Apr-1981', 'Iona Wynn', 'Earum adipisci fugia', 'Proident inventore', 'Labore vel possimus', 'Suscipit quaerat ill', 'Fuga Ex officia har', 'Mari Mccullough', '10', '65', '588', 'Alfreda Norris', 'Colleen Bass', 'Magna voluptatem obc', NULL, NULL, NULL, NULL, NULL, '2023-09-07 12:01:10', '2023-09-07 12:01:10'),
 (4, '2', 58, 'Close', 'Paypal', '1997-03-11', 'Not Sent', '60', 'Iure voluptatem Vel', '2016-12-09', 'Not Received', '12-Dec-1997', 'Hanae Vega', 'Ut enim sit aliquam', 'Id optio laudantium', 'Aut aspernatur nisi', 'Non aliquip non nesc', 'Vel quia molestias a', 'Jenette Melendez', '125', '592', '789', 'Portia Burgess', 'Regina Weeks', 'Cillum soluta et max', NULL, NULL, NULL, NULL, NULL, '2023-09-07 12:02:00', '2023-09-07 12:02:00');
@@ -1621,7 +1621,7 @@ CREATE TABLE `supply_requests` (
   `num` varchar(255) NOT NULL,
   `item_name` varchar(255) NOT NULL,
   `qty` int(11) NOT NULL,
-  `job_assign` varchar(255) NOT NULL,
+  `jobs_id` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -1631,7 +1631,7 @@ CREATE TABLE `supply_requests` (
 -- Dumping data for table `supply_requests`
 --
 
-INSERT INTO `supply_requests` (`id`, `createdBy`, `order_progress`, `order_ref`, `order_date`, `po_num`, `manager_email`, `sent_date`, `receipt_status`, `location`, `street`, `apt`, `tampa`, `fl`, `num`, `item_name`, `qty`, `job_assign`, `description`, `created_at`, `updated_at`) VALUES
+INSERT INTO `supply_requests` (`id`, `createdBy`, `order_progress`, `order_ref`, `order_date`, `po_num`, `manager_email`, `sent_date`, `receipt_status`, `location`, `street`, `apt`, `tampa`, `fl`, `num`, `item_name`, `qty`, `jobs_id`, `description`, `created_at`, `updated_at`) VALUES
 (2, 21, 'Open', '24eb3ba7-4c8d-45d8-b6c0-c8b78d894da7', '2014-04-29', '100', 'dopyl@mailinator.com', '1985-04-13', 'Not Received', 'Erasmus Daugherty', 'Ratione enim tempore', 'Quis qui vero dolore', 'Qui ut beatae sunt', 'Perferendis ullam sa', 'Voluptatem commodo f', 'Judith Cohen', 816, 'Jelani Short', 'Amet sint reprehend', '2023-10-09 06:18:40', '2023-10-09 06:57:29'),
 (3, 21, 'Close', '95d40003-2385-4190-803b-8eaabf88616f', '2007-02-04', '3', 'wuzajug@mailinator.com', '1999-02-03', 'Received', 'John Warren', 'Minima quis soluta d', 'Voluptatem qui volup', 'Commodo dolores dolo', 'Exercitation magna s', 'Fugiat voluptatum e', 'Alexandra Stein', 853, 'Chloe Figueroa', 'Vel ullamco molestia', '2023-10-09 07:12:17', '2023-10-09 07:12:17'),
 (4, 19, 'Open', 'ab8d5d3d-1466-409b-b43f-7477c20675ed', '2014-09-23', '88', 'vybezojeli@mailinator.com', '1981-02-04', 'Not Received', 'Whitney Cannon', 'In ut aliquid provid', 'Id et accusamus quis', 'Aliquip alias repudi', 'Ex veniam nihil ut', 'Ea cupidatat anim cu', 'MacKensie Murray', 285, 'Leslie Chambers', 'Accusantium voluptat', '2023-10-09 07:32:35', '2023-10-09 07:32:45');

@@ -1,14 +1,15 @@
-
 <?php
 
 return [
     'order' => 'orden',
     'order_ref' => 'referencia pedido',
     'order_progress' => 'progreso orden',
-    'order_date' => 'fecha de orden',  
+    'order_date' => 'fecha de orden',
     'actions' => 'comportamiento',
     'home' => 'hogar',
-    'supply_request' => 'solicitud de suministro',
+    'value' => 'Valor',
+    'field' => 'Campo',
+    'supply_request' => 'Colicitud de suministro',
     'create_supply_request' => 'crear solicitud de suministro',
     'receipt_status' => 'estado del recibo',
     'sent_date' => 'fecha enviada',
@@ -22,6 +23,6 @@ return [
     'show' => 'espectáculo',
     'edit' => 'editar',
     'delete' => 'borrar',
-   
+    'item_info' => 'Información del artículo',
 ];
-?>  
+?>

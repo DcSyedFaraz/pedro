@@ -23,7 +23,7 @@ return [
     'quantity' => 'Cantidad',
     'unit_price' => 'Precio Unitario',
     'total' => 'Total',
-    'job_assign' => 'Asignación de Trabajo',
+    'jobs_id' => 'Asignación de Trabajo',
     'receipt' => 'Recibo',
     'description' => 'Descripción',
     'subtotal' => 'Subtotal',
