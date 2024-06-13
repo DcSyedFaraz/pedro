@@ -60,12 +60,13 @@ class AdminEstimateRequestController extends Controller
      */
     public function vendors_save(Request $request)
     {
+        $request->validate([
+            'request_id' => 'required|exists:estimate_requests,id',
+            'vendors.*' => 'required|exists:users,id',
+            'due_date' => 'required|date|after:today',
+        ]);
         // dd($request->all());
         try {
-            $request->validate([
-                'request_id' => 'required|exists:estimate_requests,id',
-                'vendors.*' => 'required|exists:users,id',
-            ]);
 
             DB::beginTransaction();
 
@@ -74,6 +75,7 @@ class AdminEstimateRequestController extends Controller
                     [
                         'estimate_request_id' => $request->request_id,
                         'user_id' => $vendorId,
+                        'due_date' => $request->due_date,
                     ]
                 );
                 if ($bid->wasRecentlyCreated) {

@@ -13,4 +13,5 @@ return [
     'section_1' => 'Section 1',
     'section_2' => 'Section 2',
     'select' => 'Select',
+    'due_date' => 'Due Date',
 ];

@@ -13,4 +13,5 @@ return [
     'section_1' => 'Sección 1',
     'section_2' => 'Sección 2',
     'select' => 'Seleccionar',
+    'due_date' => 'Fecha de vencimiento',
 ];

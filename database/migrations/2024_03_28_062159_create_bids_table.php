@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('estimate_request_id')->constrained()->onDelete('cascade');
             $table->integer('bid')->nullable();
+            $table->date('due_date')->nullable();
             $table->boolean('selected')->nullable();
             $table->timestamps();
         });

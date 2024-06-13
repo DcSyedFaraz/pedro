@@ -80,20 +80,30 @@
                             @csrf
                             <div class="row">
                                 <div class="col-5">
-                                    <div class="input-group mb-3">
-                                        <input type="number" name="bid" class="form-control" value="{{ $userBid ? $userBid->bid : '' }}"
-                                            placeholder="Write your bid" aria-label="Write your bid"
-                                            aria-describedby="basic-addon2" {{ $userBid->bid != null ? 'disabled' : '' }}>
+                                    <div class="input-group ">
+                                        <input type="number" name="bid" class="form-control"
+                                            value="{{ $userBid ? $userBid->bid : '' }}" placeholder="Write your bid"
+                                            aria-label="Write your bid" aria-describedby="basic-addon2"
+                                            {{ $userBid->bid != null ? 'disabled' : '' }}>
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">USD</span>
                                         </div>
                                     </div>
+                                    <div class="mb-3">@if ($userBid->bid == null)
+                                        <span class="font-weight-bold">Due Date:</span> <span
+                                                class="remaining-time text-danger"
+                                                data-due-date="{{ $userBid->due_date }}"></span>
+                                    @endif</div>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-indigo" {{ $userBid->bid != null ? 'disabled' : '' }}>Place Bid</button>
+                                    <button class="btn btn-indigo" {{ $userBid->bid != null ? 'disabled' : '' }}>Place
+                                        Bid</button>
+                                </div>
+                                <div class="col-4">
                                 </div>
                             </div>
                         </form>
+
                         <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary">Back to menu</a>
                     </div>
                 </div>
@@ -102,6 +112,37 @@
         </section>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timeElements = document.querySelectorAll('.remaining-time');
 
+            timeElements.forEach(element => {
+                const dueDate = new Date(element.getAttribute('data-due-date'));
+                const now = new Date();
+                let remainingTime = Math.floor((dueDate - now) / 1000);
+
+                if (remainingTime <= 0) {
+                    element.textContent = "Time expired";
+                    element.classList.add('text-danger');
+                } else {
+                    const interval = setInterval(() => {
+                        remainingTime -= 1;
+                        if (remainingTime <= 0) {
+                            element.textContent = "Time expired";
+                            element.classList.add('text-danger');
+                            clearInterval(interval);
+                        } else {
+                            const days = Math.floor(remainingTime / (24 * 60 * 60));
+                            const hours = Math.floor((remainingTime % (24 * 60 * 60)) / (60 * 60));
+                            const minutes = Math.floor((remainingTime % (60 * 60)) / 60);
+                            const seconds = remainingTime % 60;
+                            element.textContent =
+                                `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+                        }
+                    }, 1000);
+                }
+            });
+        });
+    </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 @endsection

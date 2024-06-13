@@ -10,6 +10,7 @@ use App\Notifications\UserNotification;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Notification;
 
 class BidController extends Controller
@@ -23,13 +24,13 @@ class BidController extends Controller
     {
         try {
             $id = Auth::id();
-            $estimate = EstimateRequest::select('id', 'first_name','last_name','phone_number','email','created_at')
-            ->whereHas('bids', function ($query) use ($id) {
-                $query->where('user_id', $id)->where(function ($query) {
-                    $query->where('selected', '!=', true)
-                        ->orWhereNull('selected');
-                });
-            })->get();
+            $estimate = EstimateRequest::select('id', 'first_name', 'last_name', 'phone_number', 'email', 'created_at')
+                ->whereHas('bids', function ($query) use ($id) {
+                    $query->where('user_id', $id)->where(function ($query) {
+                        $query->where('selected', '!=', true)
+                            ->orWhereNull('selected');
+                    });
+                })->get();
 
             return view('vendor.estimate_req.index', compact('estimate'));
 
@@ -94,14 +95,22 @@ class BidController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all(),$id);
+
+        $user = auth()->user();
+        $selectedBid = Bid::where('user_id', $user->id)->where('estimate_request_id', $id)->firstOrFail();
+        $validator = Validator::make($selectedBid->toArray(), [
+            'due_date' => 'required|date|after_or_equal:today',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        if ($selectedBid->bid != null) {
+
+            return redirect()->back()->with('warning', 'You already placed the Bid!');
+        }
         try {
-            $user = auth()->user();
-            $selectedBid = Bid::where('user_id', $user->id)->where('estimate_request_id', $id)->firstOrFail();
-
-            if ($selectedBid->bid != null) {
-
-                return redirect()->back()->with('warning', 'You already placed the Bid!');
-            }
             // Select the chosen bid
             $selectedBid->bid = $request->bid;
             $selectedBid->save();
