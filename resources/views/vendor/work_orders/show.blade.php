@@ -6,6 +6,10 @@
         <!-- Content Header (Page header) -->
         <section class="content">
             <div class="container">
+                <div class="my-3">
+                    <a href="{{ route('manage_work_orders.index') ?? '' }}"
+                        class="btn btn-info btn-lg">{{ __('vendor/manage_work_order/index.back') }}</a>
+                </div>
                 <h1>{{ __('vendor/manage_work_order/index.show_job_details') }}</h1>
                 <div class="container mt-5">
                     <table class="table table-striped table-bordered">

@@ -44,9 +44,11 @@
                                                 <tr>
                                                     <td>{{ $shows->name }}</td>
                                                     <td>
-                                                        @foreach ($shows->inspectionChecklists as $checklist)
+                                                        @forelse ($shows->inspectionChecklists as $checklist)
                                                             <li>{{ $checklist->name }}</li>
-                                                        @endforeach
+                                                            @empty
+                                                            <span class="font-italic text-muted">No checklist assigned yet</span>
+                                                        @endforelse
                                                     </td>
                                                     <td>
                                                         @if ($shows->inspectionResponse->count() > 0)
@@ -281,7 +283,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div> --}}
-                                                        @else
+                                                        @elseif ($shows->inspectionChecklists->count() > 0)
                                                             <button class="btn btn-primary" data-toggle="modal"
                                                                 data-target="#achecklistModal_{{ $shows->id }}">Response</button>
                                                             <!-- Modal for Checklist Items -->
@@ -400,6 +402,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                         @endif
                                                     </td>
                                                 </tr>

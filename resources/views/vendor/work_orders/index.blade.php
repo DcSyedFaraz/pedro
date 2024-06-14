@@ -122,11 +122,11 @@
                                                                     class="btn btn-secondary mr-2">
                                                                     Create Invoice
                                                                 </a>
-                                                                <a data-toggle="tooltip" title="Alert the customer about work order completion"
+                                                                <a data-toggle="tooltip" title="Notify the customer that the vendor is en route for the job"
                                                                     href="{{ route('vendor.alert', ['id' => $workOrder->job_id]) }}"
                                                                     class="btn btn-Indigo"
                                                                     style="background-color: #6610f2!important; color: white">
-                                                                    <i class="fas fa-bell"></i> Enroute
+                                                                    <i class="fas fa-bell"></i> En-route
                                                                 </a>
                                                             </div>
                                                             @if (!$workOrder->JobLocation)
@@ -178,7 +178,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
     <script>
-        
+
         $(document).ready(function() {
             $(function() {
                 var token = $('meta[name="csrf-token"]').attr('content');

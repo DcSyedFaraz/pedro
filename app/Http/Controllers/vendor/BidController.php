@@ -8,6 +8,7 @@ use App\Models\EstimateRequest;
 use App\Models\User;
 use App\Notifications\UserNotification;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -98,12 +99,10 @@ class BidController extends Controller
 
         $user = auth()->user();
         $selectedBid = Bid::where('user_id', $user->id)->where('estimate_request_id', $id)->firstOrFail();
-        $validator = Validator::make($selectedBid->toArray(), [
-            'due_date' => 'required|date|after_or_equal:today',
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+
+        if ($selectedBid->due_date && Carbon::parse($selectedBid->due_date)->isPast()) {
+            return redirect()->back()->with('error', 'The due date has passed.');
         }
 
         if ($selectedBid->bid != null) {

@@ -24,6 +24,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary my-3">Back to menu</a>
                 <div class="row">
                     <div class="col-12">
                         <table class="table">
@@ -84,19 +85,21 @@
                                         <input type="number" name="bid" class="form-control"
                                             value="{{ $userBid ? $userBid->bid : '' }}" placeholder="Write your bid"
                                             aria-label="Write your bid" aria-describedby="basic-addon2"
-                                            {{ $userBid->bid != null ? 'disabled' : '' }}>
+                                            {{ $userBid->bid != null ? 'disabled' : '' }} id="bidInput">
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">USD</span>
                                         </div>
                                     </div>
-                                    <div class="mb-3">@if ($userBid->bid == null)
-                                        <span class="font-weight-bold">Due Date:</span> <span
+                                    <div class="mb-3">
+                                        @if ($userBid->bid == null)
+                                            <span class="font-weight-bold">Due Date:</span> <span
                                                 class="remaining-time text-danger"
                                                 data-due-date="{{ $userBid->due_date }}"></span>
-                                    @endif</div>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-indigo" {{ $userBid->bid != null ? 'disabled' : '' }}>Place
+                                    <button class="btn btn-indigo" id="bidButton" {{ $userBid->bid != null ? 'disabled' : '' }}>Place
                                         Bid</button>
                                 </div>
                                 <div class="col-4">
@@ -104,7 +107,7 @@
                             </div>
                         </form>
 
-                        <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary">Back to menu</a>
+                        <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary my-3">Back to menu</a>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -123,6 +126,8 @@
 
                 if (remainingTime <= 0) {
                     element.textContent = "Time expired";
+                    document.getElementById('bidInput').disabled = true;
+                    document.getElementById('bidButton').disabled = true;
                     element.classList.add('text-danger');
                 } else {
                     const interval = setInterval(() => {

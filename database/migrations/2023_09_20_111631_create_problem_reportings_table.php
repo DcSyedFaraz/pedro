@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('problem_reportings', function (Blueprint $table) {
             $table->id();
-            $table->string('job');
             $table->string('location');
-            $table->integer('createdBy');
+            $table->unsignedBigInteger('job');
+            $table->foreign('job')->references('id')->on('jobs')->onDelete('cascade');
+            $table->unsignedBigInteger('createdBy');
+            $table->foreign('createdBy')->references('id')->on('users')->onDelete('cascade');
             $table->string('location_supervisor');
             $table->date('problem_date');
-            $table->date('problem_detail');
+            $table->string('problem_detail')->nullable();
             $table->string('type_of_problem');
             $table->text('description_of_problem');
             $table->string('investigator_of_problem');

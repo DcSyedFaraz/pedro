@@ -10,6 +10,7 @@ use App\Notifications\UserNotification;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class VendorProblemController extends Controller
 {
@@ -47,9 +48,43 @@ class VendorProblemController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+        $rules = [
+            'job' => 'required|integer',
+            'location' => 'required|string|max:255',
+            'location_supervisor' => 'required|string|max:255',
+            'problem_date' => 'required|date',
+            'type_of_problem' => 'required|string|max:255',
+            'description_of_problem' => 'required|string',
+            'investigator_of_problem' => 'required|string|max:255',
+            'result_of_investigation' => 'required|string',
+            'suggestions' => 'required|string',
+        ];
+
+        // Custom error messages (optional)
+        $messages = [
+            'required' => 'The :attribute field is required.',
+            'integer' => 'The :attribute field must be an integer.',
+            'date' => 'The :attribute field must be a valid date.',
+            'string' => 'The :attribute field must be a string.',
+            'max' => 'The :attribute field must not exceed :max characters.',
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // If validation passes, proceed with storing the data
+        $validatedData = $validator->validated();
         try {
-            $request['createdBy'] = auth()->user()->id;
-            $problemReport= ProblemReporting::create($request->all());
+            $validatedData['createdBy'] = auth()->user()->id;
+            $problemReport = ProblemReporting::create($validatedData);
 
             // Admin Notification
             $admin = User::find(1);
@@ -64,7 +99,7 @@ class VendorProblemController extends Controller
 
             return redirect()->route('userproblem.index')->with('success', 'New Report Created Successfully');
         } catch (QueryException $e) {
-            return redirect()->route('userproblem.index')->with('error', 'An error occurred while creating the report: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while creating the report: ' . $e->getMessage());
         }
     }
 
