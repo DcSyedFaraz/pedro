@@ -13,29 +13,40 @@ Pedro is a powerful, easy-to-use Laravel-based web application designed to strea
 
 1. Clone the repository:
    ```
-   git clone https://github.com/DcSyedFaraz/pedro.git ```
+   git clone https://github.com/DcSyedFaraz/pedro.git
+   ```
 Navigate to the project directory:
 
 
-```cd pedro```
+```
+cd pedro
+```
 2. Install dependencies:
-```composer install
-npm install```
+```
+composer install
+npm install
+```
 
 3. Set up the environment file:
 
 
-```cp .env.example .env```
+```
+cp .env.example .env
+```
 4. Configure the .env file with your database and other necessary settings.
 
 Generate the application key:
 
 
-```php artisan key:generate```
+```
+php artisan key:generate
+```
 5. Run the migrations:
 
 
-```php artisan migrate```
+```
+php artisan migrate
+```
 ## Usage
 Start the local development server:
 
