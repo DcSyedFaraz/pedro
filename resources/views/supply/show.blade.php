@@ -7,6 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
+                <button class="btn btn-success my-3" id="download-pdf">Download PDF</button>
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>{{ __('user/supply/index.supply_request') }}</h1>
@@ -25,7 +26,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 p-3" id="pdf-content">
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -93,5 +94,4 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 @endsection

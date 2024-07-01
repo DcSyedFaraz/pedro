@@ -25,57 +25,60 @@
         <section class="content">
             <div class="container-fluid">
                 <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary my-3">Back to menu</a>
+                <button class="btn btn-success my-3" id="download-pdf">Download PDF</button>
                 <div class="row">
                     <div class="col-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th>First Name:</th>
-                                    <td>{{ $estimate->first_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Last Name:</th>
-                                    <td>{{ $estimate->last_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Phone Number:</th>
-                                    <td>{{ $estimate->phone_number }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Email:</th>
-                                    <td>{{ $estimate->email }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Street Address:</th>
-                                    <td>{{ $estimate->street_address }}</td>
-                                </tr>
-                                <tr>
-                                    <th>City:</th>
-                                    <td>{{ $estimate->city }}</td>
-                                </tr>
-                                <tr>
-                                    <th>State:</th>
-                                    <td>{{ $estimate->state }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Zip Code:</th>
-                                    <td>{{ $estimate->zip_code }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Details:</th>
-                                    <td>{{ $estimate->details }}</td>
-                                </tr>
-                                @if ($estimate->picture)
+                        <div class="p-3" id="pdf-content">
+                            <table class="table " >
+                                <tbody>
                                     <tr>
-                                        <th>Picture:</th>
-                                        <td>
-                                            <img src="{{ asset('storage/' . $estimate->picture) }}" alt="User Picture"
-                                                class="img-fluid">
-                                        </td>
+                                        <th>First Name:</th>
+                                        <td>{{ $estimate->first_name }}</td>
                                     </tr>
-                                @endif
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <th>Last Name:</th>
+                                        <td>{{ $estimate->last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number:</th>
+                                        <td>{{ $estimate->phone_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>{{ $estimate->email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Street Address:</th>
+                                        <td>{{ $estimate->street_address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>City:</th>
+                                        <td>{{ $estimate->city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>State:</th>
+                                        <td>{{ $estimate->state }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Zip Code:</th>
+                                        <td>{{ $estimate->zip_code }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Details:</th>
+                                        <td>{{ $estimate->details }}</td>
+                                    </tr>
+                                    @if ($estimate->picture)
+                                        <tr>
+                                            <th>Picture:</th>
+                                            <td>
+                                                <img src="{{ asset('storage/' . $estimate->picture) }}" alt="User Picture"
+                                                    class="img-fluid">
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                         <form action="{{ route('vendor_estimate_requests.update', $estimate->id) }}" method="POST">
                             @method('PUT')
                             @csrf
@@ -99,7 +102,8 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <button class="btn btn-indigo" id="bidButton" {{ $userBid->bid != null ? 'disabled' : '' }}>Place
+                                    <button class="btn btn-indigo" id="bidButton"
+                                        {{ $userBid->bid != null ? 'disabled' : '' }}>Place
                                         Bid</button>
                                 </div>
                                 <div class="col-4">
@@ -107,7 +111,8 @@
                             </div>
                         </form>
 
-                        <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary my-3">Back to menu</a>
+                        <a href="{{ route('vendor_estimate_requests.index') }}" class="btn btn-primary my-3">Back to
+                            menu</a>
                     </div>
                 </div>
                 <!-- /.row -->

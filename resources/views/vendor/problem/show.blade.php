@@ -30,7 +30,7 @@
                                     {{ __('vendor/problem/index.problem_report') }}#{{ $problemReport->id }}</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body">
+                            <div class="card-body" id="pdf-content">
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
@@ -77,6 +77,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
+                                <button class="btn btn-success my-3" id="download-pdf">Download PDF</button>
                                 <a href="{{ route('userproblem.index') }}"
                                     class="btn btn-primary">{{ __('vendor/problem/index.back_to_list') }}</a>
                                 <a href="{{ route('userproblem.edit', $problemReport->id) }}"
