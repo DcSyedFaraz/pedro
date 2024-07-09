@@ -103,7 +103,7 @@ class UserController extends Controller
         $user->password = bcrypt('12345678');
         $user->save();
 
-        $user->assignRole($request->input('roles'));
+        $user->assignRole('User');
         // dd($user);
 
 

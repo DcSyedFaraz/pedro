@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('client_status')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
-            
+
             $table->string('location_address')->nullable();
             $table->string('location_unit')->nullable();
             $table->string('location_city')->nullable();
@@ -51,7 +51,7 @@ return new class extends Migration
             $table->string('arrival_end')->nullable();
             $table->string('time_duration')->nullable();
             $table->string('start_duration')->nullable();
-            $table->string('end_duration')->nullable(); 
+            $table->string('end_duration')->nullable();
             $table->string('referral_source')->nullable();
             $table->string('opportunity_rating')->nullable();
             $table->string('opportunity_owner')->nullable();
@@ -60,7 +60,8 @@ return new class extends Migration
             $table->string('notes_for_tech')->nullable();
             $table->string('completion_notes')->nullable();
             $table->string('scheduled_at')->nullable();
-        
+            $table->timestamp('signature_time')->nullable();
+
             $table->timestamps();
         });
     }

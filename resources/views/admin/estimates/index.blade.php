@@ -44,11 +44,14 @@
                                         <thead>
                                             <tr>
                                                 <th>Select</th>
-                                                <th>{{ __('admin/estimates/index.customer_name') }}</th>
-                                                <th>{{ __('admin/estimates/index.location_name') }}</th>
-                                                <th>{{ __('admin/estimates/index.primary_contact') }}</th>
-                                                <th>{{ __('admin/estimates/index.e_signature') }}</th>
-                                                <th>{{ __('admin/estimates/index.actions') }}</th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.customer_name') }}</th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.location_address') }}
+                                                </th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.location_city') }}</th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.primary_contact') }}
+                                                </th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.e_signature') }}</th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.actions') }}</th>
                                             </tr>
                                         </thead>
 
@@ -83,12 +86,13 @@
                                                         </td>
                                                         <td>{{ isset($estimate->customer->name) ? $estimate->customer->name : '' }}
                                                         </td>
-                                                        <td>{{ isset($estimate->location_name) ? $estimate->location_name : '' }}
+                                                        <td>{{ isset($estimate->location_address) ? $estimate->location_address : '' }}
+                                                        <td>{{ isset($estimate->location_city) ? $estimate->location_city : '' }}
                                                         </td>
                                                         <td>{{ __('admin/estimates/index.primary_contact') }}:
                                                             {{ $estimate->first_name . '-' . $estimate->last_name }}
                                                             </br> {{ $emailList }}
-                                                            </br> Phone: {{ $phone }} Ext: {{ $ext }}
+
                                                         </td>
                                                         <td>
                                                             @if (isset($estimate->signature))
@@ -149,12 +153,14 @@
                                                         @endif --}}
                                                             <a class="btn btn-success"
                                                                 href="{{ route('estimates.edit', $estimate->id) }}">{{ __('admin/estimates/index.edit') }}</a>
+                                                            <a class="btn btn-primary  mx-2"
+                                                                href="{{ route('estimates.show', $estimate->id) }}">{{ __('admin/estimates/index.show') }}</a>
                                                             {{-- <form action="{{ route('estimates.destroy', $estimate) }}"
                                                                 method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('DELETE') --}}
                                                             <a href="{{ route('estimates.destroy', $estimate->id) }}"
-                                                                class="btn btn-danger mx-2"
+                                                                class="btn btn-danger"
                                                                 onclick="return confirm('Are you sure you want to delete this estimate?')">{{ __('admin/estimates/index.delete') }}</a>
                                                             {{-- </form> --}}
                                                         </td>

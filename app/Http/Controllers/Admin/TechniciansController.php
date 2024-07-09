@@ -23,7 +23,27 @@ class TechniciansController extends Controller
 
     public function store(Request $request)
     {
-        Technicians::create($request->all());
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'phone_type' => 'required|string',
+            'number' => 'required|string|max:255',
+            'ext' => 'required|string|max:255',
+            'department' => 'required|string|max:255',
+            'job_title' => 'required|string|max:255',
+            'email_type' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'billing_address' => 'required|string|max:255',
+            'contact_type' => 'required|string|max:255',
+            'active' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'aptNo' => 'nullable|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'zip' => 'required|string|max:10',
+        ]);
+        Technicians::create($validatedData);
         return redirect()->route('technicians.index')->with('success', __('admin/technicians/index.success.created'));
     }
 

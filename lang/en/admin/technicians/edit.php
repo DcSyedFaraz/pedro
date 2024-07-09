@@ -7,7 +7,7 @@ return [
     'last_name' => 'Last Name',
     'phone' => 'Phone',
     'mobile' => 'Mobile',
-    'telephone' => 'Telephone',
+    'office' => 'Office',
     'department' => 'Department',
     'job_title' => 'Job Title',
     'email' => 'Email',

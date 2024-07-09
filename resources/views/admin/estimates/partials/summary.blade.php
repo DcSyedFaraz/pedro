@@ -77,7 +77,7 @@
                 <div class="col-md-4">&nbsp;</div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input value="{{ isset($jobprim->email) ? old('email', $jobprim->email) : '' }}" type="tel"
+                        <input value="{{ isset($jobprim->email) ? old('email', $jobprim->email) : '' }}" type="email"
                             class="form-control" name="email[]" placeholder="Email">
                         <p class="email-error error-messages" style="display: none">Add at least email.</p>
                     </div>
@@ -128,7 +128,7 @@
             <div class="col-md-4">&nbsp;</div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="tel" class="form-control" name="email[]"
+                    <input type="email" class="form-control" name="email[]"
                         placeholder="{{ __('admin/estimates/edit.email') }}">
                     <p class="email-error error-messages" style="display: none">Add at least email.</p>
                 </div>
@@ -172,13 +172,13 @@
         <div class="form-group">
             <input
                 value="{{ isset($estimate->location_address) ? old('location_address', $estimate->location_address) : '' }}"
-                type="tel" class="form-control" name="location_address"
+                type="text" class="form-control" name="location_address"
                 placeholder="{{ __('admin/estimates/edit.location_address') }}">
         </div>
     </div>
     <div class="col-md-3">
         <input value="{{ isset($estimate->location_unit) ? old('location_unit', $estimate->location_unit) : '' }}"
-            type="tel" class="form-control" name="location_unit"
+            type="text" class="form-control" name="location_unit"
             placeholder="{{ __('admin/estimates/edit.location_unit') }}">
     </div>
 </div>

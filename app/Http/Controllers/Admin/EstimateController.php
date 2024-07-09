@@ -35,20 +35,27 @@ class EstimateController extends Controller
      */
     public function index()
     {
-        $now = now();
-        $next72Hours = now()->addHours(72);
-        $estimates = Estimate::with('customer', 'job_category', 'job_prioirty', 'job_source')->whereNull('scheduled_at') // Change 'scheduled_at' to your actual column name
-            ->orWhere(function ($query) use ($now, $next72Hours) {
-                $query->where('scheduled_at', '>', $next72Hours);
-                //   ->orWhere('due_at', '<', $now);
-            })->get();
-        $jobs = Job::get();
-        return view('admin.estimates.index', compact('estimates', 'jobs'));
+        // $now = now();
+        // $next72Hours = now()->addHours(72);
+        // $estimates = Estimate::with('customer', 'job_category', 'job_prioirty', 'job_source')->whereNull('scheduled_at') // Change 'scheduled_at' to your actual column name
+        //     ->orWhere(function ($query) use ($now, $next72Hours) {
+        //         $query->where('scheduled_at', '>', $next72Hours);
+        //         //   ->orWhere('due_at', '<', $now);
+        //     })->get();
+        // $jobs = Job::get();
+        $estimates = Estimate::select('id', 'email', 'first_name', 'last_name', 'signature', 'signature_time', 'customer_id', 'location_address', 'location_city')->with('jobs', 'customer')->get();
+        return view('admin.estimates.index', compact('estimates'));
     }
 
+    public function show($id)
+    {
+        $estimate = Estimate::findOrFail($id);
+        // dd($estimate);
+        return view('admin.estimates.show', compact('estimate'));
+    }
     public function create()
     {
-        $customer = User::withRole('customer')->get();
+        $customer = User::withRole('User')->get();
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
@@ -64,93 +71,147 @@ class EstimateController extends Controller
         //     'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Adjust the validation rules as needed
         //     'document' => 'required|mimes:pdf,doc,docx', // Adjust the validation rules as needed
         // ]);
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'customer_id' => 'required|integer',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|array',
+            'phone.*' => 'required|string|max:255', // Ensure each phone entry is a string
+            'ext' => 'required|array',
+            'ext.*' => 'required|string|max:255', // Ensure each ext entry is a string
+            'email' => 'required|array',
+            'email.*' => 'required|email|max:255', // Ensure each email entry is a valid email
+            'location_name' => 'required|string|max:255',
+            'location_gated_property' => 'nullable|string', // Assuming 'on' is a valid value
+            'location_address' => 'required|string|max:255',
+            'location_unit' => 'required|string|max:255',
+            'location_city' => 'required|string|max:255',
+            'location_state' => 'required|string|max:255',
+            'location_zipcode' => 'required|string|max:10',
+            'job_cat_id' => 'nullable|integer',
+            'job_sub_description' => 'nullable|string',
+            'job_description' => 'required|string|max:255',
+            'po_no' => 'required|string|max:255',
+            'job_source' => 'required|string|nullable',
+            'agent' => 'nullable|string',
+            'requested_on' => 'required|date',
+            'referral_source' => 'required|integer',
+            'tags' => 'required|string|max:255',
+            'opportunity_owner' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'arrival_start' => 'required|string|max:255',
+            'arrival_end' => 'required|string|max:255',
+            'start_duration' => 'required|integer',
+            'end_duration' => 'required|integer|gte:start_duration',
+            'assigned_tech' => 'required|string|max:255',
+            'notify_tech_assign' => 'nullable|string', // Assuming 'on' is a valid value
+            'notes_for_tech' => 'nullable|string|max:255',
+            'completion_notes' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'qty_hrs' => 'required|integer',
+            'rate' => 'required|numeric',
+            'total' => 'required|numeric',
+            'cost' => 'required|numeric',
+            'margin_tax' => 'required|numeric',
+            'note_to_cust' => 'required|string|max:255',
+        ]);
+        try {
+            DB::beginTransaction();
 
-        $job = new Estimate();
-        $job->customer_id = $request->customer_id;
-        $job->first_name = $request->first_name;
-        $job->last_name = $request->last_name;
-        $job->location_name = $request->location_name;
-        $job->location_gated_property = $request->location_gated_property;
-        $job->location_address = $request->location_address;
-        $job->location_unit = $request->location_unit;
-        $job->location_city = $request->location_city;
-        $job->location_state = $request->location_state;
-        $job->location_zipcode = $request->location_zipcode;
-        $job->job_cat_id = $request->job_cat_id;
-        $job->job_sub_cat_id = $request->job_sub_cat_id;
-        $job->job_sub_description = $request->job_sub_description;
-        $job->job_description = $request->job_description;
-        $job->po_no = $request->po_no;
-        $job->job_source = $request->job_source;
-        $job->agent = $request->agent;
-        // Job customer Fields
-        $job->customer_homeowner = $request->customer_homeowner;
-        $job->customer_unit_cordination = $request->customer_unit_cordination;
-        //Job Picture
+            $job = new Estimate();
+            $job->customer_id = $request->customer_id;
+            $job->first_name = $request->first_name;
+            $job->last_name = $request->last_name;
+            $job->location_name = $request->location_name;
+            $job->location_gated_property = $request->location_gated_property;
+            $job->location_address = $request->location_address;
+            $job->location_unit = $request->location_unit;
+            $job->location_city = $request->location_city;
+            $job->location_state = $request->location_state;
+            $job->location_zipcode = $request->location_zipcode;
+            $job->job_cat_id = $request->job_cat_id;
+            $job->job_sub_cat_id = $request->job_sub_cat_id;
+            $job->job_sub_description = $request->job_sub_description;
+            $job->job_description = $request->job_description;
+            $job->po_no = $request->po_no;
+            $job->job_source = $request->job_source;
+            $job->agent = $request->agent;
+            // Job customer Fields
+            $job->customer_homeowner = $request->customer_homeowner;
+            $job->customer_unit_cordination = $request->customer_unit_cordination;
+            //Job Picture
 
 
 
-        if ($request->hasFile('image')) {
-            $file = request()->file('image');
-            $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
-            $file->move('uploads/image/', $fileName);
-            $image = asset('uploads/image/' . $fileName);
-            $job->image = $image;
+            if ($request->hasFile('image')) {
+                $file = request()->file('image');
+                $fileName = md5($file->getClientOriginalName() . time()) . "img." . $file->getClientOriginalExtension();
+                $file->move('uploads/image/', $fileName);
+                $image = asset('uploads/image/' . $fileName);
+                $job->image = $image;
 
+            }
+
+
+            //Job document
+            if ($request->hasFile('document')) {
+                $file = request()->file('document');
+                $fileName = md5($file->getClientOriginalName() . time()) . "doc." . $file->getClientOriginalExtension();
+                $file->move('uploads/document/', $fileName);
+                $document = asset('uploads/document/' . $fileName);
+                $job->document = $document;
+
+            }
+            // Job Information
+            //Job image
+            //Job document
+            $job->requested_on = $request->requested_on;
+            $job->current_status = $request->current_status;
+            $job->opportunity_rating = $request->opportunity_rating;
+            $job->opportunity_owner = $request->opportunity_owner;
+            $job->referral_source = $request->referral_source;
+            $job->start_date = $request->start_date;
+            $job->end_date = $request->end_date;
+            $job->arrival_start = $request->arrival_start;
+            $job->arrival_end = $request->arrival_end;
+            $job->time_duration = $request->time_duration;
+            $job->start_duration = $request->start_duration;
+            $job->end_duration = $request->end_duration;
+            $job->end_duration = $request->end_duration;
+            $job->assigned_tech = $request->assigned_tech;
+            $job->notify_tech_assign = $request->notify_tech_assign;
+            $job->notes_for_tech = $request->notes_for_tech;
+            $job->completion_notes = $request->completion_notes;
+            $job->save();
+
+
+            foreach ($request['phone'] as $key => $value) {
+                EstimatePrimaryContact::create([
+                    'estimate_id' => $job->id,
+                    'phone' => $value,
+                    'ext' => $request['ext'][$key],
+                    'email' => $request['email'][$key],
+
+                ]);
+            }
+            $user = User::find($job->customer_id);
+            $admin = auth()->user();
+            $message = "created your Estimate# {$job->id}";
+            $user->notify(new UserNotification($admin, $message));
+
+            if ($user->phone != null) {
+                //$this->twilioService->sendSMS($user->phone, $message);
+            }
+
+            DB::commit();
+            return redirect()->route('estimates.index')->with('success', 'Estimate Created Successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // throw $e;
+            return redirect()->back()->with('error', __('admin/estimates/index.flash_error_convert'));
         }
-
-
-        //Job document
-        if ($request->hasFile('document')) {
-            $file = request()->file('document');
-            $fileName = md5($file->getClientOriginalName() . time()) . "doc." . $file->getClientOriginalExtension();
-            $file->move('uploads/document/', $fileName);
-            $document = asset('uploads/document/' . $fileName);
-            $job->document = $document;
-
-        }
-        // Job Information
-        //Job image
-        //Job document
-        $job->requested_on = $request->requested_on;
-        $job->current_status = $request->current_status;
-        $job->opportunity_rating = $request->opportunity_rating;
-        $job->opportunity_owner = $request->opportunity_owner;
-        $job->referral_source = $request->referral_source;
-        $job->start_date = $request->start_date;
-        $job->end_date = $request->end_date;
-        $job->arrival_start = $request->arrival_start;
-        $job->arrival_end = $request->arrival_end;
-        $job->time_duration = $request->time_duration;
-        $job->start_duration = $request->start_duration;
-        $job->end_duration = $request->end_duration;
-        $job->end_duration = $request->end_duration;
-        $job->assigned_tech = $request->assigned_tech;
-        $job->notify_tech_assign = $request->notify_tech_assign;
-        $job->notes_for_tech = $request->notes_for_tech;
-        $job->completion_notes = $request->completion_notes;
-        $job->save();
-
-
-        foreach ($request['phone'] as $key => $value) {
-            EstimatePrimaryContact::create([
-                'estimate_id' => $job->id,
-                'phone' => $value,
-                'ext' => $request['ext'][$key],
-                'email' => $request['email'][$key],
-
-            ]);
-        }
-        $user = User::find($job->customer_id);
-        $admin = auth()->user();
-        $message = "created your Estimate# {$job->id}";
-        $user->notify(new UserNotification($admin, $message));
-
-        if ($user->phone != null) {
-            //$this->twilioService->sendSMS($user->phone, $message);
-        }
-
-        return redirect()->route('estimates.index')->with('success', 'Estimate Created Successfully');
     }
     // public function store(Request $request)
     // {

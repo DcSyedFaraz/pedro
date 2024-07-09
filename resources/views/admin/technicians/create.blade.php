@@ -76,10 +76,10 @@
                                                             <option value="mobile"
                                                                 {{ old('phone_type', isset($technicians) ? $technicians->phone_type : '') == 'phone' ? 'selected' : '' }}>
                                                                 {{ __('admin/technicians/edit.mobile') }}</option>
-                                                            <option value="telephone"
-                                                                {{ old('phone_type', isset($technicians) ? $technicians->phone_type : '') == 'telephone' ? 'selected' : '' }}>
+                                                            <option value="office"
+                                                                {{ old('phone_type', isset($technicians) ? $technicians->phone_type : '') == 'office' ? 'selected' : '' }}>
 
-                                                                {{ __('admin/technicians/edit.telephone') }}
+                                                                {{ __('admin/technicians/edit.office') }}
                                                             </option>
                                                         </select>
                                                     </div>
@@ -160,7 +160,6 @@
                                                     <option value="no"
                                                         {{ old('billing_address') == 'no' ? 'selected' : '' }}>
                                                         No</option>
-                                                    <option value="no">{{ __('admin/technicians/edit.no') }}
                                                     </option>
                                                 </select>
 
@@ -195,7 +194,6 @@
                                                     <option value="no"
                                                         {{ old('active') == 'no' ? 'selected' : '' }}>
                                                         No</option>
-                                                    <option value="no">No</option>
                                                 </select>
 
                                             </div>
