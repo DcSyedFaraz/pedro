@@ -13,6 +13,7 @@ return [
     'actions' => [
         'show' => 'Mostrar',
         'edit' => 'Editar',
+        'view' => 'Vista',
         'delete' => 'Eliminar',
     ],
     'confirm_delete' => '¿Está seguro de que desea eliminar esta Orden de Compra?',

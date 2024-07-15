@@ -48,7 +48,7 @@
                                                 <td>{{ $purchaseOrder->payment_term }}</td>
                                                 <td>
                                                     <form action="{{ route('purchase-orders.destroy', $purchaseOrder->id) }}" method="POST">
-                                                        <a href="{{ route('purchase-orders.show', $purchaseOrder->id) }}" class="btn btn-info">{{ __('admin/purchase_order/index.actions.show') }}</a>
+                                                        <a href="{{ route('purchase-orders.show', $purchaseOrder->id) }}" class="btn btn-info">{{ __('admin/purchase_order/index.actions.view') }}</a>
                                                         <a href="{{ route('purchase-orders.edit', $purchaseOrder->id) }}" class="btn btn-primary">{{ __('admin/purchase_order/index.actions.edit') }}</a>
                                                         @csrf
                                                         @method('DELETE')

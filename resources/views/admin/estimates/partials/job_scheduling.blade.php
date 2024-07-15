@@ -38,7 +38,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>{{ __('admin/estimates/edit.progress') }}</strong>
+        <strong>{{ __('admin/estimates/edit.status') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
@@ -126,7 +126,7 @@
 </div>
 <hr />
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/estimates/edit.opportunity_holder') }}</strong>
     </div>
@@ -139,7 +139,7 @@
     </div>
     <div class="col-md-2">
     </div>
-</div>
+</div> --}}
 <hr />
 
 <div class="row">
@@ -237,7 +237,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <strong>{{ __('admin/estimates/edit.finish_notes') }}</strong>
+        <strong>{{ __('admin/estimates/edit.notes_of_completion') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">

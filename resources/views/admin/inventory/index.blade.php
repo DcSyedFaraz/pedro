@@ -50,7 +50,7 @@
                                     <tbody>
                                         @foreach ($inventory as $inv)
                                             <tr>
-                                                <td>{{ $inv->vendor_name->name }}</td>
+                                                <td>{{ $inv->vendor_name->name ?? '' }}</td>
                                                 <td>{{ $inv->date }}</td>
                                                 <td>{{ $inv->receive }}</td>
                                                 <td>

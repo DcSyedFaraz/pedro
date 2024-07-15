@@ -4,7 +4,7 @@
                                 <thead>
                                     <tr>
                                         <th class="table-header-flex"><i class="fa fa-exclamation-circle"
-                                                style="position: absolute;top: 0;left: 0;padding: 3px;"></i><button
+                                                style="position: absolute;top: 0;left: 0;padding: 3px;"></i><button type="button"
                                                 class="btn btn-md group-button">Group</button></th>
                                         <th class="table-header-flex">
                                             <span>{{ __('admin/estimates/edit.description') }}</span> <i

@@ -45,7 +45,7 @@ return [
     'select_document_file' => 'Please select a valid document file (PDF, DOC, DOCX)',
     // Scheduling
     'date_of_request' => 'Date of Request',
-    'progress' => 'Progress',
+    'status' => 'Status',
     'source_of_referral' => 'Source of Referral',
     'rating_scale' => 'Rating Scale',
     'labels' => 'Labels',
@@ -53,7 +53,7 @@ return [
     'on_site_date' => 'On-Site Date',
     'technician_assigned' => 'Technician Assigned',
     'technician_instructions' => 'Technician Instructions',
-    'finish_notes' => 'Finish Notes',
+    'notes_of_completion' => 'Notes of completion',
     // Invoice
     'description' => 'Description',
     'qty_hours' => 'Qty/Hrs',

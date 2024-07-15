@@ -12,6 +12,7 @@ return [
     ],
     'actions' => [
         'show' => 'Show',
+        'view' => 'View',
         'edit' => 'Edit',
         'delete' => 'Delete',
     ],

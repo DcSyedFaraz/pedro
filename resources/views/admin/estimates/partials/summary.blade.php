@@ -277,7 +277,7 @@
     </div>
 </div>
 <hr />
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/estimates/edit.work_source') }}</strong>
     </div>
@@ -294,7 +294,7 @@
             <span class="error-message error-messages" id="job_sour_error"></span><br>
         </div>
     </div>
-</div>
+</div> --}}
 <hr />
 <div class="row">
     <div class="col-md-4">
