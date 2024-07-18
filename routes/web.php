@@ -154,6 +154,7 @@ Route::group(['middleware' => ['language']], function () {
         Route::resource('general_setting', \App\Http\Controllers\Admin\GeneralSettingController::class);
         // Routes for work
         // Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('.index');
+        Route::get('/work_orders/details/{id}', [adminWorkOrderController::class, 'details'])->name('work_orders.details');
         Route::resource('work_orders', adminWorkOrderController::class);
         Route::get('reassign-checklist/{id}', [InspectionController::class, "reassign_checklist"])->name("reassign_checklist");
 

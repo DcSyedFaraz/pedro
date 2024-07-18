@@ -14,6 +14,10 @@ class WorkOrders extends Model
     {
         return $this->hasOne(Job::class, 'id', 'job_id');
     }
+    public function user()
+    {
+        return $this->hasOneThrough(User::class, Job::class, 'id', 'id', 'job_id', 'customer_id');
+    }
     public function vendor()
     {
         return $this->hasOne(User::class, 'id', 'vendor_id');
@@ -28,7 +32,7 @@ class WorkOrders extends Model
     }
     public function files()
     {
-        return $this->hasMany(Files::class,'job_id','job_id');
+        return $this->hasMany(Files::class, 'job_id', 'job_id');
     }
 
 

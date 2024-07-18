@@ -75,6 +75,11 @@ class WorkOrdersController extends Controller
         $workOrders = WorkOrders::findOrFail($id);
         return view('admin.work_orders.show', compact('workOrders'));
     }
+    public function details($id)
+    {
+        $workOrder = WorkOrders::findOrFail($id);
+        return view('admin.work_orders.details', compact('workOrder'));
+    }
 
     public function edit(WorkOrders $workOrder)
     {

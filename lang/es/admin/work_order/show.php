@@ -12,4 +12,12 @@ return [
     'are_you_sure' => '¿Estás seguro de eliminar esta imagen?',
     'whoops' => 'Ups!',
     'there_were_some_problems_with_your_input' => 'Hubo algunos problemas con su entrada.',
+    'work_order_details' => 'Detalles de la Orden de Trabajo',
+    'job_id' => 'ID del Trabajo',
+    'vendor_id' => 'ID del Vendedor',
+    'deadline' => 'Fecha Límite',
+    'user_name' => 'Nombre de Usuario',
+    'user_address' => 'Dirección de Usuario',
+    'edit_work_order' => 'Editar Orden de Trabajo',
+    'delete_work_order' => 'Eliminar Orden de Trabajo',
 ];

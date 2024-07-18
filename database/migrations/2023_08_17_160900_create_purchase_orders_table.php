@@ -32,12 +32,12 @@ return new class extends Migration
             $table->string('tampa')->nullable();
             $table->string('fl')->nullable();
             $table->string('num')->nullable();
-            $table->string('item_name')->nullable();
-            $table->string('qty')->nullable();
-            $table->string('unit_price')->nullable();
-            $table->string('total')->nullable();
-            $table->string('jobs_id')->nullable();
-            $table->string('receipt')->nullable();
+            // $table->string('item_name')->nullable();
+            // $table->string('qty')->nullable();
+            // $table->string('unit_price')->nullable();
+            // $table->string('total')->nullable();
+            // $table->string('jobs_id')->nullable();
+            // $table->string('receipt')->nullable();
             $table->string('desc')->nullable();
             $table->string('subtotal')->nullable();
             $table->string('discount')->nullable();

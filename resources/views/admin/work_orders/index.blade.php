@@ -89,9 +89,14 @@
                                                         <a href="{{ route('work_orders.edit', $workOrder->id) }}" data-toggle="tooltip"
                                                             data-placement="top" title="Edit this work order"
                                                             class="btn btn-primary"><i class="fas fa-edit"></i></a>
+
+                                                        <a href="{{ route('work_orders.details', $workOrder->id) }}" data-toggle="tooltip"
+                                                            data-placement="top" title="show details of this work order"
+                                                            class="btn btn-info"><i class="fas fa-eye"></i></a>
+
                                                         <a href="{{ route('work_orders.show', $workOrder->id) }}" data-toggle="tooltip"
                                                             data-placement="top" title="add images and notes to this work order"
-                                                            class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                                            class="btn btn-warning"><i class="fas fa-paperclip"></i></a>
 
                                                         <button type="button" class="btn btn-success open-map-modal" data-toggle="tooltip"
                                                             data-placement="top" title="add/update location of this work order"

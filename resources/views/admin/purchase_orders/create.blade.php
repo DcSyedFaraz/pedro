@@ -282,12 +282,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="innerinputs">
-                                                    <div class="row">
-                                                        <div class="col-sm-3">
+                                                    <div class="row item-row">
+                                                        <div class="col-sm-2">
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.item_name') }}</label>
-                                                                <input value="{{ old('item_name') }}" name="item_name"
+                                                                <input value="{{ old('item_name') }}" name="item_name[]"
                                                                     type="text" class="form-control"
                                                                     placeholder="{{ __('admin/purchase_order/edit.add_product') }}"
                                                                     id="addproduct">
@@ -299,7 +299,7 @@
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.quantity') }}</label>
-                                                                <input value="{{ old('qty') }}" name="qty"
+                                                                <input value="{{ old('qty') }}" name="qty[]"
                                                                     type="number" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
@@ -307,7 +307,7 @@
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.unit_price') }}</label>
-                                                                <input value="{{ old('unit_price') }}" name="unit_price"
+                                                                <input value="{{ old('unit_price') }}" name="unit_price[]"
                                                                     type="number" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
@@ -315,7 +315,7 @@
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.total_amount') }}</label>
-                                                                <input value="{{ old('total') }}" name="total"
+                                                                <input value="{{ old('total') }}" name="total[]"
                                                                     type="number" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
@@ -323,16 +323,19 @@
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.job_assignment') }}</label>
-                                                                <input value="{{ old('jobs_id') }}" name="jobs_id"
+                                                                <input value="{{ old('jobs_id') }}" name="jobs_id[]"
                                                                     type="text" class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct" class="form-label">Reciept</label>
-                                                                <input value="{{ old('receipt') }}" name="receipt"
+                                                                <input value="{{ old('receipt') }}" name="receipt[]"
                                                                     type="text" class="form-control" id="addproduct">
                                                             </div>
+                                                        </div>
+                                                        <div class="col-sm-1 d-flex align-items-end">
+                                                            <button type="button" class="btn btn-success end add-row">+</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -384,6 +387,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="innerinputs-last">
+                                                    <div class="row">
+                                                        <!-- Other form fields go here -->
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -404,4 +412,22 @@
     </section>
 
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            // Function to add new row
+            $('.add-row').on('click', function() {
+                var newRow = $('.item-row:first').clone();
+                newRow.find('input').val('');
+                newRow.find('.add-row').removeClass('btn-success add-row').addClass('btn-danger remove-row').text('-');
+                $('.item-row:last').after(newRow);
+            });
+
+            // Function to remove row
+            $(document).on('click', '.remove-row', function() {
+                $(this).closest('.item-row').remove();
+            });
+        });
+    </script>
 @endsection
