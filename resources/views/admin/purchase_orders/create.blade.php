@@ -74,8 +74,7 @@
                                                                             Reference</label>
                                                                         <input value="{{ old('order_ref') }}"
                                                                             name="order_ref" type="number"
-                                                                            class="form-control"
-                                                                            placeholder="1011"
+                                                                            class="form-control" placeholder="1011"
                                                                             id="reference">
 
                                                                     </div>
@@ -260,8 +259,7 @@
                                                                                 <input value="{{ old('num') }}"
                                                                                     name="num" type="text"
                                                                                     class="form-control"
-                                                                                    placeholder="33602"
-                                                                                    id="steunitapt">
+                                                                                    placeholder="33602" id="steunitapt">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -307,8 +305,9 @@
                                                             <div class="addproduct-div">
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.unit_price') }}</label>
-                                                                <input value="{{ old('unit_price') }}" name="unit_price[]"
-                                                                    type="number" class="form-control" id="addproduct">
+                                                                <input value="{{ old('unit_price') }}"
+                                                                    name="unit_price[]" type="number"
+                                                                    class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
@@ -316,7 +315,8 @@
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.total_amount') }}</label>
                                                                 <input value="{{ old('total') }}" name="total[]"
-                                                                    type="number" class="form-control" id="addproduct">
+                                                                    type="number" readonly class="form-control"
+                                                                    id="addproduct">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2">
@@ -335,7 +335,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-1 d-flex align-items-end">
-                                                            <button type="button" class="btn btn-success end add-row">+</button>
+                                                            <button type="button"
+                                                                class="btn btn-success end add-row">+</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -354,7 +355,7 @@
                                                                 <h5>{{ __('admin/purchase_order/edit.subtotal') }}</h5>
                                                                 <input value="{{ old('subtotal' ?? '0.00') }}"
                                                                     type="number" id="subtotal" name="subtotal"
-                                                                    class="total" disabled>
+                                                                    class="total" readonly>
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5 style="color:green;">
@@ -362,27 +363,27 @@
                                                                     (-)</h5>
                                                                 <input value="{{ old('discount' ?? '0.00') }}"
                                                                     type="number" id="discount" name="discount"
-                                                                    class="total" disabled>
+                                                                    class="total">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/purchase_order/edit.tax_paid') }}</h5>
                                                                 <input value="{{ old('tax_paid' ?? '0.00') }}"
                                                                     type="number" id="tax_paid" name="tax_paid"
-                                                                    class="total" disabled>
+                                                                    class="total">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/purchase_order/edit.shipping_cost') }}
                                                                 </h5>
                                                                 <input value="{{ old('ship_cost' ?? '0.00') }}"
                                                                     type="number" id="ship_cost" name="ship_cost"
-                                                                    class="total" disabled>
+                                                                    class="total">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/purchase_order/edit.grand_total_price') }}
                                                                 </h5>
                                                                 <input value="{{ old('grand_total' ?? '0.00') }}"
                                                                     type="number" id="grand_total" name="grand_total"
-                                                                    class="total" disabled>
+                                                                    class="total" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -415,18 +416,59 @@
 @endsection
 @section('scripts')
     <script>
+        function calculateTotal() {
+            let subtotal = 0;
+            $('.item-row').each(function() {
+                let unitPrice = parseFloat($(this).find('input[name="unit_price[]"]').val()) || 0;
+                let quantity = parseFloat($(this).find('input[name="qty[]"]').val()) || 0;
+                let total = unitPrice * quantity;
+                $(this).find('input[name="total[]"]').val(total.toFixed(2));
+                subtotal += total;
+            });
+
+            let discount = parseFloat($('#discount').val()) || 0;
+            let tax_paid = parseFloat($('#tax_paid').val()) || 0;
+            let ship_cost = parseFloat($('#ship_cost').val()) || 0;
+
+            let grand_total = subtotal - discount + tax_paid + ship_cost;
+
+            $('#subtotal').val(subtotal.toFixed(2));
+            $('#grand_total').val(grand_total.toFixed(2));
+        }
+
         $(document).ready(function() {
+            // Recalculate total on any relevant input change
+            $(' #discount, #tax_paid, #ship_cost').on('input', function() {
+                calculateTotal();
+            });
+
+            $(document).on('input',
+                '.item-row input[name="qty[]"], .item-row input[name="unit_price[]"], .item-row input[name="total[]"]',
+                function() {
+                    calculateTotal();
+                });
+            // Initial calculation
+            calculateTotal();
+
             // Function to add new row
             $('.add-row').on('click', function() {
                 var newRow = $('.item-row:first').clone();
                 newRow.find('input').val('');
-                newRow.find('.add-row').removeClass('btn-success add-row').addClass('btn-danger remove-row').text('-');
+                newRow.find('.add-row').removeClass('btn-success add-row').addClass('btn-danger remove-row')
+                    .text('-');
                 $('.item-row:last').after(newRow);
+                calculateTotal();
             });
 
             // Function to remove row
             $(document).on('click', '.remove-row', function() {
                 $(this).closest('.item-row').remove();
+                calculateTotal();
+            });
+
+            // Recalculate total when adding a new row
+            $(document).on('click', '.add-row', function() {
+                calculateTotal();
             });
         });
     </script>

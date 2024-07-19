@@ -97,13 +97,13 @@ body {
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-#button-1 .checkbox:checked + .knobs:before {
+#button-1 .checkbox:checked+.knobs:before {
     content: "NO";
     left: 42px;
     background-color: #f44336;
 }
 
-#button-1 .checkbox:checked ~ .layer {
+#button-1 .checkbox:checked~.layer {
     background-color: #fcebeb;
 }
 
@@ -263,27 +263,33 @@ body {
 .col-sm-12 {
     padding: 0;
 }
+
 .bordewer {
     border: 1px solid #dcdcdc !important;
 }
+
 .innerinputs {
     padding: 25px;
     width: 100%;
 }
+
 table.table-condensed {
     width: 200px;
     text-align: center;
 }
+
 .innerinputs-last {
     padding: 25px;
     border-top: 1px solid #dcdcdc;
 }
+
 .inner-inner-inner {
     display: flex;
     align-content: center;
     justify-content: space-between;
     align-items: center;
 }
+
 .inner-section-4 input[type="submit"] {
     width: 10%;
     background-color: #61aa70;
@@ -292,18 +298,22 @@ table.table-condensed {
     text-transform: uppercase;
     font-weight: 600;
 }
+
 .total-cost {
     padding-top: 30px;
 }
+
 .inner-section-4 {
     padding: 20px 0px;
 }
+
 .total-cost h5 {
     font-size: 18px;
     margin-bottom: 0;
 }
+
 .total {
-    padding: 7px 30px;
+    padding: 7px 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #eee;
@@ -314,6 +324,7 @@ table.table-condensed {
 .shipping-address-div input {
     margin-bottom: 13.6px !important;
 }
+
 /*--Habron End--*/
 .btn-indigo {
     background-color: #6610f2 !important;
