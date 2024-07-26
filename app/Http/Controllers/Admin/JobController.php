@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Job;
 use App\Models\JobPrimaryContact;
 use App\Models\User;
@@ -27,6 +28,27 @@ class JobController extends Controller
     {
         $this->twilioService = $twilioService;
     }
+    public function getPrimaryContact($userId)
+    {
+        $customer = Customer::where('user_id', $userId)->first();
+
+        if (!$customer) {
+            return response()->json(['success' => false, 'message' => 'Customer not found'], 404);
+        }
+
+        $contacts = $customer->pricontact->map(function ($contact) {
+            return [
+                'fname' => $contact->first_name,
+                'lname' => $contact->last_name,
+                'number' => $contact->phone,
+                'ext' => $contact->ext,
+                'email' => $contact->email,
+            ];
+        });
+
+        return response()->json(['success' => true, 'contacts' => $contacts]);
+    }
+
     public function index()
     {
 
@@ -162,7 +184,7 @@ class JobController extends Controller
             $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
             $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
 
-            if($formattedPhoneNumber != null){
+            if ($formattedPhoneNumber != null) {
 
                 //$this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
             }
@@ -311,7 +333,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $job->delete();
-        return redirect()->route('job.index')->with('success','Job Deleted Successfully');
+        return redirect()->route('job.index')->with('success', 'Job Deleted Successfully');
     }
     public function job_pri($id)
     {
@@ -376,7 +398,7 @@ class JobController extends Controller
         //         $query->whereNull('end_date')
         //             ->orWhere('end_date', '<=', $now);
         //     })->get();
-        $jobs_needing_scheduling = Job::where('current_status', '1')->get();
+        $jobs_needing_scheduling = Job::whereNot('current_status', '2')->get();
 
         return view('admin.job.job_needing_scheduling', compact('jobs_needing_scheduling'));
     }

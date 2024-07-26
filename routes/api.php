@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\users\userEstimateController;
 use App\Http\Controllers\vendor\AttendanceController;
 use Illuminate\Http\Request;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('customers/{customer}/primary-contact', [JobController::class, 'getPrimaryContact']);
+
 Route::post('/estimate/esignature/{id}', [userEstimateController::class, 'esignature'])->name('esignature');
 Route::post('login', [AttendanceController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {

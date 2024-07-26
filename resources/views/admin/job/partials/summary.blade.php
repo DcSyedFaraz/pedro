@@ -67,7 +67,8 @@
                     <div class="form-group">
                         <input value="{{ isset($jobprim->phone) ? old('phone', $jobprim->phone) : '' }}" type="tel"
                             class="form-control" name="phone[]" id="" placeholder="Phone number">
-                        <p class="error-message phone-error error-messages" style="display: none;"> {{ __('admin/job/edit.add_at_least_phone') }}
+                        <p class="error-message phone-error error-messages" style="display: none;">
+                            {{ __('admin/job/edit.add_at_least_phone') }}
                         </p>
                     </div>
                 </div>
@@ -75,7 +76,8 @@
                     <div class="form-group">
                         <input value="{{ isset($jobprim->ext) ? old('ext', $jobprim->ext) : '' }}" type="tel"
                             class="form-control" name="ext[]" placeholder="Ext">
-                        <p class="ext-error error-messages" style="display: none;">{{ __('admin/job/edit.add_at_least_ext') }}</p>
+                        <p class="ext-error error-messages" style="display: none;">
+                            {{ __('admin/job/edit.add_at_least_ext') }}</p>
                     </div>
 
                 </div>
@@ -89,7 +91,8 @@
                     <div class="form-group">
                         <input value="{{ isset($jobprim->email) ? old('email', $jobprim->email) : '' }}" type="tel"
                             class="form-control" name="email[]" placeholder="Email">
-                        <p class="email-error error-messages" style="display: none">{{ __('admin/job/edit.add_at_least_email') }}</p>
+                        <p class="email-error error-messages" style="display: none">
+                            {{ __('admin/job/edit.add_at_least_email') }}</p>
                     </div>
                 </div>
                 <!-- Add a Remove button -->
@@ -119,13 +122,15 @@
                 <div class="form-group">
                     <input type="tel" class="form-control" name="phone[]" id="" placeholder="Phone number">
                     <small class="text-danger text-wrap">{{ __('admin/job/edit.job_info') }}</small>
-                    <p class="error-message phone-error error-messages" style="display: none;"> {{ __('admin/job/edit.add_at_least_phone') }} </p>
+                    <p class="error-message phone-error error-messages" style="display: none;">
+                        {{ __('admin/job/edit.add_at_least_phone') }} </p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <input type="tel" class="form-control" name="ext[]" placeholder="Ext">
-                    <p class="ext-error error-messages" style="display: none;">{{ __('admin/job/edit.add_at_least_ext') }}</p>
+                    <p class="ext-error error-messages" style="display: none;">
+                        {{ __('admin/job/edit.add_at_least_ext') }}</p>
                 </div>
 
             </div>
@@ -138,7 +143,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <input type="tel" class="form-control" name="email[]" placeholder="Email">
-                    <p class="email-error error-messages" style="display: none">{{ __('admin/job/edit.add_at_least_email') }}</p>
+                    <p class="email-error error-messages" style="display: none">
+                        {{ __('admin/job/edit.add_at_least_email') }}</p>
                 </div>
             </div>
             <!-- Add a Remove button -->
@@ -154,6 +160,9 @@
 <p class="primary_append">
 
 </p>
+{{-- <div class="primary_append"></div>
+<div class="email_append"></div> --}}
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -168,7 +177,8 @@
     </div>
     <div class="col-md-4">
         <input {{ isset($job->location_gated_property) && $job->location_gated_property ? 'checked' : '' }}
-            type="checkbox" name="location_gated_property" placeholder="Location Name(e.g Home or Office)"> {{ __('admin/job/edit.gated_property') }}
+            type="checkbox" name="location_gated_property" placeholder="Location Name(e.g Home or Office)">
+        {{ __('admin/job/edit.gated_property') }}
     </div>
 </div>
 <div class="row">
@@ -321,3 +331,90 @@
             name="billable" class="form-control form-control-sm form-check">
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('customer_id').addEventListener('change', function() {
+            var userId = this.value;
+            if (userId) {
+                fetch('/api/customers/' + userId + '/primary-contact')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            populatePrimaryContacts(data.contacts);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching primary contact:', error));
+            }
+        });
+
+        function populatePrimaryContacts(contacts) {
+            // Ensure these elements exist
+            var primaryAppend = document.querySelector('.primary_append');
+            var emailAppend = document.querySelector('.email_append');
+
+            if (!primaryAppend || !emailAppend) {
+                console.error('Required elements not found in the DOM');
+                return;
+            }
+
+            // Clear existing fields
+            primaryAppend.innerHTML = '';
+            emailAppend.innerHTML = '';
+
+            contacts.forEach(contact => {
+                addPrimaryContactField(contact.phone, contact.ext, contact.email);
+            });
+        }
+
+
+        function addPrimaryContactField(phone = '', ext = '', email = '') {
+            var primaryContactHtml = `
+            <div class="row">
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input value="${phone}" type="tel" class="form-control" name="phone[]" placeholder="Phone number">
+                        <p class="error-message phone-error error-messages" style="display: none;"> {{ __('admin/job/edit.add_at_least_phone') }}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input value="${ext}" type="tel" class="form-control" name="ext[]" placeholder="Ext">
+                        <p class="ext-error error-messages" style="display: none;">{{ __('admin/job/edit.add_at_least_ext') }}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+            var emailContactHtml = `
+            <div class="row">
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input value="${email}" type="tel" class="form-control" name="email[]" placeholder="Email">
+                        <p class="email-error error-messages" style="display: none">{{ __('admin/job/edit.add_at_least_email') }}</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn remove-contact"><i class="fas fa-minus text-danger"></i></button>
+                </div>
+            </div>
+        `;
+
+            document.querySelector('.primary_append').insertAdjacentHTML('beforeend', primaryContactHtml);
+            document.querySelector('.email_append').insertAdjacentHTML('beforeend', emailContactHtml);
+        }
+
+        // Add event listener for dynamically added remove buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-contact')) {
+                e.target.closest('.row').remove();
+            }
+        });
+
+        // Add new contact field when the add button is clicked
+        document.getElementById('add-primary').addEventListener('click', function() {
+            addPrimaryContactField();
+        });
+    });
+</script>
