@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 @section('content')
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Ready To Be Invoiced</h1>
+                        <h1>Jobs Per Manager</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Ready To Be Invoiced</li>
+                            <li class="breadcrumb-item active">Jobs Per Manager</li>
                         </ol>
                     </div>
                 </div>
@@ -29,8 +29,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                          <h3 class="card-title">User Managment</h3>
-                        </div> -->
+                              <h3 class="card-title">User Managment</h3>
+                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                             </div>
@@ -50,6 +50,7 @@
                                                 <th>Jobs</th>
                                                 <th>Primary Contact</th>
                                                 <th>Status</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
 
@@ -110,7 +111,11 @@
                                                     @else
                                                         <td class="text-success"><strong>---</strong></td>
                                                     @endif
-
+                                                    <td class="d-flex"><a class="btn btn-primary"
+                                                            href="{{ route('job.edit', $jobs->id) }}">Edit</a>
+                                                        <a class=" btn btn-secondary mx-1"
+                                                            href="{{ route('job.show', $jobs->id) }}">Show</a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
 

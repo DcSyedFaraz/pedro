@@ -71,6 +71,8 @@
                                  Feedback
                              </button>
                              @endif
+                             <a class="btn btn btn-secondary mx-1"
+                             href="{{ route('job.show', $jobs->id) }}">Show</a>
                             <a class="btn btn-primary"
                             href="{{ route('job.edit', $jobs->id) }}">Edit</a></td>
                       </tr>

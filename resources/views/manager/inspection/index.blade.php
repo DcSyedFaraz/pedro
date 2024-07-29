@@ -81,7 +81,7 @@
                                         <tr>
                                             <th>{{ __('admin/inspection/index.s_n') }}</th>
                                             <th>{{ __('admin/inspection/index.name') }}</th>
-                                            <th>Total Itmes</th>
+                                            <th>Total Items</th>
                                             @if (auth()->user()->hasRole('Admin'))
                                                 <th>{{ __('admin/inspection/index.created_by') }}</th>
                                             @endif

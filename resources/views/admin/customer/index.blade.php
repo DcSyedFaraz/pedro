@@ -28,8 +28,8 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                                  <h3 class="card-title">{{ __('admin/customer/index.user_management') }}</h3>
-                                </div> -->
+                                      <h3 class="card-title">{{ __('admin/customer/index.user_management') }}</h3>
+                                    </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
                                 <a class="btn btn-success"
@@ -50,24 +50,24 @@
 
                                     <tbody>
                                         @if ($customers)
-                                            @foreach ($customers as $key => $customer)
+                                            @foreach ($users as $key => $user)
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $customer->customer_name }}</td>
-                                                    <td>{{ $customer->acnum ?? '' }}</td>
+                                                    <td>{{ $user->name ?? '' }}</td>
+                                                    <td>{{ $user->customer->acnum ?? '' }}</td>
                                                     <td>
-                                                        @if (!empty($customer->usname))
-                                                            <?php $roles = $customer->usname->getRoleNames(); ?>
+                                                        @if (!empty($user))
+                                                            <?php $roles = $user->getRoleNames(); ?>
                                                             <label class="badge badge-success">{{ $roles[0] }}</label>
                                                         @endif
 
                                                     </td>
                                                     <td>
-                                                        <!-- <a class="btn btn-info" href="{{ route('users.show', $customer->id) }}">{{ __('admin/customer/index.show') }}</a> -->
+                                                        <!-- <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">{{ __('admin/customer/index.show') }}</a> -->
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('customer.edit', $customer->id) }}">{{ __('admin/customer/index.edit') }}</a>
+                                                            href="{{ route('customer.edit', $user->id) }}">{{ __('admin/customer/index.edit') }}</a>
 
-                                                        <form action="{{ route('customer.destroy', $customer->id) }}"
+                                                        <form action="{{ route('customer.destroy', $user->id) }}"
                                                             method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')

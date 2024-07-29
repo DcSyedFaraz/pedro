@@ -1,24 +1,59 @@
 <div class="row">
-
     <div class="col-md-4">
         <strong>{{ __('admin/job/edit.customer') }}</strong>
     </div>
     <div class="col-md-8">
         <div class="form-group">
-
             <select name="customer_id" id="customer_id" class="form-control">
                 <option value="">Select {{ __('admin/job/edit.customer') }}</option>
                 @foreach ($customer as $cust)
-                    <option value="{{ $cust->id }}"
+                    <option value="{{ $cust->id }}" data-contacts="{{ json_encode($cust->pricontact) }}"
                         {{ isset($job) && old('customer_id', $job->customer_id) == $cust->id ? 'selected' : '' }}>
                         {{ $cust->name }}
                     </option>
                 @endforeach
             </select>
-
             <span class="error-message error-messages" id="customer_id_error"></span><br>
         </div>
     </div>
+
+
+    <template id="contact-template">
+        <div class="row">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="tel" class="form-control" disabled name="phone[]" placeholder="Phone number">
+                    <p class="error-message phone-error error-messages" style="display: none;">
+                        {{ __('admin/job/edit.add_at_least_phone') }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="tel" class="form-control" disabled name="ext[]" placeholder="Ext">
+                    <p class="ext-error error-messages" style="display: none;">
+                        {{ __('admin/job/edit.add_at_least_ext') }}</p>
+                </div>
+            </div>
+            {{-- <div class="col-md-1">
+                <button type="button" class="btn btn-danger remove-contact"><i class="fas fa-trash"></i></button>
+            </div> --}}
+        </div>
+        <div class="row">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="email" class="form-control" disabled name="email[]" placeholder="Email">
+                    <p class="email-error error-messages" style="display: none">
+                        {{ __('admin/job/edit.add_at_least_email') }}</p>
+                </div>
+            </div>
+            {{-- <div class="col-md-2">
+                <button type="button" class="btn btn-primary add-contact"><i class="fas fa-plus"></i></button>
+            </div> --}}
+        </div>
+    </template>
     <div class="col-md-4">
         <strong>{{ __('admin/job/edit.job_name') }}</strong>
     </div>
@@ -41,8 +76,8 @@
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <input value="{{ isset($job->first_name) ? old('first_name', $job->first_name) : '' }}" class="form-control"
-                name="first_name" id="first_name" placeholder="First Name">
+            <input value="{{ isset($job->first_name) ? old('first_name', $job->first_name) : '' }}"
+                class="form-control" name="first_name" id="first_name" placeholder="First Name">
             <span class="error-message error-messages" id="first_name_error"></span><br>
         </div>
     </div>
@@ -54,7 +89,10 @@
         </div>
     </div>
 </div>
-@if (isset($job->jobPri))
+<div id="primary-contacts-container">
+    <!-- Primary contacts will be appended here -->
+</div>
+{{-- @if (isset($job->jobPri))
 
     @foreach ($job->jobPri as $jobprim)
         <div class="primary_append">
@@ -156,7 +194,7 @@
         </div>
     </div>
 
-@endif
+@endif --}}
 <p class="primary_append">
 
 </p>
@@ -193,8 +231,8 @@
         </div>
     </div>
     <div class="col-md-3">
-        <input value="{{ isset($job->location_unit) ? old('location_unit', $job->location_unit) : '' }}"
-            type="tel" class="form-control" name="location_unit" placeholder="Site/Unit/Apt">
+        <input value="{{ isset($job->location_unit) ? old('location_unit', $job->location_unit) : '' }}" type="tel"
+            class="form-control" name="location_unit" placeholder="Site/Unit/Apt">
     </div>
 </div>
 <div class="row">
@@ -230,9 +268,10 @@
             <select id="job-cat-id" name="job_cat_id" class="form-control">
                 <option value="">Select a {{ __('admin/job/edit.job_category') }}</option>
                 @foreach ($jobCategories as $category)
-                    <option
-                        {{ isset($job->job_cat_id) ? (old('job_cat_id', $job->job_cat_id) ? 'selected' : '') : '' }}
-                        value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" data-description="{{ $category->description ?? '' }}"
+                        {{ isset($job->job_cat_id) ? (old('job_cat_id', $job->job_cat_id) == $category->id ? 'selected' : '') : '' }}>
+                        {{ $category->name }}
+                    </option>
                 @endforeach
             </select>
             <span class="error-message error-messages" id="job-cat-id_error"></span><br>
@@ -270,7 +309,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <textarea class="form-control" name="job_description" placeholder="Job Desciption">{{ isset($job->job_description) ? old('job_description', $job->job_description) : '' }}</textarea>
+            <textarea class="form-control" id="job-description" name="job_description" placeholder="Job Desciption">{{ isset($job->job_description) ? old('job_description', $job->job_description) : '' }}</textarea>
         </div>
     </div>
 </div>
@@ -331,7 +370,7 @@
             name="billable" class="form-control form-control-sm form-check">
     </div>
 </div>
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('customer_id').addEventListener('change', function() {
             var userId = this.value;
@@ -417,4 +456,54 @@
             addPrimaryContactField();
         });
     });
-</script>
+</script> --}}
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var jobCatDropdown = document.getElementById('job-cat-id');
+            var jobDescriptionTextarea = document.getElementById('job-description');
+
+            jobCatDropdown.addEventListener('change', function() {
+                var selectedOption = jobCatDropdown.options[jobCatDropdown.selectedIndex];
+                var description = selectedOption.getAttribute('data-description');
+                jobDescriptionTextarea.value = description ? description : '';
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            function appendContact(contact) {
+                const template = $('#contact-template').html();
+                const $contact = $(template);
+                $contact.find('input[name="phone[]"]').val(contact.number || '');
+                $contact.find('input[name="ext[]"]').val(contact.ext || '');
+                $contact.find('input[name="email[]"]').val(contact.email || '');
+                $('#primary-contacts-container').append($contact);
+            }
+
+            $('#customer_id').change(function() {
+                const contacts = $(this).find('option:selected').data('contacts');
+                $('#primary-contacts-container').empty();
+                if (contacts) {
+                    contacts.forEach(contact => appendContact(contact));
+                } else {
+                    appendContact({});
+                }
+            });
+
+            $(document).on('click', '.add-contact', function() {
+                appendContact({});
+            });
+
+            $(document).on('click', '.remove-contact', function() {
+                $(this).closest('.row').next('.row').remove(); // Remove email row
+                $(this).closest('.row').remove(); // Remove phone and ext row
+            });
+
+            // Trigger change event on page load to populate contacts if a customer is already selected
+            if ($('#customer_id').val()) {
+                $('#customer_id').trigger('change');
+            }
+        });
+    </script>
+@endsection

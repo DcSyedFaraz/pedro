@@ -15,6 +15,7 @@ use App\Models\Task;
 use App\Notifications\UserNotification;
 use App\Services\TwilioService;
 use Brick\Math\Exception\NumberFormatException;
+use Carbon\Carbon;
 use Exception;
 use File;
 use Illuminate\Http\Request;
@@ -206,6 +207,7 @@ class JobController extends Controller
     public function show($id)
     {
         $job = Job::findOrFail($id);
+        // return $job;
         return view('admin.job.show', compact('job'));
     }
 
@@ -326,7 +328,9 @@ class JobController extends Controller
                 //$this->twilioService->sendSMS($user->phone, $message);
             }
         }
-        return redirect()->route('job.index')->with('success', 'Job updated successfully');
+        $previousUrl = $request->input('previous_url', route('job.index'));
+
+        return redirect($previousUrl)->with('success', 'Job updated successfully');
     }
 
     public function destroy($id)
@@ -362,8 +366,8 @@ class JobController extends Controller
     {
         //today
         $today = now(); // Current date and time
-        $startOfDay = $today->copy()->startOfDay()->format('Y-m-d'); // Today's start time
-        $endOfDay = $today->copy()->endOfDay()->format('Y-m-d'); // Today's end time
+        $startOfDay = $today->copy()->startOfDay()->format('Y-m-d\TH:i:s'); // Today's start time
+        $endOfDay = $today->copy()->endOfDay()->format('Y-m-d\TH:i:s'); // Today's end time
         //Schedule Today
         $schedule_today = Job::whereBetween('start_date', [$startOfDay, $endOfDay])
             ->whereBetween('end_date', [$startOfDay, $endOfDay])
@@ -371,7 +375,7 @@ class JobController extends Controller
 
         return view('admin.job.schedule_today', compact('schedule_today'));
     }
-    //48 hours
+
     public function Next48Hours()
     {
         //today
@@ -379,47 +383,44 @@ class JobController extends Controller
         $endOfNext48Hours = $now->copy()->addHours(48); // Today's end time
 
         //Schedule Today
-        $next_48_hours = Job::whereBetween('start_date', [$now, $endOfNext48Hours])
-            ->whereBetween('end_date', [$now, $endOfNext48Hours])
+        $next_48_hours = Job::whereBetween('start_date', [$now->format('Y-m-d\TH:i:s'), $endOfNext48Hours->format('Y-m-d\TH:i:s')])
+            ->whereBetween('end_date', [$now->format('Y-m-d\TH:i:s'), $endOfNext48Hours->format('Y-m-d\TH:i:s')])
             ->get();
 
         return view('admin.job.next_48_hours', compact('next_48_hours'));
     }
+
     public function JobsNeedingScheduling()
     {
-
         $now = now(); // Current date and time
         // Jobs that need scheduling (start_date or end_date is null or in the past)
-        // $jobs_needing_scheduling = Job::where(function ($query) use ($now) {
-        //     $query->whereNull('start_date')
-        //         ->orWhere('start_date', '<=', $now);
-        // })
-        //     ->orWhere(function ($query) use ($now) {
-        //         $query->whereNull('end_date')
-        //             ->orWhere('end_date', '<=', $now);
-        //     })->get();
-        $jobs_needing_scheduling = Job::whereNot('current_status', '2')->get();
+        $jobs_needing_scheduling = Job::where(function ($query) use ($now) {
+            $query->whereNull('start_date')
+                ->orWhere('start_date', '<=', $now->format('Y-m-d\TH:i:s'));
+        })
+            ->orWhere(function ($query) use ($now) {
+                $query->whereNull('end_date')
+                    ->orWhere('end_date', '<=', $now->format('Y-m-d\TH:i:s'));
+            })->get();
 
         return view('admin.job.job_needing_scheduling', compact('jobs_needing_scheduling'));
     }
 
     public function JobsInProgress()
     {
-
         // Retrieve jobs in progress based on the current_status field
         $jobs_in_progress = Job::where('current_status', 7)->get();
         return view('admin.job.job_in_progress', compact('jobs_in_progress'));
-
     }
 
     public function JobsInCompleted()
     {
-
         //Retrieve completed jobs based on the current_status field
         $completed_jobs = Job::where('current_status', 9)->get();
         return view('admin.job.jobs_completed', compact('completed_jobs'));
-
     }
+
+
     public function job_assign(Request $request, $id)
     {
 

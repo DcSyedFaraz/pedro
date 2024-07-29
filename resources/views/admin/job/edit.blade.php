@@ -95,6 +95,8 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
+                                    <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
+
                                     <div class="row">
                                         <div class="col-md-6">&nbsp;</div>
                                         <div class="col-md-6 d-flex justify-content-end">
@@ -120,12 +122,14 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="pic-tab" data-toggle="tab" href="#pic"
                                                         role="tab" aria-controls="pic" aria-selected="false"><i
-                                                            class="fas fa-image fa-fw"></i> {{ __('admin/job/edit.pictures') }}&nbsp;</a>
+                                                            class="fas fa-image fa-fw"></i>
+                                                        {{ __('admin/job/edit.pictures') }}&nbsp;</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="doc-tab" data-toggle="tab" href="#doc"
                                                         role="tab" aria-controls="doc" aria-selected="false"><i
-                                                            class="fas fa-file fa-fw"></i> {{ __('admin/job/edit.documents') }}&nbsp;</a>
+                                                            class="fas fa-file fa-fw"></i>
+                                                        {{ __('admin/job/edit.documents') }}&nbsp;</a>
                                                 </li>
                                             </ul>
                                             <div class="card">

@@ -103,8 +103,10 @@
                                                             data-target="#managerModal{{ $jobs->id }}">
                                                             {{ __('admin/job/index.Assign') }}
                                                         </button>
-                                                        <a class="btn-sm btn btn-primary mx-1"
+                                                        <a class="btn-sm btn btn-primary ml-1"
                                                             href="{{ route('job.edit', $jobs->id) }}">{{ __('admin/job/index.Edit') }}</a>
+                                                        <a class="btn-sm btn btn-secondary mx-1"
+                                                            href="{{ route('job.show', $jobs->id) }}">Show</a>
 
                                                         @if ($jobs->ratings->count() > 0)
                                                             <button type="button" class="btn-sm btn btn-warning mx-1"

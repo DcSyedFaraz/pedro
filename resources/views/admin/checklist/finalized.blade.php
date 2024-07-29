@@ -85,7 +85,7 @@
                                     <thead>
                                         <tr>
                                             <th>{{ __('admin/inspection/index.name') }}</th>
-                                            <th>Total Itmes</th>
+                                            <th>Total Items</th>
                                             <th>{{ __('admin/inspection/index.created_by') }}</th>
                                             <th>{{ __('admin/inspection/index.action') }}</th>
                                         </tr>

@@ -436,59 +436,59 @@ $(document).on('click', '.remove-email', function () {
 
 
 // Event listener for job category dropdown change
-$('#job-cat-id').change(function () {
+// $('#job-cat-id').change(function () {
 
-    var categoryId = $(this).val();
+//     var categoryId = $(this).val();
 
-    if (categoryId) {
-        // Make AJAX request to get job subcategories
-        $.ajax({
-            url: '/admin/get-subcategories',
-            type: 'GET',
-            data: { category_id: categoryId },
-            success: function (data) {
+//     if (categoryId) {
+//         // Make AJAX request to get job subcategories
+//         $.ajax({
+//             url: '/admin/get-subcategories',
+//             type: 'GET',
+//             data: { category_id: categoryId },
+//             success: function (data) {
 
-                var subcategories = data;
-                var options = '<option value="">Select a Job Subcategorysss</option>';
+//                 var subcategories = data;
+//                 var options = '<option value="">Select a Job Subcategorysss</option>';
 
-                subcategories.forEach(function (subcategory) {
-                    options += '<option value="' + subcategory.id + '">' + subcategory.name + '</option>';
-                });
-                $('#jobSubcategory').html(options);
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
-            }
-        });
-    } else {
-        // Clear job subcategory dropdown if no category selected
-        $('#job-subcategory').html('<option value="">Select a Job Subcategory</option>');
-        $('#job-sub-description').val('');
-    }
-});
+//                 subcategories.forEach(function (subcategory) {
+//                     options += '<option value="' + subcategory.id + '">' + subcategory.name + '</option>';
+//                 });
+//                 $('#jobSubcategory').html(options);
+//             },
+//             error: function (xhr) {
+//                 console.log(xhr.responseText);
+//             }
+//         });
+//     } else {
+//         // Clear job subcategory dropdown if no category selected
+//         $('#job-subcategory').html('<option value="">Select a Job Subcategory</option>');
+//         $('#job-sub-description').val('');
+//     }
+// });
 
-$('#job-cat-id').change(function () {
-    var subcategoryId = $(this).val();
+// $('#job-cat-id').change(function () {
+//     var subcategoryId = $(this).val();
 
-    if (subcategoryId) {
-        // Make AJAX request to get job sub-description
-        $.ajax({
-            url: '/admin/get-subdescription',
-            type: 'GET',
-            data: { subcategory_id: subcategoryId },
-            success: function (data) {
-                // Update job sub-description field
-                $('#jobSubDescription').val(data.subdescription);
-            },
-            error: function (xhr) {
-                console.log(xhr.responseText);
-            }
-        });
-    } else {
-        // Clear job sub-description field if no subcategory selected
-        $('#jobSubDescription').val('');
-    }
-});
+//     if (subcategoryId) {
+//         // Make AJAX request to get job sub-description
+//         $.ajax({
+//             url: '/admin/get-subdescription',
+//             type: 'GET',
+//             data: { subcategory_id: subcategoryId },
+//             success: function (data) {
+//                 // Update job sub-description field
+//                 $('#jobSubDescription').val(data.subdescription);
+//             },
+//             error: function (xhr) {
+//                 console.log(xhr.responseText);
+//             }
+//         });
+//     } else {
+//         // Clear job sub-description field if no subcategory selected
+//         $('#jobSubDescription').val('');
+//     }
+// });
 
 $(document).ready(function () {
 

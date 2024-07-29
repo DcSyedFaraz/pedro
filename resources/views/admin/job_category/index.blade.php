@@ -41,7 +41,6 @@
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Job Sub Category</th>
                   <th>Description</th>
                   <th>Actions</th>
                 </tr>
@@ -52,7 +51,6 @@
                   @foreach($job_category as $jobcat)
                   <tr>
                   <td>{{ $jobcat->name }}</td>
-                  <td>{{ isset($jobcat->job_sub_category) ? $jobcat->job_sub_category->name : '' }}</td>
                   <td>{{ $jobcat->description }}</td>
                   <td>
                       <a class="btn btn-info" href="{{ route('job-category.show',$jobcat->id) }}">Show</a>

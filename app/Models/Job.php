@@ -23,7 +23,7 @@ class Job extends Model
     }
     public function ratings()
     {
-        return $this->hasMany(Rating::class,);
+        return $this->hasMany(Rating::class, );
     }
     public function manager()
     {
@@ -52,6 +52,10 @@ class Job extends Model
     public function jobPri()
     {
         return $this->hasMany(JobPrimaryContact::class);
+    }
+    public function customerPri()
+    {
+        return $this->hasManyThrough(PrimaryContact::class, Customer::class);
     }
 
     public function task()

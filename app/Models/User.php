@@ -62,9 +62,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(CompanyDocuments::class, 'vendor_id', 'id');
     }
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'user_id', 'id');
+    }
     public function services()
     {
         return $this->belongsToMany(Services::class, 'service_user');
+    }
+    public function service()
+    {
+        return $this->hasMany(StoredService::class,'customer_id');
+    }
+    public function pricontact()
+    {
+        return $this->hasMany(PrimaryContact::class,'customer_id');
     }
 
     public function areasOfWork()
