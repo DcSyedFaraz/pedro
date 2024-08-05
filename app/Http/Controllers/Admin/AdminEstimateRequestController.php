@@ -149,6 +149,7 @@ class AdminEstimateRequestController extends Controller
                 'state' => 'required|string|max:255',
                 'zip_code' => 'required|string|max:10',
                 'details' => 'nullable|string',
+                'frequency' => 'required',
                 'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ];
 
@@ -164,6 +165,7 @@ class AdminEstimateRequestController extends Controller
             $supply->state = $validatedData['state'];
             $supply->zip_code = $validatedData['zip_code'];
             $supply->details = $validatedData['details'];
+            $supply->frequency = $validatedData['frequency'];
             $supply->createdBy = auth()->user()->id;
 
             if ($request->hasFile('picture')) {
@@ -235,6 +237,7 @@ class AdminEstimateRequestController extends Controller
                 'city' => 'required|string|max:255',
                 'state' => 'required|string|max:255',
                 'zip_code' => 'required|string|max:10',
+                'frequency' => 'required',
                 'details' => 'nullable|string',
                 'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ];
@@ -256,6 +259,7 @@ class AdminEstimateRequestController extends Controller
             $supply->state = $validatedData['state'];
             $supply->zip_code = $validatedData['zip_code'];
             $supply->details = $validatedData['details'];
+            $supply->frequency = $validatedData['frequency'];
 
             if ($request->hasFile('picture')) {
                 // Delete the old picture if it exists

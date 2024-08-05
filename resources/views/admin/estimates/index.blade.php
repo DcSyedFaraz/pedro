@@ -58,7 +58,7 @@
                                         <tbody>
                                             @if ($estimates)
                                                 @foreach ($estimates as $estimate)
-                                                    @php
+                                                    {{-- @php
                                                         $phones = isset($estimate->phone) ? $estimate->phone : [];
                                                         $ext_ids = isset($estimate->ext_id) ? $estimate->ext_id : [];
                                                         $exts = isset($estimate->ext) ? $estimate->ext : [];
@@ -69,7 +69,7 @@
                                                         $ext_id = implode(',', $ext_ids);
                                                         $ext = implode(',', $exts);
                                                         $emailList = implode(',', $emailAddresses);
-                                                    @endphp
+                                                    @endphp --}}
                                                     <tr>
                                                         <td>
                                                             @if (!empty($estimate->jobs))
@@ -91,7 +91,7 @@
                                                         </td>
                                                         <td>{{ __('admin/estimates/index.primary_contact') }}:
                                                             {{ $estimate->first_name . '-' . $estimate->last_name }}
-                                                            </br> {{ $emailList }}
+                                                            {{-- </br> {{ $emailList }} --}}
 
                                                         </td>
                                                         <td>

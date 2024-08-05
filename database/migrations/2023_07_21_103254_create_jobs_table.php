@@ -59,13 +59,13 @@ return new class extends Migration
             $table->string('assigned_tech')->nullable();
             // $table->string('assigned_tech')->nullable();
             $table->string('notify_tech_assign')->nullable();
-            $table->string('notes_for_tech')->nullable();
+            $table->text('notes_for_tech')->nullable();
             $table->string('scheduled_at')->nullable();
-            $table->string('completion_notes')->nullable();
+            $table->text('completion_notes')->nullable();
             $table->string('image')->nullable();
             $table->string('document')->nullable();
             $table->string('billable')->nullable();
-            $table->string('mark_description')->nullable();
+            $table->text('mark_description')->nullable();
 
             $table->timestamps();
         });

@@ -72,7 +72,6 @@ class SupplyController extends Controller
         $rules = [
             'order_progress' => 'required|string|max:255',
             'order_date' => 'required|date',
-            'po_num' => 'required|string|max:255',
             'manager_email' => 'required|email|max:255',
             'sent_date' => 'required|date',
             'receipt_status' => 'required|string|max:255',
@@ -99,6 +98,8 @@ class SupplyController extends Controller
 
             $validatedData['order_ref'] = Str::uuid()->toString();
             $validatedData['createdBy'] = auth()->user()->id;
+            $validatedData['po_num'] = 'PO-' . date('Ymd') . '-' . Str::padLeft(SupplyRequest::count() + 1, 4, '0');
+
 
             $supply = SupplyRequest::create($validatedData);
 
@@ -156,7 +157,7 @@ class SupplyController extends Controller
             })->get();
 
         }
-        return view('supply.edit', compact('supplyRequest','jobs'));
+        return view('supply.edit', compact('supplyRequest', 'jobs'));
     }
 
     /**
@@ -180,7 +181,6 @@ class SupplyController extends Controller
         $rules = [
             'order_progress' => 'required|string|max:255',
             'order_date' => 'required|date',
-            'po_num' => 'required|string|max:255',
             'manager_email' => 'required|email|max:255',
             'sent_date' => 'required|date',
             'receipt_status' => 'required|string|max:255',

@@ -79,7 +79,7 @@
                                                                     <div class="purchase-order-status">
                                                                         <label for="vender-div"
                                                                             class="form-label">PO#</label>
-                                                                        <input name="po_num" type="number"
+                                                                        <input disabled type="number"
                                                                             class="form-control" id="reference"
                                                                             value="{{ old('po_num') }}">
                                                                     </div>

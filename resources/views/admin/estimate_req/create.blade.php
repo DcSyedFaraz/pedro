@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 <style>
@@ -34,11 +34,13 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <form method="POST" action="{{ route('estimate_requests.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('estimate_requests.store') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <label for="first_name">First Name</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                        <input type="text" class="form-control" id="first_name" name="first_name"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="last_name">Last Name</label>
@@ -46,7 +48,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone_number">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
+                                        <input type="tel" class="form-control" id="phone_number" name="phone_number"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -54,7 +57,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="street_address">Street Address</label>
-                                        <input type="text" class="form-control" id="street_address" name="street_address" required>
+                                        <input type="text" class="form-control" id="street_address" name="street_address"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="city">City</label>
@@ -69,12 +73,24 @@
                                         <input type="text" class="form-control" id="zip_code" name="zip_code" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="details">Please Enter Details of Requested Work and/or Description of Problem</label>
+                                        <label for="details">Please Enter Details of Requested Work and/or Description of
+                                            Problem</label>
                                         <textarea class="form-control" id="details" name="details" rows="3"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="picture">Picture(if any)</label>
                                         <input type="file" class="form-control-file" id="picture" name="picture">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="frequency">Frequency</label>
+                                        <select class="form-control" id="frequency" name="frequency" required>
+                                            <option selected hidden>Select Frequency</option>
+                                            <option value="One Time">One Time</option>
+                                            <option value="Daily">Daily</option>
+                                            <option value="Weekly">Weekly</option>
+                                            <option value="Bi-Weekly">Bi-Weekly</option>
+                                            <option value="Monthly">Monthly</option>
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Create Request</button>
                                 </form>

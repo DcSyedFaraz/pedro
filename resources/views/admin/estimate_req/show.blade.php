@@ -64,6 +64,12 @@
                                     <th>{{ __('admin/estimatereq/index.details') }}:</th>
                                     <td>{{ $estimate->details }}</td>
                                 </tr>
+                                <tr>
+                                    <th>Frequency:</th>
+                                    <td> <span class="badge badge-success">
+                                            {{ $estimate->frequency }}
+                                        </span></td>
+                                </tr>
                                 @if ($estimate->picture)
                                     <tr>
                                         <th>Picture:</th>

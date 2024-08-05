@@ -55,7 +55,7 @@
                                     <tbody>
                                         @if ($job)
                                             @foreach ($job as $key => $jobs)
-                                                @php
+                                                {{-- @php
                                                     $phones = isset($jobs->phone) ? $jobs->phone : [];
                                                     $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
                                                     $exts = isset($jobs->ext) ? $jobs->ext : [];
@@ -64,7 +64,7 @@
                                                     $ext_id = implode(',', $ext_ids);
                                                     $ext = implode(',', $exts);
                                                     $emailList = implode(',', $emailAddresses);
-                                                @endphp
+                                                @endphp --}}
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $jobs->id }}</td>

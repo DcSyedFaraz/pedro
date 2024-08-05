@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('createdBy');
             $table->text('description')->nullable();
-            // Add other checklist-related fields here
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@
     'edit_estimate_request' => 'Edit Estimate Request',
     'picture(if_any)' => 'Picture(if any)',
     'update_request' => 'Update Request',
-    'please_enter_details_of_requested_work_and/or_description_of_problem' => 'Please Enter Details of Requested Work and/or Description of Problem',
+    'please_enter_details_of_requested_work_and/or_description_of_problem' => 'Please Enter Details of Requested Work and/or Description of Estimate',
 
     ];
 ?>

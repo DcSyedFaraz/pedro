@@ -50,7 +50,7 @@
                                                             <span class="font-italic text-muted">No checklist assigned yet</span>
                                                         @endforelse
                                                     </td>
-                                                    <td>
+                                                    <td class="d-flex">
                                                         @if ($shows->inspectionResponse->count() > 0)
                                                             @php
                                                                 $reAssignItems = $shows->inspectionChecklists->load('checklistItems')->filter(function ($item) {
@@ -170,122 +170,14 @@
                                                                     </div>
                                                                 </div>
                                                             @endif
-                                                            <a class="btn btn-info"
+                                                            <a class="btn btn-sm  btn-info"
                                                                 href="{{ route('responce.show', $shows->id) }}">{{ __('vendor/responce/index.show') }}</a>
-                                                            <a class="btn btn-warning"
+                                                            <a class="btn btn-sm mx-2 btn-warning"
                                                                 href="{{ route('responce.edit', $shows->id) }}">{{ __('vendor/responce/index.edit') }}</a>
-                                                            {{-- <button class="btn btn-primary" data-toggle="modal"
-                                                                data-target="#checklistModal_{{ $shows->id }}">Update
-                                                                Response</button>
 
-                                                            <!-- Modal for Checklist Items -->
-                                                            <div class="modal fade" id="checklistModal_{{ $shows->id }}"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="checklistModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="checklistModalLabel">
-                                                                                Checklist Items for {{ $shows->name }}
-                                                                            </h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <!-- Given Response Form -->
-                                                                            <form action="{{ route('responce.store') }}"
-                                                                                enctype="multipart/form-data"
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                <input type="hidden" name="location_id"
-                                                                                    value="{{ $shows->id }}">
-
-                                                                                @foreach ($shows->inspectionResponse as $item)
-                                                                                    <input type="hidden"
-                                                                                        name="checklist_id[]"
-                                                                                        value="{{ $item->checklist_id }}"
-                                                                                        id="">
-                                                                                    <input type="hidden"
-                                                                                        name="checklist_item_id[]"
-                                                                                        value="{{ $item->checklist_item_id }}">
-
-                                                                                    <div class="mb-3">
-                                                                                        <label
-                                                                                            for="rating_{{ $item->id }}"
-                                                                                            class="form-label">{{ $item->checklistItem->description ?? '' }}</label>
-                                                                                        <select name="rating[]"
-                                                                                            id="rating_{{ $item->id }}"
-                                                                                            class="form-select">
-                                                                                            <option
-                                                                                                {{ old('rating', isset($item->rating) ? $item->rating : '') == 'green' ? 'selected' : '' }}
-                                                                                                value="green">Green
-                                                                                            </option>
-                                                                                            <option
-                                                                                                {{ old('rating', isset($item->rating) ? $item->rating : '') == 'yellow' ? 'selected' : '' }}
-                                                                                                value="yellow">Yellow
-                                                                                            </option>
-                                                                                            <option
-                                                                                                {{ old('rating', isset($item->rating) ? $item->rating : '') == 'red' ? 'selected' : '' }}
-                                                                                                value="red">Red</option>
-                                                                                        </select>
-                                                                                    </div>
-
-                                                                                    <div class="mb-3">
-                                                                                        <label
-                                                                                            for="remarks_{{ $item->id }}"
-                                                                                            class="form-label">Remarks:</label>
-                                                                                        <textarea class="form-control" name="remarks[]" id="remarks_{{ $item->id }}">{{ isset($item->remarks) ? old('remarks', $item->remarks) : '' }}</textarea>
-                                                                                    </div>
-                                                                                @endforeach
-                                                                                <div class="mb-3">
-                                                                                    <label for="remarks"
-                                                                                        class="form-label">Notes:</label>
-                                                                                    <textarea class="form-control" name="notes" id="remarks">{{ isset($item->notess->notes) ? old('notes', $item->notess->notes) : '' }}</textarea>
-                                                                                    <div class="form-group">
-                                                                                        <label for="exampleInputFile">File
-                                                                                        </label>
-                                                                                        <div class="input-group">
-                                                                                            <div class="custom-file">
-                                                                                                <input type="file"
-                                                                                                    accept=".jpeg, .jpg, .png, .gif, .bmp, .svg, .tiff, .webp, .ico"
-                                                                                                    class="custom-file-input"
-                                                                                                    id="exampleInputFile"
-                                                                                                    name="file">
-                                                                                                <p class="custom-file-label"
-                                                                                                    id="selectedFileName"
-                                                                                                    for="exampleInputFile">
-                                                                                                    Choose
-                                                                                                    file</p>
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    @if (isset($item->notess->file))
-                                                                                        <img src="{{ asset('storage/' . $item->notess->file) }}"
-                                                                                            alt="" srcset=""
-                                                                                            class="img-thumbnail">
-                                                                                    @endif
-                                                                                </div>
-                                                                                <button type="submit"
-                                                                                    class="btn btn-success">Update
-                                                                                    Inspection</button>
-                                                                            </form>
-                                                                        </div>
-
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div> --}}
-                                                        @elseif ($shows->inspectionChecklists->count() > 0)
-                                                            <button class="btn btn-primary" data-toggle="modal"
-                                                                data-target="#achecklistModal_{{ $shows->id }}">Response</button>
+                                                                @elseif ($shows->inspectionChecklists->count() > 0)
+                                                            <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                                data-target="#achecklistModal_{{ $shows->id }}">Submit Responce</button>
                                                             <!-- Modal for Checklist Items -->
                                                             <div class="modal fade"
                                                                 id="achecklistModal_{{ $shows->id }}" tabindex="-1"

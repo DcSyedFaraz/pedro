@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
             $table->integer('job_id');
-            $table->integer('vendor_id');
+            $table->foreignId('vendor_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('status');
             $table->string('deadline');
             $table->string('payment_info')->nullable();

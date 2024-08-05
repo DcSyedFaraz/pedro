@@ -83,20 +83,20 @@ class JobController extends Controller
     public function store(Request $request)
     {
 
-        $to = $request['phone'][0];
+        // $to = $request['phone'][0];
 
-        $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+        // $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 
-        try {
+        // try {
 
-            $phoneNumberObject = $phoneNumberUtil->parse($to, null);
+        //     $phoneNumberObject = $phoneNumberUtil->parse($to, null);
 
-        } catch (NumberFormatException $e) {
+        // } catch (NumberFormatException $e) {
 
-            return redirect()->back()->with('error', 'Invalid phone number');
-        }
+        //     return redirect()->back()->with('error', 'Invalid phone number');
+        // }
 
-        $formattedPhoneNumber = $phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
+        // $formattedPhoneNumber = $phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
         // dd($formattedPhoneNumber);
 
 
@@ -163,15 +163,15 @@ class JobController extends Controller
             $job->billable = $request->billable;
             $job->save();
 
-            foreach ($request['phone'] as $key => $value) {
-                JobPrimaryContact::create([
-                    'job_id' => $job->id,
-                    'phone' => $value,
-                    'ext' => $request['ext'][$key],
-                    'email' => $request['email'][$key],
+            // foreach ($request['phone'] as $key => $value) {
+            //     JobPrimaryContact::create([
+            //         'job_id' => $job->id,
+            //         'phone' => $value,
+            //         'ext' => $request['ext'][$key],
+            //         'email' => $request['email'][$key],
 
-                ]);
-            }
+            //     ]);
+            // }
 
             // SMS
             $jobInfoSMS = "New Job Alert!\n";
@@ -185,10 +185,10 @@ class JobController extends Controller
             $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
             $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
 
-            if ($formattedPhoneNumber != null) {
+            // if ($formattedPhoneNumber != null) {
 
-                //$this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
-            }
+            //     //$this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
+            // }
 
             // Notification
             $user = User::find($request->input('customer_id'));
@@ -200,7 +200,7 @@ class JobController extends Controller
 
         } catch (Exception $e) {
             throw $e;
-            return redirect()->back()->with('error', 'An error occurred while creating Job.');
+            // return redirect()->back()->with('error', 'An error occurred while creating Job.');
         }
     }
 
@@ -310,23 +310,23 @@ class JobController extends Controller
             }
         }
 
-        foreach ($request['phone'] as $key => $value) {
-            JobPrimaryContact::create([
-                'job_id' => $job->id,
-                'phone' => $value,
-                'ext' => $request['ext'][$key],
-                'email' => $request['email'][$key],
+        // foreach ($request['phone'] as $key => $value) {
+        //     JobPrimaryContact::create([
+        //         'job_id' => $job->id,
+        //         'phone' => $value,
+        //         'ext' => $request['ext'][$key],
+        //         'email' => $request['email'][$key],
 
-            ]);
+        //     ]);
 
-            $user = User::find($request->input('customer_id'));
-            $admin = auth()->user();
-            $message = "updated your Job# {$job->id}";
-            $user->notify(new UserNotification($admin, $message));
+        // }
+        $user = User::find($request->input('customer_id'));
+        $admin = auth()->user();
+        $message = "updated your Job# {$job->id}";
+        $user->notify(new UserNotification($admin, $message));
 
-            if ($user->phone != null) {
-                //$this->twilioService->sendSMS($user->phone, $message);
-            }
+        if ($user->phone != null) {
+            //$this->twilioService->sendSMS($user->phone, $message);
         }
         $previousUrl = $request->input('previous_url', route('job.index'));
 

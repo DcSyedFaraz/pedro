@@ -29,19 +29,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="p-3" id="pdf-content">
-                            <table class="table " >
+                            <table class="table ">
                                 <tbody>
                                     <tr>
-                                        <th>First Name:</th>
-                                        <td>{{ $estimate->first_name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Last Name:</th>
-                                        <td>{{ $estimate->last_name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone Number:</th>
-                                        <td>{{ $estimate->phone_number }}</td>
+                                        <th>Client Name:</th>
+                                        <td>{{ $estimate->first_name }} {{ $estimate->last_name }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email:</th>
@@ -64,8 +56,18 @@
                                         <td>{{ $estimate->zip_code }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Details:</th>
+                                        <th>Job Description:</th>
                                         <td>{{ $estimate->details }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bid Due Date:</th>
+                                        <td>{{ $estimate->bids->where('user_id', auth()->id())->first()->due_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Frequency:</th>
+                                        <td> <span class="badge badge-success">
+                                                {{ $estimate->frequency }}
+                                            </span></td>
                                     </tr>
                                     @if ($estimate->picture)
                                         <tr>

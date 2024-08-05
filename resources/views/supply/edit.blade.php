@@ -84,7 +84,7 @@
                                                                     <div class="purchase-order-status">
                                                                         <label for="po_num"
                                                                             class="form-label">{{ __('user/supply/index.po') }}</label>
-                                                                        <input name="po_num" type="number"
+                                                                        <input name="po_num" disabled type="text"
                                                                             class="form-control" id="po_num"
                                                                             value="{{ old('po_num', $supplyRequest->po_num) }}">
                                                                     </div>

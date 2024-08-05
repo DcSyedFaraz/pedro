@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zip_code');
+            $table->string('frequency');
             $table->text('details')->nullable();
             $table->string('picture')->nullable();
             $table->timestamps();

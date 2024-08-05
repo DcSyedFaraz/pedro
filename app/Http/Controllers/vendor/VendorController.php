@@ -180,8 +180,8 @@ class VendorController extends Controller
     public function quick_pay($id)
     {
         $workOrder = WorkOrders::find($id);
-        // dd($workOrder->payment_info);
-        if ($workOrder && $workOrder->payment_info === '---') {
+        // dd(!$workOrder->payment_info != 'quick_pay');
+        if ($workOrder && $workOrder->payment_info != 'quick_pay') {
             // Update the status to 'Accepted'
             $workOrder->payment_info = 'quick_pay';
             $workOrder->save();

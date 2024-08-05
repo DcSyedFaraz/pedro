@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('job_id');
             $table->string('notes');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
