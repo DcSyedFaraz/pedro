@@ -28,7 +28,7 @@ class CustomerFactory extends Factory
             'customer_tag' => $this->faker->word,
             'job_template' => $this->faker->word,
             'invoice_template' => $this->faker->word,
-            'notes' => $this->faker->paragraph,
+            'notes' => $this->faker->sentence,
             'referral' => $this->faker->word,
             'amount' => $this->faker->randomNumber(2),
             'assigned_contract' => $this->faker->word,

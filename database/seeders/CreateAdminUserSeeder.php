@@ -25,19 +25,19 @@ class CreateAdminUserSeeder extends Seeder
 {
     public function run()
     {
-        // User::factory()->count(5)->admin()->create();
-        // User::factory()->count(5)->user()->create();
-        // User::factory()->count(5)->manager()->create();
-        // User::factory()->count(5)->vendor()->create();
+        User::factory()->count(5)->admin()->create();
+        User::factory()->count(5)->user()->create();
+        User::factory()->count(5)->manager()->create();
+        User::factory()->count(5)->vendor()->create();
 
-        // Job::factory(10)->create();
-        // WorkOrders::factory(10)->create();
-        // Customer::factory(10)->create();
-        // InspectionChecklist::factory(10)->create();
-        // ChecklistItem::factory(20)->create();
+        Job::factory(10)->create();
+        WorkOrders::factory(10)->create();
+        Customer::factory(10)->create();
+        InspectionChecklist::factory(10)->create();
+        ChecklistItem::factory(20)->create();
         Location::factory(20)->create();
-        // Estimate::factory(20)->create();
-        // EstimateRequest::factory(20)->create();
-        // Bid::factory(20)->create();
+        Estimate::factory(20)->create();
+        EstimateRequest::factory(20)->create();
+        Bid::factory(20)->create();
     }
 }
