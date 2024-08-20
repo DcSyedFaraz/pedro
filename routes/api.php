@@ -35,7 +35,7 @@ Route::post('password/email',  [\App\Http\Controllers\Api\ForgotPasswordControll
 Route::any('password/reset', [\App\Http\Controllers\Api\CodeCheckController::class,'index']);
 Route::post('password/code/check', [\App\Http\Controllers\Api\CodeCheckController::class,'code_verify']);
 
-Route::group(['middleware' => ['api','auth:api'], 'prefix' => 'auth'], function () 
+Route::group(['middleware' => ['api','auth:api'], 'prefix' => 'auth'], function ()
 {
-    Route::post('change_password', [\App\Http\Controllers\Api\RegisterController::class, 'change_password']); 
+    Route::post('change_password', [\App\Http\Controllers\Api\RegisterController::class, 'change_password']);
 });

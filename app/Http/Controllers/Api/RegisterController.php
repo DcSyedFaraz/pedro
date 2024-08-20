@@ -84,7 +84,7 @@ class RegisterController extends BaseController
                 $token = $user->createToken('app_api')->plainTextToken;
                 $users = $this->userinfo($request->email);
                 $role = $user->roles->first()->name;
-                return response()->json(['success' => true, 'message' => 'User Logged In successfully', 'token' => $token, 'user_info' => $users, 'role' => $role,]);
+                return response()->json(['success' => true, 'message' => 'User Logged In successfully', 'token' => $token, 'user_info' => $users, 'role' => $role]);
             } else {
                 return $this->sendError('Incorrect Password');
             }
@@ -136,6 +136,7 @@ class RegisterController extends BaseController
     }
     public function change_password(Request $request)
     {
+        // return 'hi............';
         try {
 
             $validator = Validator::make($request->all(), [
@@ -155,7 +156,9 @@ class RegisterController extends BaseController
             $user->password = Hash::make($request->new_password);
             $user->save();
 
-            return response()->json(['success' => true, 'message' => 'Password Successfully Changed', 'user_info' => $user]);
+            $role = $user->roles->first()->name;
+
+            return response()->json(['success' => true, 'message' => 'Password Successfully Changed', 'user_info' => $user, 'role' => $role]);
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage());
         }
