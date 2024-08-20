@@ -8,10 +8,10 @@ class TwilioService
 {
     protected $twilio;
 
-    public function __construct()
-    {
-        $this->twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
-    }
+    // public function __construct()
+    // {
+    //     $this->twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+    // }
     public function sendNotify($to, $message)
     {
         $this->twilio->notify->services(config('services.twilio.sid'))
