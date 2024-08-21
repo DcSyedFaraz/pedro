@@ -31,7 +31,7 @@ class JobController extends Controller
     }
     public function getPrimaryContact($userId)
     {
-        $customer = Customer::where('user_id', $userId)->first();
+        $customer = Customer::where('id', $userId)->first();
 
         if (!$customer) {
             return response()->json(['success' => false, 'message' => 'Customer not found'], 404);

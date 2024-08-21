@@ -370,7 +370,7 @@
             name="billable" class="form-control form-control-sm form-check">
     </div>
 </div>
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('customer_id').addEventListener('change', function() {
             var userId = this.value;
@@ -456,7 +456,7 @@
             addPrimaryContactField();
         });
     });
-</script>
+</script> --}}
 @section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -483,6 +483,8 @@
 
             $('#customer_id').change(function() {
                 const contacts = $(this).find('option:selected').data('contacts');
+                console.log(contacts);
+
                 $('#primary-contacts-container').empty();
                 if (contacts) {
                     contacts.forEach(contact => appendContact(contact));

@@ -53,7 +53,7 @@
                                     <tbody>
                                         @if ($job)
                                             @foreach ($job as $jobs)
-                                                @php
+                                                {{-- @php
                                                     $phones = isset($jobs->phone) ? $jobs->phone : [];
                                                     $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
                                                     $exts = isset($jobs->ext) ? $jobs->ext : [];
@@ -62,7 +62,7 @@
                                                     $ext_id = implode(',', $ext_ids);
                                                     $ext = implode(',', $exts);
                                                     $emailList = implode(',', $emailAddresses);
-                                                @endphp
+                                                @endphp --}}
                                                 <tr>
                                                     <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
                                                     <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}

@@ -50,7 +50,7 @@
                             </tr>
                             <tr>
                                 <th>{{ __('user/job/show.job_category') }}</th>
-                                <td>{{ $job->job_category->name }}</td>
+                                <td>{{ $job->job_category->name ?? 'N/A'}}</td>
                             </tr>
                             <tr>
                                 <th>{{ __('user/job/show.job_description') }}</th>
@@ -62,11 +62,11 @@
                             </tr>
                             <tr>
                                 <th>{{ __('user/job/show.job_source') }}</th>
-                                <td>{{ $job->job_source->name?? '' }}</td>
+                                <td>{{ $job->job_source->name ?? '' }}</td>
                             </tr>
                             <tr>
                                 <th>{{ __('user/job/show.agent') }}</th>
-                                <td>{{ $job->agentname->name?? ''}}</td>
+                                <td>{{ $job->agentname->name ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>{{ __('user/job/show.first_name_primary_contact') }}</th>
