@@ -43,4 +43,17 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => 'auth'], function
 Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']], function () {
 
     Route::resource('manage_work_orders', VendorController::class);
+
+    Route::controller(VendorController::class)->group(function () {
+        Route::get('/manage_work_orders/accept/{id}', 'acceptWorkOrder');
+        Route::get('/manage_work_orders/decline/{id}', 'declineWorkOrder');
+
+        Route::get('/quick_pay/{id}', 'quick_pay');
+        Route::get('/doc/{id}', 'doc');
+        Route::get('/alert/{id}', 'alert');
+        Route::put('/upload/{id}', 'upload');
+        Route::get('/attendance/{id}', 'attendance');
+        Route::post('/attendance/store', 'attendanceStore');
+
+    });
 });
