@@ -29,7 +29,7 @@ class VendorController extends Controller
     }
     public function show($id)
     {
-        $job = Job::findOrFail($id);
+        $job = Job::with('workOrder.JobLocation')->findOrFail($id);
         return response()->json($job, 200);
     }
     public function acceptWorkOrder($id)
