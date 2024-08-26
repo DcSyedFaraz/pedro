@@ -110,7 +110,7 @@ class VendorController extends Controller
             }
 
             // Save notes in the 'workorders' table
-            $workOrders->notes = $request->input('notes');
+            $workOrders->note = $request->input('notes');
             $workOrders->save();
 
             // Commit the transaction
@@ -121,7 +121,7 @@ class VendorController extends Controller
             // Rollback the transaction in case of an error
             DB::rollBack();
 
-            return response()->json(['success' => false, 'message' => 'An error occurred while uploading files and saving notes.']);
+            return response()->json(['success' => false, 'message' => 'An error occurred while uploading files and saving notes. ' . $e->getMessage()]);
         }
     }
     public function alert($id)
