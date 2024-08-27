@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use App\Http\Controllers\users\userEstimateController;
 use App\Http\Controllers\vendor\AttendanceController;
@@ -40,6 +41,14 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => 'auth'], function
     Route::post('change_password', [\App\Http\Controllers\Api\RegisterController::class, 'change_password']);
 });
 
+Route::group(['prefix' => 'user', 'middleware' => ['auth:api', 'role:User']], function () {
+    route::controller(UserController::class)->group(function () {
+        Route::get('/joblist', 'index');
+        Route::get('/joblist{id}', 'show');
+
+
+    });
+});
 Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']], function () {
 
     Route::resource('manage_work_orders', VendorController::class);
@@ -56,4 +65,5 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']]
         Route::post('/attendance/store', 'attendanceStore');
 
     });
+
 });
