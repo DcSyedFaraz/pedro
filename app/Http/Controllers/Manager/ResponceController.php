@@ -50,7 +50,17 @@ class ResponceController extends Controller
      */
     public function store(Request $request)
     {
-// dd($request->all());
+        $request->validate([
+            'location_id' => 'required|integer|exists:jobs,id',
+            'checklist_item_id' => 'required|array',
+            'checklist_item_id.*' => 'integer|exists:checklist_items,id',
+            'checklist_id' => 'required|array',
+            'checklist_id.*' => 'integer|exists:inspection_checklists,id',
+            'rating' => 'required|array',
+            'rating.*' => 'in:yellow,green,red',
+            'remarks' => 'required|array',
+            'remarks.*' => 'string|max:255',
+        ]);
 
         try {
             DB::beginTransaction();

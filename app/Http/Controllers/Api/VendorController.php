@@ -24,7 +24,18 @@ class VendorController extends Controller
 {
     public function resstore(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'location_id' => 'required|integer|exists:jobs,id', // Assuming 'location_id' must exist in 'locations' table
+            'checklist_item_id' => 'required|array',
+            'checklist_item_id.*' => 'integer|exists:checklist_items,id', // Ensure each item is an integer and exists in 'checklist_items' table
+            'checklist_id' => 'required|array',
+            'checklist_id.*' => 'integer|exists:inspection_checklists,id', // Ensure each item is an integer and exists in 'checklists' table
+            'rating' => 'required|array',
+            'rating.*' => 'in:yellow,green,red', // Ensure each rating is one of the allowed values
+            'remarks' => 'required|array',
+            'remarks.*' => 'string|max:255', // Ensure each remark is a string and not too long
+        ]);
+
 
         try {
             DB::beginTransaction();
