@@ -103,6 +103,8 @@ class Job extends Model
             return 'Partially';
         } else if ($this->attributes['current_status'] == 9) {
             return 'Completed';
+        } else if ($this->attributes['current_status'] == 10) {
+            return 'Awaiting Checklist';
         }
         return '';
     }

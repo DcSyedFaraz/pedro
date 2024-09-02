@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
+use App\Http\Controllers\Manager\ResponceController;
 use App\Http\Controllers\users\userEstimateController;
 use App\Http\Controllers\vendor\AttendanceController;
 use Illuminate\Http\Request;
@@ -42,9 +43,9 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => 'auth'], function
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth:api', 'role:User']], function () {
-    route::controller(UserController::class)->group(function () {
+    Route::controller(UserController::class)->group(function () {
         Route::get('/joblist', 'index');
-        Route::get('/joblist{id}', 'show');
+        Route::get('/joblist/{id}', 'show');
 
 
     });
@@ -63,7 +64,11 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']]
         Route::put('/upload/{id}', 'upload');
         Route::get('/attendance/{id}', 'attendance');
         Route::post('/attendance/store', 'attendanceStore');
+        Route::get('/responce', 'resindex');
+        Route::get('/responce/{id}', 'resshow');
+        Route::post('/responce/{id}', 'resstore');
 
     });
+
 
 });

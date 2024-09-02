@@ -65,7 +65,7 @@ class JobController extends Controller
         $manager = User::withRole('account manager')->get();
 
 
-        // $job = Job::with('customer','job_category','job_prioirty','job_source')->get();
+        // dd($job);
         return view('admin.job.index', compact('job', 'manager'));
     }
 

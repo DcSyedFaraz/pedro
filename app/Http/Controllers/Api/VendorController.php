@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Files;
+use App\Models\InspectionChecklist;
+use App\Models\InspectionResponse;
 use App\Models\Job;
 use App\Models\JobLocation;
+use App\Models\Notes;
 use App\Models\User;
 use App\Models\WorkOrders;
 use App\Notifications\UserNotification;
@@ -19,6 +22,89 @@ use Str;
 
 class VendorController extends Controller
 {
+    public function resstore(Request $request)
+    {
+        // dd($request->all());
+
+        try {
+            DB::beginTransaction();
+
+            foreach ($request['rating'] as $key => $value) {
+                $criteria = [
+                    'location_id' => $request['location_id'],
+                    'checklist_id' => $request['checklist_id'][$key],
+                    'checklist_item_id' => $request['checklist_item_id'][$key],
+                ];
+
+                $data = [
+                    'rating' => $value,
+                    'remarks' => $request['remarks'][$key],
+                ];
+                // dd($file);
+                if ($request->hasFile('files') && isset($request->file('files')[$key])) {
+                    $file = $request->file('files')[$key];
+                    // Save the file with a unique name
+                    $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                    $path = $file->storeAs('inspection', $fileName, 'public');
+
+                    // Add the file path or name to the data array
+                    $data['file_path'] = $path; // Change 'file_path' to your database column name
+                }
+
+                $some = InspectionResponse::updateOrCreate($criteria, $data);
+            }
+
+            if ($request->hasFile('notesFile')) {
+                $file = $request->file('notesFile');
+                $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                $paths = $file->storeAs('inspection', $fileName, 'public');
+            }
+
+            $job_id = $request['location_id'];
+            // $notes = ['notes' => $request['notes']];
+
+            if (isset($paths)) {
+                $notes['file'] = $paths;
+            }
+
+            // Notes::updateOrcreate(
+            //     ['job_id' => $job_id],
+            //     $notes
+            // );
+
+            $user = auth()->user();
+            $admin = User::find(1);
+            $message = "Updated response of Job# {$request['location_id']}";
+            // dd($message);
+            $admin->notify(new UserNotification($user, $message));
+
+            DB::commit();
+            return response()->json(['success' => true, 'message' => 'Responses submitted successfully']);
+        } catch (Exception $e) {
+            DB::rollback();
+            // throw $e;
+            return response()->json(['success' => false, 'message' => 'An error occurred. Please try again. ' . $e->getMessage()]);
+        }
+
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function resshow($id)
+    {
+        $response = InspectionResponse::selectRaw('MAX(id) as id, checklist_id, MAX(rating) as rating, MAX(remarks) as remarks')->with('checklistItem', 'checklistItem.inspectionChecklist')
+            ->where('location_id', $id)
+            ->groupBy('checklist_id')
+            ->get();
+        $new = InspectionResponse::where('location_id', $id)->first();
+        // dd($response);
+        return response()->json(['response' => $response, 'responce' => $new, 'id' => $id], 200);
+    }
     public function index()
     {
         $WorkOrders = WorkOrders::where('vendor_id', auth()->user()->id)
@@ -29,8 +115,20 @@ class VendorController extends Controller
     }
     public function show($id)
     {
-        $job = Job::with('workOrder.JobLocation')->findOrFail($id);
+        $job = Job::with('workOrder.JobLocation', 'inspectionChecklists.checklistItems', 'inspectionResponse')->findOrFail($id);
         return response()->json($job, 200);
+    }
+    public function resindex()
+    {
+        $checklists = InspectionChecklist::get();
+        $show = Job::with('inspectionChecklists', 'inspectionResponse')->whereHas('workOrder', function ($query) {
+            $query->where('vendor_id', auth()->user()->id)->where('status', 'accepted');
+        })->get();
+
+        // dd($show);
+        // $location->inspectionChecklists()->sync($request->checklists);
+        return response()->json(['checklists' => $checklists, 'job' => $show], 200);
+        // return view('manager.responce.index', compact('checklists', 'show'));
     }
     public function acceptWorkOrder($id)
     {
@@ -222,6 +320,19 @@ class VendorController extends Controller
                 $diffInTime = $startDate->diff($endDate)->format('%H:%I:%S');
                 // dd($diffInTime);
                 $time = $diffInTime;
+                $workOrder = WorkOrders::find($request->job);
+
+                if ($workOrder) {
+                    // Assuming the WorkOrder model has a relationship defined to Job like 'job'
+                    $job = $workOrder->job;
+
+                    if ($job) {
+                        // Update the job's status on checkout
+                        $job->update([
+                            'current_status' => 10
+                        ]);
+                    }
+                }
             } else {
                 $time = '';
                 $attendanceStatus = 'checkIn';
