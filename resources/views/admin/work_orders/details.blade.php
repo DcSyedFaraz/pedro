@@ -66,6 +66,13 @@
                                         <p class="form-control-plaintext">{{ $workOrder->jobname?->location_name }}</p>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="user_address"
+                                        class="col-md-4 col-form-label text-md-right">{{ __('admin/work_order/show.job_desc') }}</label>
+                                    <div class="col-md-6">
+                                        <p class="form-control-plaintext">{{ $workOrder->jobname?->job_description }}</p>
+                                    </div>
+                                </div>
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">

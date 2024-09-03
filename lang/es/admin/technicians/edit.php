@@ -16,6 +16,7 @@ return [
     'billing_address' => '¿Dirección de Facturación?',
     'yes' => 'Sí',
     'no' => 'No',
+    'select_contact' => 'Select Contact',
     'contact' => 'Contacto',
     'contact_1' => 'Contacto 1',
     'contact_2' => 'Contacto 2',

@@ -218,7 +218,7 @@
                                                                 <div class="col-12">
                                                                     <div class="shipping-address-div">
                                                                         <label for="reference"
-                                                                            class="form-label">Reciepent's Address</label>
+                                                                            class="form-label">Recipient's Address</label>
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <input value="{{ old('location') }}"
@@ -306,7 +306,7 @@
                                                                 <label for="addproduct"
                                                                     class="form-label">{{ __('admin/purchase_order/edit.unit_price') }}</label>
                                                                 <input value="{{ old('unit_price') }}"
-                                                                    name="unit_price[]" type="number"
+                                                                    name="unit_price[]" type="text"
                                                                     class="form-control" id="addproduct">
                                                             </div>
                                                         </div>
@@ -427,13 +427,22 @@
             });
 
             let discount = parseFloat($('#discount').val()) || 0;
-            let tax_paid = parseFloat($('#tax_paid').val()) || 0;
+            let taxRate = parseFloat($('#tax_paid').val()) || 0;
             let ship_cost = parseFloat($('#ship_cost').val()) || 0;
+
+            let taxPaid = (subtotal - discount) * (taxRate / 100); // calculate tax paid amount
 
             let grand_total = subtotal - discount + tax_paid + ship_cost;
 
             $('#subtotal').val(subtotal.toFixed(2));
-            $('#grand_total').val(grand_total.toFixed(2));
+            let news = parseInt(grand_total);
+            // console.log(typeof new); // Check the type of grand_total
+
+            if (typeof news === 'number') {
+                $('#grand_total').val(news.toFixed(2));
+            } else {
+                console.error('grand_total is not a number:', grand_total);
+            }
         }
 
         $(document).ready(function() {

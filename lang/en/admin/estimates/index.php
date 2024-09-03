@@ -24,4 +24,5 @@ return [
     'flash_success_convert' => 'Estimates converted to a job successfully!',
     'flash_error_delete' => 'Error deleting estimate!',
     'flash_error_convert' => 'Error converting estimates to a job!',
+    'e_signature_time' => 'Timestamps',
 ];

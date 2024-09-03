@@ -14,6 +14,7 @@ return [
     'there_were_some_problems_with_your_input' => 'Hubo algunos problemas con su entrada.',
     'work_order_details' => 'Detalles de la Orden de Trabajo',
     'job_id' => 'ID del Trabajo',
+    'job_desc' => 'Descripción del trabajo',
     'vendor_id' => 'ID del Vendedor',
     'deadline' => 'Fecha Límite',
     'user_name' => 'Nombre de Usuario',

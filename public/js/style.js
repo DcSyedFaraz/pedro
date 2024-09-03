@@ -597,7 +597,7 @@ $(document).ready(function () {
                 <td><input type="number" class="form-control job_inv_rate" name="rate[]" placeholder="Rate"></td>
                 <td><input type="number" class="form-control job_inv_total" name="total[]" placeholder="Total" readonly></td>
                 <td><input type="number" class="form-control job_inv_cost" name="cost[]" placeholder="Cost"></td>
-                <td><input type="number" class="form-control job_inv_tax" name="margin_tax[]" placeholder="Tax"></td>
+                <td><input type="text" class="form-control job_inv_tax" name="margin_tax[]" placeholder="Tax"></td>
                 <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
             </tr>`;
         $("#job-invoice-rows").append(newRow);
@@ -624,7 +624,12 @@ $(document).ready(function () {
 
 
         var est_total = est_rate * est_qty;
-        var estTotal = est_total + est_cost + est_tax;
+        var subtotal = est_total + est_cost;
+
+        // Calculate tax as a percentage of the subtotal
+        var taxAmount = subtotal * (est_tax / 100);
+
+        var estTotal = subtotal + taxAmount;
         row.find(".est_inv_total").val(estTotal.toFixed(2));
         return estTotal;
     }
@@ -686,9 +691,9 @@ $(document).ready(function () {
                 <td colspan="2"><input type="text" class="form-control est_inv_desc" name="description" placeholder="Description"></td>
                 <td><input type="number" class="form-control est_inv_qty" name="qty_hrs" placeholder="Qty"></td>
                 <td><input type="number" class="form-control est_inv_rate" name="rate" placeholder="Rate"></td>
-                <td><input type="number" class="form-control est_inv_total" name="total" placeholder="Total" readonly></td>
-                <td><input type="number" class="form-control est_inv_cost" name="cost1" placeholder="Cost"></td>
                 <td><input type="number" class="form-control est_inv_tax" name="margin_tax" placeholder="Tax"></td>
+                <td><input type="text" class="form-control est_inv_total" name="total" placeholder="Total" readonly></td>
+                <td><input type="number" class="form-control est_inv_cost" name="cost1" placeholder="Cost"></td>
                 <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
             </tr>`;
         $("#est-invoice-rows").append(newRow);

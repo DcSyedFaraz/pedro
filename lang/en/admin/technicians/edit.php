@@ -17,6 +17,7 @@ return [
     'yes' => 'Yes',
     'no' => 'No',
     'contact' => 'Contact',
+    'select_contact' => 'Select Contact',
     'contact_1' => 'Contact 1',
     'contact_2' => 'Contact 2',
     'active' => 'Active?',

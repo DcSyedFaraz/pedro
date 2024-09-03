@@ -50,6 +50,7 @@ class ResponceController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'location_id' => 'required|integer|exists:jobs,id',
             'checklist_item_id' => 'required|array',

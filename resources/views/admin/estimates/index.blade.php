@@ -40,7 +40,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
+                                    <table id="example1" class="table table-bordered table-striped table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>Select</th>
@@ -51,6 +51,8 @@
                                                 <th class="text-nowrap">{{ __('admin/estimates/index.primary_contact') }}
                                                 </th>
                                                 <th class="text-nowrap">{{ __('admin/estimates/index.e_signature') }}</th>
+                                                <th class="text-nowrap">{{ __('admin/estimates/index.e_signature_time') }}
+                                                </th>
                                                 <th class="text-nowrap">{{ __('admin/estimates/index.actions') }}</th>
                                             </tr>
                                         </thead>
@@ -86,7 +88,9 @@
                                                         </td>
                                                         <td>{{ isset($estimate->customer->name) ? $estimate->customer->name : '' }}
                                                         </td>
-                                                        <td>{{ isset($estimate->location_address) ? $estimate->location_address : '' }}
+                                                        <td class="text-truncate">
+                                                            {{ isset($estimate->location_address) ? $estimate->location_address : '' }}
+                                                        </td>
                                                         <td>{{ isset($estimate->location_city) ? $estimate->location_city : '' }}
                                                         </td>
                                                         <td>{{ __('admin/estimates/index.primary_contact') }}:
@@ -105,16 +109,13 @@
                                                                     data-target="#signatureModal{{ $estimate->id }}">
                                                                     {{ __('admin/estimates/index.show_signature') }}
                                                                 </button>
-                                                                <p class="lead" style="font-size: 16px !important;">
-                                                                    {{ \Carbon\Carbon::parse($estimate->signature_time)->format('l, F j, Y h:i A') }}
-
-                                                                </p>
 
                                                                 <!-- Modal -->
                                                                 <div class="modal fade"
                                                                     id="signatureModal{{ $estimate->id }}" tabindex="-1"
                                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog">
+
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
@@ -137,6 +138,14 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if (isset($estimate->signature))
+                                                                <p class="lead" style="font-size: 16px !important;">
+                                                                    {{ \Carbon\Carbon::parse($estimate->signature_time)->format('l, F j, Y h:i A') }}
+
+                                                                </p>
                                                             @endif
                                                         </td>
                                                         <td class="d-flex">

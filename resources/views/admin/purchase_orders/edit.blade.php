@@ -441,8 +441,10 @@
             });
 
             let discount = parseFloat($('#discount').val()) || 0;
-            let tax_paid = parseFloat($('#tax_paid').val()) || 0;
+            let taxRate = parseFloat($('#tax_paid').val()) || 0;
             let ship_cost = parseFloat($('#ship_cost').val()) || 0;
+
+            let taxPaid = (subtotal - discount) * (taxRate / 100);
 
             let grand_total = subtotal - discount + tax_paid + ship_cost;
 

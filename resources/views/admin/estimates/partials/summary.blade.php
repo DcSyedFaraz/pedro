@@ -9,7 +9,7 @@
             <select name="customer_id" id="customer_id" class="form-control">
                 <option value="">select {{ __('admin/estimates/edit.customer') }}</option>
                 @foreach ($customer as $cust)
-                    <option
+                    <option data-contacts="{{ json_encode($cust->pricontact) }}"
                         {{ isset($estimate->customer_id) ? (old('customer_id', $estimate->customer_id) ? 'selected' : '') : '' }}
                         value="{{ $cust->id }}">{{ $cust->name }}</option>
                 @endforeach
@@ -17,6 +17,42 @@
             <span class="error-message error-messages" id="customer_id_error"></span><br>
         </div>
     </div>
+    <template id="contact-template">
+        <div class="row">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="tel" class="form-control" disabled name="phone[]" placeholder="Phone number">
+                    <p class="error-message phone-error error-messages" style="display: none;">
+                        {{ __('admin/job/edit.add_at_least_phone') }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="tel" class="form-control" disabled name="ext[]" placeholder="Ext">
+                    <p class="ext-error error-messages" style="display: none;">
+                        {{ __('admin/job/edit.add_at_least_ext') }}</p>
+                </div>
+            </div>
+            {{-- <div class="col-md-1">
+                <button type="button" class="btn btn-danger remove-contact"><i class="fas fa-trash"></i></button>
+            </div> --}}
+        </div>
+        <div class="row">
+            <div class="col-md-4">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="email" class="form-control" disabled name="email[]" placeholder="Email">
+                    <p class="email-error error-messages" style="display: none">
+                        {{ __('admin/job/edit.add_at_least_email') }}</p>
+                </div>
+            </div>
+            {{-- <div class="col-md-2">
+                <button type="button" class="btn btn-primary add-contact"><i class="fas fa-plus"></i></button>
+            </div> --}}
+        </div>
+    </template>
     <!-- <div class="col-md-4">
             <div class="form-group">
                 <button class="form-control"><i class="fas fa-link"></i> Link to parent</button>
@@ -44,7 +80,10 @@
         </div>
     </div>
 </div>
-@if (isset($estimate->prim_cont))
+<div id="primary-contacts-container">
+    <!-- Primary contacts will be appended here -->
+</div>
+{{-- @if (isset($estimate->prim_cont))
 
     @foreach ($estimate->prim_cont as $jobprim)
         <div>
@@ -109,7 +148,8 @@
                 <div class="form-group">
                     <input type="tel" class="form-control" name="phone[]" id=""
                         placeholder="{{ __('admin/estimates/edit.phone') }}">
-                    <p class="error-message phone-error error-messages" style="display: none;"> Add at least phone </p>
+                    <p class="error-message phone-error error-messages" style="display: none;"> Add at least phone
+                    </p>
                 </div>
             </div>
             <div class="col-md-3">
@@ -142,7 +182,7 @@
         </div>
     </div>
 
-@endif
+@endif --}}
 <p class="primary_append">
 
 </p>
@@ -314,3 +354,43 @@
 
     </div>
 </div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            function appendContact(contact) {
+                const template = $('#contact-template').html();
+                const $contact = $(template);
+                $contact.find('input[name="phone[]"]').val(contact.number || '');
+                $contact.find('input[name="ext[]"]').val(contact.ext || '');
+                $contact.find('input[name="email[]"]').val(contact.email || '');
+                $('#primary-contacts-container').append($contact);
+            }
+
+            $('#customer_id').change(function() {
+                const contacts = $(this).find('option:selected').data('contacts');
+                console.log(contacts);
+
+                $('#primary-contacts-container').empty();
+                if (contacts) {
+                    contacts.forEach(contact => appendContact(contact));
+                } else {
+                    appendContact({});
+                }
+            });
+
+            $(document).on('click', '.add-contact', function() {
+                appendContact({});
+            });
+
+            $(document).on('click', '.remove-contact', function() {
+                $(this).closest('.row').next('.row').remove(); // Remove email row
+                $(this).closest('.row').remove(); // Remove phone and ext row
+            });
+
+            // Trigger change event on page load to populate contacts if a customer is already selected
+            if ($('#customer_id').val()) {
+                $('#customer_id').trigger('change');
+            }
+        });
+    </script>
+@endsection

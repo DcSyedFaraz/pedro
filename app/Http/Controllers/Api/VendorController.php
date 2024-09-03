@@ -24,80 +24,52 @@ class VendorController extends Controller
 {
     public function resstore(Request $request)
     {
-        $request->validate([
-            'location_id' => 'required|integer|exists:jobs,id', // Assuming 'location_id' must exist in 'locations' table
-            'checklist_item_id' => 'required|array',
-            'checklist_item_id.*' => 'integer|exists:checklist_items,id', // Ensure each item is an integer and exists in 'checklist_items' table
-            'checklist_id' => 'required|array',
-            'checklist_id.*' => 'integer|exists:inspection_checklists,id', // Ensure each item is an integer and exists in 'checklists' table
-            'rating' => 'required|array',
-            'rating.*' => 'in:yellow,green,red', // Ensure each rating is one of the allowed values
-            'remarks' => 'required|array',
-            'remarks.*' => 'string|max:255', // Ensure each remark is a string and not too long
+        $validatedData = $request->validate([
+            'location_id' => 'required|integer',
+            'checklist_id' => 'required|integer',
+            'answers' => 'required|array',
+            'answers.*.checklist_item_id' => 'required|integer',
+            'answers.*.rating' => 'nullable|string',
+            'answers.*.remarks' => 'nullable|string',
         ]);
 
+        // Extract location_id and checklist_id from the request
+        $locationId = $validatedData['location_id'];
+        $checklistId = $validatedData['checklist_id'];
+
+        // Begin the database transaction
+        DB::beginTransaction();
 
         try {
-            DB::beginTransaction();
-
-            foreach ($request['rating'] as $key => $value) {
-                $criteria = [
-                    'location_id' => $request['location_id'],
-                    'checklist_id' => $request['checklist_id'][$key],
-                    'checklist_item_id' => $request['checklist_item_id'][$key],
-                ];
-
-                $data = [
-                    'rating' => $value,
-                    'remarks' => $request['remarks'][$key],
-                ];
-                // dd($file);
-                if ($request->hasFile('files') && isset($request->file('files')[$key])) {
-                    $file = $request->file('files')[$key];
-                    // Save the file with a unique name
-                    $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('inspection', $fileName, 'public');
-
-                    // Add the file path or name to the data array
-                    $data['file_path'] = $path; // Change 'file_path' to your database column name
-                }
-
-                $some = InspectionResponse::updateOrCreate($criteria, $data);
+            // Loop through each answer and perform the updateOrCreate operation
+            foreach ($validatedData['answers'] as $answer) {
+                InspectionResponse::updateOrCreate(
+                    [
+                        'location_id' => $locationId,
+                        'checklist_id' => $checklistId,
+                        'checklist_item_id' => $answer['checklist_item_id'],
+                    ],
+                    [
+                        'rating' => $answer['rating'],
+                        'remarks' => $answer['remarks'],
+                        // Add other fields that need to be updated or created here
+                    ]
+                );
             }
 
-            if ($request->hasFile('notesFile')) {
-                $file = $request->file('notesFile');
-                $fileName = $file->getClientOriginalName() . Str::random(5) . '.' . $file->getClientOriginalExtension();
-                $paths = $file->storeAs('inspection', $fileName, 'public');
-            }
-
-            $job_id = $request['location_id'];
-            // $notes = ['notes' => $request['notes']];
-
-            if (isset($paths)) {
-                $notes['file'] = $paths;
-            }
-
-            // Notes::updateOrcreate(
-            //     ['job_id' => $job_id],
-            //     $notes
-            // );
-
-            $user = auth()->user();
-            $admin = User::find(1);
-            $message = "Updated response of Job# {$request['location_id']}";
-            // dd($message);
-            $admin->notify(new UserNotification($user, $message));
-
+            // Commit the transaction if all operations were successful
             DB::commit();
-            return response()->json(['success' => true, 'message' => 'Responses submitted successfully']);
-        } catch (Exception $e) {
-            DB::rollback();
-            // throw $e;
-            return response()->json(['success' => false, 'message' => 'An error occurred. Please try again. ' . $e->getMessage()]);
-        }
 
+            return response()->json(['succes' => true, 'message' => 'Inspection responses saved successfully.'], 200);
+        } catch (Exception $e) {
+            // Rollback the transaction if any exception occurs
+            DB::rollBack();
+
+            // Return an error response
+            return response()->json(['succes' => false, 'error' => 'An error occurred while saving inspection responses. ' . $e->getMessage()], 500);
+        }
     }
+
 
 
     /**
