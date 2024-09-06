@@ -49,7 +49,7 @@
                                                                     {{ __('admin/inventory/edit.vendor') }}</option>
                                                                 @foreach ($vendor as $vendors)
                                                                     <option value="{{ $vendors->id }}"
-                                                                        { == $vendors->id ? 'selected' : '' }}>
+                                                                        {{ $vendors->id ? 'selected' : '' }}>
                                                                         {{ $vendors->name }}
                                                                     </option>
                                                                 @endforeach
@@ -62,8 +62,8 @@
                                                                 <label for="vender-div"
                                                                     class="form-label">{{ __('admin/inventory/edit.date') }}</label>
                                                                 <div class="input-group date" id="datepicker">
-                                                                    <input value="{{ old('date') }}"
-                                                                        name="date" type="date" class="form-control"
+                                                                    <input value="{{ old('date') }}" name="date"
+                                                                        type="date" class="form-control"
                                                                         id="date" />
 
                                                                 </div>
@@ -90,9 +90,9 @@
 
                                                             <label for="vender-div"
                                                                 class="form-label">{{ __('admin/inventory/edit.paid_for') }}</label>
-                                                            <input value="{{ old('paid') }}"
-                                                                name="paid" type="number" class="form-control"
-                                                                id="reference" placeholder="Paid">
+                                                            <input value="{{ old('paid') }}" name="paid"
+                                                                type="number" class="form-control" id="reference"
+                                                                placeholder="Paid">
                                                             </select>
                                                         </div>
                                                     </div>
@@ -114,9 +114,9 @@
                                                             <label for="receivedto"
                                                                 class="form-label">{{ __('admin/inventory/edit.received') }}
                                                                 to: </label>
-                                                            <input value="{{ old('receive') }}"
-                                                                name="receive" type="text" class="form-control"
-                                                                id="receivedto" placeholder="Received" />
+                                                            <input value="{{ old('receive') }}" name="receive"
+                                                                type="text" class="form-control" id="receivedto"
+                                                                placeholder="Received" />
 
                                                         </div>
                                                     </div>
@@ -145,9 +145,9 @@
                                                             <div class="order-qty-main-div">
                                                                 <label for="order-qty"
                                                                     class="form-label">{{ __('admin/inventory/edit.order_qty') }}</label>
-                                                                <input value="{{ old('quantity') }}"
-                                                                    name="quantity" type="number" class="form-control"
-                                                                    id="order-qty" placeholder="0.00">
+                                                                <input value="{{ old('quantity') }}" name="quantity"
+                                                                    type="number" class="form-control" id="order-qty"
+                                                                    placeholder="0.00">
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -155,9 +155,8 @@
                                                             <div class="unreceived-qty-main-div">
                                                                 <label for="unreceived-qty"
                                                                     class="form-label">{{ __('admin/inventory/edit.unreceived_qty') }}</label>
-                                                                <input
-                                                                    value="{{ old('unreceived') }}"
-                                                                    name="unreceived" type="number" class="form-control"
+                                                                <input value="{{ old('unreceived') }}" name="unreceived"
+                                                                    type="number" class="form-control"
                                                                     id="unreceived-qty" placeholder="0.00">
                                                                 </select>
                                                             </div>
@@ -166,9 +165,8 @@
                                                             <div class="unit-cost-main-div">
                                                                 <label for="unit-cost"
                                                                     class="form-label">{{ __('admin/inventory/edit.unit_cost') }}</label>
-                                                                <input
-                                                                    value="{{ old('unit_cost') }}"
-                                                                    name="unit_cost" type="number" class="form-control"
+                                                                <input value="{{ old('unit_cost') }}" name="unit_cost"
+                                                                    type="number" class="form-control"
                                                                     placeholder="0.00" id="unit-cost">
                                                                 </select>
                                                             </div>
@@ -177,9 +175,9 @@
                                                             <div class="total-cost-main-div">
                                                                 <label for="total-cost"
                                                                     class="form-label">{{ __('admin/inventory/edit.total') }}</label>
-                                                                <input value="{{ old('total') }}"
-                                                                    name="total" type="number" class="form-control"
-                                                                    placeholder="0.00" id="total-cost">
+                                                                <input value="{{ old('total') }}" name="total"
+                                                                    type="number" class="form-control total-costs"
+                                                                    placeholder="0.00" id="">
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -191,40 +189,35 @@
                                                         <div class="col-4 total-cost">
                                                             <div class="inner-inner-inner">
                                                                 <h5>ITEM {{ __('admin/inventory/edit.subtotal') }}</h5>
-                                                                <input
-                                                                    value="{{ old('customer_name') }}"
-                                                                    type="number" id="subtotal" name="subtotal"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('customer_name') }}" type="number"
+                                                                    id="subtotal" name="subtotal" class="total"
+                                                                    disabled value="0.00">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5 style="color:green;">
                                                                     {{ __('admin/inventory/edit.discount') }} RECIEVE (-)
                                                                 </h5>
-                                                                <input
-                                                                    value="{{ old('discount') }}"
-                                                                    type="number" id="discount" name="discount"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('discount') }}" type="number"
+                                                                    id="discount" name="discount" class="total"
+                                                                    value="0.00">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/inventory/edit.tax_paid') }}</h5>
-                                                                <input
-                                                                    value="{{ old('tax_paid') }}"
-                                                                    type="number" id="tax_paid" name="tax_paid"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('tax_paid') }}" type="number"
+                                                                    id="tax_paid" name="tax_paid" class="total"
+                                                                    value="0.00">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/inventory/edit.ship_cost') }}</h5>
-                                                                <input
-                                                                    value="{{ old('ship_cost') }}"
-                                                                    type="number" id="ship_cost" name="ship_cost"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('ship_cost') }}" type="number"
+                                                                    id="ship_cost" name="ship_cost" class="total"
+                                                                    value="0.00">
                                                             </div>
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/inventory/edit.grand_total') }}</h5>
-                                                                <input
-                                                                    value="{{ old('grand_total') }}"
-                                                                    type="number" id="grand_total" name="grand_total"
-                                                                    class="total" disabled value="0.00">
+                                                                <input value="{{ old('grand_total') }}" type="number"
+                                                                    id="grand_total" name="grand_total" class="total"
+                                                                    disabled value="0.00">
                                                             </div>
 
                                                         </div>
@@ -235,7 +228,7 @@
                                     </div>
 
 
-                                    <div class="inner-section py-3">
+                                    {{-- <div class="inner-section py-3">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-sm-3">
@@ -378,7 +371,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="inner-section-4">
@@ -401,4 +394,50 @@
         </section>
 
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            // Calculate total cost for each row
+            $('.total-costs').each(function() {
+                var quantity = parseFloat($(this).closest('.row').find('#order-qty').val());
+                var unitCost = parseFloat($(this).closest('.row').find('#unit-cost').val());
+                var totalCost = quantity * unitCost;
+                $(this).find('#subtotal').val(totalCost.toFixed(2));
+            });
+
+            // Calculate subtotal when any total cost changes
+            $('.total-cost').on('input', function() {
+                var subtotal = 0;
+                $('.total-cost').each(function() {
+                    subtotal += parseFloat($(this).find('#total-cost').val());
+                });
+                $('#subtotal').val(subtotal.toFixed(2));
+            });
+
+            // Calculate discount when discount input changes
+            $('#discount').on('input', function() {
+                var subtotal = parseFloat($('#subtotal').val());
+                var discountPercentage = parseFloat($('#discount').val());
+                var discountAmount = (subtotal / 100) * discountPercentage;
+                var discountedSubtotal = subtotal - discountAmount;
+                $('#subtotal').val(discountedSubtotal.toFixed(2));
+            });
+
+            // Calculate tax paid when subtotal changes
+            $('#subtotal').on('input', function() {
+                var discountedSubtotal = parseFloat($('#subtotal').val());
+                var taxPaid = (discountedSubtotal / 100) * 8; // assume 8% tax rate (adjust as needed)
+                $('#tax_paid').val(taxPaid.toFixed(2));
+            });
+
+            // Calculate grand total when any of the above values change
+            $('#subtotal, #tax_paid').on('input', function() {
+                var discountedSubtotal = parseFloat($('#subtotal').val());
+                var taxPaid = parseFloat($('#tax_paid').val());
+                var grandTotal = discountedSubtotal + taxPaid;
+                $('#grand_total').val(grandTotal.toFixed(2));
+            });
+        });
+    </script>
 @endsection

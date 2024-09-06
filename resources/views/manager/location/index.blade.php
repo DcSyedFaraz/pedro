@@ -1,9 +1,4 @@
-@extends(
-    Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :
-    (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' :
-    (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout')
-)
-)
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : (Auth::user()->hasRole('vendor') ? 'vendor.layouts.app' : (Auth::user()->hasRole('account manager') ? 'manager.layouts.app' : 'default.layout')))
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -33,10 +28,13 @@
 
                         <div class="card">
                             <!-- <div class="card-header">
-                              <h3 class="card-title">User Managment</h3>
-                            </div> -->
+                                              <h3 class="card-title">User Managment</h3>
+                                            </div> -->
                             <!-- /.card-header -->
                             <div class="card-header">
+                                <a href="{{ route('checklists.create') }}" class="btn btn-info ">
+                                    Create/ Delete Sheet
+                                </a>
                                 <button type="button" class="btn btn-success" data-toggle="modal"
                                     data-target="#exampleModal">
                                     Assign/ Update Checklist
@@ -65,20 +63,31 @@
                                                                     <label
                                                                         for="location_{{ $location->id }}">{{ $location->name }}</label>
                                                                     @foreach ($checklists as $checklist)
-                                                                    <div class="d-flex">
-                                                                        @php
-                                                                        // Check if there is a matching inspection record for the current location and checklist
-                                                                        $matchingInspection = $inspections->first(function ($inspection) use ($location, $checklist) {
-                                                                            return $inspection->job_id === $location->id && $inspection->inspection_checklist_id === $checklist->id;
-                                                                        });
-                                                                    @endphp
-                                                                        <input type="checkbox" class="form-check"
-                                                                            name="assignments[{{ $location->id }}][]"
-                                                                            value="{{ $checklist->id }}" {{ $matchingInspection  ? 'checked' : '' }}
-                                                                            id="location_{{ $location->id }}_checklist_{{ $checklist->id }}">
-                                                                        <label
-                                                                            for="location_{{ $location->id }}_checklist_{{ $checklist->id }}" class="form-label"> &nbsp;{{ $checklist->name }}</label>
-                                                                    </div>
+                                                                        <div class="d-flex">
+                                                                            @php
+                                                                                // Check if there is a matching inspection record for the current location and checklist
+                                                                                $matchingInspection = $inspections->first(
+                                                                                    function ($inspection) use (
+                                                                                        $location,
+                                                                                        $checklist,
+                                                                                    ) {
+                                                                                        return $inspection->job_id ===
+                                                                                            $location->id &&
+                                                                                            $inspection->inspection_checklist_id ===
+                                                                                                $checklist->id;
+                                                                                    },
+                                                                                );
+                                                                            @endphp
+                                                                            <input type="checkbox" class="form-check"
+                                                                                name="assignments[{{ $location->id }}][]"
+                                                                                value="{{ $checklist->id }}"
+                                                                                {{ $matchingInspection ? 'checked' : '' }}
+                                                                                id="location_{{ $location->id }}_checklist_{{ $checklist->id }}">
+                                                                            <label
+                                                                                for="location_{{ $location->id }}_checklist_{{ $checklist->id }}"
+                                                                                class="form-label">
+                                                                                &nbsp;{{ $checklist->name }}</label>
+                                                                        </div>
                                                                     @endforeach
                                                                 </div>
                                                             @endforeach

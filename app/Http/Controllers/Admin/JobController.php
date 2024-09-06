@@ -370,7 +370,7 @@ class JobController extends Controller
         $endOfDay = $today->copy()->endOfDay()->format('Y-m-d\TH:i:s'); // Today's end time
         //Schedule Today
         $schedule_today = Job::whereBetween('start_date', [$startOfDay, $endOfDay])
-            ->whereBetween('end_date', [$startOfDay, $endOfDay])
+            ->orWhereBetween('end_date', [$startOfDay, $endOfDay])
             ->get();
 
         return view('admin.job.schedule_today', compact('schedule_today'));
@@ -384,7 +384,7 @@ class JobController extends Controller
 
         //Schedule Today
         $next_48_hours = Job::whereBetween('start_date', [$now->format('Y-m-d\TH:i:s'), $endOfNext48Hours->format('Y-m-d\TH:i:s')])
-            ->whereBetween('end_date', [$now->format('Y-m-d\TH:i:s'), $endOfNext48Hours->format('Y-m-d\TH:i:s')])
+            ->orWhereBetween('end_date', [$now->format('Y-m-d\TH:i:s'), $endOfNext48Hours->format('Y-m-d\TH:i:s')])
             ->get();
 
         return view('admin.job.next_48_hours', compact('next_48_hours'));

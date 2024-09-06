@@ -29,6 +29,10 @@
 
                         <div class="card">
                             <!-- /.card-header -->
+                            <div class="card-header">
+                                <a class="btn btn-success" href="{{ route('job.create') }}">
+                                    {{ __('admin/job/index.CreateJob') }} </a>
+                            </div>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>

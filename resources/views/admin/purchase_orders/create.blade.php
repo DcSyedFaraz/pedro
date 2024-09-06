@@ -368,7 +368,7 @@
                                                             <div class="inner-inner-inner">
                                                                 <h5>{{ __('admin/purchase_order/edit.tax_paid') }}</h5>
                                                                 <input value="{{ old('tax_paid' ?? '0.00') }}"
-                                                                    type="number" id="tax_paid" name="tax_paid"
+                                                                    type="text" id="tax_paid" name="tax_paid"
                                                                     class="total">
                                                             </div>
                                                             <div class="inner-inner-inner">
@@ -431,15 +431,16 @@
             let ship_cost = parseFloat($('#ship_cost').val()) || 0;
 
             let taxPaid = (subtotal - discount) * (taxRate / 100); // calculate tax paid amount
+            console.log(taxPaid);
 
-            let grand_total = subtotal - discount + tax_paid + ship_cost;
+            let grand_total = subtotal - discount + taxPaid + ship_cost;
 
             $('#subtotal').val(subtotal.toFixed(2));
             let news = parseInt(grand_total);
-            // console.log(typeof new); // Check the type of grand_total
 
             if (typeof news === 'number') {
                 $('#grand_total').val(news.toFixed(2));
+                console.log(news.toFixed(2)); // Check the type of grand_total
             } else {
                 console.error('grand_total is not a number:', grand_total);
             }
