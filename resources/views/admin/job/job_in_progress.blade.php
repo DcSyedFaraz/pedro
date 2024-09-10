@@ -45,22 +45,21 @@
                                         @if ($jobs_in_progress)
                                             @foreach ($jobs_in_progress as $jobs)
                                                 @php
-                                                    $phones = isset($jobs->phone) ? $jobs->phone : [];
-                                                    $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
-                                                    $exts = isset($jobs->ext) ? $jobs->ext : [];
-                                                    $emailAddresses = isset($jobs->email) ? $jobs->email : [];
-                                                    $phone = implode(',', $phones);
-                                                    $ext_id = implode(',', $ext_ids);
-                                                    $ext = implode(',', $exts);
-                                                    $emailList = implode(',', $emailAddresses);
+                                                    // $phones = isset($jobs->phone) ? $jobs->phone : [];
+                                                    // $ext_ids = isset($jobs->ext_id) ? $jobs->ext_id : [];
+                                                    // $exts = isset($jobs->ext) ? $jobs->ext : [];
+                                                    // $emailAddresses = isset($jobs->email) ? $jobs->email : [];
+                                                    // // $phone = implode(',', $phones);
+                                                    // // $ext_id = implode(',', $ext_ids);
+                                                    // // $ext = implode(',', $exts);
+                                                    // $emailList = implode(',', $emailAddresses);
                                                 @endphp
                                                 <tr>
                                                     <td>{{ isset($jobs->customer->name) ? $jobs->customer->name : '' }}</td>
-                                                    <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : '' }}
+                                                    <td>{{ isset($jobs->job_category->name) ? $jobs->job_category->name : 'N/A' }}
                                                     </td>
                                                     <td>Primary Contact: <span
                                                             style="font-weight: bold;">{{ $jobs->first_name . '-' . $jobs->last_name }}</span>
-                                                        </br>Email: <strong>{{ $emailList }}</strong>
                                                         </br> Start Date: <strong>{{ $jobs->start_date }} End Date
                                                             {{ $jobs->end_date }}</strong>
                                                         </br> Start Time: <strong>{{ $jobs->start_time }} End Time:

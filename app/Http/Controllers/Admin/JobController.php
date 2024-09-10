@@ -75,9 +75,9 @@ class JobController extends Controller
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
-        $job_source = job_source_category::get();
+        // $job_source = job_source_category::get();
 
-        return view('admin.job.create', compact('customer', 'jobCategories', 'job_prioirty', 'job_source', 'agent'));
+        return view('admin.job.create', compact('customer', 'jobCategories', 'job_prioirty', 'agent'));
     }
 
     public function store(Request $request)
@@ -119,7 +119,7 @@ class JobController extends Controller
             $job->job_sub_description = $request->job_sub_description;
             $job->job_description = $request->job_description;
             $job->po_no = $request->po_no;
-            $job->job_source = $request->job_source;
+            // $job->job_source = $request->job_source;
             $job->job_priority = $request->job_priority;
             $job->agent = $request->agent;
             // Job customer Fields
@@ -217,9 +217,9 @@ class JobController extends Controller
         $agent = User::withRole('agent')->get();
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
-        $job_source = job_source_category::get();
+        // $job_source = job_source_category::get();
         // dd($job->jobPri);
-        return view('admin.job.edit', compact('job', 'customer', 'jobCategories', 'job_prioirty', 'job_source', 'agent', ));
+        return view('admin.job.edit', compact('job', 'customer', 'jobCategories', 'job_prioirty',  'agent', ));
     }
 
     public function update(Request $request, $id)
@@ -244,7 +244,7 @@ class JobController extends Controller
         $job->job_sub_description = $request->job_sub_description;
         $job->job_description = $request->job_description;
         $job->po_no = $request->po_no;
-        $job->job_source = $request->job_source;
+        // $job->job_source = $request->job_source;
         $job->job_priority = $request->job_priority;
         $job->agent = $request->agent;
         // Job customer Fields

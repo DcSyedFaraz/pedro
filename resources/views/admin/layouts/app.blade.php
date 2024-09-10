@@ -787,14 +787,14 @@
                                         </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('job-source.index') }}"
                                         class="nav-link {{ request()->routeIs('job-source.*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ __('admin/layout/app.job_source') }}
                                         </p>
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
 
