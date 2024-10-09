@@ -61,6 +61,10 @@ use App\Http\Controllers\users\userJobController;
 use App\Http\Controllers\vendor\DashboardController as vendorDashboardController;
 use App\Http\Controllers\vendor\VendorController;
 
+
+// frontend
+use App\Http\Controllers\FrontendController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -328,3 +332,8 @@ Route::group(['middleware' => ['language']], function () {
     });
 });
 
+Route::controller(FrontendController::class)->group(function () {
+
+    Route::get('/', 'index')->name('home');
+    Route::get('/about-us', 'about_us')->name('about_us');
+});
