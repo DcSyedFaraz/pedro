@@ -337,4 +337,7 @@ Route::controller(FrontendController::class)->group(function () {
 
     Route::get('/', 'index')->name('home');
     Route::get('/about-us', 'about_us')->name('about_us');
+    Route::get('/service', 'service')->name('service');
+    Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/contact-us', 'contactus')->name('contactus');
 });
