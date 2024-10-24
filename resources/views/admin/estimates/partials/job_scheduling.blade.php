@@ -199,7 +199,7 @@
 </div>
 <hr />
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/estimates/edit.technician_assigned') }}</strong>
     </div>
@@ -221,7 +221,7 @@
         </div>
     </div>
 </div>
-<hr />
+<hr /> --}}
 <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/estimates/edit.technician_instructions') }}</strong>

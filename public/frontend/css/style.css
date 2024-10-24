@@ -107,7 +107,7 @@ header span{
 }
 .sec-1 .content{
     border-bottom: 2px solid #fff;
-    border-left: 2px solid #fff; 
+    border-left: 2px solid #fff;
     padding-left: 40px;
     padding-bottom: 40px;
 }
@@ -385,7 +385,7 @@ header span{
     width: 220px;
     background-color: #ffffff;
     margin: 0px auto;
-    
+
 }
 /*----section-7-----*/
 .sec-7 {
@@ -536,16 +536,16 @@ footer h3{
     align-items: center;
 }
 .image-box img {
-        position: relative; 
+        position: relative;
         overflow: hidden;
-        width: 300px; 
+        width: 300px;
   }
-  
+
   .image-box img {
     width: 100%;
     transition: transform 0.3s ease;
   }
-  
+
   .image-boc .content-box {
     position: absolute;
     bottom: 0;
@@ -555,13 +555,13 @@ footer h3{
     color: white;
     text-align: center;
     padding: 10px;
-    opacity: 0; 
-    transition: opacity 0.3s ease; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
   .image-box:hover img {
     transform: translateY(-250px);
   }
-  
+
    .sec-8 p{
     font-size: 16px;
    }
@@ -574,29 +574,29 @@ footer h3{
     cursor: pointer;
     outline: 0;
   }
-  
+
   .section-padding {
     padding-top: 80px;
   }
-  
+
   .gallery-section {
     position: relative;
     z-index: 1;
   }
-  
+
   .title {
     font-size: 46px;
     font-weight: 700;
     font-family: "Playfair Display", serif;
     color: #f44336;
-  } 
-  
+  }
+
   .filter {
     text-align: center;
     max-width: 1050px;
     margin: auto;
   }
-  
+
   .btn-2 {
     display: inline-block;
     color: #000;
@@ -604,13 +604,13 @@ footer h3{
     font-size: 16px;
     font-weight: 500;
     padding: 10px;
-    
+
   }
   .btn-2:hover,.btn-2-active {
     border-bottom: 2px solid #043669;
     color: #043669;
     transform: translateY(3px);
-    
+
   }
   .gallery {
     display: flex;
@@ -632,17 +632,17 @@ footer h3{
     overflow: hidden;
     margin: 10px 10px;
   }
-  
+
   .gallery img:hover {
     transform: scale(1.1);
   }
-  
+
   .sets .hide,
   .sets .pophide {
     width: 0%;
     opacity: 0;
   }
-  
+
   .closeBtn {
     position: absolute;
     font-size: 22px;
@@ -663,7 +663,7 @@ footer h3{
     color: black;
     outline: 2px solid #000;
   }
-  
+
   .openDiv {
     width: 100%;
     height: 100vh;
@@ -700,8 +700,8 @@ footer h3{
     background: #fff;
     color: black;
   }
-  
-  
+
+
   @media (max-width: 1199px) {
     .section-padding {
       padding-top: 70px;
@@ -729,17 +729,17 @@ footer h3{
       padding: 8px 25px;
     }
   }
-  
+
   @media (max-width: 540px) {
     .section-padding {
       padding-top: 30px;
     }
-    
+
     .gallery img {
       margin: 8px 6px;
       width: 155px;
     }
-  
+
     .closeBtn {
       font-size: 18px;
       border-radius: 15px;
@@ -751,13 +751,13 @@ footer h3{
       border-radius: 10px;
       margin: 5px;
     }
-  
+
     .imgPreview {
       width: 90%;
       max-height: 50vh;
       height: auto;
     }
-    
+
   }
 /*----10----*/
 .sec-10{
@@ -902,7 +902,7 @@ ul {
 }
 .form-container {
 
-  padding: 20px;  
+  padding: 20px;
 }
 
 .form-row {
@@ -924,7 +924,7 @@ ul {
   font-size: 14px;
   border-radius: 30px;
   border: 1px solid white;
-  
+
 }
 .form-row-full {
   width: 100%;
@@ -939,7 +939,7 @@ ul {
   border-radius: 25px;
   border: 1px solid white;
   height: 50px;
-  
+
 }
 
 .toggle-password {
@@ -955,7 +955,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  
+
 }
 
 .extra-options label {
@@ -1019,7 +1019,7 @@ button {
 }
 .form-container {
 
-  padding: 20px;  
+  padding: 20px;
 }
 
 .form-row {
@@ -1041,7 +1041,7 @@ button {
   font-size: 14px;
   border-radius: 30px;
   border: 1px solid white;
-  
+
 }
 .form-row-full {
   width: 100%;
@@ -1056,7 +1056,7 @@ button {
   border-radius: 35px;
   border: 1px solid white;
   height: 55px;
-  
+
 }
 .login label{
   gap: 10px;
@@ -1074,7 +1074,7 @@ button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  
+
 }
 
 .extra-options label {
@@ -1099,7 +1099,7 @@ button {
   border-radius: 25px;
   margin: 0px auto;
   display: table;
-  
+
 }
 .login text a {
   text-decoration: none;

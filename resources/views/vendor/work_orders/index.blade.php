@@ -32,7 +32,7 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('vendor/manage_work_order/index.queue') }}</th>
+                                            {{-- <th>{{ __('vendor/manage_work_order/index.queue') }}</th> --}}
                                             <th>{{ __('vendor/manage_work_order/index.work_order') }}</th>
                                             <th>{{ __('vendor/manage_work_order/index.job_name') }}</th>
                                             <th>{{ __('admin/job/index.AssignedManager') }}</th>
@@ -49,9 +49,9 @@
                                         @if ($WorkOrders)
                                             @foreach ($WorkOrders as $key => $workOrder)
                                                 <tr data-id="{{ $workOrder->id }}">
-                                                    <td><a href="#"><i
+                                                    {{-- <td><a href="#"><i
                                                                 class="fas fa-arrows-alt cursor-pointer"></i></a>&nbsp;{{ $key + 1 }}
-                                                    </td>
+                                                    </td> --}}
                                                     <td> {{ $workOrder->id ?? '' }}</td>
                                                     <td>{{ $workOrder->jobname->name ?? '' }}</td>
                                                     <td>
@@ -177,7 +177,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
-    <script>
+    {{-- <script>
 
         $(document).ready(function() {
             $(function() {
@@ -221,5 +221,5 @@
                 });
             }
         });
-    </script>
+    </script> --}}
 @endsection

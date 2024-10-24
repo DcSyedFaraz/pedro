@@ -1,129 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pedro</title>
+@extends('frontend.layout.app')
+@section('content')
+    <!-- signin-->
+    <div class="signin">
+        <div class="form-container">
+            <div class="content">
+                <h2>SIGN UP TO ACCOUNT</h2>
+                <p>Enter Your Email & Password to Login</p>
+            </div>
+            <form method="post" action="{{ route('register') }}">
+                @csrf
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="First Name" required>
+                    <input type="text" name="email" value="{{ old('email') }}" required
+                        class="@error('email') is-invalid @enderror" placeholder="Enter Your Email">
+                </div>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <div class="form-row">
+                    {{-- <input type="text" name="firstName" placeholder="User Name" required> --}}
+                    <input type="text" name="phonenumber" placeholder="Phone Number" required>
+                </div>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('/admin/plugins/fontawesome-free/css/all.min.css')}}">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="{{asset('/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('/admin/dist/css/adminlte.min.css')}}">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="{{asset('/admin/plugins/toastr/toastr.min.css')}}">
-  <?php $roles = DB::table('roles')->get(); ?>
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <!-- <a href="/admin/index2.html" class="h1"><b>Admin</b>LTE</a> -->
-    </div>
-<div class="container">
-<div class="row">
-            
-          <div class="col-12">
-                <h1 class="login-box-msg">Register</h1>
-                <div class="card">
-                  <div class="card-header">
-                  <form method="post" action="{{ route('register') }}">
-                    @csrf
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Name:</strong>
-                                <input class="form-control" name="name" value="{{ old('name') }}" required>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Email:</strong>
-                                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Password:</strong>
-                                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" required>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Confirm Password:</strong>
-                                <input class="form-control" type="password" name="confirm-password" required>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Role:</strong>
-                                <select name="roles" class="form-control" required="required">
-                                    <option disabled selected valüe="">select role</option>
-                                    @foreach($roles as $role)
-                                    
-                                    <option value="{{$role->name}}">{{$role->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                  </form>
-                  </div>
-              </div> 
-          </div>   
+                {{-- <div class="form-row">
+                    <input type="text" name="city" placeholder="City" required>
+                    <input type="text" name="state" placeholder="State" required>
+                </div> --}}
+
+                <div class="form-row-full">
+                    <input type="password" id="password" name="password" required
+                        class="@error('password') is-invalid @enderror" placeholder="Password">
+                    <span class="toggle-password" onclick="togglePassword()">👁</span>
+                </div>
+                <div class="form-row-full">
+                    <input type="password" id="confirm_password" name="confirm-password"
+                         required
+                        class="@error('confirm-password') is-invalid @enderror" placeholder="confirm-password">
+                    <span class="toggle-password" onclick="toggleconPassword()">👁</span>
+                </div>
+                <div class="form-row-full">
+                    <select name="roles" class="form-select" required="required">
+                        <option disabled selected value="">select role</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="extra-options">
+                    <label>
+                        <input type="radio" name="rememberMe"> Remember Me
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button type="signup">Sign Up</button>
+                <div class="text">
+                    <p>Don't Have Account? <a href="login.html">Log In</a></p>
+                </div>
+            </form>
         </div>
-</div>
-<a href="{{route('login')}}" class="text-center">Sign in</a>
-<p class="mb-0">
-      </p>
-      <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
     </div>
-    <!-- /.card-body -->
-  </div>
-  <!-- /.card -->
-</div>
-<!-- /.login-box -->
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+            passwordField.setAttribute("type", type);
+        }
 
-<!-- jQuery -->
-<script src="{{asset('/admin/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('/admin/dist/js/adminlte.min.js')}}"></script>
-
-<!-- Toastr -->
-<script src="{{asset('/admin/plugins/toastr/toastr.min.js')}}"></script>
-<script>
-@if(session('success'))
-  toastr.success("{{session('success')}}");
-@endif
-@error('password')
-  toastr.error("{{$message}}")
-@enderror
-@if($errors->any())
-    @foreach ($errors->all() as $error)
-    toastr.error("{{$error}}")
-    @endforeach
-@endif
-</script>
-</body>
-</html>
+        function toggleconPassword() {
+            var passwordField = document.getElementById("confirm_password");
+            var type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+            passwordField.setAttribute("type", type);
+        }
+    </script>
+@endsection

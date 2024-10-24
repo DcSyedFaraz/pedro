@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' :  'manager.layouts.app' )
+@extends(Auth::user()->hasRole('Admin') ? 'admin.layouts.app' : 'manager.layouts.app')
 
 
 @section('content')
@@ -158,7 +158,8 @@
                                 </div>
                             </div>
                             <!--invoice Start -->
-                            <div class="card" id="BillContainer" style="{{ isset($job->billable) && $job->billable ? '' : 'display: none;' }}">
+                            <div class="card" id="BillContainer"
+                                style="{{ isset($job->billable) && $job->billable ? '' : 'display: none;' }}">
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -174,6 +175,8 @@
                                                         <div class="tab-content mt-3">
                                                             <div id="products-services" class="tab-pane fade show active">
                                                                 @include('admin.estimates.partials.invoice')
+                                                                {{-- <x-invoice-service-table :invoice="$invoice ?? null"
+                                                                    deleteRoute="productService.destroy" /> --}}
                                                             </div>
                                                         </div>
                                                         <br />

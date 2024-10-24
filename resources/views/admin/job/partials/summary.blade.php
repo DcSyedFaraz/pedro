@@ -344,7 +344,7 @@
         </div>
     </div>
 </div> --}}
-<hr />
+{{-- <hr />
 <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/job/edit.agent_rep') }}</strong>
@@ -362,7 +362,7 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 <div class="row">
     <div class="form-group">
         <label for="showBill">{{ __('admin/job/edit.billable') }}</label>

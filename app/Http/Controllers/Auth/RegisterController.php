@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -45,12 +46,12 @@ class RegisterController extends Controller
     public function register_form()
     {
 
-        $data['roles'] = \Spatie\Permission\Models\Role::select(['id','name'])
-        ->where(function($query){
-            $query->where('name','!=', 'Admin');
-            $query->where('name','!=', 'Super-Admin');
-        })->get();
-        return view('auth.register',$data);
+        $data['roles'] = Role::select(['id', 'name'])
+            ->where(function ($query) {
+                $query->where('name', '!=', 'Admin');
+                $query->where('name', '!=', 'account manager');
+            })->get();
+        return view('auth.register', $data);
     }
 
     /**
@@ -66,6 +67,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'same:confirm-password'],
             'roles' => 'required',
+            'phonenumber' => 'nullable',
         ]);
     }
 
@@ -80,6 +82,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phonenumber'] ?? null,
             'password' => Hash::make($data['password']),
         ]);
         $user->assignRole($data['roles']);

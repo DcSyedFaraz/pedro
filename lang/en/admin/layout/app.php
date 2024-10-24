@@ -21,7 +21,7 @@ return [
     'inventory' => 'Inventory',
     'job_list' => 'Job List',
     'location' => 'Location',
-    'inspection_sheet' => 'Inspection Sheet',
+    'inspection_sheet' => 'Inspection Sheet Create',
     'assign_checklist' => 'Assign Checklist',
     'today_schedule' => 'Today\'s Schedule',
     'within_48_hours' => 'Within 48 hours',

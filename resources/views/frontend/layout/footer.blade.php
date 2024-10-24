@@ -15,8 +15,8 @@
                     <li><a href="aboutus.html">About Us</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="gellery.html">Gallery</a></li>
-                    <li><a href="login.html">Log In</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="{{ route('login') }}">Log In</a></li>
+                    <li><a href="{{ route('signup') }}">Sign Up</a></li>
                 </ul>
             </div>
             <div class="col-12 col-sm-3 col-md-6 col-lg-3">

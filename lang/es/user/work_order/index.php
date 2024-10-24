@@ -10,7 +10,7 @@ return [
     'pending' => 'Pendiente',
     'accepted' => 'Aceptado',
     'declined' => 'Rechazado',
-    'waiting_for_vendor_to_accept' => 'Esperando a que el proveedor acepte',
+    'waiting_for_vendor_to_accept' => 'Esperando fecha de programación',
     'location_saved' => 'Ubicación guardada',
     'please_provide_a_job_location' => 'Por favor, proporcione una ubicación de trabajo',
     'assign_vendor' => 'Asignar proveedor',

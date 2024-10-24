@@ -40,14 +40,15 @@
     <div class="col-md-4">
         <div class="form-group">
             <input value="{{ isset($job->start_date) ? $job->start_date : '' }}" type="datetime-local"
-                class="form-control" name="start_date" placeholder="{{ __('admin/job/edit.start_date') }}" step="1">
+                class="form-control" name="start_date" placeholder="{{ __('admin/job/edit.start_date') }}"
+                step="1">
             <p class="start-date-error error-message error-messages" style="display: none;">Enter a valid start date</p>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
-            <input value="{{ isset($job->end_date) ? $job->end_date : '' }}" type="datetime-local"
-                class="form-control" name="end_date" placeholder="{{ __('admin/job/edit.end_date') }}">
+            <input value="{{ isset($job->end_date) ? $job->end_date : '' }}" type="datetime-local" class="form-control"
+                name="end_date" placeholder="{{ __('admin/job/edit.end_date') }}">
             <p class="end-date-error error-message error-messages" style="display: none;">Enter a valid start date</p>
         </div>
     </div>
@@ -78,7 +79,8 @@
     <div class="col-md-4">
         <div class="form-group">
             <input value="{{ isset($job->start_duration) ? old('start_duration', $job->start_duration) : '' }}"
-                type="number" class="form-control" name="start_duration" placeholder="{{ __('admin/job/edit.start_duration') }}">
+                type="number" class="form-control" name="start_duration"
+                placeholder="{{ __('admin/job/edit.start_duration') }}">
             <p class="start-duration-error error-message error-messages" style="display: none;">Enter a valid start
                 duration</p>
         </div>
@@ -106,12 +108,13 @@
                         value="{{ $job_por->id }}">{{ $job_por->name }}</option>
                 @endforeach
             </select>
-            <p class="job-priority-error error-message error-messages" style="display: none;">Select a {{ __('admin/job/edit.job_priority') }}</p>
+            <p class="job-priority-error error-message error-messages" style="display: none;">Select a
+                {{ __('admin/job/edit.job_priority') }}</p>
         </div>
     </div>
 </div>
 <hr />
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/job/edit.assign_techs') }}</strong>
     </div>
@@ -119,7 +122,8 @@
         <div class="form-group">
             <input value="{{ isset($job->assigned_tech) ? old('assigned_tech', $job->assigned_tech) : '' }}"
                 type="text" class="form-control" name="assigned_tech" placeholder="techs">
-            <p class="assigned-tech-error error-message error-messages" style="display: none;">Please enter the assigned
+            <p class="assigned-tech-error error-message error-messages" style="display: none;">Please enter the
+                assigned
                 tech(s)</p>
         </div>
     </div>
@@ -130,11 +134,12 @@
     <div class="col-md-6">
         <div class="form-group">
             <input {{ isset($job->notify_tech_assign) && $job->notify_tech_assign ? 'checked' : '' }} type="checkbox"
-                name="notify_tech_assign" placeholder="Location Name(e.g Home or Office)"> {{ __('admin/job/edit.notify_tech_assign') }}
+                name="notify_tech_assign" placeholder="Location Name(e.g Home or Office)">
+            {{ __('admin/job/edit.notify_tech_assign') }}
         </div>
     </div>
 </div>
-<hr />
+<hr /> --}}
 <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/job/edit.notes_for_techs') }}</strong>

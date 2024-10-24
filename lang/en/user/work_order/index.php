@@ -10,7 +10,7 @@ return [
     'pending' => 'Pending',
     'accepted' => 'Accepted',
     'declined' => 'Declined',
-    'waiting_for_vendor_to_accept' => 'Waiting for vendor to accept',
+    'waiting_for_vendor_to_accept' => 'Waiting for scheduling Date',
     'location_saved' => 'Location saved',
     'please_provide_a_job_location' => 'Please provide a job location',
     'assign_vendor' => 'Assign Vendor',

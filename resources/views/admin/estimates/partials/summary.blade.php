@@ -335,7 +335,7 @@
         </div>
     </div>
 </div> --}}
-<hr />
+{{-- <hr />
 <div class="row">
     <div class="col-md-4">
         <strong>{{ __('admin/estimates/edit.representative') }}</strong>
@@ -353,7 +353,7 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 @section('scripts')
     <script>
         $(document).ready(function() {

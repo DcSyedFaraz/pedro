@@ -29,7 +29,7 @@
 
                 <button>Log In</button>
                 <div class="text">
-                    <p>Don't Have Account? <a href="signup.html">Create Account</a> </p>
+                    <p>Don't Have Account? <a href="{{ route('signup') }}">Create Account</a> </p>
                 </div>
             </form>
         </div>
