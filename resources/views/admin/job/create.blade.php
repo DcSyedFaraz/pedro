@@ -174,9 +174,8 @@
                                                         </ul>
                                                         <div class="tab-content mt-3">
                                                             <div id="products-services" class="tab-pane fade show active">
-                                                                @include('admin.estimates.partials.invoice')
-                                                                {{-- <x-invoice-service-table :invoice="$invoice ?? null"
-                                                                    deleteRoute="productService.destroy" /> --}}
+                                                                {{-- @include('admin.estimates.partials.invoice') --}}
+                                                                <x-invoice-service-table :route="'#'" />
                                                             </div>
                                                         </div>
                                                         <br />

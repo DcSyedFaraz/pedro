@@ -106,7 +106,7 @@ $('#add-primary').click(function () {
         '</div>' +
         '</div>' +
 
-        '</div>'+
+        '</div>' +
         '<div class="row" id="new-email">' +
         '<div class="col-md-4">&nbsp;</div>' +
         '<div class="col-md-6">' +
@@ -120,7 +120,7 @@ $('#add-primary').click(function () {
         '</div>' +
         '</div>' +
         '</div>'
-        );
+    );
 
     $('.primary_append').append(newPrimaryInput);
 });
@@ -614,45 +614,50 @@ $(document).ready(function () {
 
 
     var EsttotalJobAmount = 0;
-
+    var EstCost = 0;
 
     function EstcalculateRowTotals(row) {
         var est_rate = parseFloat(row.find(".est_inv_rate").val()) || 0;
         var est_qty = parseFloat(row.find(".est_inv_qty").val()) || 0;
         var est_cost = parseFloat(row.find(".est_inv_cost").val()) || 0;
-        var est_tax = parseFloat(row.find(".est_inv_tax").val()) || 0;
-
+        // Removed tax calculation
+        // var est_tax = parseFloat(row.find(".est_inv_tax").val()) || 0;
 
         var est_total = est_rate * est_qty;
-        var subtotal = est_total + est_cost;
 
-        // Calculate tax as a percentage of the subtotal
-        var taxAmount = subtotal * (est_tax / 100);
+        // Calculate margin as a percentage of cost
+        var profit = est_total - est_cost;
+        var marginPercentage = (est_cost === 0) ? 0 : ((profit / est_total) * 100);
 
-        var estTotal = subtotal + taxAmount;
-        row.find(".est_inv_total").val(estTotal.toFixed(2));
-        return estTotal;
+        // Update the margin field instead of tax
+        row.find(".est_inv_tax").text(marginPercentage.toFixed(2) + "%"); // Displaying margin percentage
+
+        // Update the total field
+        row.find(".est_inv_total").val(est_total.toFixed(2));
+
+        return est_total;
     }
 
-    //Update update Total Job Amount
+    // Update Total Job Amount
     function EstupdateTotalJobAmount() {
         EsttotalJobAmount = 0;
         EstCost = 0;
+
         $(".est_inv_total").each(function () {
-            EsttotalJobAmount += parseFloat($(this).val());
+            EsttotalJobAmount += parseFloat($(this).val()) || 0;
         });
+
         $(".est_inv_cost").each(function () {
-            EstCost += parseFloat($(this).val());
+            EstCost += parseFloat($(this).val()) || 0;
         });
+
         $("#est-product-and-service-taxes-and-fees").text("$" + EsttotalJobAmount.toFixed(2));
         EstcalculateAndDisplayGrossProfit();
     }
 
     function EstcalculateAndDisplayGrossProfit() {
-
-        var EsttotalAmount = EsttotalJobAmount; // Assuming you have an input field for total job amount
-        // var EstCost = EsttotalJobAmount; // Assuming you have an input field for total cost
-        var EstgrossProfit = EsttotalAmount - EstCost;
+        var EsttotalAmount = EsttotalJobAmount; // Total Job Amount
+        var EstgrossProfit = EsttotalAmount - EstCost; // Gross Profit
         var EstgrossProfitPercentage = (EsttotalJobAmount === 0) ? 0 : ((EstgrossProfit / EsttotalJobAmount) * 100);
 
         // Ensure the grossProfitPercentage doesn't exceed 100%
@@ -666,47 +671,62 @@ $(document).ready(function () {
         $("#est-gross-profit-percentage").text("(" + EstgrossProfitPercentage.toFixed(2) + "%)");
     }
 
+    // Event listener for input changes to quantity, rate, cost, and margin
     $(document).on("input", ".est_inv_qty, .est_inv_rate, .est_inv_cost, .est_inv_tax", function () {
         var row = $(this).closest("tr");
-        var EstTotal = EstcalculateRowTotals(row);
+        EstcalculateRowTotals(row);
         EstupdateTotalJobAmount();
     });
 
-    // Listen for input changes on drive and labor time fields
-    $("#est_drive_time, #est_labor_time, #est_amount, #est_payments_and_deposits_input").on("input", function () {
-        EstupdateTotalDriveAndLaborTime();
-    });
-
-    // Only update the corresponding inv_total and total-job-amount on inv_total change
+    // Event listener for changes in the total field
     $(document).on("input", ".est_inv_total", function () {
         var row = $(this).closest("tr");
         EstcalculateRowTotals(row);
         EstupdateTotalJobAmount();
     });
 
+    // Event listener for adding a new row
     $("#est_multiples_primary").click(function () {
-
         var newRow = `
-            <tr>
-                <td colspan="2"><input type="text" class="form-control est_inv_desc" name="description" placeholder="Description"></td>
-                <td><input type="number" class="form-control est_inv_qty" name="qty_hrs" placeholder="Qty"></td>
-                <td><input type="number" class="form-control est_inv_rate" name="rate" placeholder="Rate"></td>
-                <td><input type="number" class="form-control est_inv_tax" name="margin_tax" placeholder="Tax"></td>
-                <td><input type="text" class="form-control est_inv_total" name="total" placeholder="Total" readonly></td>
-                <td><input type="number" class="form-control est_inv_cost" name="cost1" placeholder="Cost"></td>
-                <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
-            </tr>`;
+        <tr>
+            <td colspan="2">
+                <input type="text" class="form-control est_inv_desc" name="description[]" placeholder="Description">
+            </td>
+            <td>
+                <input type="number" class="form-control est_inv_qty" name="qty_hrs[]" placeholder="Qty">
+            </td>
+            <td>
+                <input type="number" class="form-control est_inv_rate" name="rate[]" placeholder="Rate">
+            </td>
+            <td>
+            <span class="est_inv_tax"></span>
+            </td>
+            <td>
+                <input type="text" class="form-control est_inv_total" name="total[]" placeholder="Total" readonly>
+            </td>
+            <td>
+                <input type="number" class="form-control est_inv_cost" name="cost[]" placeholder="Cost">
+            </td>
+            <td>
+                <button type="button" class="btn remove-row">
+                    <i class="fas fa-minus text-danger"></i>
+                </button>
+            </td>
+        </tr>`;
+
         $("#est-invoice-rows").append(newRow);
 
+        // Initialize calculations for the new row
         EstcalculateRowTotals($("#est-invoice-rows tr:last"));
         EstupdateTotalJobAmount();
     });
 
+    // Event listener for removing a row
     $("#est-invoice-rows").on("click", ".remove-row", function () {
         $(this).closest("tr").remove();
         EstupdateTotalJobAmount();
-
     });
+
 
     // Faraz
     // Multiple Primary Section
@@ -715,7 +735,7 @@ $(document).ready(function () {
 
         // Remove the template's ID to avoid duplicates
         newDiv.removeAttr("id");
-        newDiv.removeClass("d-none","exclude-from-submission");
+        newDiv.removeClass("d-none", "exclude-from-submission");
         newDiv.find('input[type="text"]').val('');
         // Append the cloned div to the container
         $("#some").append(newDiv);
@@ -824,7 +844,7 @@ $(document).ready(function () {
         $('#new-ser').remove();
     });
 
-    $('#add-checklist-item').click(function() {
+    $('#add-checklist-item').click(function () {
         var newChecklistItem = $(
             '<div class="my-2 new-checklist-item">' +
 
@@ -841,7 +861,7 @@ $(document).ready(function () {
         $('#checklist-items').append(newChecklistItem);
     });
 
-    $(document).on('click', '.remove-checklist-item', function() {
+    $(document).on('click', '.remove-checklist-item', function () {
         $(this).closest('.new-checklist-item').remove();
     });
 

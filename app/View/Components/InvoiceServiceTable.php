@@ -11,15 +11,29 @@ class InvoiceServiceTable extends Component
      *
      * @return void
      */
-    public $invoice;
-    public $deleteRoute;
-    public $addRoute;
+    public $route;
+    public $rows;
 
-    public function __construct($invoice, $deleteRoute, $addRoute = null)
+    /**
+     * Create a new component instance.
+     *
+     * @param string $route
+     * @param array|null $rows
+     * @return void
+     */
+    public function __construct($route, $rows = null)
     {
-        $this->invoice = $invoice;
-        $this->deleteRoute = $deleteRoute;
-        $this->addRoute = $addRoute;
+        $this->route = $route;
+        $this->rows = $rows ?? [
+            [
+                'description' => '',
+                'qty_hrs' => '',
+                'rate' => '',
+                'margin_tax' => '',
+                'total' => '',
+                'cost' => '',
+            ],
+        ];
     }
     /**
      * Get the view / contents that represent the component.

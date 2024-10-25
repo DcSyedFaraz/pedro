@@ -99,7 +99,7 @@ class JobController extends Controller
         // $formattedPhoneNumber = $phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
         // dd($formattedPhoneNumber);
 
-
+        // dd($request->all());
         try {
             $job = new Job();
             $job->name = $request->name;
@@ -219,7 +219,7 @@ class JobController extends Controller
         $job_prioirty = job_priority_category::get();
         // $job_source = job_source_category::get();
         // dd($job->jobPri);
-        return view('admin.job.edit', compact('job', 'customer', 'jobCategories', 'job_prioirty',  'agent', ));
+        return view('admin.job.edit', compact('job', 'customer', 'jobCategories', 'job_prioirty', 'agent', ));
     }
 
     public function update(Request $request, $id)
