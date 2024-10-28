@@ -76,12 +76,6 @@ class EstimateController extends Controller
             'customer_id' => 'required|integer',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|array',
-            'phone.*' => 'required|string|max:255', // Ensure each phone entry is a string
-            'ext' => 'required|array',
-            'ext.*' => 'required|string|max:255', // Ensure each ext entry is a string
-            'email' => 'required|array',
-            'email.*' => 'required|email|max:255', // Ensure each email entry is a valid email
             'location_name' => 'required|string|max:255',
             'location_gated_property' => 'nullable|string', // Assuming 'on' is a valid value
             'location_address' => 'required|string|max:255',
@@ -93,29 +87,33 @@ class EstimateController extends Controller
             'job_sub_description' => 'nullable|string',
             'job_description' => 'required|string|max:255',
             'po_no' => 'required|string|max:255',
-            'job_source' => 'required|string|nullable',
+            'job_source' => 'nullable|string|nullable',
             'agent' => 'nullable|string',
             'requested_on' => 'required|date',
             'referral_source' => 'required|integer',
             'tags' => 'required|string|max:255',
-            'opportunity_owner' => 'required|string|max:255',
+            'opportunity_owner' => 'nullable|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'arrival_start' => 'required|string|max:255',
             'arrival_end' => 'required|string|max:255',
             'start_duration' => 'required|integer',
             'end_duration' => 'required|integer|gte:start_duration',
-            'assigned_tech' => 'required|string|max:255',
+            'assigned_tech' => 'nullable|string|max:255',
             'notify_tech_assign' => 'nullable|string', // Assuming 'on' is a valid value
             'notes_for_tech' => 'nullable|string|max:255',
             'completion_notes' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'qty_hrs' => 'required|integer',
-            'rate' => 'required|numeric',
-            'total' => 'required|numeric',
-            'cost' => 'required|numeric',
-            'margin_tax' => 'required|numeric',
             'note_to_cust' => 'required|string|max:255',
+            'description' => 'required|array',
+            'description.*' => 'required|string',
+            'qty_hrs' => 'required|array',
+            'qty_hrs.*' => 'required|integer',
+            'rate' => 'required|array',
+            'rate.*' => 'required|numeric',
+            'total' => 'required|array',
+            'total.*' => 'required|numeric',
+            'cost' => 'required|array',
+            'cost.*' => 'required|numeric',
         ]);
         try {
             DB::beginTransaction();
@@ -141,6 +139,7 @@ class EstimateController extends Controller
             // Job customer Fields
             $job->customer_homeowner = $request->customer_homeowner;
             $job->customer_unit_cordination = $request->customer_unit_cordination;
+            $job->note_to_cust = $request->note_to_cust;
             //Job Picture
 
 
@@ -187,15 +186,31 @@ class EstimateController extends Controller
             $job->save();
 
 
-            foreach ($request['phone'] as $key => $value) {
-                EstimatePrimaryContact::create([
-                    'estimate_id' => $job->id,
-                    'phone' => $value,
-                    'ext' => $request['ext'][$key],
-                    'email' => $request['email'][$key],
+            // foreach ($request['phone'] as $key => $value) {
+            //     EstimatePrimaryContact::create([
+            //         'estimate_id' => $job->id,
+            //         'phone' => $value,
+            //         'ext' => $request['ext'][$key],
+            //         'email' => $request['email'][$key],
 
-                ]);
+            //     ]);
+            // }
+            $items = [];
+            foreach ($request['description'] as $index => $description) {
+                $items[] = [
+                    'description' => $description,
+                    'qty_hrs' => $request['qty_hrs'][$index],
+                    'rate' => $request['rate'][$index],
+                    'total' => $request['total'][$index],
+                    'cost' => $request['cost'][$index],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
             }
+
+            // Insert Invoice Items
+            $job->invoice()->createMany($items);
+
             $user = User::find($job->customer_id);
             $admin = auth()->user();
             $message = "created your Estimate# {$job->id}";
@@ -209,7 +224,7 @@ class EstimateController extends Controller
             return redirect()->route('estimates.index')->with('success', 'Estimate Created Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            // throw $e;
+            throw $e;
             return redirect()->back()->with('error', __('admin/estimates/index.flash_error_convert'));
         }
     }
@@ -322,15 +337,32 @@ class EstimateController extends Controller
             }
         }
 
-        foreach ($request['phone'] as $key => $value) {
-            EstimatePrimaryContact::create([
-                'estimate_id' => $job->id,
-                'phone' => $value,
-                'ext' => $request['ext'][$key],
-                'email' => $request['email'][$key],
+        // foreach ($request['phone'] as $key => $value) {
+        //     EstimatePrimaryContact::create([
+        //         'estimate_id' => $job->id,
+        //         'phone' => $value,
+        //         'ext' => $request['ext'][$key],
+        //         'email' => $request['email'][$key],
 
-            ]);
+        //     ]);
+        // }
+        $job->invoice()->delete();
+        $items = [];
+        foreach ($request['description'] as $index => $description) {
+            $items[] = [
+                'description' => $description,
+                'qty_hrs' => $request['qty_hrs'][$index],
+                'rate' => $request['rate'][$index],
+                'total' => $request['total'][$index],
+                'cost' => $request['cost'][$index],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
+
+        // Insert Invoice Items
+        $job->invoice()->createMany($items);
+
         $user = User::find($job->customer_id);
         $admin = auth()->user();
         $message = "updated your Estimate# {$job->id}";

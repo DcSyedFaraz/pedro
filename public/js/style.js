@@ -727,7 +727,15 @@ $(document).ready(function () {
         EstupdateTotalJobAmount();
     });
 
+    $(document).ready(function () {
+        // Iterate through each existing row and calculate totals
+        $("#est-invoice-rows tr").each(function () {
+            EstcalculateRowTotals($(this));
+        });
 
+        // Update the total job amount after calculating row totals
+        EstupdateTotalJobAmount();
+    });
     // Faraz
     // Multiple Primary Section
     $('#add-pri').click(function () {

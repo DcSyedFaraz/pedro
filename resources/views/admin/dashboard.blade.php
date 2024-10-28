@@ -61,7 +61,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                {{-- <h3>{{ $inventory }}</h3> --}}
+                                <h3>0</h3>
 
                                 <p>Inventory</p>
                             </div>
@@ -76,7 +76,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{ $invoice }}</h3>
+                                <h3>0</h3>
 
                                 <p>Average Revenue(Paid)</p>
                             </div>

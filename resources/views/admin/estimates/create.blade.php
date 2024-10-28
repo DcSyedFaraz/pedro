@@ -174,14 +174,15 @@
                                                         </ul>
                                                         <div class="tab-content mt-3">
                                                             <div id="products-services" class="tab-pane fade show active">
-                                                                @include('admin.estimates.partials.invoice')
+                                                                <x-invoice-service-table :route="'#'" />
+                                                                {{-- @include('admin.estimates.partials.invoice') --}}
                                                             </div>
                                                         </div>
                                                         <br />
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label for="note-to-customer">Note To Customer</label>
-                                                                <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4"></textarea>
+                                                                <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4">{{ isset($estimate->note_to_cust) ? old('note_to_cust', $estimate->note_to_cust) : '' }}</textarea>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="row mt-3 invoice">

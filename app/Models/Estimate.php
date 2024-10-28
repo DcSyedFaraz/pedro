@@ -15,30 +15,34 @@ class Estimate extends Model
         'ext_id' => 'array',
         'ext' => 'array',
         'email' => 'array',
+        'job_sub_cat_id' => 'boolean',
     ];
-
+    public function invoice()
+    {
+        return $this->hasMany(EstimateInvoice::class);
+    }
     public function customer()
     {
-        return $this->hasOne(User::class,'id','customer_id');
+        return $this->hasOne(User::class, 'id', 'customer_id');
     }
     public function jobs()
     {
-        return $this->hasOne(Job::class,'estimate_id');
+        return $this->hasOne(Job::class, 'estimate_id');
     }
 
     public function job_category()
     {
-        return $this->hasOne(job_Category::class,'id','job_cat_id');
+        return $this->hasOne(job_Category::class, 'id', 'job_cat_id');
     }
 
     public function job_prioirty()
     {
-        return $this->hasOne(job_priority_category::class,'id','job_priority');
+        return $this->hasOne(job_priority_category::class, 'id', 'job_priority');
     }
 
     public function job_source()
     {
-        return $this->hasOne(job_source_category::class,'id','job_source');
+        return $this->hasOne(job_source_category::class, 'id', 'job_source');
     }
 
     public function prim_cont()

@@ -60,6 +60,7 @@ return new class extends Migration
             $table->string('notes_for_tech')->nullable();
             $table->string('completion_notes')->nullable();
             $table->string('scheduled_at')->nullable();
+            $table->string('note_to_cust')->nullable();
             $table->timestamp('signature_time')->nullable();
 
             $table->timestamps();

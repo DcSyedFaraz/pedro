@@ -16,7 +16,10 @@ class Job extends Model
         'ext' => 'array',
         'email' => 'array',
     ];
-
+    public function invoice()
+    {
+        return $this->hasMany(JobInvoice::class);
+    }
     public function customer()
     {
         return $this->hasOne(User::class, 'id', 'customer_id');

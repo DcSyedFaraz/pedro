@@ -203,7 +203,7 @@
                                                                     <div class="col-md-6">
                                                                         <label for="note-to-customer">Note To
                                                                             Customer</label>
-                                                                        <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4"></textarea>
+                                                                        <textarea id="note-to-customer" name="note_to_cust" class="form-control" rows="4">{{ isset($job->note_to_cust) ? old('note_to_cust', $job->note_to_cust) : '' }}</textarea>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="row mt-3 invoice">
