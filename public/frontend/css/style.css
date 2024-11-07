@@ -7,7 +7,7 @@ body{
     font-family: "montserrat";
 }
 .btn{
-    border: 1px solid #043669;
+    border: 1px solid #000;
     border-radius: 1px;
     height: 50px;
     width: 150px;
@@ -17,7 +17,7 @@ body{
 }
 .btn a{
     text-align: center;
-    color: #043669;
+    color: #000;
     text-decoration: none;
 }
 h1,h2,h3,h4,h5,h6,p,a,li{
@@ -63,7 +63,7 @@ ul.navbar-nav.sm-icons {
     float: right;
 }
 header {
-    background-color: #043669;
+    background-color: #000;
 }
 a.nav-link {
     display: flex;
@@ -87,7 +87,7 @@ header i.fa.fa-phone {
     font-size: 16px;
     /* font-weight: 200; */
     background: white;
-    color: #043669;
+    color: #000;
 }
 header span{
     font-size: 14px;
@@ -131,7 +131,7 @@ header span{
     background-color: #ffffff;
 }
 .sec-1 .btn a{
-    color: #043669;
+    color: #000;
     text-decoration: none;
 }
 .sec-1 .btn:hover{
@@ -188,7 +188,7 @@ header span{
     padding: 100px 0px;
 }
 .sec-3 h4{
-    color: #043669;
+    color: #000;
     font-size: 20px;
     font-weight: 500;
 }
@@ -213,12 +213,12 @@ header span{
     font-size: 20px;
     font-weight: 500;
     padding: 11px 18px;
-    border: 4px solid #043669;
+    border: 4px solid #000;
     border-radius: 60px;
     height: 60px;
     width: 60px;
     margin-bottom: 20px;
-    color: #043669;
+    color: #000;
     text-align: center;
 }
 .pro-info {
@@ -227,7 +227,7 @@ header span{
     gap: 20px;
 }
 .sec-3 .btn:hover{
-    background-color: #043669;
+    background-color: #000;
 }
 .sec-3 .btn:hover a{
     color: #ffffff;
@@ -236,7 +236,7 @@ header span{
 .sec-4{
     padding-top: 50px;
     padding-bottom: 50px;
-    background-color: #043669;
+    background-color: #000;
 }
 .sec-4 h3{
     font-size: 20px;
@@ -266,11 +266,11 @@ header span{
     background-color: #ffffff;
 }
 .sec-4 .btn a{
-    color: #043669;
+    color: #000;
     text-decoration: none;
 }
 .sec-4 .btn:hover{
-    background-color: #043669;
+    background-color: #000;
 }
 .sec-4 .btn:hover a{
     color: #ffffff;
@@ -327,7 +327,7 @@ header span{
 }
 .testi-main .owl-nav span {
     border-radius: 50px;
-    border: 1px solid #043669;
+    border: 1px solid #000;
     width: 52px;
     display: block;
     height: 55px;
@@ -341,7 +341,7 @@ header span{
 .sec-6{
     padding-top: 50px;
     padding-bottom: 50px;
-    background-color: #043669;
+    background-color: #f7a000;
 }
 .sec-6 h2{
     text-align: center;
@@ -372,7 +372,7 @@ header span{
     color: #ffffff;
 }
 .sec-6 .btn:hover{
-    background-color: #043669;
+    background-color: #000;
 }
 .sec-6 .btn:hover a{
     color: #ffffff;
@@ -502,7 +502,7 @@ footer h3{
     margin-top: 2px;
     text-align: center;
     height: 400px;
-    background-color: #043669;
+    background-color: #f7a000;
     color: white;
     display: flex;
     align-items: center;
@@ -607,8 +607,8 @@ footer h3{
 
   }
   .btn-2:hover,.btn-2-active {
-    border-bottom: 2px solid #043669;
-    color: #043669;
+    border-bottom: 2px solid #000;
+    color: #000;
     transform: translateY(3px);
 
   }
@@ -841,7 +841,7 @@ ul {
 
 .my-form *:disabled {
   cursor: default;
-  background-color: #043669;
+  background-color: #000;
 }
 
 .my-form .required-msg {
@@ -850,7 +850,7 @@ ul {
 }
 .box{
   margin-top: 50px;
-  border: 2px solid #043669;
+  border: 2px solid #000;
   border-radius: 1px;
   height: 150px;
 }
@@ -881,7 +881,7 @@ ul {
 .signin {
   padding-top: 50px;
   padding-bottom: 50px;
-  background-color: #033a71;
+  background-color: #1e1e1e;
   height: 100%;
   margin: 0;
   display: flex;
@@ -968,18 +968,52 @@ ul {
   text-decoration: none;
   color: white;
 }
+.login button {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f7a000 !important;
+    color: #000000 !important;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #f7a000 !important;
+    border-radius: 25px;
+    margin: 0px auto;
+    display: table;
+}
+.signin button {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f7a000 !important;
+    color: #000000 !important;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #f7a000 !important;
+    border-radius: 25px;
+    margin: 0px auto;
+    display: table;
+}
 button {
-  width: 50%;
-  height: 55px;
-  padding: 10px;
-  font-size: 16px;
-  background-color: white;
-  color: #3670EE;
-  cursor: pointer;
-  border: 1px solid white;
-  border-radius: 25px;
-  margin: 0px auto;
-  display: table;
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f7a000;
+    color: #000000;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #f7a000;
+    border-radius: 25px;
+    margin: 0px auto;
+    display: table;
+}
+.signin .form-container select.form-select {
+    padding: 11px 20px;
+    border-radius: 25rem;
+
 }
 .signin label{
   gap: 10px;
@@ -998,7 +1032,7 @@ button {
 .login {
   padding-top: 50px;
   padding-bottom: 50px;
-  background-color: #033a71;
+  background-color: #1e1e1e;
   height: 100%;
   margin: 0;
   display: flex;

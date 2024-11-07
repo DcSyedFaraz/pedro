@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-md-2 col-6">
                     <a class="navbar-brand" href="/"><img width="100px"
-                            src="frontend/images/tom-logo-e1724166815700.png"></a>
+                            src="{{ asset('frontend/images/facilit8_logo.png') }}"></a>
                 </div>
 
                 <div class="col-md-7 mob">
