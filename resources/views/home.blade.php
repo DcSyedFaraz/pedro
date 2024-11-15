@@ -7,12 +7,13 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="content">
-                            <h1>Tom McNally - Best Painting Contractor In USA</h1>
-                            <p>For homes, warehouses, and offices needing on-time, on-spec, and on-budget painting by
-                                safety-certified painting professionals, Tom McNally Painting is your trusted choice.
+                            <h1>Pedro Grillo - Your Facility Managed Smarter</h1>
+                            <p>Manage your entire facility business with effortless control, all under one roof. Get your
+                                operations streamlined, your tasks simplified, and your efficiency enhanced with our
+                                all-in-one management software solution.
                             </p>
                             <div class="btn">
-                                <a href="#">Discover Now</a>
+                                <a href="#">Get in Touch</a>
                             </div>
                         </div>
                     </div>
@@ -25,27 +26,27 @@
                 <div class="row">
                     <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                         <div class="img-1">
-                            <img src="frontend/images/Group-6-1.png">
+                            <img src="{{ asset('frontend/images/sdhsghrfghfg.png') }}">
                         </div>
-                        <h4>Quality Materials</h4>
-                        <p>We use top-grade paints and materials from Sherwin Williams for a long-lasting and
-                            professional appearance.</p>
+                        <h4>On-Site Facility Assessments</h4>
+                        <p>We provide on-time evaluations to assess maintenance needs, plan upgrades, or troubleshoot
+                            issues, offering clients personalized solutions.</p>
                     </div>
                     <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                         <div class="img-1">
-                            <img src="frontend/images/Group-7-3.png">
+                            <img src="{{ asset('frontend/images/sdfggfhd.png') }}">
                         </div>
-                        <h4>Garage Cleanouts</h4>
-                        <p>Our experienced painters bring precision and skill to every job for a high-quality finish
-                            that enhances your property.</p>
+                        <h4>Training and Consultation</h4>
+                        <p>Our training sessions or consulting services help clients improve their facility management
+                            processes, ensuring they can make the most of the software. </p>
                     </div>
                     <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                         <div class="img-1">
-                            <img src="frontend/images/Group-6-1.png">
+                            <img src="{{ asset('frontend/images/sghsrhrt.png') }}">
                         </div>
-                        <h4>Timely Completion</h4>
-                        <p>We prioritize clear communication and on-time delivery, providing a smooth and stress-free
-                            painting experience from start to finish.</p>
+                        <h4>Comprehensive Reporting and Insights</h4>
+                        <p>To help you make data-driven decisions, we offer detailed reports on facility performance,
+                            maintenance schedules, costs, and operational efficiency. </p>
                     </div>
                 </div>
             </div>
@@ -56,16 +57,17 @@
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                         <h4>About Us</h4>
-                        <h2>With (10) Years Of Experience, We Enhance Property Durability!</h2>
-                        <p>Our expert finish revitalizes your space, delivering a fresh look and lasting performance for
-                            years to come.</p>
+                        <h2>We Manage Your Facility Business Efficiently</h2>
+                        <p>Welcome to Pedro Grillo — where facility management gets a major upgrade! Founded by industry
+                            veterans who understand the hustle and headaches of the service world, we’re on a mission to
+                            make managing your facility business simpler, smarter, and more rewarding.</p>
                         <div class="pro-info">
                             <div class="icon">
                                 <i class="fa fa-share-alt" aria-hidden="true"></i>
                             </div>
                             <div class="content-info">
-                                <h5>Projects Completed</h5>
-                                <p>250+</p>
+                                <h5>Years Of Experience</h5>
+                                <p>15+</p>
                             </div>
                         </div>
 
@@ -74,8 +76,8 @@
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </div>
                             <div class="content-info">
-                                <h5>Happy Customers</h5>
-                                <p>70+</p>
+                                <h5>Response Time:</h5>
+                                <p>24/7 Support</p>
                             </div>
                         </div>
                         <div class="btn">
@@ -96,10 +98,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-                        <h3>BRING YOUR SPACE TO LIFE</h3>
-                        <h1>Hire Tom MacNally <br> Painting Contactor!</h1>
-                        <p>We strive to deliver on our promise of care and quality. Get in touch to see how we do
-                            it!
+                        <h3>PEDRO GRILLO SOFTWARE SOLUTIONS</h3>
+                        <h1>Built by Experts, Designed for You</h1>
+                        <p>Let's transform facility management with our intuitive solutions, which will simplify your tasks,
+                            streamline processes, and empower your business to thrive.
                         </p>
                         <div class="btn">
                             <a href="{{ route('contactus') }}">Contact Us</a>
@@ -127,13 +129,14 @@
                                         <img src="frontend/images/Ellipse-4-2.png" alt="">
                                     </div>
                                     <div>
-                                        <h6>Sally James</h6>
-                                        <p>Painting and Finishing For Mill</p>
+                                        <h6>Phillip Maxwell</h6>
+                                        {{-- <p>Painting and Finishing For Mill</p> --}}
                                     </div>
                                 </div>
                                 <p class="resti-para">
-                                    It's been amazing to witness how Tom MacNally's paint crews have revitalized the
-                                    entire mill, giving it a modern, refreshed appearance and bringing it back to life.
+                                    From coordinating subcontractors to tracking jobs in real time, everything runs smoother
+                                    and faster. Our team saves hours every week, allowing us to focus on delivering great
+                                    service to our clients.
                                 </p>
                             </div>
 
@@ -143,14 +146,15 @@
                                         <img width="100px" src="frontend/images/headshot-girl-smiling.png" alt="">
                                     </div>
                                     <div>
-                                        <h6>Lina Doe</h6>
-                                        <p>Rust Stop Treatment For Terrace </p>
+                                        <h6>John Osgood</h6>
+                                        {{-- <p>Rust Stop Treatment For Terrace </p> --}}
                                     </div>
                                 </div>
                                 <p class="testi-para">
 
-                                    I really appreciate their punctuality and commitment to delivery. They didn't delay
-                                    a day and completed the project within a week. I highly recommend Tom MacNally.
+                                    It’s incredibly user-friendly, and the customer support team is always available to
+                                    help. We’ve reduced our admin time by 30% since using this software—it’s a
+                                    game-changer!”
                                 </p>
                             </div>
 
@@ -160,15 +164,14 @@
                                         <img width="100px" src="frontend/images/manlook.png" alt="">
                                     </div>
                                     <div>
-                                        <h6>Robert Hans</h6>
-                                        <p>Airless Spray For Garage </p>
+                                        <h6>Helen Lopez</h6>
+                                        {{-- <p>Airless Spray For Garage </p> --}}
                                     </div>
                                 </div>
                                 <p class="testi-para">
 
-                                    Phase two of five has been completed to paint the entire facility. I loved it when
-                                    the same crew extended to phase three; I would love to get my garage done by them in
-                                    the spring.
+                                    The software is powerful yet easy to use, and it covers everything we need for facility
+                                    management. Scheduling, invoicing, and reporting are all in one place.
 
                                 </p>
                             </div>
@@ -182,35 +185,34 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="content-3">
-                                <h2>Our Services</h2>
-                                <p>The Only Painter and Restorer You Need!</p>
+                                <h2>All-In-One Facility Management Software
+                                </h2>
+                                <p>See what we have in store for you! </p>
                             </div>
                         </div>
                         <div class="col-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="images-3">
                                 <img width="100%" src="frontend/images/image-2024-08-19T180503.011.png">
                             </div>
-                            <h5>Grain Bins & Legs</h5>
-                            <p>We specialize in painting and maintaining grain bins and legs, ensuring a
-                                professional finish that protects against corrosion and wear while enhancing
-                                durability.</p>
+                            <h5>Job Scheduling & Dispatching</h5>
+                            <p>Easily schedule and dispatch tasks to subcontractors and employees, ensuring timely service
+                                delivery.</p>
                         </div>
                         <div class="col-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="images-3">
                                 <img width="100%" src="frontend/images/image-2024-08-19T180429.918.png">
                             </div>
-                            <h5>Morton Buildings</h5>
-                            <p>Our expertise extends to painting Morton Buildings, delivering a high-quality,
-                                long-lasting finish that complements the robust construction and helps withstand the
-                                elements.</p>
+                            <h5>Real-Time Job Tracking</h5>
+                            <p>Track the progress of jobs in real time to stay updated on task completion and service
+                                status.</p>
                         </div>
                         <div class="col-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="images-2">
                                 <img width="100%" src="frontend/images/image-2024-08-19T180433.686.png">
                             </div>
-                            <h5>Rubberized Roof Coatings</h5>
-                            <p>We apply premium rubberized roof coatings that provide extra protection against leaks
-                                and weather damage, ensuring your roof remains in top condition.</p>
+                            <h5>Automated Reminders & Alerts</h5>
+                            <p>Send automatic reminders for upcoming tasks, appointments, or service due dates, reducing
+                                no-shows.</p>
                         </div>
                         <div class="btn">
                             <a href="{{ route('service') }}">Explore Our Services</a>
@@ -236,8 +238,8 @@
                         </div>
                         <div class="col-12 col-sm-4 col-md-4 col-lg-4">
                             <h2>Map Location</h2>
-                            <p>Track the phone number’s location on Google Maps by opening the app on the
-                                associated <br> device.</p>
+                            <p>Track the phone number’s location on Google Maps by opening the app on the associated device.
+                            </p>
                             <ul>
                                 <li>Mississippi</li>
                                 <li>Tennessee</li>

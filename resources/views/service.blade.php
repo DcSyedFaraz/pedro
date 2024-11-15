@@ -10,9 +10,7 @@
                             <img src="{{ asset('frontend/images/1-2.png') }}">
                         </div>
                         <div class="content-box">
-                            <p> <b>Grain Bins & Legs:</b> We specialize in painting and maintaining grain bins and legs,
-                                ensuring a professional finish that protects against corrosion and wear while enhancing
-                                durability.
+                            <p> <b>Job Scheduling & Dispatching:</b> Easily schedule and dispatch tasks to subcontractors and employees, ensuring timely service delivery.
 
                             </p>
                         </div>
@@ -24,13 +22,7 @@
                             <img src="{{ asset('frontend/images/5-1.png') }}">
                         </div>
                         <div class="content-box">
-                            <p> <b>Morton Buildings:</b> Our expertise extends to painting Morton Buildings, delivering
-                                a high-quality, long-lasting finish that complements the robust construction and helps
-                                withstand the elements. We specialize in painting and maintaining grain bins and legs,
-                                ensuring a professional finish that protects against corrosion and wear while enhancing
-                                durability.
-
-                            </p>
+                            <p> <b>Real-Time Job Tracking:</b> Track the progress of jobs in real-time to stay updated on task completion and service status.
 
                             </p>
                         </div>
@@ -42,9 +34,7 @@
                             <img src="{{ asset('frontend/images/8.png') }}">
                         </div>
                         <div class="content-box">
-                            <p> <b>Roof Coatings:</b> We apply premium rubberized roof coatings that provide an extra
-                                layer of protection against leaks and weather damage, ensuring your roof remains in top
-                                condition.</p>
+                            <p> <b>Automated Reminders & Alerts:</b> Send automatic reminders for upcoming tasks, appointments, or service due dates, reducing no-shows.</p>
                         </div>
                     </div>
                 </div>
@@ -54,9 +44,7 @@
                             <img src="{{ asset('frontend/images/11.png') }}">
                         </div>
                         <div class="content-box">
-                            <p> <b>Elastomeric Leak Stop:</b> Our elastomeric leak stop services involve applying
-                                flexible, durable coatings that effectively seal and prevent leaks, keeping your
-                                structures dry and secure.
+                            <p> <b>Customizable Work Orders:</b> Tailor work orders to fit the specific needs of each service, whether it's plumbing, landscaping, or electrical.
 
                             </p>
                         </div>
@@ -70,9 +58,7 @@
                             <img src="{{ asset('frontend/images/14.png') }}">
                         </div>
                         <div class="content-box">
-                            <p><b>Pressure Washing:</b> Our pressure washing services prepare surfaces for painting by
-                                removing grime, dirt, and old paint, ensuring a clean and smooth base for optimal paint
-                                adhesion.
+                            <p><b>Subcontractor Management:</b> Manage subcontractors' availability, assignments, and payment details all in one place.
 
                             </p>
                         </div>
@@ -84,8 +70,7 @@
                             <img src="{{ asset('frontend/images/17.png') }}">
                         </div>
                         <div class="content-box">
-                            <p> <b>Rust Stop:</b> We offer rust stop treatments that prevent and treat rust on metal
-                                surfaces, ensuring a clean, smooth surface before painting for a lasting finish.
+                            <p> <b>Service History Tracking:</b> Keep detailed records of all completed jobs and maintenance for future reference or client billing.
 
                             </p>
                         </div>
@@ -97,9 +82,7 @@
                             <img src="{{ asset('frontend/images/2-1.png') }}">
                         </div>
                         <div class="content-box">
-                            <p><b>Custom Color Matching:</b> Our custom color matching services ensure your paint
-                                perfectly matches your desired shade, providing a flawless and cohesive look for any
-                                project.
+                            <p><b>Client Portal:</b> Allow clients to access job status updates, invoices, and service history through a personalized online portal.
 
                             </p>
                         </div>
@@ -111,9 +94,7 @@
                             <img src="{{ asset('frontend/images/6.png') }}">
                         </div>
                         <div class="content-box">
-                            <p> <b>Airless Spray Equipment:</b> Using advanced airless spray equipment, we deliver a
-                                smooth, even coat of paint quickly and efficiently, ideal for both large and small
-                                projects.
+                            <p> <b>Mobile Access:</b> Access the system from any device, ensuring your team is always connected while on the go.
                             </p>
                         </div>
                     </div>
@@ -125,9 +106,7 @@
                                 <img src="{{ asset('frontend/images/9.png') }}">
                             </div>
                             <div class="content-box">
-                                <p> <b>Grain Bin Sealant:</b> We apply specialized grain bin sealants that protect
-                                    against moisture and contaminants, ensuring the longevity and integrity of your
-                                    storage facilities.
+                                <p> <b>Time Tracking for Employees:</b> Track the hours worked by employees and subcontractors to ensure accurate billing and payroll.
 
                                 </p>
                             </div>
@@ -139,9 +118,7 @@
                                 <img src="{{ asset('frontend/images/12.png') }}">
                             </div>
                             <div class="content-box">
-                                <p> <b>Foundation Sealant:</b> Our foundation sealant services prevent water
-                                    infiltration and damage by applying high-quality sealants that enhance the
-                                    durability of your building’s foundation.
+                                <p> <b>Inventory Management:</b> Keep track of tools, materials, and supplies, ensuring you never run out of necessary items for jobs.
 
                                 </p>
                             </div>
@@ -153,9 +130,7 @@
                                 <img src="{{ asset('frontend/images/15.png') }}">
                             </div>
                             <div class="content-box">
-                                <p> <b>Hot Pour Rubber:</b> We use hot pour rubber to fill and seal cracks in surfaces,
-                                    creating a durable, flexible repair that prevents further damage and extends the
-                                    life of your pavement.
+                                <p> <b>Invoice Generation & Payment Tracking:</b> Generate professional invoices with ease and track payments, ensuring smooth financial management.
                                 </p>
                             </div>
                         </div>
@@ -166,9 +141,7 @@
                                 <img src="{{ asset('frontend/images/18-1.png') }}">
                             </div>
                             <div class="content-box">
-                                <p> <b>Skylight Repair-Replace:</b> We handle skylight repair and replacement with
-                                    precision, ensuring your skylights are properly sealed and functioning to improve
-                                    natural light and energy efficiency.
+                                <p> <b>Multi-Location Management:</b> Manage multiple facility locations from one dashboard, which is ideal for businesses with a wide service area.
                                 </p>
                             </div>
                         </div>
@@ -180,9 +153,7 @@
                                     <img src="{{ asset('frontend/images/10.png') }}">
                                 </div>
                                 <div class="content-box">
-                                    <p><b>Farm:</b> Our painting services for farm structures are tailored to withstand
-                                        harsh conditions, ensuring your barns, silos, and equipment look great and last
-                                        longer.
+                                    <p><b>Workforce Scheduling Optimization:</b> Automatically optimize schedules based on availability, job urgency, and location to maximize efficiency.
                                     </p>
                                 </div>
                             </div>
@@ -193,9 +164,8 @@
                                     <img src="{{ asset('frontend/images/Faith.png') }}">
                                 </div>
                                 <div class="content-box">
-                                    <p> <b>Commercial:</b> We offer professional painting services for commercial
-                                        spaces, focusing on creating a clean, appealing environment that enhances your
-                                        business’s image and functionality.
+                                    <p> <b>GPS Job Routing:</b> Use GPS integration to provide the fastest route to job sites, saving time and fuel costs.
+
                                     </p>
                                 </div>
                             </div>
@@ -206,9 +176,7 @@
                                     <img src="{{ asset('frontend/images/16.png') }}">
                                 </div>
                                 <div class="content-box">
-                                    <p><b>Residential:</b> Our residential painting services provide a fresh, vibrant
-                                        look for your home, using high-quality paints and techniques to improve both the
-                                        appearance and value of your property.
+                                    <p><b>Customer Relationship Management (CRM):</b> Track and manage client details, preferences, and communication to enhance customer satisfaction.
                                     </p>
                                 </div>
                             </div>
@@ -219,9 +187,7 @@
                                     <img src="{{ asset('frontend/images/19.png') }}">
                                 </div>
                                 <div class="content-box">
-                                    <p> <b>Industrial:</b> We deliver specialized painting solutions for industrial
-                                        environments, applying durable coatings that withstand heavy use and harsh
-                                        conditions while maintaining a professional finish.
+                                    <p> <b>Document Storage & Sharing:</b> Store important documents, such as contracts, invoices, and blueprints, in one secure location accessible by all team members.
 
 
                                     </p>
@@ -236,9 +202,7 @@
                                     </div>
                                     <div class="content-box">
                                         <p>
-                                            <b>Free Estimates: </b>Free Estimates: We offer free estimates to help you
-                                            understand the scope and cost of your painting project, allowing you to make
-                                            informed decisions with no obligation.
+                                            <b>Customizable Reporting: </b>Generate detailed reports on job performance, costs, and business metrics to drive informed decision-making.
                                         </p>
                                     </div>
                                 </div>
@@ -249,9 +213,7 @@
                                         <img src="{{ asset('frontend/images/19.png') }}">
                                     </div>
                                     <div class="content-box">
-                                        <p><b>Fully Insured:</b> Our services are fully insured, giving you peace of
-                                            mind that you are protected throughout the painting process, from start to
-                                            finish.
+                                        <p><b>Analytics & Insights:</b> Get data-driven insights into your business, identifying areas for improvement and tracking key performance indicators.
                                         </p>
                                     </div>
                                 </div>
@@ -262,9 +224,7 @@
                                         <img src="{{ asset('frontend/images/4.png') }}">
                                     </div>
                                     <div class="content-box">
-                                        <p><b>All Work Guaranteed:</b> We guarantee all our work, ensuring that every
-                                            painting project meets our high standards and your complete satisfaction,
-                                            backed by our commitment to quality.”
+                                        <p><b>24/7 Customer Support:</b> Access round-the-clock support to resolve any technical issues or questions that may arise.
                                         </p>
                                     </div>
                                 </div>

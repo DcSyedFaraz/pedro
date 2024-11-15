@@ -3,10 +3,9 @@
         <div class="row">
             <div class="col-12 col-sm-4 col-md-6 col-lg-4">
                 <div class="logo">
-                    <img src="frontend/images/tom-logo-e1724166815700.png">
+                    <img src="{{ asset('frontend/images/facilit8_logo1.png') }}">
                 </div>
-                <p>For homes, warehouses, and offices needing on-time, on-spec, and on-budget painting by
-                    safety-certified painting professionals, Tom McNally Painting is your trusted choice.</p>
+                <p>Pedro Grilla provides tools to assist in facility management. Results may vary, and we are not liable for outcomes based on software usage. Please consult professionals for specific business advice.</p>
             </div>
             <div class="col-12 col-sm-3 col-md-6 col-lg-3">
                 <h4>Quick Link</h4>
@@ -52,6 +51,6 @@
         </div>
         <div class="copyright">
             <hr>
-            <p>© 2024 Restorer and Painting. All Rights Reserved.</p>
+            <p>© 2024 Facilit System 8. All Rights Reserved.</p>
         </div>
 </footer>

@@ -320,7 +320,14 @@ header span{
     display: flex;
     gap: 20px;
 }
-
+.owl-carousel .owl-item {
+    min-height: 1px;
+    float: left;
+    -webkit-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    background-color: #fff;
+    border-radius: 20px;
+}
 .testi-main {
     display: flex;
     align-items: center;
@@ -335,7 +342,8 @@ header span{
 .owl-stage-outer {
     border-radius: 20px;
     margin-left: -50px;
-    background: white;
+    /* background: white; */
+    margin-bottom: -100px;
 }
 /*----section-6-----*/
 .sec-6{

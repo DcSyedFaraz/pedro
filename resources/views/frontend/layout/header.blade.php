@@ -3,8 +3,8 @@
         <div class="container d-block">
             <div class="row align-items-center">
                 <div class="col-md-2 col-6">
-                    <a class="navbar-brand" href="/"><img width="100px"
-                            src="{{ asset('frontend/images/facilit8_logo.png') }}"></a>
+                    <a class="navbar-brand" href="/"><img width="225px"
+                            src="{{ asset('frontend/images/facilit8_logo1.png') }}"></a>
                 </div>
 
                 <div class="col-md-7 mob">
