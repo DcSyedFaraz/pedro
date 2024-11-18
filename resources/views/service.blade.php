@@ -214,7 +214,7 @@
                             <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                                 <div class="main-box">
                                     <div class="image-box">
-                                        <img src="{{ asset('frontend/images/7-12/4.png') }}">
+                                        <img src="{{ asset('frontend/images/7-12/5.png') }}">
                                     </div>
                                     <div class="content-box">
                                         <p>
