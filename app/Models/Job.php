@@ -18,7 +18,7 @@ class Job extends Model
     ];
     public function invoice()
     {
-        return $this->hasMany(JobInvoice::class);
+        return $this->hasMany(JobInvoice::class,'jobs_id');
     }
     public function customer()
     {
