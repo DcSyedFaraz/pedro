@@ -8,7 +8,6 @@
         "php": "^8.0.2",
         "barryvdh/laravel-dompdf": "^2.0",
         "bavix/laravel-wallet": "^9.6",
-        "caryley/laravel-inventory": "^3.0",
         "giggsey/libphonenumber-for-php": "^8.13",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "dev-master",

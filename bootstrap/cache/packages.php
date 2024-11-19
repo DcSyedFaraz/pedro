@@ -29,17 +29,6 @@
       0 => 'Bavix\\Wallet\\WalletServiceProvider',
     ),
   ),
-  'caryley/laravel-inventory' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Caryley\\LaravelInventory\\LaravelInventoryServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LaravelInventory' => 'Caryley\\LaravelInventory\\Facades\\LaravelInventory',
-    ),
-  ),
   'intervention/image' => 
   array (
     'providers' => 

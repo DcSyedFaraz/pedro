@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5280737c8a723364bf15ce74425d699",
+    "content-hash": "39f03c60fd684df716ba5edf81486176",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -221,68 +221,6 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
-        },
-        {
-            "name": "caryley/laravel-inventory",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Caryley/Laravel-Inventory.git",
-                "reference": "f770fb9e2cb535abe3ad3318645b35b32e448a94"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Caryley/Laravel-Inventory/zipball/f770fb9e2cb535abe3ad3318645b35b32e448a94",
-                "reference": "f770fb9e2cb535abe3ad3318645b35b32e448a94",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^9.0|^10.0",
-                "php": "^8.0|^8.1"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.4",
-                "orchestra/testbench": "^7.0|^8.0",
-                "pestphp/pest": "^1.22"
-            },
-            "type": "project",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Caryley\\LaravelInventory\\LaravelInventoryServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaravelInventory": "Caryley\\LaravelInventory\\Facades\\LaravelInventory"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Caryley\\LaravelInventory\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tal Elmishali",
-                    "email": "tal@caryley.dev",
-                    "homepage": "https://caryley.dev"
-                }
-            ],
-            "description": "Inventory feature for laravel models.",
-            "homepage": "https://github.com/caryley/laravel-inventory",
-            "keywords": [
-                "Laravel Inventory",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/Caryley/Laravel-Inventory/issues",
-                "source": "https://github.com/Caryley/Laravel-Inventory/tree/3.0.0"
-            },
-            "time": "2023-01-25T18:12:00+00:00"
         },
         {
             "name": "clue/stream-filter",
