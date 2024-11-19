@@ -139,7 +139,7 @@ class EstimateController extends Controller
             // Job customer Fields
             $job->customer_homeowner = $request->customer_homeowner;
             $job->customer_unit_cordination = $request->customer_unit_cordination;
-            $job->note_to_cust = $request->note_to_cust;
+            // $job->note_to_cust = $request->note_to_cust;
             //Job Picture
 
 
