@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody id="est-invoice-rows">
-                @forelse ($estimate->invoice as $index => $row)
+                @forelse ($job->invoice as $index => $row)
                     <tr>
                         <td colspan="2">
                             <input type="text" class="form-control est_inv_desc" name="description[]"
