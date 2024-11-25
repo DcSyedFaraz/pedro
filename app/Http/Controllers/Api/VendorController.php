@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
+use Log;
 use Str;
 
 class VendorController extends Controller
@@ -94,6 +95,8 @@ class VendorController extends Controller
             ->whereNotIn('status', ['declined'])
             ->orderby('priority', 'asc')->get();
         // return $WorkOrders;
+        Log::debug($WorkOrders);
+        Log::debug(auth()->user()->id);
         return response()->json($WorkOrders, 200);
     }
     public function show($id)
