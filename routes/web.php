@@ -80,7 +80,7 @@ Route::group(['middleware' => ['language']], function () {
     Route::get('logout', [LoginController::class, 'logout']);
     Route::get('account/verify/{token}', [LoginController::class, 'verifyAccount'])->name('users.verify');
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/', [HomeController::class, 'login']);
+    // Route::get('/', [HomeController::class, 'login']);
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/test', function () {
         event(new App\Events\StatusLiked('Someone'));
@@ -102,7 +102,7 @@ Route::group(['middleware' => ['language']], function () {
         // Inspection
         Route::resource('checklists', InspectionController::class);
         Route::resource('location', LocationController::class);
-        Route::resource('invoice', InvoiceController::class);
+        Route::resource('invoice', InvoiceController::class)->except('create');
         Route::get('/invoice/create/{id}', [InvoiceController::class, 'create'])->name('invoice.create');
         Route::resource('supply', SupplyController::class);
         Route::resource('userproblem', VendorProblemController::class);
@@ -154,12 +154,12 @@ Route::group(['middleware' => ['language']], function () {
         // Storage
         Route::get('/document', [DashboardController::class, 'document'])->name('document');
         Route::get('/signature', [DashboardController::class, 'signature'])->name('signature');
-        Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
-        Route::resource('general_setting', \App\Http\Controllers\Admin\GeneralSettingController::class);
+        // Route::post('profile/update', [DashboardController::class, 'update'])->name('profile.update');
+        // Route::resource('general_setting', \App\Http\Controllers\Admin\GeneralSettingController::class);
         // Routes for work
         // Route::get('/work-orders', [adminWorkOrderController::class, 'index'])->name('.index');
         Route::get('/work_orders/details/{id}', [adminWorkOrderController::class, 'details'])->name('work_orders.details');
-        Route::resource('work_orders', adminWorkOrderController::class);
+        // Route::resource('work_orders', adminWorkOrderController::class);
         Route::get('reassign-checklist/{id}', [InspectionController::class, "reassign_checklist"])->name("reassign_checklist");
 
 

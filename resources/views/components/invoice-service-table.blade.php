@@ -64,7 +64,7 @@
                                     <i class="fas fa-plus text-primary"></i>
                                 </button>
                             @else
-                                <button type="button" class="btn remove-button">
+                                <button type="button" class="btn remove-button remove-row">
                                     <i class="fas fa-minus text-danger"></i>
                                 </button>
                             @endif
@@ -78,4 +78,3 @@
         {{-- </form> --}}
     </div>
 </div>
-

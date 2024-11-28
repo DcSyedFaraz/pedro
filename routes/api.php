@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 // Saad
 
-Route::any('login', [\App\Http\Controllers\Api\RegisterController::class, 'login'])->name('login');
+Route::any('login', [\App\Http\Controllers\Api\RegisterController::class, 'login']);
 Route::any('verify', [\App\Http\Controllers\Api\RegisterController::class, 'verify']);
 Route::post('password/email', [\App\Http\Controllers\Api\ForgotPasswordController::class, 'forget']);
 Route::any('password/reset', [\App\Http\Controllers\Api\CodeCheckController::class, 'index']);
@@ -52,7 +52,13 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:api', 'role:User']], fu
 });
 Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']], function () {
 
-    Route::resource('manage_work_orders', VendorController::class);
+    Route::get('manage_work_orders', [VendorController::class, 'index']);
+    Route::get('manage_work_orders/create', [VendorController::class, 'create']);
+    Route::post('manage_work_orders', [VendorController::class, 'store']);
+    Route::get('manage_work_orders/{id}', [VendorController::class, 'show']);
+    Route::get('manage_work_orders/{id}/edit', [VendorController::class, 'edit']);
+    Route::put('manage_work_orders/{id}', [VendorController::class, 'update']);
+    Route::delete('manage_work_orders/{id}', [VendorController::class, 'destroy']);
 
     Route::controller(VendorController::class)->group(function () {
         Route::get('/manage_work_orders/accept/{id}', 'acceptWorkOrder');

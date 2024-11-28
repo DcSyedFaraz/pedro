@@ -24,7 +24,7 @@ class InvoiceServiceTable extends Component
     public function __construct($route, $rows = null)
     {
         $this->route = $route;
-        $this->rows = $rows ?? [
+        $this->rows = $rows && count($rows) > 0 ? $rows : [
             [
                 'description' => '',
                 'qty_hrs' => '',
@@ -42,6 +42,7 @@ class InvoiceServiceTable extends Component
      */
     public function render()
     {
+        // dd($this->rows);
         return view('components.invoice-service-table');
     }
 }

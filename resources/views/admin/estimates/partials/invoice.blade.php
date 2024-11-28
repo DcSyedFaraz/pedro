@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody id="est-invoice-rows">
-                @forelse ($job->invoice as $index => $row)
+                @forelse ($estimate->invoice as $index => $row)
                     <tr>
                         <td colspan="2">
                             <input type="text" class="form-control est_inv_desc" name="description[]"
@@ -52,8 +52,7 @@
                         </td>
                         <td>
                             @if ($loop->first)
-                                <button type="button" class="btn calculate-button" id="est_multiples_primary"
-                                    >
+                                <button type="button" class="btn calculate-button" id="est_multiples_primary">
                                     <i class="fas fa-plus text-primary"></i>
                                 </button>
                             @else
@@ -95,7 +94,7 @@
                                 <i class="fas fa-plus text-primary"></i>
                             </button>
                         </td>
-                    </tr> <!-- Closing the <tr> tag -->
+                    </tr>
                 @endforelse
             </tbody>
         </table>

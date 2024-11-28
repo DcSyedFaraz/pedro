@@ -1,91 +1,102 @@
-                    <div class="row">
-                        <div class="col">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="table-header-flex">
-                                            <i class="fa fa-exclamation-circle"
-                                                style="position: absolute;top: 0;left: 0;padding: 3px;"></i>
-                                            <button class="btn btn-md group-button">Group</button>
-                                        </th>
-                                        <th class="table-header-flex"><span>Description</span> <i
-                                                class="fa fa-exclamation-circle"style="position: absolute;top: 0;left: 0;padding: 30px 95px;"></i>
-                                        </th>
-                                        <th>Warehouse</th>
-                                        <th>Qty/Hrs</th>
-                                        <th>Rate</th>
-                                        <th>Total</th>
-                                        <th>Cost</th>
-                                        <th>Margin Tax</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="job-invoice-rows">
-
-                                    @if (@isset($invoice->service))
-                                        @foreach ($invoice->service as $y => $service)
-                                            <tr>
-                                                <td colspan="2"><input
-                                                        value="{{ isset($service->description) ? $service->description : '' }}"
-                                                        type="text" class="form-control inv_desc"
-                                                        name="description[]" placeholder="Description"></td>
-                                                <td><input
-                                                        value="{{ isset($service->warehouse) ? $service->warehouse : '' }}"
-                                                        type="text" class="form-control job_inv_whr"
-                                                        name="warehouse[]" placeholder="Warehouse"></td>
-                                                <td><input
-                                                        value="{{ isset($service->qty_hrs) ? $service->qty_hrs : '' }}"
-                                                        type="number" class="form-control job_inv_qty" name="qty_hrs[]"
-                                                        placeholder="Qty"></td>
-                                                <td><input value="{{ isset($service->rate) ? $service->rate : '' }}"
-                                                        type="number" class="form-control job_inv_rate" name="rate[]"
-                                                        placeholder="Rate"></td>
-                                                <td><input value="{{ isset($service->total) ? $service->total : '' }}"
-                                                        type="number" class="form-control job_inv_total" name="total[]"
-                                                        placeholder="Total" readonly></td>
-                                                <td><input value="{{ isset($service->cost) ? $service->cost : '' }}"
-                                                        type="number" class="form-control job_inv_cost" name="cost[]"
-                                                        placeholder="Cost"></td>
-                                                <td><input
-                                                        value="{{ isset($service->margin_tax) ? $service->margin_tax : '' }}"
-                                                        type="number" class="form-control job_inv_tax"
-                                                        name="margin_tax[]" placeholder="Tax"></td>
-                                                <td class="d-flex">
-                                                    @if (!$loop->first)
-                                                        <a href="{{ route('productService.destroy', $service->id) }}"
-                                                            class="btn calculate-button" data-row="1"><i
-                                                                class="fas fa-trash text-danger"></i></a>
-                                                    @endif
-                                                    @if ($loop->last)
-                                                        <button type="button" class="btn calculate-button"
-                                                            id="job-multiple-primary" data-row="1"><i
-                                                                class="fas fa-plus text-primary"></i></button>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="2"><input type="text" class="form-control inv_desc"
-                                                    name="description[]" placeholder="Description"></td>
-                                            <td><input type="text" class="form-control job_inv_whr"
-                                                    name="warehouse[]" placeholder="Warehouse"></td>
-                                            <td><input type="number" class="form-control job_inv_qty" name="qty_hrs[]"
-                                                    placeholder="Qty"></td>
-                                            <td><input type="number" class="form-control job_inv_rate" name="rate[]"
-                                                    placeholder="Rate"></td>
-                                            <td><input type="number" class="form-control job_inv_total" name="total[]"
-                                                    placeholder="Total" readonly></td>
-                                            <td><input type="number" class="form-control job_inv_cost" name="cost[]"
-                                                    placeholder="Cost"></td>
-                                            <td><input type="number" class="form-control job_inv_tax"
-                                                    name="margin_tax[]" placeholder="Tax"></td>
-                                            <td><button type="button" class="btn calculate-button"
-                                                    id="job-multiple-primary" data-row="1"><i
-                                                        class="fas fa-plus text-primary"></i></button></td>
-                                        </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="table-header-flex">
+                        <i class="fa fa-exclamation-circle"
+                            style="position: absolute; top: 0; left: 0; padding: 3px;"></i>
+                        <button type="button" class="btn btn-md group-button">Group</button>
+                    </th>
+                    <th class="table-header-flex">
+                        <span>{{ __('admin/estimates/edit.description') }}</span>
+                    </th>
+                    <th>{{ __('admin/estimates/edit.qty_hours') }}</th>
+                    <th>{{ __('admin/estimates/edit.rate') }}</th>
+                    <th>{{ __('admin/estimates/edit.margin_tax') }}</th>
+                    <th>{{ __('admin/estimates/edit.total') }}</th>
+                    <th>{{ __('admin/estimates/edit.cost') }}</th>
+                    <th>{{ __('admin/estimates/edit.action') }}</th>
+                </tr>
+            </thead>
+            <tbody id="est-invoice-rows">
+                @forelse ($job->invoice as $index => $row)
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" class="form-control est_inv_desc" name="description[]"
+                                placeholder="{{ __('admin/estimates/edit.description') }}"
+                                value="{{ old('description.' . $index, $row['description'] ?? '') }}">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_qty" name="qty_hrs[]"
+                                placeholder="{{ __('admin/estimates/edit.qty_hours') }}"
+                                value="{{ old('qty_hrs.' . $index, $row['qty_hrs'] ?? '') }}">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_rate" name="rate[]"
+                                placeholder="{{ __('admin/estimates/edit.rate') }}"
+                                value="{{ old('rate.' . $index, $row['rate'] ?? '') }}">
+                        </td>
+                        <td>
+                            <span class="est_inv_tax">0.00%</span>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_total" name="total[]"
+                                placeholder="{{ __('admin/estimates/edit.total') }}" readonly
+                                value="{{ old('total.' . $index, $row['total'] ?? '') }}">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_cost" name="cost[]"
+                                placeholder="{{ __('admin/estimates/edit.cost') }}"
+                                value="{{ old('cost.' . $index, $row['cost'] ?? '') }}">
+                        </td>
+                        <td>
+                            @if ($loop->first)
+                                <button type="button" class="btn calculate-button" id="est_multiples_primary">
+                                    <i class="fas fa-plus text-primary"></i>
+                                </button>
+                            @else
+                                <button type="button" class="btn remove-button">
+                                    <i class="fas fa-minus text-danger"></i>
+                                </button>
+                            @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" class="form-control est_inv_desc" name="description[]"
+                                placeholder="Description"
+                                value="{{ old('description.0', $row['description'] ?? '') }}">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_qty" name="qty_hrs[]" placeholder="Qty"
+                                value="{{ old('qty_hrs.0', $row['qty_hrs'] ?? '') }}">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_rate" name="rate[]" placeholder="Rate"
+                                value="{{ old('rate.0', $row['rate'] ?? '') }}">
+                        </td>
+                        <td>
+                            <span class="est_inv_tax">0.00%</span>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_total" name="total[]" placeholder="Total"
+                                readonly value="{{ old('total.0', $row['total'] ?? '') }}">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control est_inv_cost" name="cost[]" placeholder="Cost"
+                                value="{{ old('cost.0', $row['cost'] ?? '') }}">
+                        </td>
+                        <td>
+                            <button type="button" class="btn calculate-button" id="est_multiples_primary"
+                                data-row="1">
+                                <i class="fas fa-plus text-primary"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>

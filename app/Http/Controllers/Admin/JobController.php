@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Job;
+use App\Models\JobInvoice;
 use App\Models\JobPrimaryContact;
 use App\Models\User;
 use App\Models\job_Category;
@@ -161,6 +162,7 @@ class JobController extends Controller
             $job->notes_for_tech = $request->notes_for_tech;
             $job->completion_notes = $request->completion_notes;
             $job->billable = $request->billable;
+            $job->note_to_cust = $request->note_to_cust;
             $job->save();
 
             // foreach ($request['phone'] as $key => $value) {
@@ -184,6 +186,23 @@ class JobController extends Controller
             $jobInfoSMS .= "Gated Property: " . ($job->location_gated_property ? 'Yes' : 'No') . "\n";
             $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
             $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
+
+            // dd($request->description);
+            if ($request->has('description') && (count($request->description) > 0)) {
+                foreach ($request->description as $key => $description) {
+                    // Check if the required data is present for each invoice
+                    if (!empty($description) && isset($request->qty_hrs[$key], $request->rate[$key], $request->total[$key], $request->cost[$key])) {
+                        $invoice = new JobInvoice();
+                        $invoice->jobs_id = $job->id;  // Associate the invoice with the job
+                        $invoice->description = $description;
+                        $invoice->qty_hrs = $request->qty_hrs[$key];
+                        $invoice->rate = $request->rate[$key];
+                        $invoice->total = $request->total[$key];
+                        $invoice->cost = $request->cost[$key];
+                        $invoice->save();
+                    }
+                }
+            }
 
             // if ($formattedPhoneNumber != null) {
 
@@ -218,7 +237,7 @@ class JobController extends Controller
         $jobCategories = job_Category::get();
         $job_prioirty = job_priority_category::get();
         // $job_source = job_source_category::get();
-        // dd($job->jobPri);
+        // dd($job->invoice);
         return view('admin.job.edit', compact('job', 'customer', 'jobCategories', 'job_prioirty', 'agent', ));
     }
 
@@ -299,6 +318,7 @@ class JobController extends Controller
         $job->notes_for_tech = $request->notes_for_tech;
         $job->completion_notes = $request->completion_notes;
         $job->billable = $request->billable;
+        $job->note_to_cust = $request->note_to_cust;
         $job->save();
 
         $ProductandService = JobPrimaryContact::where('job_id', $id)->get();
@@ -309,6 +329,23 @@ class JobController extends Controller
                 $ProductandServices->delete();
             }
         }
+
+        $job->invoice()->delete();
+        $items = [];
+        foreach ($request['description'] as $index => $description) {
+            $items[] = [
+                'description' => $description,
+                'qty_hrs' => $request['qty_hrs'][$index],
+                'rate' => $request['rate'][$index],
+                'total' => $request['total'][$index],
+                'cost' => $request['cost'][$index],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        // Insert Invoice Items
+        $job->invoice()->createMany($items);
 
         // foreach ($request['phone'] as $key => $value) {
         //     JobPrimaryContact::create([

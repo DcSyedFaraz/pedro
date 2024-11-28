@@ -15,11 +15,11 @@ return new class extends Migration {
         Schema::create('job_invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jobs_id')->constrained()->onDelete('cascade');
-            $table->string('description');
-            $table->integer('qty_hrs');
-            $table->decimal('rate', 10, 2);
-            $table->decimal('total', 15, 2);
-            $table->decimal('cost', 10, 2);
+            $table->string('description')->nullable();
+            $table->integer('qty_hrs')->nullable();
+            $table->decimal('rate', 10, 2)->nullable();
+            $table->decimal('total', 15, 2)->nullable();
+            $table->decimal('cost', 10, 2)->nullable();
             $table->timestamps();
         });
     }

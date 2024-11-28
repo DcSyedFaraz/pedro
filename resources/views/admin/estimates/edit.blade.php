@@ -77,7 +77,7 @@
 
         <section class="content">
             <div class="container-fluid">
-                @if (count($errors) > 0)
+                {{-- @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <strong>{{ __('admin/estimates/edit.whoops') }}!</strong> {{ __('admin/estimates/edit.problems_with_input') }}<br><br>
                         <ul>
@@ -86,7 +86,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -191,8 +191,8 @@
                                                                 <div class="tab-content mt-3">
                                                                     <div id="products-services"
                                                                         class="tab-pane fade show active">
-                                                                        {{-- <x-invoice-service-table :route="'#'" :rows="$job->invoice"> --}}
-                                                                        @include('admin.estimates.partials.invoice')
+                                                                        <x-invoice-service-table :route="'#'" :rows="$estimate->invoice" />
+                                                                        {{-- @include('admin.estimates.partials.invoice') --}}
                                                                     </div>
                                                                 </div>
                                                                 <br />
