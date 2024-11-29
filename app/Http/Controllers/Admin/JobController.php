@@ -187,7 +187,12 @@ class JobController extends Controller
             $jobInfoSMS .= "Notes: {$job->notes_for_tech}\n";
             $jobInfoSMS .= "Billable: " . ($job->billable ? 'Yes' : 'No') . "\n";
 
+            // if ($formattedPhoneNumber != null) {
+
+            //     //$this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
+            // }
             // dd($request->description);
+            
             if ($request->has('description') && (count($request->description) > 0)) {
                 foreach ($request->description as $key => $description) {
                     // Check if the required data is present for each invoice
@@ -203,11 +208,6 @@ class JobController extends Controller
                     }
                 }
             }
-
-            // if ($formattedPhoneNumber != null) {
-
-            //     //$this->twilioService->sendSMS($formattedPhoneNumber, $jobInfoSMS);
-            // }
 
             // Notification
             $user = User::find($request->input('customer_id'));
