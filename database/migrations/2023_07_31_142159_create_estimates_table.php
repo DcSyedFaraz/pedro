@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('customer_id')->nullable();
             $table->integer('job_id')->nullable();
-            $table->string('signature')->nullable();
+            $table->longText('signature')->nullable();
             $table->string('client_status')->nullable();
             $table->string('location_name')->nullable();
             $table->string('location_gated_property')->nullable();
