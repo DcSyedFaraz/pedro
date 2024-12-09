@@ -69,6 +69,27 @@
                                         <input type="text" class="form-control" id="zip_code" name="zip_code" required value="{{ old('zip_code', $estimate->zip_code) }}">
                                     </div>
                                     <div class="form-group">
+                                        <label for="frequency">Frequency</label>
+                                        <select class="form-control" id="frequency" name="frequency" required>
+                                            <option selected hidden>Select Frequency</option>
+                                            <option value="One Time"
+                                                {{ old('frequency', $estimate->frequency) == 'One Time' ? 'selected' : '' }}>
+                                                One Time</option>
+                                            <option value="Daily"
+                                                {{ old('frequency', $estimate->frequency) == 'Daily' ? 'selected' : '' }}>
+                                                Daily</option>
+                                            <option value="Weekly"
+                                                {{ old('frequency', $estimate->frequency) == 'Weekly' ? 'selected' : '' }}>
+                                                Weekly</option>
+                                            <option value="Bi-Weekly"
+                                                {{ old('frequency', $estimate->frequency) == 'Bi-Weekly' ? 'selected' : '' }}>
+                                                Bi-Weekly</option>
+                                            <option value="Monthly"
+                                                {{ old('frequency', $estimate->frequency) == 'Monthly' ? 'selected' : '' }}>
+                                                Monthly</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="details">Please Enter Details of Requested Work and/or Description of Problem</label>
                                         <textarea class="form-control" id="details" name="details" rows="3">{{ old('details', $estimate->details) }}</textarea>
                                     </div>

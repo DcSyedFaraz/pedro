@@ -30,14 +30,14 @@ class CreateAdminUserSeeder extends Seeder
         User::factory()->count(1)->manager()->create();
         User::factory()->count(1)->vendor()->create();
 
-        Job::factory(1)->create();
-        WorkOrders::factory(1)->create();
-        Customer::factory(1)->create();
-        InspectionChecklist::factory(1)->create();
-        ChecklistItem::factory(2)->create();
-        Location::factory(2)->create();
-        Estimate::factory(2)->create();
-        EstimateRequest::factory(2)->create();
-        Bid::factory(2)->create();
+        // Job::factory(1)->create();
+        // WorkOrders::factory(1)->create();
+        // Customer::factory(1)->create();
+        // InspectionChecklist::factory(1)->create();
+        // ChecklistItem::factory(2)->create();
+        // Location::factory(2)->create();
+        // Estimate::factory(2)->create();
+        // EstimateRequest::factory(2)->create();
+        // Bid::factory(2)->create();
     }
 }

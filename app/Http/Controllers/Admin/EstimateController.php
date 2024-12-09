@@ -98,7 +98,7 @@ class EstimateController extends Controller
             'arrival_start' => 'required|string|max:255',
             'arrival_end' => 'required|string|max:255',
             'start_duration' => 'required|integer',
-            'end_duration' => 'required|integer|gte:start_duration',
+            'end_duration' => 'required|integer',
             'assigned_tech' => 'nullable|string|max:255',
             'notify_tech_assign' => 'nullable|string', // Assuming 'on' is a valid value
             'notes_for_tech' => 'nullable|string|max:255',
@@ -130,7 +130,7 @@ class EstimateController extends Controller
             $job->location_state = $request->location_state;
             $job->location_zipcode = $request->location_zipcode;
             $job->job_cat_id = $request->job_cat_id;
-            $job->job_sub_cat_id = $request->job_sub_cat_id;
+            $job->job_sub_cat_id = $request->has('job_sub_cat_id') ? 1 : 0;
             $job->job_sub_description = $request->job_sub_description;
             $job->job_description = $request->job_description;
             $job->po_no = $request->po_no;
@@ -270,7 +270,7 @@ class EstimateController extends Controller
         $job->location_state = $request->location_state;
         $job->location_zipcode = $request->location_zipcode;
         $job->job_cat_id = $request->job_cat_id;
-        $job->job_sub_cat_id = $request->job_sub_cat_id;
+        $job->job_sub_cat_id = $request->has('job_sub_cat_id') ? 1 : 0;
         $job->job_sub_description = $request->job_sub_description;
         $job->job_description = $request->job_description;
         $job->po_no = $request->po_no;

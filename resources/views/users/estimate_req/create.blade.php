@@ -68,6 +68,17 @@
                                         <input type="text" class="form-control" id="zip_code" name="zip_code" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="frequency">Frequency</label>
+                                        <select class="form-control" id="frequency" name="frequency" required>
+                                            <option selected hidden>Select Frequency</option>
+                                            <option value="One Time">One Time</option>
+                                            <option value="Daily">Daily</option>
+                                            <option value="Weekly">Weekly</option>
+                                            <option value="Bi-Weekly">Bi-Weekly</option>
+                                            <option value="Monthly">Monthly</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="details">Please Enter Details of Requested Work and/or Description of Problem</label>
                                         <textarea class="form-control" id="details" name="details" rows="3"></textarea>
                                     </div>

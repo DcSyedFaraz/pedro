@@ -66,6 +66,7 @@ class EstimateRequestController extends Controller
                 'city' => 'required|string|max:255',
                 'state' => 'required|string|max:255',
                 'zip_code' => 'required|string|max:10',
+                'frequency' => 'required|string',
                 'details' => 'nullable|string',
                 'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ];
@@ -82,6 +83,7 @@ class EstimateRequestController extends Controller
             $supply->state = $validatedData['state'];
             $supply->zip_code = $validatedData['zip_code'];
             $supply->details = $validatedData['details'];
+            $supply->frequency = $validatedData['frequency'];
             $supply->createdBy = auth()->user()->id;
 
             if ($request->hasFile('picture')) {
@@ -144,6 +146,7 @@ class EstimateRequestController extends Controller
                 'state' => 'required|string|max:255',
                 'zip_code' => 'required|string|max:10',
                 'details' => 'nullable|string',
+                'frequency' => 'required|string',
                 'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ];
 
@@ -163,6 +166,7 @@ class EstimateRequestController extends Controller
             $supply->city = $validatedData['city'];
             $supply->state = $validatedData['state'];
             $supply->zip_code = $validatedData['zip_code'];
+            $supply->frequency = $validatedData['frequency'];
             $supply->details = $validatedData['details'];
 
             if ($request->hasFile('picture')) {
