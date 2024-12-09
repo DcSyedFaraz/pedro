@@ -74,9 +74,9 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::logout();
-            return redirect()->to('/')->with('success', 'User Logout successfully.');
+            return redirect()->to('/login')->with('success', 'User Logout successfully.');
         } else {
-            return redirect()->to('/')->with('error', 'User Logout successfully.');
+            return redirect()->to('/login')->with('error', 'User Logout successfully.');
         }
     }
 
