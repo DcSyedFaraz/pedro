@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminEstimateRequestController;
 use App\Http\Controllers\Admin\MoodReportController;
 use App\Http\Controllers\Admin\ProblemReportingController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Manager\LocationController;
 use App\Http\Controllers\Manager\ResponceController;
 use App\Http\Controllers\SupplyController;
@@ -11,10 +12,6 @@ use App\Http\Controllers\vendor\AttendanceController;
 use App\Http\Controllers\vendor\BidController;
 use App\Http\Controllers\vendor\CompanyProfileController;
 use App\Http\Controllers\vendor\VendorProblemController;
-use App\Models\User;
-use App\Notifications\UserNotification;
-use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
@@ -97,8 +94,19 @@ Route::group(['middleware' => ['language']], function () {
 
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::post('/put_location/{id}', [AttendanceController::class, 'update'])->name('put_location');
 
+        Route::controller(ChatController::class)->group(function () {
+            Route::get('/chat', 'index')->name('chat.index');
+            Route::get('/chats', 'showChats')->name('chats.index');
+            Route::get('/chats/search', 'search')->name('chats.search');
+            Route::get('/chats/{id}', 'show')->name('chats.show');
+            Route::post('/chats/{chat}/messages', 'storeMessage')->name('chats.messages.store');
+
+            // Route to initiate chat
+            Route::get('/client/{id}/chat', 'initiateChat')->name('chats.create');
+        });
+
+        Route::post('/put_location/{id}', [AttendanceController::class, 'update'])->name('put_location');
         // Inspection
         Route::resource('checklists', InspectionController::class);
         Route::resource('location', LocationController::class);

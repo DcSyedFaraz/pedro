@@ -6,13 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin | Dashboard</title>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script>
-        const pusher = new Pusher('6783ea165c58d9b1b6c3', {
-            cluster: 'ap2',
-            encrypted: true
-        });
-        const channel = pusher.subscribe('post-liked');
-    </script>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -469,7 +463,7 @@
 
                                 <!-- Messages -->
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('chats.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Messages</p>
                                     </a>
@@ -951,18 +945,6 @@
                 "autoWidth": false,
                 "responsive": true,
             });
-        });
-        // toastr.success('dasd');
-        channel.bind('status.liked', function(data) {
-            if (data) {
-                const eventData = JSON.stringify(data);
-                const message = eventData.message;
-                alert(JSON.stringify(data));
-                toastr.success(JSON.stringify(data.message));
-                console.log(eventData);
-            } else {
-                console.log('some');
-            }
         });
     </script>
     <script>
