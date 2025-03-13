@@ -16,11 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('map');
@@ -95,12 +91,7 @@ class AttendanceController extends Controller
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function stores(Request $request)
     {
 
@@ -284,12 +275,6 @@ class AttendanceController extends Controller
         return $distance;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
@@ -332,12 +317,6 @@ class AttendanceController extends Controller
         return response()->json(['message' => 'Location saved successfully']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

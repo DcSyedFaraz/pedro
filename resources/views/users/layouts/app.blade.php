@@ -55,37 +55,37 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
 
-<!-- Language Dropdown Menu -->
-<li class="nav-item dropdown">
-    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-        @if (app()->getLocale() == 'en')
-            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
-                width="32" height="auto">
-        @elseif (app()->getLocale() == 'es')
-            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
-                height="auto">
-        @endif
-        <span class="badge badge-success navbar-badge">{{ app()->getLocale() }}</span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-        <span class="dropdown-item dropdown-header">Select Language</span>
-        <div class="dropdown-divider"></div>
-        <a href="{{ route('lang.switch', 'en') }}" class="dropdown-item my-2 text-wrap ">
-            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
-                width="32" height="auto"> English
-            @if (app()->getLocale() == 'en')
-                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
-            @endif
-        </a>
-        <a href="{{ route('lang.switch', 'es') }}" class="dropdown-item my-2 text-wrap ">
-            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
-                height="auto"> Spanish
-            @if (app()->getLocale() == 'es')
-                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
-            @endif
-        </a>
-    </div>
-</li>
+                <!-- Language Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        @if (app()->getLocale() == 'en')
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto">
+                        @elseif (app()->getLocale() == 'es')
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto">
+                        @endif
+                        <span class="badge badge-success navbar-badge">{{ app()->getLocale() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        <span class="dropdown-item dropdown-header">Select Language</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('lang.switch', 'en') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/united-states.png') }}" alt="United States Flag"
+                                width="32" height="auto"> English
+                            @if (app()->getLocale() == 'en')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                        <a href="{{ route('lang.switch', 'es') }}" class="dropdown-item my-2 text-wrap ">
+                            <img src="{{ asset('assets/imgs/flag.png') }}" alt="Spain Flag" width="32"
+                                height="auto"> Spanish
+                            @if (app()->getLocale() == 'es')
+                                <span class="float-right text-muted text-sm"><strong>Selected</strong></span>
+                            @endif
+                        </a>
+                    </div>
+                </li>
 
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
@@ -195,6 +195,23 @@
                                 </li>
 
                             </ul>
+                        </li>
+                        <!-- Messages -->
+                        @php
+                            $user = Auth::id();
+                            $messages = App\Models\Message::where('sender_id', '!=', $user)
+                                ->whereNull('read_at')
+                                ->count();
+                        @endphp
+                        <li class="nav-item">
+                            <a href="{{ route('chats.index') }}"
+                                class="nav-link {{ request()->routeIs('chats.*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Chats @if ($messages > 0)
+                                        <span class="badge badge-warning navbar-badge">{{ $messages }}</span>
+                                    @endif
+                                </p>
+                            </a>
                         </li>
                         <!-- Jobs  -->
                         <li class="nav-item {{ request()->routeIs('joblist.*') ? 'menu-open' : '' }} ">

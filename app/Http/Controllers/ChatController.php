@@ -16,14 +16,27 @@ class ChatController extends Controller
 {
     public function showChats()
     {
-        $chats = Chat::with(['userOne', 'userTwo'])->get();
-        $users = User::role('User')->get();
+        $user = Auth::user();
+
+        $chats = Chat::where('user_one_id', $user->id)
+            ->orWhere('user_two_id', $user->id)
+            ->with(['userOne', 'userTwo'])->get();
+        if (Auth::user()->hasRole(['Admin', 'account manager'])) {
+            $users = User::role('User')->get();
+        } else {
+            $users = User::role('account manager')->get();
+        }
+
         return view('chats.index', compact('chats', 'users'));
     }
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $users = User::where('name', 'like', "%$search%")->get();
+        if (Auth::user()->hasRole(['Admin', 'account manager'])) {
+            $users = User::role('User')->where('name', 'like', "%$search%")->get();
+        } else {
+            $users = User::role('account manager')->where('name', 'like', "%$search%")->get();
+        }
         $chats = Chat::with(['userOne', 'userTwo'])->get();
 
         return view('chats.index', compact('users', 'chats'));
@@ -55,13 +68,6 @@ class ChatController extends Controller
                     'with_user' => [
                         'id' => $otherUser->id,
                         'name' => $otherUser->name,
-
-                    ],
-                    'product' => [
-                        'id' => $chat->product->id,
-                        'name' => $chat->product->name,
-                        'description' => $chat->product->description,
-                        'image' => $chat->product->images->first(),
 
                     ],
                     'last_message' => $chat->messages->first() ? [

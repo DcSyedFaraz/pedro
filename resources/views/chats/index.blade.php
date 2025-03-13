@@ -1,4 +1,13 @@
-@extends('admin.layouts.app')
+@php
+    $layout = match (true) {
+        Auth::user()->hasRole('Admin') => 'admin.layouts.app',
+        Auth::user()->hasRole('User') => 'users.layouts.app',
+        Auth::user()->hasRole('account manager') => 'manager.layouts.app',
+        default => 'default.layout',
+    };
+@endphp
+
+@extends($layout)
 
 @section('content')
     <div class="content-wrapper">
