@@ -54,7 +54,7 @@
                                             @foreach ($WorkOrders as $workOrder)
                                                 <tr data-id="{{ $workOrder->id }}">
                                                     <td>{{ $workOrder->id ?? '' }}</td>
-                                                    <td>{{ $workOrder->jobname->name ?? '' }}</td>
+                                                    <td>{{ $workOrder->jobname->location_name ?? '' }}</td>
                                                     <td>{{ $workOrder->vendor->name ?? '' }}</td>
                                                     <td>
                                                         @switch($workOrder->status)
