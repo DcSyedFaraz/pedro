@@ -32,6 +32,9 @@ class NewChatNotification extends Notification
         $url = route('chats.show', $this->chat->id);
 
         return [
+            'user_id'=> $this->otherUser['id'],
+            'name'=> $this->otherUser['name'],
+            'email'=> $this->otherUser['email'],
             'chat_id' => $this->chat->id,
             'message' => 'A new chat has been initiated with : ' . $this->otherUser->name,
             'url' => $url,

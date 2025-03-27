@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class VendorProblemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $problemReports = ProblemReporting::where('createdBy', auth()->user()->id)->get();
@@ -27,11 +23,6 @@ class VendorProblemController extends Controller
         return view('vendor.problem.index', compact('problemReports', 'job'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $job = Job::whereHas('workOrder', function ($query) {
@@ -40,12 +31,7 @@ class VendorProblemController extends Controller
         return view('vendor.problem.create', compact('job'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         // dd($request->all());
@@ -103,24 +89,14 @@ class VendorProblemController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $problemReport = ProblemReporting::findOrFail($id);
         return view('vendor.problem.show', compact('problemReport'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
 
