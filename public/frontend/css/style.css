@@ -6,10 +6,11 @@ body{
     overflow-x: hidden;
     font-family: "montserrat";
 }
-.btncust{
+.btncust {
   background-color: #f7a000;
   color: #000;
-  border-radius: 20px
+  border-radius: 20px;
+  padding: 10px 18px;
 }
 .btn{
     border: 1px solid #000;
