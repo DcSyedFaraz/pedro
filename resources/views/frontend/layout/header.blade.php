@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contactus') }}">Contact Us</a>
                         </li>
+                        <li><a class="btncust" href="{{ route('login') }}">Log In</a></li>
+
+                        <li><a class="btncust" href="{{ route('signup') }}">Sign Up</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mob">
