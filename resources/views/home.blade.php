@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="content">
-                            <h1>Pedro Grillo - Your Facility Managed Smarter</h1>
+                            <h1>Facilit8 Systems - Your Facility Managed Smarter</h1>
                             <p>Manage your entire facility business with effortless control, all under one roof. Get your
                                 operations streamlined, your tasks simplified, and your efficiency enhanced with our
                                 all-in-one management software solution.
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <div class="testi-main col-12 col-sm-12 col-md-8 col-lg-8">
-                        <div class="owl-carousel owl-theme">
+                        <div class="owl-carousel testimonial-car owl-theme">
                             <div class="testi-inner">
                                 <div class="upper1">
                                     <div>

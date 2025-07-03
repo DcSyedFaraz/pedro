@@ -1,11 +1,10 @@
 @extends('frontend.layout.app')
 @section('content')
-    <!-----sec-9----->
-    <div class="sec-9">
+<!-----sec-9----->
+<div class="sec-9">
         <div class="container">
-            <div class="row">
 
-                <div class="section-padding gallery-section" id="gallery">
+                <!-- <div class="section-padding gallery-section" id="gallery">
                     <div class="container">
 
                         <div id="btncontainer" class="filter">
@@ -48,8 +47,17 @@
                                     src="{{ asset('frontend/images/steel-building-ba2-1.jpg') }}" /></a>
                         </div>
                     </div>
+                </div> -->
+                <div class="gallery-main">
+                        <div class="owl-carousel gallery-car owl-theme">
+                                <div class="item">
+                                        <img src="{{ asset('frontend/images/dash1.png') }}" />
+                                </div>
+                                <div class="item">
+                                        <img src="{{ asset('frontend/images/dash2.png') }}" />
+                                </div>
+                        </div>
                 </div>
-            </div>
         </div>
-    </div>
+</div>
 @endsection

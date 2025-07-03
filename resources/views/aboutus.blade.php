@@ -18,7 +18,7 @@
                     <h4>About Us</h4>
                     <h2>We Manage Your Facility Business Efficiently </h2>
                     <p>
-                        Welcome to Pedro Grillo — where facility management gets a major upgrade! Founded by industry
+                        Welcome to Facilit8 Systems — where facility management gets a major upgrade! Founded by industry
                         veterans who understand the hustle and headaches of the service world, we’re on a mission to make
                         managing your facility business simpler, smarter, and more rewarding. After 15 years of rolling up
                         our sleeves in the service industry, we realized there had to be a better way. So we built it! Pedro

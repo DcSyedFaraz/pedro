@@ -5,7 +5,7 @@
                 <div class="logo">
                     <img src="{{ asset('frontend/images/facilit8_logo1.png') }}">
                 </div>
-                <p>Pedro Grilla provides tools to assist in facility management. Results may vary, and we are not liable for outcomes based on software usage. Please consult professionals for specific business advice.</p>
+                <p>Facilit8 Systems provides tools to assist in facility management. Results may vary, and we are not liable for outcomes based on software usage. Please consult professionals for specific business advice.</p>
             </div>
             <div class="col-12 col-sm-3 col-md-6 col-lg-3">
                 <h4>Quick Link</h4>
@@ -29,11 +29,10 @@
             <div class="col-12 col-sm-2 col-md-6 col-lg-2">
                 <h4>More info</h4>
                 <ul>
-                    <li><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp; 901-830-9155</li>
-                    <li><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp;309-241-5875</li>
-                    <li><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;&nbsp;tommcnlly62@gmail.com</li>
-                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;&nbsp;P.O.Box 18217 Memphis, TN
-                        38181</li>
+                    <!-- <li><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp; 901-830-9155</li> -->
+                    <li><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;&nbsp;407-978-0288</li>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;&nbsp;info@facilit8system.com</li>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;&nbsp;1714 N Goldenrod Road, A4, Orlando FL 32807</li>
                 </ul>
             </div>
             <div class="row">
@@ -51,6 +50,6 @@
         </div>
         <div class="copyright">
             <hr>
-            <p>© 2024 Facilit System 8. All Rights Reserved.</p>
+            <p>© 2025 Facilit8 Systems. All Rights Reserved.</p>
         </div>
 </footer>
