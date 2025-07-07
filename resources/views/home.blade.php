@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="content">
-                            <h1>Facilit8 Systems - Your Facility Managed Smarter</h1>
+                            <h1>Facilit8 System - Your Facility Managed Smarter</h1>
                             <p>Manage your entire facility business with effortless control, all under one roof. Get your
                                 operations streamlined, your tasks simplified, and your efficiency enhanced with our
                                 all-in-one management software solution.
@@ -58,7 +58,7 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                         <h4>About Us</h4>
                         <h2>We Manage Your Facility Business Efficiently</h2>
-                        <p>Welcome to Pedro Grillo — where facility management gets a major upgrade! Founded by industry
+                        <p>Welcome to Facilit8 System — where facility management gets a major upgrade! Founded by industry
                             veterans who understand the hustle and headaches of the service world, we’re on a mission to
                             make managing your facility business simpler, smarter, and more rewarding.</p>
                         <div class="pro-info">
@@ -98,7 +98,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-8 col-md-8 col-lg-8">
-                        <h3>PEDRO GRILLO SOFTWARE SOLUTIONS</h3>
+                        <h3>Facilit8 System</h3>
                         <h1>Built by Experts, Designed for You</h1>
                         <p>Let's transform facility management with our intuitive solutions, which will simplify your tasks,
                             streamline processes, and empower your business to thrive.
@@ -224,7 +224,7 @@
             <div class="sec-7">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Find Us Here!</h2>
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4400.741146836249!2d-90.04144914165491!3d35.14695242321589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d57f64e0678647%3A0xad453f0450885857!2sManassas%20Garden!5e0!3m2!1sen!2s!4v1726178910707!5m2!1sen!2s"
@@ -236,7 +236,7 @@
                                 <img width="25%" src="frontend/images/image-2024-08-19T185426.178.png">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                        <!-- <div class="col-12 col-sm-4 col-md-4 col-lg-4">
                             <h2>Map Location</h2>
                             <p>Track the phone number’s location on Google Maps by opening the app on the associated device.
                             </p>
@@ -248,7 +248,7 @@
                                 <li>Oklahoma</li>
                                 <li>Kansas</li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

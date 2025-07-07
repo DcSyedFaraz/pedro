@@ -18,17 +18,16 @@
                 <h4>About Us</h4>
                 <h2>We Manage Your Facility Business Efficiently </h2>
                 <p>
-                    Welcome to Facilit8 Systems — where facility management gets a major upgrade! Founded by industry
+                    Welcome to Facilit8 System — where facility management gets a major upgrade! Founded by industry
                     veterans who understand the hustle and headaches of the service world, we’re on a mission to make
                     managing your facility business simpler, smarter, and more rewarding. After 15 years of rolling up
-                    our sleeves in the service industry, we realized there had to be a better way. So we built it! Pedro
-                    Grillo is the software we wish we’d had—an all-in-one, subscription-based solution designed for
+                    our sleeves in the service industry, we realized there had to be a better way. So we built it! Facilit8 System is the software we wish we’d had—an all-in-one, subscription-based solution designed for
                     facility managers like you, who need everything in one place without the extra fuss.
                     <br><br>
                     Imagine handling your entire operation from a single dashboard. This is what we do; with us, you can
                     easily schedule jobs, dispatch teams, and track progress in real-time, manage subcontractors with a
                     few clicks—plumbers, landscapers, electricians, you name it, and simplify invoicing and payments for
-                    smooth, streamlined billing. With Pedro Grillo, it’s all about effortless control and keeping things
+                    smooth, streamlined billing. With Facilit8 System, it’s all about effortless control and keeping things
                     moving seamlessly. Whether it’s daily maintenance or long-term planning, our platform lets you
                     manage every detail under one roof so nothing falls through the cracks.
 

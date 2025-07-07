@@ -5,7 +5,7 @@
                 <div class="logo">
                     <img src="{{ asset('frontend/images/facilit8_logo1.png') }}">
                 </div>
-                <p>Facilit8 Systems provides tools to assist in facility management. Results may vary, and we are not liable for outcomes based on software usage. Please consult professionals for specific business advice.</p>
+                <p>Facilit8 System provides tools to assist in facility management. Results may vary, and we are not liable for outcomes based on software usage. Please consult professionals for specific business advice.</p>
             </div>
             <div class="col-12 col-sm-3 col-md-6 col-lg-3">
                 <h4>Quick Link</h4>
@@ -50,6 +50,6 @@
         </div>
         <div class="copyright">
             <hr>
-            <p>© 2025 Facilit8 Systems. All Rights Reserved.</p>
+            <p>© 2025 Facilit8 System. All Rights Reserved.</p>
         </div>
 </footer>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pedro</title>
+    <title>Facilit8 System</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
