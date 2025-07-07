@@ -10,10 +10,10 @@
             <div class="col-12 col-sm-3 col-md-6 col-lg-3">
                 <h4>Quick Link</h4>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="gellery.html">Gallery</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('about_us') }}">About Us</a></li>
+                    <li><a href="{{ route('service') }}">Services</a></li>
+                    <li><a href="{{ route('gallery') }}">Gallery</a></li>
                     <li><a href="{{ route('login') }}">Log In</a></li>
                     <li><a href="{{ route('signup') }}">Sign Up</a></li>
                 </ul>
@@ -21,8 +21,8 @@
             <div class="col-12 col-sm-3 col-md-6 col-lg-3">
                 <h4>Support</h4>
                 <ul>
+                    <li><a href="{{ route('contactus') }}">Contact</a></li>
                     <li>Privacy Policy</li>
-                    <li>Contact</li>
                     <li>Terms & Conditions</li>
                 </ul>
             </div>

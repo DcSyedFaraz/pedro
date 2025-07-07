@@ -35,7 +35,7 @@
                         <li><a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                         <li class="phone"><a class="nav-link" href="#"><i class="fa fa-phone"
                                     aria-hidden="true"></i></a></li>
-                        <p><span>Call Us</span> <br>901-830-9155</p>
+                        <p><span>Call Us</span> <br>407-978-0288</p>
                     </ul>
                 </div>
                 <div class="col-6 d-md-none">
@@ -48,7 +48,7 @@
                         aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
                             <a class="navbar-brand" href="/"><img width="100px"
-                                    src="frontend/images/tom-logo-e1724166815700.png"></a>
+                                    src="{{ asset('frontend/images/facilit8_logo1.png') }}"></a>
                             <button type="button" class="btn-close btn-close-white text-reset"
                                 data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
@@ -80,7 +80,7 @@
                                             aria-hidden="true"></i></a></li>
                                 <li class="phone"><a class="nav-link" href="#"><i class="fa fa-phone"
                                             aria-hidden="true"></i></a></li>
-                                <p><span>Call Us</span> <br>901-830-9155</p>
+                                <p><span>Call Us</span> <br>407-978-0288</p>
                             </ul>
                         </div>
                     </div>

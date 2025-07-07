@@ -444,6 +444,11 @@
     width: 45px;
   }
 
+  header p {
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
   body {
     padding-right: 0 !important;
   }
