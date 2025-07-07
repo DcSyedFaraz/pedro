@@ -326,6 +326,10 @@ header span {
   color: #ffffff;
 }
 
+.header img {
+  width: 100%;
+}
+
 .sec-4 .btn {
   border: 1px solid #ffffff;
   border-radius: 1px;

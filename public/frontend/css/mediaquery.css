@@ -1193,3 +1193,15 @@
     margin: 0px auto;
   }
 }
+
+@media only screen and (min-width:1024px) and (max-width:1300px) {
+  .navbar .navbar-nav .nav-link {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width:1300px) and (max-width:1400px) {
+  .navbar .navbar-nav .nav-link {
+    font-size: 14px;
+  }
+}
