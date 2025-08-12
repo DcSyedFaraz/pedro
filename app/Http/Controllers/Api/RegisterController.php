@@ -81,6 +81,13 @@ class RegisterController extends BaseController
 
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
+
+                if (!$user->hasRole('vendor')) {
+                    Auth::logout(); // logout immediately if not vendor
+                    return $this->sendError('Only vendor accounts are allowed to log in.');
+                }
+
+
                 $token = $user->createToken('app_api')->plainTextToken;
                 $users = $this->userinfo($request->email);
                 $role = $user->roles->first()->name;

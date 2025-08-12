@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 // Saad
 
-Route::any('login', [\App\Http\Controllers\Api\RegisterController::class, 'login']);
+Route::post('login', [\App\Http\Controllers\Api\RegisterController::class, 'login']);
 Route::any('verify', [\App\Http\Controllers\Api\RegisterController::class, 'verify']);
 Route::post('password/email', [\App\Http\Controllers\Api\ForgotPasswordController::class, 'forget']);
 Route::any('password/reset', [\App\Http\Controllers\Api\CodeCheckController::class, 'index']);
