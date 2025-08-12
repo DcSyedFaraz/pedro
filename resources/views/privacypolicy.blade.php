@@ -2,33 +2,33 @@
 @section('content')
 <!-----sec-10----->
 <style>
-    h1 {
+    .main-privacy h1 {
         margin: 0;
         font-size: 2.5em;
     }
 
-    h2 {
+    .main-privacy h2 {
         color: #002C3E;
         font-size: 1.8em;
         margin-top: 20px;
     }
 
-    p {
+    .main-privacy p {
         font-size: 1.1em;
         margin-bottom: 1em;
     }
 
-    ul {
+    .main-privacy ul {
         list-style-type: none;
         padding: 0;
     }
 
-    ul li {
+    .main-privacy ul li {
         margin: 8px 0;
         font-size: 1.1em;
     }
 </style>
-<div class="container" style="padding: 80px 0;">
+<div class="container main-privacy" style="padding: 80px 0;">
     <h1>Privacy Policy</h1>
     <h2>Introduction</h2>
     <p>Welcome to Facilit8 System (“we”, “our”, “us”). We are committed to safeguarding your privacy and handling your personal data responsibly. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you use our website and services.</p>
