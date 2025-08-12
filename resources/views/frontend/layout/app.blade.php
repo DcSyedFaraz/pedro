@@ -27,7 +27,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
-
+        <link rel="icon" href="./frontend/images/fav.png" />
     <title>Facilit8</title>
 
 </head>

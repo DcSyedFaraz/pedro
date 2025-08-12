@@ -2,12 +2,12 @@
     <nav class="navbar navbar-light navbar-expand-lg">
         <div class="container d-block">
             <div class="row align-items-center">
-                <div class="col-md-2 col-6">
+                <div class="col-md-3 col-lg-2 col-6">
                     <a class="navbar-brand" href="/"><img width="225px"
                             src="{{ asset('frontend/images/facilit8_logo1.png') }}"></a>
                 </div>
 
-                <div class="col-md-7 mob">
+                <div class="col-md-9 col-lg-7 mob">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="{{ route('home') }}">Home</a>
@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contactus') }}">Contact Us</a>
                         </li>
+                        <li><a class="btncust" href="{{ route('login') }}">Log In</a></li>
+
+                        <li><a class="btncust" href="{{ route('signup') }}">Sign Up</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mob">
@@ -32,7 +35,7 @@
                         <li><a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                         <li class="phone"><a class="nav-link" href="#"><i class="fa fa-phone"
                                     aria-hidden="true"></i></a></li>
-                        <p><span>Call Us</span> <br>901-830-9155</p>
+                        <p><span>Call Us</span> <br>407-978-0288</p>
                     </ul>
                 </div>
                 <div class="col-6 d-md-none">
@@ -45,7 +48,7 @@
                         aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
                             <a class="navbar-brand" href="/"><img width="100px"
-                                    src="frontend/images/tom-logo-e1724166815700.png"></a>
+                                    src="{{ asset('frontend/images/facilit8_logo1.png') }}"></a>
                             <button type="button" class="btn-close btn-close-white text-reset"
                                 data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
@@ -69,7 +72,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="logi{{ route('login') }}">Log In</a>
                                 </li>
-                                <li class="nav-item"></li>
                                 <a class="nav-link" href="{{ route('login') }}">Sign Up</a>
                                 </li>
                             </ul>
@@ -78,7 +80,7 @@
                                             aria-hidden="true"></i></a></li>
                                 <li class="phone"><a class="nav-link" href="#"><i class="fa fa-phone"
                                             aria-hidden="true"></i></a></li>
-                                <p><span>Call Us</span> <br>901-830-9155</p>
+                                <p><span>Call Us</span> <br>407-978-0288</p>
                             </ul>
                         </div>
                     </div>
