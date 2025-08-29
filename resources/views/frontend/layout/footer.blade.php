@@ -22,7 +22,7 @@
                 <h4>Support</h4>
                 <ul>
                     <li><a href="{{ route('contactus') }}">Contact</a></li>
-                    <li>Privacy Policy</li>
+                    <li><a href="{{ route('privacypolicy') }}">Privacy Policy</a></li>
                     <li>Terms & Conditions</li>
                 </ul>
             </div>
