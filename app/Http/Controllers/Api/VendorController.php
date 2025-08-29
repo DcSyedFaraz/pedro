@@ -92,7 +92,7 @@ class VendorController extends Controller
     public function index()
     {
         $WorkOrders = WorkOrders::where('vendor_id', auth()->user()->id)
-            ->whereNotIn('status', ['declined'])
+            ->whereNotIn('status', ['declined'])->with('jobname')
             ->orderby('priority', 'asc')->get();
         // return $WorkOrders;
         Log::debug($WorkOrders);
