@@ -60,7 +60,7 @@ return [
     |
     */
 
-    'editor' => env('DEBUGBAR_EDITOR', 'vscode'),
+    'editor' => env('DEBUGBAR_EDITOR', 'cursor'),
 
     /*
     |--------------------------------------------------------------------------
