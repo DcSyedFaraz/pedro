@@ -77,6 +77,9 @@
         <li>Objecting to or restricting certain processing.</li>
     </ul>
     <p>To exercise any of these rights, contact us at the details provided below.</p>
+    
+    <h3>Data Deletion Request</h3>
+    <p>If you wish to permanently delete your account and all associated data, you can submit a deletion request through our <a href="{{ route('data-deletion.index') }}" style="color: #007bff; text-decoration: underline;">Data Deletion Portal</a>. Please note that this action is permanent and cannot be undone.</p>
 
     <h2>Minors</h2>
     <p>Our services are not intended for individuals under the age of 13. If you believe we’ve collected data from a minor, please contact us and we’ll take steps to delete it.</p>

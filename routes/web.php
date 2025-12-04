@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminEstimateRequestController;
 use App\Http\Controllers\Admin\MoodReportController;
 use App\Http\Controllers\Admin\ProblemReportingController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\DataDeletionController;
 use App\Http\Controllers\Manager\LocationController;
 use App\Http\Controllers\Manager\ResponceController;
 use App\Http\Controllers\SupplyController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\vendor\VendorProblemController;
 use Illuminate\Support\Facades\Route;
 // Admin Dashboard
 use App\Http\Controllers\Admin\TaskController;
-use App\Http\Controllers\Admin\InspectionCategoryController;
 use App\Http\Controllers\Admin\JobPerAssignController;
 use App\Http\Controllers\Admin\JobPerRegionController;
 use App\Http\Controllers\Admin\ReadyInvoiceController;
@@ -32,7 +32,6 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\CheckListController;
 use App\Http\Controllers\Admin\InspectionController;
 use App\Http\Controllers\Admin\ServicesController;
-use App\Http\Controllers\Admin\AreasController;
 
 use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\JobSubCategoryController;
@@ -44,7 +43,6 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\GeneralSettingController;
 
 // users Dashboard
 use App\Http\Controllers\users\DashboardController as usersDashboardController;
@@ -349,4 +347,12 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/privacypolicy', 'privacypolicy')->name('privacypolicy');
     Route::get('/gallery', 'gallery')->name('gallery');
     Route::get('/contact-us', 'contactus')->name('contactus');
+});
+
+Route::controller(DataDeletionController::class)->group(function () {
+    Route::get('/data-deletion', 'index')->name('data-deletion.index');
+    Route::post('/data-deletion/verify', 'verify')->name('data-deletion.verify');
+    Route::post('/data-deletion/confirm', 'confirm')->name('data-deletion.confirm');
+    Route::post('/data-deletion/resend', 'resendCode')->name('data-deletion.resend');
+    Route::get('/data-deletion/success', 'success')->name('data-deletion.success');
 });
