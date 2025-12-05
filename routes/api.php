@@ -78,3 +78,11 @@ Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']]
 
 
 });
+
+// Data Deletion API Routes
+Route::prefix('data-deletion')->controller(\App\Http\Controllers\Api\DataDeletionController::class)->group(function () {
+    Route::post('/request', 'requestDeletion')->name('api.data-deletion.request');
+    Route::post('/verify', 'verifyCode')->name('api.data-deletion.verify');
+    Route::post('/confirm', 'confirmDeletion')->name('api.data-deletion.confirm');
+    Route::post('/resend', 'resendCode')->name('api.data-deletion.resend');
+});
