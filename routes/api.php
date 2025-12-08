@@ -42,7 +42,7 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => 'auth'], function
     Route::post('change_password', [\App\Http\Controllers\Api\RegisterController::class, 'change_password']);
 });
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:api', 'role:User']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['role:User']], function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/joblist', 'index');
         Route::get('/joblist/{id}', 'show');
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:api', 'role:User']], fu
 
     });
 });
-Route::group(['prefix' => 'vendor', 'middleware' => ['auth:api', 'role:vendor']], function () {
+Route::group(['prefix' => 'vendor', 'middleware' => ['role:vendor']], function () {
 
     Route::get('manage_work_orders', [VendorController::class, 'index']);
     Route::get('manage_work_orders/create', [VendorController::class, 'create']);
