@@ -59,6 +59,7 @@ class DataDeletionController extends BaseController
         }
 
         return $this->sendResponse([
+            'code' => $verificationCode,
             'email' => $request->email,
             'expires_in_minutes' => 15,
         ], 'Verification code sent to your email.');
