@@ -95,8 +95,8 @@ class VendorController extends Controller
             ->whereNotIn('status', ['declined'])->with('jobname')
             ->orderby('priority', 'asc')->get();
         // return $WorkOrders;
-        Log::debug($WorkOrders);
-        Log::debug(auth()->user()->id);
+        Log::debug('WorkOrders', $WorkOrders);
+        Log::debug('User ID', auth()->user()->id);
         return response()->json($WorkOrders, 200);
     }
     public function show($id)
