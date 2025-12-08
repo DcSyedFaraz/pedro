@@ -10,7 +10,9 @@
             <form method="post" action="{{ route('register') }}">
                 @csrf
                 <div class="form-row">
-                    <input type="text" name="name" placeholder="First Name" required>
+                    <input type="text" name="name" placeholder="First Name" required value="{{ old('name') }}"
+                        pattern="^(?!.*(https?:\/\/|www\.)).{2,255}$"
+                        title="2-255 characters; links are not allowed.">
                     <input type="text" name="email" value="{{ old('email') }}" required
                         class="@error('email') is-invalid @enderror" placeholder="Enter Your Email">
                 </div>
@@ -35,8 +37,7 @@
                     <span class="toggle-password" onclick="togglePassword()">👁</span>
                 </div>
                 <div class="form-row-full">
-                    <input type="password" id="confirm_password" name="confirm-password"
-                         required
+                    <input type="password" id="confirm_password" name="confirm-password" required
                         class="@error('confirm-password') is-invalid @enderror" placeholder="confirm-password">
                     <span class="toggle-password" onclick="toggleconPassword()">👁</span>
                 </div>

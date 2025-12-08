@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -55,7 +58,35 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request)
+    {
+        $request->merge([
+            'name' => $this->sanitizeName($request->input('name', '')),
+        ]);
+
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
+    }
+
+    /**
+     * Get a validator for an incoming registration request. Names are restricted
+     * to letters, numbers, spaces, apostrophes, dashes and dots, and URLs are blocked.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -63,7 +94,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^(?!.*(https?:\\/\\/|www\\.))[\\pL\\pM0-9\\s\'\\-.]{2,255}$/u',
+            ],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'same:confirm-password'],
             'roles' => 'required',
@@ -79,8 +115,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $cleanName = $this->sanitizeName($data['name']);
+
         $user = User::create([
-            'name' => $data['name'],
+            'name' => $cleanName,
             'email' => $data['email'],
             'phone' => $data['phonenumber'] ?? null,
             'password' => Hash::make($data['password']),
@@ -90,6 +128,16 @@ class RegisterController extends Controller
         return $user;
     }
 
+    /**
+     * Remove tags, collapse whitespace and trim the provided name.
+     */
+    protected function sanitizeName(string $name): string
+    {
+        $name = strip_tags($name);
+        $name = preg_replace('/\s+/', ' ', $name);
+
+        return trim($name);
+    }
 
 
 }

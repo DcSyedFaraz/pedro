@@ -34,8 +34,17 @@ class RegisterController extends BaseController
 
     public function register(Request $request)
     {
+        $request->merge([
+            'name' => $this->sanitizeName($request->input('name', '')),
+        ]);
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^(?!.*(https?:\\/\\/|www\\.))[\\pL\\pM0-9\\s\'\\-.]{2,255}$/u',
+            ],
             'email' => 'required|email|unique:users',
             'phone' => 'required',
             'password' => 'required|min:8',
@@ -53,8 +62,9 @@ class RegisterController extends BaseController
             $profile = asset('uploads/user/profiles/' . $fileName);
         }
 
-        $input = $request->except(['confirm_password'], $request->all());
+        $input = $request->except(['confirm_password']);
         $input['password'] = bcrypt($input['password']);
+        $input['name'] = $request->input('name');
 
         $input['photo'] = '/uploads/user/profiles/' . $fileName;//$profile;
         $input['email_verified_at'] = Carbon::now();
@@ -174,6 +184,17 @@ class RegisterController extends BaseController
     public function noauth()
     {
         return $this->sendError('session destroyed , Login to continue!');
+    }
+
+    /**
+     * Remove tags, collapse whitespace and trim the provided name.
+     */
+    private function sanitizeName(string $name): string
+    {
+        $name = strip_tags($name);
+        $name = preg_replace('/\s+/', ' ', $name);
+
+        return trim($name);
     }
 
 
