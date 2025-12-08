@@ -19,15 +19,17 @@ class WorkOrdersFactory extends Factory
     public function definition()
     {
         return [
-            'job_id' => Job::inRandomOrder()->first()->id,
-            'vendor_id' => 3,
+            'job_id' => Job::inRandomOrder()->first()?->id ?? Job::factory()->create()->id,
+            'vendor_id' => User::role('vendor')->inRandomOrder()->first()?->id ?? User::inRandomOrder()->first()?->id ?? 1,
             'status' => $this->faker->randomElement([
                 'pending',
-                'accepted'
+                'accepted',
+                'completed',
+                'in_progress'
             ]),
-            'deadline' => $this->faker->dateTime,
-            'payment_info' => $this->faker->word,
-            'priority' => $this->faker->word,
+            'deadline' => $this->faker->dateTimeBetween('now', '+30 days')->format('Y-m-d'),
+            'payment_info' => $this->faker->randomElement(['quick_pay', 'regular', null]),
+            'priority' => $this->faker->randomElement(['low', 'medium', 'high', 'urgent']),
             'note' => $this->faker->sentence(10),
         ];
     }

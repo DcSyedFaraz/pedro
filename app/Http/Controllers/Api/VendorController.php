@@ -91,12 +91,30 @@ class VendorController extends Controller
     }
     public function index()
     {
-        $WorkOrders = WorkOrders::where('vendor_id', auth()->user()->id)
-            ->whereNotIn('status', ['declined'])->with('jobname')
-            ->orderby('priority', 'asc')->get();
-        // return $WorkOrders;
-        Log::debug('WorkOrders', $WorkOrders->toArray());
-        Log::debug('User ID', [auth()->user()->id]);
+        $userId = auth()->user()->id;
+
+        // Debug: Check total work orders for this vendor (including declined)
+        $totalCount = WorkOrders::where('vendor_id', $userId)->count();
+        Log::debug('Total WorkOrders for vendor', ['vendor_id' => $userId, 'total_count' => $totalCount]);
+
+        // Get work orders excluding declined status
+        $WorkOrders = WorkOrders::where('vendor_id', $userId)
+            ->whereNotIn('status', ['declined'])
+            ->with('jobname')
+            ->orderByRaw("FIELD(priority, 'urgent', 'high', 'medium', 'low')")
+            ->get();
+
+        Log::debug('Filtered WorkOrders', [
+            'vendor_id' => $userId,
+            'count' => $WorkOrders->count(),
+            'data' => $WorkOrders->toArray()
+        ]);
+
+        // Check if no work orders found
+        if ($WorkOrders->isEmpty()) {
+            Log::warning('No work orders found for vendor', ['vendor_id' => $userId]);
+        }
+
         return response()->json($WorkOrders, 200);
     }
     public function show($id)
