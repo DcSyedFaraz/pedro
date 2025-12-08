@@ -288,7 +288,7 @@ Route::group(['middleware' => ['language']], function () {
         Route::resource('problem', ProblemReportingController::class);
 
         Route::post('estimates/update-selected-jobs', [EstimateController::class, 'updateSelectedJobs'])->name('estimates.updateSelectedJobs');
-        Route::resource('estimates', EstimateController::class);
+        Route::resource('estimates', EstimateController::class)->except('destroy');
         Route::get('/estimatess/destroy/{id}', [EstimateController::class, 'destroy'])->name('estimates.destroy');
         Route::get('/estimatepri/destroy/{id}', [EstimateController::class, 'est_pri'])->name('estpri.destroy');
 
