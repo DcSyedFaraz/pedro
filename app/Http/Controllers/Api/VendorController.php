@@ -71,14 +71,6 @@ class VendorController extends Controller
         }
     }
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function resshow($id)
     {
         $response = InspectionResponse::selectRaw('MAX(id) as id, checklist_id, MAX(rating) as rating, MAX(remarks) as remarks')->with('checklistItem', 'checklistItem.inspectionChecklist')
@@ -94,8 +86,8 @@ class VendorController extends Controller
         $userId = auth()->user()->id;
 
         // Debug: Check total work orders for this vendor (including declined)
-        $totalCount = WorkOrders::where('vendor_id', $userId)->count();
-        Log::debug('Total WorkOrders for vendor', ['vendor_id' => $userId, 'total_count' => $totalCount]);
+        // $totalCount = WorkOrders::where('vendor_id', $userId)->count();
+        // Log::debug('Total WorkOrders for vendor', ['vendor_id' => $userId, 'total_count' => $totalCount]);
 
         // Get work orders excluding declined status
         $WorkOrders = WorkOrders::where('vendor_id', $userId)
@@ -106,8 +98,8 @@ class VendorController extends Controller
 
         Log::debug('Filtered WorkOrders', [
             'vendor_id' => $userId,
-            'count' => $WorkOrders->count(),
-            'data' => $WorkOrders->toArray()
+            'count' => $WorkOrders->count()
+            // 'data' => $WorkOrders->toArray()
         ]);
 
         // Check if no work orders found
